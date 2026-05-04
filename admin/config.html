@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main  # or master – change if needed
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "books"
+    label: "Books"
+    folder: "_data/books"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text", required: false}
+      - {label: "Cover image", name: "cover", widget: "image"}
+      - {label: "PDF file", name: "pdf", widget: "file"}
+      - {label: "Date added", name: "date", widget: "datetime", default: ""}
+
+  - name: "latest"
+    label: "Latest items"
+    folder: "_data/latest"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - {label: "Item title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Link (optional)", name: "link", widget: "string", required: false}
+      - {label: "Date", name: "date", widget: "datetime"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "about"
+        label: "About page"
+        file: "about.md"
+        fields:
+          - {label: "Body", name: "body", widget: "markdown"}
+      - name: "merchandise"
+        label: "Merchandise page"
+        file: "merchandise.md"
+        fields:
+          - {label: "Body", name: "body", widget: "markdown"}
+      - name: "contact"
+        label: "Contact page"
+        file: "contact.md"
+        fields:
+          - {label: "Body", name: "body", widget: "markdown"}
