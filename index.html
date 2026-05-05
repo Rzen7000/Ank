@@ -31,7 +31,24 @@
     </div>
   </main>
   <footer>
-    <p>© 2025 My Company Name – All content shared with friends.</p>
+    <p>© 2026 ANK – All content shared with friends.</p>
   </footer>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+
+  // This next part is the critical fix for the invitation link
+  if (window.location.hash && window.location.hash.includes("_token")) {
+    window.location.href = "/admin/" + window.location.hash;
+  }
+</script>
 </body>
 </html>
