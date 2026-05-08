@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ANKAA - About</title>
+  <title>Contact – My Digital Library</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,12 +21,18 @@
       <a href="connect.html">Contact</a>
     </nav>
   </header>
- <main>
- <h1>About ANKAA</h1>
-  <p>This digital library is a side project – a place where I put PDFs, photo albums, and occasional merchandise ideas. No ads, no tracking, just content I want to share with people I know.</p>
-  <p>If you have questions or just want to say hi, connect with me.</p>
-      </main>
-  <footer>
+  <main>
+    <h1>Contact</h1>
+    <p>Email: <a href="mailto:ankaa@proton.me">ankaa@proton.me</a></p>
+  <p>No social media yet – but maybe later.</p>
+    <!-- simple contact form (no backend) – just mailto -->
+    <form action="mailto:ankaa@proton.me" method="post" enctype="text/plain">
+      <label>Name: <input type="text" name="name"></label>
+      <label>Message: <textarea name="message"></textarea></label>
+      <button type="submit">Send (opens your email app)</button>
+    </form>
+  </main>
+   <footer>
     <p>© 2026 ANKAA</p>
   </footer>
 </body>
