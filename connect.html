@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connect</title>
+  <title>Caw, Caw – Send a Message</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header>
     <div class="logo">
       <img src="images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
-      <span class="site-title">ANKAA</span>
+      <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-        <a href="index.html">Imaginarium</a>
+      <a href="index.html">The Imaginarium</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
@@ -21,34 +21,67 @@
       <a href="connect.html">Caw, Caw</a>
     </nav>
   </header>
-    <main>
-  <h1>Caw, Caw: Send a Message</h1>
-  <p>I don’t do social media. I have enough existential dread without watching people argue about whether you should peel a banana from the stem or the bottom.<br>Bennu agrees; he’s a bird of few taps.
-<br><br>
-If you need to reach me; to ask a question, share an exotic fruit recommendation, or tell me my dark chocolate take was wrong; email is the only way.</p>
-  <p><strong>Email:</strong> <a href="mailto:3ankaa@proton.me">3ankaa@proton.me</a></p>
-  <p><strong>Response time:</strong> Don't expect an immediate response. If you're lucky, within a week. <br>If I'm deep in a rabbit hole or traveling for mangoes, maybe a month. I'll get to you. Probably.</p>
-  <p><strong>Sarcastic warning (because you've made it this far):</strong><br>
-  - No, I will not help you name your houseplant.<br>
-  - No, I will not translate Bennu’s taps for you. He’s cryptic on purpose.<br>
-  - No, I will not tell you where the Imaginarium is. You have to get lost first.<br>
-  - No, I will not fix your snack machine. Call Adam and Hani, they will build you a better one.<br>
-  - No, I will not explain why Jimba’s backpack is a portal to another dimension (it’s snacks).<br>
-  - Yes, you can send me dark chocolate. I will not share my address, but the thought counts.<br>
-  - Yes, you can name a character after yourself in a future Quest Pack. For a small donation to my mango fund. 
-   <br>(Kidding. Or am I? Honestly, I’d probably do it for free; I’m easy.)<br>
-    <p>If you made it through all that and still want to email me, you’re my kind of weirdo. Hit me up. 
-<br>Bennu might even tap a greeting, or he might ignore you. He’s a bird of mystery.</p>
-</main>
-    <!-- simple contact form (no backend) – just mailto -->
-    <form action="mailto:3ankaa@proton.me" method="post" enctype="text/plain">
-      <label>Name: <input type="text" name="name"></label>
-      <label>Message: <textarea name="message"></textarea></label>
-      <button type="submit">Send (opens your email app)</button>
-    </form>
+
+  <main>
+    <div class="welcome-section">
+      <h1>Caw, Caw: Send a Message</h1>
+      <p>I don’t do social media. I have enough existential dread without watching people argue about whether you should peel a banana from the stem or the bottom.<br>
+      Bennu agrees; he’s a bird of few taps.</p>
+
+      <p>If you need to reach me; to ask a question, share an exotic fruit recommendation, or tell me my dark chocolate take was wrong, email is the only way.</p>
+
+      <p><strong>Email:</strong> <a href="mailto:3ankaa@proton.me">3ankaa@proton.me</a></p>
+
+      <p><strong>Response time:</strong> Don’t expect an immediate response. If you’re lucky, within a week.<br>
+      If I’m deep in a rabbit hole or traveling for mangoes, maybe a month. I’ll get to you. Probably.</p>
+
+      <p><strong>Sarcastic warning (because you’ve made it this far):</strong><br>
+      - No, I will not help you name your houseplant.<br>
+      - No, I will not translate Bennu’s taps for you. He’s cryptic on purpose.<br>
+      - No, I will not tell you where the Imaginarium is. You have to get lost first.<br>
+      - No, I will not fix your snack machine. Call Adam and Hani, they will build you a better one.<br>
+      - No, I will not explain why Jimba’s backpack is a portal to another dimension (it’s snacks).<br>
+      - Yes, you can send me dark chocolate. I will not share my address, but the thought counts.<br>
+      - Yes, you can name a character after yourself in a future Quest Pack. For a small donation to my mango fund.<br>
+      (Kidding. Or am I? Honestly, I’d probably do it for free, I’m easy.)</p>
+
+      <p>If you made it through all that and still want to email me, you’re my kind of weirdo. Hit me up.<br>
+      Bennu might even tap a greeting, or he might ignore you. He’s a bird of mystery.</p>
+
+      <!-- Simple contact form (no backend) – uses mailto -->
+      <form action="mailto:3ankaa@proton.me" method="post" enctype="text/plain">
+        <label>Name: <input type="text" name="name"></label>
+        <label>Message: <textarea name="message"></textarea></label>
+        <button type="submit">Send (opens your email app)</button>
+      </form>
+    </div>
   </main>
-   <footer>
-    <p>© 2026 3ANKAA</p>
-  </footer>
+
+ <footer>
+  <p>
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    © 2026 3ANKAA
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+  </p>
+</footer>
+
+  <!-- Netlify Identity Widget (same as other pages) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+    if (window.location.hash && window.location.hash.includes("_token")) {
+      window.location.href = "/admin/" + window.location.hash;
+    }
+  </script>
 </body>
 </html>

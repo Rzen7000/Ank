@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-   <header>
+  <header>
     <div class="logo">
       <img src="images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
-      <span class="site-title">ANKAA</span>
+      <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-  <a href="index.html">Imaginarium</a>
+      <a href="index.html">The Imaginarium</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
@@ -21,28 +21,64 @@
       <a href="connect.html">Caw, Caw</a>
     </nav>
   </header>
- <main>
-  <h1>Gift Closet</h1>
-  <p><br><br>Check out our bookstore for the entire range of Adventure & Quest Packs! (Link HERE)
-<br><br>Now let’s talk about hoodies.
-<br><br>
-I love them. You love them. The world needs more hoodies with weird prints;<br> like a hoopoe wearing a graduation cap, or a diagram of a snack‑powered machine.
-<br><br>
-So I’m enthusiastically selling hoodies. Well, I will be. Eventually.
-<br><br>
-Sometimes I’d rather give them away, because capitalism is exhausting, 
-<br>and I just want to buy dark chocolate and exotic fruits. 
-<br>But chocolate money doesn’t grow on trees 
-<br>(except cocoa trees, but that’s farming, and I respect farmers).
-</p>
-  <p><strong>Capitalism disclaimer:</strong> <br>Yes, this is a joke about capitalism. If you get it, we're friends.<br> If you don't, buy a hoodie anyway. Or a drawing of Bennu. He likes portraits.</p>
-  <div class="book-grid">
-    <!-- merchandise items go here later -->
-    <p><em>Hoodies coming soon. <br>In the meantime, send chocolate.</em></p>
-  </div>
-</main>
-   <footer>
-    <p>© 2026 3ANKAA</p>
-  </footer>
+
+  <main>
+    <div class="welcome-section">
+      <h1>Gift Closet</h1>
+      <p>Check out our bookstore for the entire range of Adventure & Quest Packs! <a href="#">(Link to store – coming soon)</a></p>
+
+      <p>Now let’s talk about hoodies.<br>
+      I love them. You love them. The world needs more hoodies with weird prints – like a hoopoe wearing a graduation cap, or a diagram of a snack‑powered machine.</p>
+
+      <p>So I’m enthusiastically selling hoodies. Well, I will be. Eventually.</p>
+
+      <p>Sometimes I’d rather give them away, because capitalism is exhausting, and I just want to buy dark chocolate and exotic fruits.<br>
+      But chocolate money doesn’t grow on trees (except cocoa trees, but that’s farming, and I respect farmers).</p>
+
+<div style="text-align: center; margin: 2rem 0;">
+  <a href="https://ko-fi.com/3ankaa" target="_blank" 
+     style="background: black; color: white; padding: 0.8rem 1.8rem; text-decoration: none; border-radius: 40px; display: inline-block; font-weight: bold; transition: background 0.2s;">
+     🍫 Buy me a chocolate 🍫
+  </a>
+  <p style="font-size: 0.8rem; margin-top: 0.5rem;">(Your chocolate supports my dark chocolate addiction and exotic fruit research)</p>
+</div>
+
+      <p><strong>Capitalism disclaimer:</strong><br>
+      Yes, this is a joke about capitalism. If you get it, we're friends.<br>
+      If you don't, buy a hoodie anyway. Or a drawing of Bennu. He likes portraits.</p>
+
+      <div class="book-grid">
+        <!-- merchandise items go here later -->
+        <p><em>Hoodies coming soon. In the meantime, send chocolate.</em></p>
+      </div>
+    </div>
+  </main>
+
+ <footer>
+  <p>
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    © 2026 3ANKAA
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+  </p>
+</footer>
+
+  <!-- Netlify Identity Widget (same as other pages) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+    if (window.location.hash && window.location.hash.includes("_token")) {
+      window.location.href = "/admin/" + window.location.hash;
+    }
+  </script>
 </body>
 </html>

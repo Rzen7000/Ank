@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Educators – The Imaginarium</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="index.html">The Imaginarium</a>
+      <a href="books.html">Quest Packs & Adventures</a>
+      <a href="about.html">The Storykeeper</a>
+      <a href="latest.html">Bennu's Bulletin</a>
+      <a href="merchandise.html">Gift Closet</a>
+      <a href="connect.html">Caw, Caw</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="welcome-section">
+      <h1>For Educators: Bring the Imaginarium to Your Classroom</h1>
+      <p>You teach. You care. You also want to keep your sanity. 
+      <br>These Quest Packs are designed to make serious topics feel like adventures, without the standard “worksheet fatigue”.</p>
+
+      <h2>📖 How to use a Quest Pack</h2>
+      <p>Each Quest Pack includes:<br>
+      - A complete story (no abridgement)<br>
+      - “Imaginarium Kit”: hands‑on activities using simple materials<br>
+      - “Bennu’s Field Log”: portfolio prompts (draw, write, debate)<br>
+      - Cross‑curricular links (history, science, ethics, art)<br>
+      - “Glorious Failures” section – because trying and falling is learning</p>
+
+      <h2>🧠 Sample Discussion Questions</h2>
+      <ul>
+        <li>Why does Jimba’s backpack become a portal when snacks are inside? (Metaphor for hidden potential?)</li>
+        <li>In “Silence of the Hive”, who was right: The Farmer or the teacher? Can both be right?</li>
+        <li>Bennu never gives direct answers. Is that teaching or just annoying?</li>
+      </ul>
+
+      <h2>🎓 Curriculum Alignment (General)</h2>
+      <p>Quest Packs touch on:<br>
+      - Social‑emotional learning (empathy, fairness)<br>
+      - Critical thinking (multiple perspectives)<br>
+      - Ethical reasoning (Zakat, freedom of speech, animal testing)<br>
+      - Creative writing and visual storytelling</p>
+
+      <h2>📥 Free Sample Pack</h2>
+      <p>Download a complete Quest Pack to test in your class. <a href="pdfs/sample_questpack.html" download>Click here for “The Floating Classroom”</a>.</p>
+
+      <h2>🏷️ Bulk / School Licenses</h2>
+      <p>If you want to use Quest Packs with your entire grade or school, email me via <a href="connect.html">Caw, Caw</a>. We can work out a fair, affordable rate (or a chocolate bar donation).</p>
+
+      <p><em>Bennu approves of teachers. He taps twice, which means “keep going, you’re doing fine”.</em></p>
+    </div>
+  </main>
+
+ <footer>
+  <p>
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    © 2026 3ANKAA
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
+  </p>
+</footer>
+
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+    if (window.location.hash && window.location.hash.includes("_token")) {
+      window.location.href = "/admin/" + window.location.hash;
+    }
+  </script>
+</body>
+</html>
