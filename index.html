@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>The Imaginarium – Interactive Map</title>
   
-  <!-- Load main CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- ===== PERFORMANCE OPTIMIZATIONS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- Load icon CSS -->
-  <link rel="stylesheet" href="css/icons.css">
+  <!-- Load main CSS -->
+  <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/icons.css" media="print" onload="this.media='all'">
   
   <style>
-    /* --- RESET --- */
+    /* --- CRITICAL CSS --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
@@ -70,7 +72,7 @@
       transform: scale(1.02);
     }
 
-    /* --- LOADING SCREEN --- */
+    /* --- LOADING SCREEN (shown briefly on all devices) --- */
     #loading-screen {
       position: fixed;
       top: 0;
@@ -101,47 +103,12 @@
       opacity: 0.6;
     }
     
-    /* === FALLBACK SKIP BUTTON === */
-    #skip-loading {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10001;
-      background: rgba(180, 95, 42, 0.9);
-      color: #fdf6e3;
-      border: 2px solid #c9a84c;
-      padding: 12px 28px;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Georgia', serif;
-      transition: 0.3s;
-      display: none;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-    #skip-loading:hover {
-      background: #8f4a1f;
-      transform: translateX(-50%) scale(1.02);
-    }
-    #skip-loading.show {
-      display: block;
-      animation: fadeInUp 0.5s ease;
-    }
-
     @keyframes pulse {
       0% { opacity: 0.4; transform: scale(0.98); }
       100% { opacity: 1; transform: scale(1.02); }
     }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-
-    /* --- MAP CONTAINER --- */
+    /* --- MAP CONTAINER (hidden by default, shown on desktop) --- */
     #map-container {
       flex: 1;
       position: relative;
@@ -157,7 +124,7 @@
       display: block;
     }
 
-    /* --- MAP IMAGE WRAPPER --- */
+    /* --- MAP IMAGE --- */
     #map-wrapper {
       position: relative;
       width: 100%;
@@ -174,11 +141,6 @@
       height: auto;
       pointer-events: none;
       user-select: none;
-      filter: blur(6px);
-      transition: filter 0.6s ease;
-    }
-    #map-image.loaded {
-      filter: blur(0);
     }
 
     /* --- COMPASS ROSE & LEGEND --- */
@@ -354,9 +316,7 @@
       100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0.6; }
     }
 
-    /* ============================================================
-       FULL-SCREEN CONTENT OVERLAY WITH IFRAME
-       ============================================================ */
+    /* --- CONTENT OVERLAY --- */
     #content-overlay {
       position: fixed;
       top: 0;
@@ -515,9 +475,7 @@
       border-color: #b45f2a;
     }
 
-    /* ============================================================
-       MENU POPUP
-       ============================================================ */
+    /* --- MENU POPUP --- */
     #menu-overlay {
       position: fixed;
       top: 0;
@@ -602,7 +560,7 @@
       color: #b45f2a;
     }
 
-    /* --- MENU CTA (Call to Action) --- */
+    /* --- MENU CTA --- */
     .menu-cta {
       background: #f5ede3;
       border-radius: 12px;
@@ -702,6 +660,31 @@
     #welcome-card .welcome-btn:hover {
       background: #8f4a1f;
       transform: scale(1.02);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(26, 20, 16, 0.9);
+      border-top: 1px solid rgba(212, 197, 160, 0.2);
+      color: #d4c5a0;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+    footer a {
+      color: #d4c5a0;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #fdf6e3;
+      text-decoration: underline;
     }
 
     /* --- RESPONSIVE --- */
@@ -823,6 +806,23 @@
       .compass-rose { display: none; }
       .legend { display: none; }
     }
+
+    /* --- MOBILE-FIRST: Hide map and show menu directly --- */
+    @media (max-width: 768px) {
+      #map-container {
+        display: none !important;
+      }
+      .mobile-map-hint {
+        display: block !important;
+        text-align: center;
+        padding: 20px;
+        color: #d4c5a0;
+      }
+    }
+
+    .mobile-map-hint {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -833,9 +833,6 @@
     <div class="sub">Bennu is flying across Egypt</div>
   </div>
 
-  <!-- ===== SKIP LOADING BUTTON ===== -->
-  <button id="skip-loading">🚪 Skip to Explore</button>
-
   <!-- ===== HEADER ===== -->
   <header class="map-header">
     <div class="logo">
@@ -845,18 +842,20 @@
     <button class="menu-btn" id="menuBtn">📜 Explore</button>
   </header>
 
-  <!-- ===== MAP CONTAINER ===== -->
-  <div id="map-container">
+  <!-- ===== MAP CONTAINER (Desktop Only) ===== -->
+  <div id="map-container" class="visible">
     
     <!-- Map Wrapper -->
     <div id="map-wrapper">
-      <!-- Responsive image with mobile-friendly versions -->
       <picture>
         <source media="(max-width: 480px)" srcset="images/3Ankaa-website-map-small.webp">
         <source media="(max-width: 1024px)" srcset="images/3Ankaa-website-map-medium.webp">
-        <img id="map-image" 
-             src="images/3Ankaa-website-map.webp" 
-             alt="Map of Egypt - The Imaginarium" />
+        <img 
+          id="map-image" 
+          src="images/3Ankaa-website-map.webp" 
+          alt="Map of Egypt - The Imaginarium"
+          fetchpriority="high"
+          loading="eager" />
       </picture>
       
       <!-- Map Overlays -->
@@ -889,14 +888,25 @@
         <div id="bennu" style="left: 15%; top: 20%;">
           <span class="trail"></span>
           <span class="wing">
-            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;">
+            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;" loading="lazy">
           </span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== FULL-SCREEN CONTENT OVERLAY WITH IFRAME ===== -->
+  <!-- ===== MOBILE HINT (shown on mobile instead of map) ===== -->
+  <div class="mobile-map-hint">
+    <p style="font-size:1.2rem; color:#b45f2a;">🗺️ Explore the Imaginarium</p>
+    <p style="font-size:0.9rem; color:#d4c5a0; max-width:400px; margin:10px auto;">
+      Click "Explore" to discover all the magical places, games, and stories waiting for you!
+    </p>
+    <button class="menu-btn" style="margin-top:16px;" onclick="document.getElementById('menuBtn').click();">
+      🚪 Explore Now
+    </button>
+  </div>
+
+  <!-- ===== CONTENT OVERLAY ===== -->
   <div id="content-overlay">
     <div id="content-card">
       <button class="close-btn" id="contentClose">✕</button>
@@ -925,7 +935,6 @@
     <div id="menu-card">
       <button class="close-btn" id="menuClose">✕</button>
       
-      <!-- === CTA MESSAGE === -->
       <div class="menu-cta">
         <p class="cta-headline">✨ Your Adventure Awaits</p>
         <p class="cta-text">You've read the stories. Now step into the world behind it.</p>
@@ -967,7 +976,6 @@
     (function() {
       // --- 1. DOM REFERENCES ---
       const loadingScreen = document.getElementById('loading-screen');
-      const skipButton = document.getElementById('skip-loading');
       const mapContainer = document.getElementById('map-container');
       const mapImage = document.getElementById('map-image');
       const mapWrapper = document.getElementById('map-wrapper');
@@ -1169,7 +1177,6 @@
           grid.appendChild(item);
         });
 
-        // Activities Hub item
         const activitiesItem = document.createElement('div');
         activitiesItem.className = 'menu-item';
         activitiesItem.style.borderColor = '#c9a84c';
@@ -1249,29 +1256,7 @@
         if (e.target === menuOverlay) menuOverlay.classList.remove('active');
       });
 
-      // --- 9. SKIP LOADING FUNCTION ---
-      function showSkipButton() {
-        skipButton.classList.add('show');
-      }
-
-      function skipLoading() {
-        // Hide loading screen
-        loadingScreen.classList.add('hidden');
-        // Show map container
-        mapContainer.classList.add('visible');
-        // Initialize map even if image isn't fully loaded
-        initMap();
-        // Hide skip button
-        skipButton.classList.remove('show');
-        // Open menu automatically
-        setTimeout(() => {
-          menuOverlay.classList.add('active');
-        }, 300);
-      }
-
-      skipButton.addEventListener('click', skipLoading);
-
-      // --- 10. WELCOME ---
+      // --- 9. WELCOME ---
       const welcomeOverlay = document.getElementById('welcome-overlay');
       const welcomeBtn = document.getElementById('welcomeBtn');
 
@@ -1292,7 +1277,7 @@
         }
       });
 
-      // --- 11. KEYBOARD ---
+      // --- 10. KEYBOARD ---
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (contentOverlay.classList.contains('active')) closeContent();
@@ -1304,7 +1289,7 @@
         }
       });
 
-      // --- 12. INIT ---
+      // --- 11. INIT ---
       let mapInitialized = false;
 
       function initMap() {
@@ -1318,62 +1303,93 @@
         console.log('🕊️ Bennu is flying across Egypt!');
       }
 
-      // --- 13. LOAD MAP WITH SKIP FUNCTIONALITY ---
-      function loadMap() {
-        // Show skip button after 3 seconds if not loaded
-        const skipTimer = setTimeout(() => {
-          showSkipButton();
-        }, 3000);
-
-        // Check if image is already loaded
-        if (mapImage.complete && mapImage.naturalHeight > 0) {
-          clearTimeout(skipTimer);
-          mapImage.classList.add('loaded');
-          loadingScreen.classList.add('hidden');
-          mapContainer.classList.add('visible');
-          initMap();
-          return;
-        }
-
-        // Set up load event
-        mapImage.addEventListener('load', function() {
-          clearTimeout(skipTimer);
-          this.classList.add('loaded');
-          loadingScreen.classList.add('hidden');
-          mapContainer.classList.add('visible');
-          initMap();
-          skipButton.classList.remove('show');
-        });
-
-        // Set up error event (fallback)
-        mapImage.addEventListener('error', function() {
-          console.warn('Map image failed to load, showing page anyway');
-          clearTimeout(skipTimer);
-          loadingScreen.classList.add('hidden');
-          mapContainer.classList.add('visible');
-          initMap();
-          skipButton.classList.remove('show');
-        });
-
-        // Safety timeout
-        setTimeout(() => {
-          if (!loadingScreen.classList.contains('hidden')) {
-            console.warn('Image load timeout, showing page anyway');
-            loadingScreen.classList.add('hidden');
-            mapContainer.classList.add('visible');
-            initMap();
-            skipButton.classList.remove('show');
-          }
-        }, 8000);
+      // --- 12. DETECT MOBILE AND LOAD APPROPRIATELY ---
+      function isMobile() {
+        return window.innerWidth <= 768;
       }
 
-      // --- 14. START LOADING ---
-      loadMap();
+      function loadPage() {
+        // Hide loading screen quickly
+        setTimeout(() => {
+          loadingScreen.classList.add('hidden');
+        }, 500);
+
+        if (isMobile()) {
+          // Mobile: show the hint, hide the map
+          console.log('📱 Mobile device detected - showing explore menu instead of map');
+          document.querySelector('.mobile-map-hint').style.display = 'block';
+          mapContainer.classList.remove('visible');
+          // Initialize the menu only (not the map)
+          createMenuItems();
+          // Auto-open the menu after a short delay
+          setTimeout(() => {
+            menuOverlay.classList.add('active');
+          }, 800);
+        } else {
+          // Desktop: load the map
+          console.log('💻 Desktop detected - loading map');
+          document.querySelector('.mobile-map-hint').style.display = 'none';
+          mapContainer.classList.add('visible');
+          
+          // Load the map image
+          if (mapImage.complete && mapImage.naturalHeight > 0) {
+            mapImage.classList.add('loaded');
+            initMap();
+          } else {
+            mapImage.addEventListener('load', function() {
+              this.classList.add('loaded');
+              initMap();
+            });
+            mapImage.addEventListener('error', function() {
+              console.warn('Map image failed to load, showing menu instead');
+              // Fallback: show menu
+              mapContainer.classList.remove('visible');
+              document.querySelector('.mobile-map-hint').style.display = 'block';
+              createMenuItems();
+              setTimeout(() => {
+                menuOverlay.classList.add('active');
+              }, 500);
+            });
+            // Timeout fallback
+            setTimeout(() => {
+              if (!mapInitialized) {
+                console.warn('Map load timeout, showing menu');
+                mapContainer.classList.remove('visible');
+                document.querySelector('.mobile-map-hint').style.display = 'block';
+                createMenuItems();
+                setTimeout(() => {
+                  menuOverlay.classList.add('active');
+                }, 500);
+              }
+            }, 10000);
+          }
+        }
+      }
+
+      // --- 13. START ---
+      loadPage();
+
+      // --- 14. Handle resize (mobile to desktop) ---
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          // Reload the page on resize to switch modes
+          // Only do this if the user has been on the page for more than 2 seconds
+          if (performance.now() > 2000) {
+            location.reload();
+          }
+        }, 500);
+      });
 
       console.log('🕊️ Bennu says: "Welcome to the Imaginarium!"');
-      console.log('📱 If loading is slow, click "Skip to Explore"');
 
     })();
   </script>
+  
+  <!-- Defer loading of non-critical libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
 </body>
 </html>
