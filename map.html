@@ -429,7 +429,7 @@
     }
 
     /* ============================================================
-       MENU POPUP WITH ACTIVITIES SUB-MENU
+       MENU POPUP - SIMPLIFIED (Links to Activities Hub)
        ============================================================ */
     #menu-overlay {
       position: fixed;
@@ -513,42 +513,6 @@
       margin-left: auto;
       font-size: 0.8rem;
       color: #b45f2a;
-    }
-
-    /* --- ACTIVITIES SUB-MENU --- */
-    .sub-menu {
-      display: none;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 2px solid #d4c5a0;
-    }
-    .sub-menu.active {
-      display: block;
-    }
-    .sub-menu .menu-item {
-      font-size: 0.85rem;
-      padding: 10px 14px;
-    }
-    .sub-menu .menu-item .icon {
-      font-size: 1.1rem;
-    }
-    .sub-menu .back-btn {
-      background: none;
-      border: none;
-      color: #b45f2a;
-      font-family: 'Georgia', serif;
-      font-size: 0.85rem;
-      cursor: pointer;
-      padding: 6px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .sub-menu .back-btn:hover {
-      color: #8f4a1f;
-      transform: translateX(-4px);
     }
 
     /* --- WELCOME OVERLAY --- */
@@ -817,7 +781,7 @@
     </div>
   </div>
 
-  <!-- ===== MENU POPUP WITH ACTIVITIES SUB-MENU ===== -->
+  <!-- ===== MENU POPUP - SIMPLIFIED ===== -->
   <div id="menu-overlay">
     <div id="menu-card">
       <button class="close-btn" id="menuClose">✕</button>
@@ -825,12 +789,6 @@
       
       <!-- Main Menu -->
       <div class="menu-grid" id="menuGrid"></div>
-      
-      <!-- Activities Sub-Menu -->
-      <div class="sub-menu" id="activitiesSubMenu">
-        <button class="back-btn" id="backToMainMenu">← Back to Menu</button>
-        <div class="menu-grid" id="activitiesGrid"></div>
-      </div>
     </div>
   </div>
 
@@ -941,46 +899,7 @@
         }
       ];
 
-      // --- 3. ACTIVITIES DATA ---
-      const activities = [
-        {
-          id: 'tap-code',
-          icon: '🕊️',
-          name: 'Bennu\'s Tap Code',
-          description: 'Learn Morse code with Bennu',
-          page: 'activities/tap-code.html'
-        },
-        {
-          id: 'snack-portal',
-          icon: '🎒',
-          name: 'Snack Portal Adventure',
-          description: 'Explore Jimba\'s magical backpack',
-          page: 'activities/snack-portal.html'
-        },
-        {
-          id: 'mango-quiz',
-          icon: '🥭',
-          name: 'Mango Committee Quiz',
-          description: 'Discover your Imaginarium personality',
-          page: 'activities/mango-quiz.html'
-        },
-        {
-          id: 'memory-game',
-          icon: '🧠',
-          name: 'Bennu\'s Memory Game',
-          description: 'Match the pairs with Bennu',
-          page: 'activities/memory-game.html'
-        },
-        {
-          id: 'scavenger-hunt',
-          icon: '🔍',
-          name: 'Scavenger Hunt',
-          description: 'Find all 7 locations with clues',
-          page: 'activities/scavenger-hunt.html'
-        }
-      ];
-
-      // --- 4. BENNU QUIPS ---
+      // --- 3. BENNU QUIPS ---
       const bennuQuips = [
         'Bennu says: "The Nile is just a really long snack delivery system. Prove me wrong."',
         'Bennu says: "If you\'re not eating mangoes while reading, are you even living?"',
@@ -990,7 +909,7 @@
         'Bennu says: "The pyramids were built by aliens. Just kidding. They were built by Egyptians with very strong backs."'
       ];
 
-      // --- 5. FLIGHT PATH ---
+      // --- 4. FLIGHT PATH ---
       const flightPath = [
         { x: 12, y: 14 }, { x: 58, y: 18 }, { x: 50, y: 28 }, { x: 22, y: 30 },
         { x: 24, y: 36 }, { x: 16, y: 40 }, { x: 40, y: 52 }, { x: 32, y: 55 }, { x: 12, y: 78 }
@@ -1038,7 +957,7 @@
         }, 1200);
       }
 
-      // --- 6. CREATE HOTSPOTS ---
+      // --- 5. CREATE HOTSPOTS ---
       function createHotspots() {
         const container = document.getElementById('hotspots-container');
         
@@ -1069,12 +988,12 @@
         });
       }
 
-      // --- 7. CREATE MENU ---
+      // --- 6. CREATE MENU (UPDATED - Links to Activities Hub) ---
       function createMenuItems() {
         const grid = document.getElementById('menuGrid');
         grid.innerHTML = '';
         
-        // Add all location items except the map one (which is replaced by Activities)
+        // Add all location items
         locations.forEach((loc, index) => {
           const item = document.createElement('div');
           item.className = 'menu-item';
@@ -1086,55 +1005,26 @@
           grid.appendChild(item);
         });
 
-        // Add Activities item (replaces "Explore the Map")
+        // Add Activities Hub item (links to activities/index.html)
         const activitiesItem = document.createElement('div');
         activitiesItem.className = 'menu-item';
         activitiesItem.style.borderColor = '#c9a84c';
         activitiesItem.style.background = '#f5ede3';
         activitiesItem.innerHTML = `
           <span class="icon">🎮</span>
-          Activities
+          Activities Hub
           <span class="arrow">→</span>
         `;
         activitiesItem.addEventListener('click', function(e) {
           e.stopPropagation();
-          showActivitiesSubMenu();
+          // Navigate to Activities Hub
+          window.location.href = 'activities/index.html';
+          document.getElementById('menu-overlay').classList.remove('active');
         });
         grid.appendChild(activitiesItem);
       }
 
-      // --- 8. CREATE ACTIVITIES SUB-MENU ---
-      function createActivitiesSubMenu() {
-        const grid = document.getElementById('activitiesGrid');
-        grid.innerHTML = '';
-        
-        activities.forEach(activity => {
-          const item = document.createElement('div');
-          item.className = 'menu-item';
-          item.innerHTML = `<span class="icon">${activity.icon}</span> ${activity.name}`;
-          item.title = activity.description;
-          item.addEventListener('click', function() {
-            // Open the activity in a new tab or navigate to it
-            window.open(activity.page, '_blank');
-            document.getElementById('menu-overlay').classList.remove('active');
-          });
-          grid.appendChild(item);
-        });
-      }
-
-      function showActivitiesSubMenu() {
-        document.getElementById('menuGrid').style.display = 'none';
-        document.getElementById('menuTitle').textContent = '🎮 Activities';
-        document.getElementById('activitiesSubMenu').classList.add('active');
-      }
-
-      function hideActivitiesSubMenu() {
-        document.getElementById('menuGrid').style.display = 'grid';
-        document.getElementById('menuTitle').textContent = '🏛️ Explore the Imaginarium';
-        document.getElementById('activitiesSubMenu').classList.remove('active');
-      }
-
-      // --- 9. CONTENT OVERLAY WITH IFRAME ---
+      // --- 7. CONTENT OVERLAY WITH IFRAME ---
       const contentClose = document.getElementById('contentClose');
       const contentBack = document.getElementById('contentBack');
       const contentIcon = document.getElementById('contentIcon');
@@ -1185,24 +1075,20 @@
         if (e.target === this) closeContent();
       });
 
-      // --- 10. MENU ---
+      // --- 8. MENU ---
       const menuBtn = document.getElementById('menuBtn');
       const menuOverlay = document.getElementById('menu-overlay');
       const menuClose = document.getElementById('menuClose');
-      const backToMain = document.getElementById('backToMainMenu');
 
       menuBtn.addEventListener('click', () => {
-        // Reset to main menu view
-        hideActivitiesSubMenu();
         menuOverlay.classList.add('active');
       });
       menuClose.addEventListener('click', () => menuOverlay.classList.remove('active'));
-      backToMain.addEventListener('click', hideActivitiesSubMenu);
       menuOverlay.addEventListener('click', (e) => {
         if (e.target === menuOverlay) menuOverlay.classList.remove('active');
       });
 
-      // --- 11. WELCOME ---
+      // --- 9. WELCOME ---
       const welcomeOverlay = document.getElementById('welcome-overlay');
       const welcomeBtn = document.getElementById('welcomeBtn');
 
@@ -1223,7 +1109,7 @@
         }
       });
 
-      // --- 12. KEYBOARD ---
+      // --- 10. KEYBOARD ---
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (contentOverlay.classList.contains('active')) closeContent();
@@ -1235,17 +1121,14 @@
         }
       });
 
-      // --- 13. INIT ---
+      // --- 11. INIT ---
       function initMap() {
         createHotspots();
         createMenuItems();
-        createActivitiesSubMenu();
-        // Ensure sub-menu is hidden initially
-        hideActivitiesSubMenu();
         setTimeout(flyBennuToNextPoint, 1000);
         console.log('🐦 The Imaginarium Map loaded!');
         console.log(`📍 ${locations.length} locations ready.`);
-        console.log(`🎮 ${activities.length} activities ready.`);
+        console.log(`🎮 Activities Hub linked in menu!`);
         console.log('🕊️ Bennu is flying across Egypt!');
       }
 
