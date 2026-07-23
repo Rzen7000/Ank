@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Mango Committee – Personality Quiz</title>
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .quiz-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+      min-height: 450px;
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .quiz-header .icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .quiz-header h1 {
+      font-size: 2rem;
+      color: #b45f2a;
+      font-family: 'Georgia', serif;
+    }
+    .quiz-header p {
+      color: #5c4530;
+      font-size: 1rem;
+    }
+
+    .question-counter {
+      text-align: center;
+      color: #5c4530;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .progress-track {
+      height: 4px;
+      background: #d4c5a0;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .progress-track .fill {
+      height: 100%;
+      background: #b45f2a;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+
+    .question {
+      font-size: 1.2rem;
+      color: #3e2e1f;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .option-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 14px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      transition: 0.3s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .option-btn:hover {
+      border-color: #b45f2a;
+      background: #fdf6e3;
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(180, 95, 42, 0.1);
+    }
+    .option-btn .emoji {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .option-btn.selected {
+      border-color: #b45f2a;
+      background: #f5ede3;
+    }
+
+    /* ===== RESULTS ===== */
+    .result {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .result .big-icon {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .result h2 {
+      font-size: 2rem;
+      color: #b45f2a;
+      margin-bottom: 4px;
+    }
+    .result .role {
+      font-size: 1.2rem;
+      color: #c9a84c;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .result .description {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+    .result .recommendation {
+      background: #fdf6e3;
+      border-left: 4px solid #c9a84c;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #5c4530;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-style: italic;
+    }
+    .result .recommendation strong {
+      color: #b45f2a;
+    }
+    .restart-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .restart-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      .quiz-container { padding: 20px; }
+      .quiz-header h1 { font-size: 1.6rem; }
+      .question { font-size: 1.05rem; }
+      .result h2 { font-size: 1.6rem; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      .quiz-container { padding: 16px; }
+      .quiz-header .icon { font-size: 3rem; }
+      .quiz-header h1 { font-size: 1.3rem; }
+      .question { font-size: 0.95rem; }
+      .option-btn { font-size: 0.9rem; padding: 10px 14px; }
+      .result .big-icon { font-size: 3.5rem; }
+      .result h2 { font-size: 1.3rem; }
+      .result .role { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="quiz-container" id="quizContainer">
+      <div id="quizContent">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== QUIZ DATA =====
+    const quizData = [
+      {
+        question: "What's your ideal snack while reading?",
+        options: [
+          { text: "Dark chocolate (80% cocoa minimum)", emoji: "🍫", value: "B" },
+          { text: "A ripe mango, eaten messily", emoji: "🥭", value: "M" },
+          { text: "Sunflower seeds, one at a time", emoji: "🌻", value: "S" },
+          { text: "A mystery fruit you've never tried", emoji: "🔮", value: "A" }
+        ]
+      },
+      {
+        question: "How do you handle a difficult problem?",
+        options: [
+          { text: "Think deeply, analyse, then act", emoji: "🤔", value: "A" },
+          { text: "Try random things until something works", emoji: "🎲", value: "J" },
+          { text: "Ask for help from friends and experts", emoji: "🫂", value: "B" },
+          { text: "Argue with Bennu about it", emoji: "🐦", value: "S" }
+        ]
+      },
+      {
+        question: "What's your favorite type of story?",
+        options: [
+          { text: "A wild adventure with twists and turns", emoji: "🏔️", value: "J" },
+          { text: "A philosophical journey that makes you think", emoji: "🧠", value: "A" },
+          { text: "A comedy filled with sarcasm and jokes", emoji: "😂", value: "B" },
+          { text: "A mystery where you solve the puzzle", emoji: "🔍", value: "S" }
+        ]
+      },
+      {
+        question: "What's your role in a group project?",
+        options: [
+          { text: "Leader who keeps everyone on track", emoji: "👑", value: "B" },
+          { text: "The creative one with wild ideas", emoji: "🎨", value: "J" },
+          { text: "The supporter who helps everyone", emoji: "🫂", value: "A" },
+          { text: "The quiet observer who notices everything", emoji: "👀", value: "S" }
+        ]
+      },
+      {
+        question: "What's your motto in life?",
+        options: [
+          { text: "Think big, laugh harder", emoji: "🌟", value: "B" },
+          { text: "Snacks solve everything", emoji: "🍫", value: "J" },
+          { text: "Question everything, including this quiz", emoji: "❓", value: "A" },
+          { text: "If in doubt, tap it out", emoji: "🐦", value: "S" }
+        ]
+      }
+    ];
+
+    // ===== PERSONALITY TYPES =====
+    const personalityTypes = {
+      'B': {
+        name: "Bennu",
+        role: "The Wise Guardian",
+        icon: "🐦",
+        description: "You're wise, sarcastic, and secretly kind. Like Bennu, you see the bigger picture and aren't afraid to tap some sense into people. You value learning, laughter, and the occasional snack. People come to you for advice, even if you give it in cryptic beak taps.",
+        recommendation: "You should read <strong>'Bennu's Riddle'</strong> – a philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers. Perfect for a thinker like you!"
+      },
+      'J': {
+        name: "Jimba",
+        role: "The Snack Enthusiast",
+        icon: "🍫",
+        description: "You're adventurous, snack-obsessed, and loyal to the core. Like Jimba, you'd follow your heart (and your stomach) anywhere. You believe that snacks make everything better, and you're not wrong. Your backpack is full of surprises, and you're always ready for the next adventure.",
+        recommendation: "You should read <strong>'The Floating Classroom'</strong> – when Jimba's snack goes missing, the class discovers a time-traveling portal inside the supply closet. It's got snacks AND adventure!"
+      },
+      'A': {
+        name: "Ali",
+        role: "The Quiet Thinker",
+        icon: "📚",
+        description: "You're thoughtful, observant, and always asking 'why'. Like Ali, you take notes when others are arguing and see the world in a unique way. You believe that deep questions deserve deep answers (even if they're wrapped in funny stories). You're a truth-seeker with a gentle soul.",
+        recommendation: "You should read <strong>'The Accidental Messenger'</strong> – Ali stumbles upon a secret that could change everything. Delivering the message might be harder than receiving it. Perfect for a thinker like you!"
+      },
+      'S': {
+        name: "The Storykeeper",
+        role: "The Guardian of Stories",
+        icon: "📖",
+        description: "You're a dreamer, a storyteller, and a keeper of secrets. Like the Storykeeper, you believe that stories have the power to change the world. You love dark chocolate, exotic fruits, and arguing with fictional hoopoe. You're the one who writes things down so others don't have to.",
+        recommendation: "You should read <strong>'The Month That Changed Everything'</strong> – Jimba learns about food, just not the 'eating' part. It's a story about discovery, growth, and the power of trying new things."
+      }
+    };
+
+    // ===== GAME STATE =====
+    let currentQuestion = 0;
+    let answers = { B: 0, J: 0, A: 0, S: 0 };
+    let totalQuestions = quizData.length;
+
+    // ===== RENDER FUNCTIONS =====
+    function renderStart() {
+      const container = document.getElementById('quizContent');
+      container.innerHTML = `
+        <div class="quiz-header">
+          <span class="icon">🥭</span>
+          <h1>The Mango Committee</h1>
+          <p>Discover your Imaginarium personality! The Mango Committee will judge you. (In a nice way.)</p>
+        </div>
+        <div style="text-align: center; margin-top: 24px;">
+          <button class="restart-btn" onclick="startQuiz()">🍫 Start the Quiz</button>
+        </div>
+        <p style="text-align:center; color:#5c4530; font-size:0.85rem; margin-top:16px;">
+          🐦 5 questions • 3 minutes • Bennu may or may not be watching
+        </p>
+      `;
+    }
+
+    function renderQuestion(index) {
+      const container = document.getElementById('quizContent');
+      const q = quizData[index];
+      const progress = ((index + 1) / totalQuestions) * 100;
+
+      let optionsHTML = '';
+      q.options.forEach(opt => {
+        optionsHTML += `
+          <button class="option-btn" onclick="selectOption('${opt.value}', this)">
+            <span class="emoji">${opt.emoji}</span>
+            <span>${opt.text}</span>
+          </button>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="quiz-header">
+          <span class="icon">🥭</span>
+          <h1>The Mango Committee</h1>
+        </div>
+        <div class="question-counter">Question ${index + 1} of ${totalQuestions}</div>
+        <div class="progress-track">
+          <div class="fill" style="width: ${progress}%;"></div>
+        </div>
+        <div class="question">${q.question}</div>
+        <div class="options" id="optionsContainer">
+          ${optionsHTML}
+        </div>
+      `;
+    }
+
+    function selectOption(value, button) {
+      // Disable all buttons
+      const allBtns = document.querySelectorAll('.option-btn');
+      allBtns.forEach(btn => btn.style.opacity = '0.6');
+      button.style.opacity = '1';
+      button.classList.add('selected');
+
+      // Add to score
+      answers[value] = (answers[value] || 0) + 1;
+
+      // Move to next question or show results
+      setTimeout(() => {
+        if (currentQuestion + 1 < totalQuestions) {
+          currentQuestion++;
+          renderQuestion(currentQuestion);
+        } else {
+          showResults();
+        }
+      }, 500);
+    }
+
+    function showResults() {
+      const container = document.getElementById('quizContent');
+      // Find the dominant personality
+      let maxScore = 0;
+      let dominantType = 'B';
+      for (const [key, value] of Object.entries(answers)) {
+        if (value > maxScore) {
+          maxScore = value;
+          dominantType = key;
+        }
+      }
+
+      const result = personalityTypes[dominantType];
+      container.innerHTML = `
+        <div class="result">
+          <span class="big-icon">${result.icon}</span>
+          <h2>You are ${result.name}!</h2>
+          <div class="role">${result.role}</div>
+          <div class="description">${result.description}</div>
+          <div class="recommendation">${result.recommendation}</div>
+          <button class="restart-btn" onclick="restartQuiz()">🔄 Retake the Quiz</button>
+          <p style="font-size:0.8rem; color:#5c4530; margin-top:12px;">
+            🐦 Bennu taps ${dominantType === 'B' ? 'once' : dominantType === 'J' ? 'twice' : dominantType === 'A' ? 'thrice' : 'four times'} in approval.
+          </p>
+        </div>
+      `;
+    }
+
+    function startQuiz() {
+      currentQuestion = 0;
+      answers = { B: 0, J: 0, A: 0, S: 0 };
+      renderQuestion(0);
+    }
+
+    function restartQuiz() {
+      startQuiz();
+    }
+
+    // ===== INIT =====
+    renderStart();
+    console.log('🥭 The Mango Committee Quiz loaded!');
+  </script>
+</body>
+</html>

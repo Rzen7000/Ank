@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bennu's Memory Game</title>
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .game-stats .stat {
+      font-size: 0.95rem;
+      color: #3e2e1f;
+    }
+    .game-stats .stat strong {
+      color: #b45f2a;
+    }
+    .game-stats .bennu-reaction {
+      font-style: italic;
+      color: #5c4530;
+      font-size: 0.9rem;
+    }
+
+    .level-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .level-btn {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+    .level-btn:hover {
+      border-color: #b45f2a;
+    }
+    .level-btn.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    .game-grid {
+      display: grid;
+      gap: 10px;
+      margin: 0 auto;
+    }
+    .game-grid.easy { grid-template-columns: repeat(3, 1fr); max-width: 400px; }
+    .game-grid.medium { grid-template-columns: repeat(4, 1fr); max-width: 500px; }
+    .game-grid.hard { grid-template-columns: repeat(5, 1fr); max-width: 600px; }
+
+    .card {
+      aspect-ratio: 1;
+      background: #d4c5a0;
+      border: 2px solid #b45f2a;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+      user-select: none;
+      background: linear-gradient(145deg, #d4c5a0, #c9b89a);
+    }
+    .card:hover:not(.matched):not(.flipped) {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(180, 95, 42, 0.2);
+    }
+    .card.flipped {
+      background: #fdf6e3;
+      border-color: #c9a84c;
+      transform: scale(0.98);
+    }
+    .card.matched {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      cursor: default;
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+    .card.matched .card-content {
+      opacity: 0.7;
+    }
+    .card .card-content {
+      font-size: 2.5rem;
+    }
+    .card .card-back {
+      font-size: 1.5rem;
+      opacity: 0.5;
+    }
+
+    .game-over {
+      text-align: center;
+      padding: 20px;
+    }
+    .game-over .big-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .game-over h2 {
+      color: #b45f2a;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .game-over p {
+      font-size: 1.05rem;
+      color: #3e2e1f;
+      margin-bottom: 8px;
+    }
+    .game-over .final-stats {
+      background: #f5ede3;
+      border-radius: 12px;
+      padding: 16px;
+      max-width: 400px;
+      margin: 12px auto;
+    }
+    .game-over .final-stats p {
+      font-size: 0.95rem;
+      margin: 4px 0;
+    }
+    .restart-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+      margin-top: 12px;
+    }
+    .restart-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .game-grid.easy { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+      .game-grid.medium { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+      .game-grid.hard { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
+      .card { font-size: 2rem; }
+      .card .card-content { font-size: 2rem; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; padding-left: 12px; }
+      .game-stats { flex-direction: column; align-items: stretch; text-align: center; }
+      .card { font-size: 1.5rem; border-radius: 8px; }
+      .card .card-content { font-size: 1.5rem; }
+      .game-grid.easy { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .game-grid.medium { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .game-grid.hard { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .level-btn { font-size: 0.75rem; padding: 4px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🧠 Bennu's Memory Game</h1>
+    <p class="subtitle">Match the pairs. Bennu is watching. No pressure.</p>
+
+    <div class="game-stats" id="gameStats">
+      <span class="stat">⏱️ <strong id="timerDisplay">60s</strong></span>
+      <span class="stat">🔢 Moves: <strong id="movesDisplay">0</strong></span>
+      <span class="stat">🎯 Matches: <strong id="matchesDisplay">0</strong></span>
+      <span class="bennu-reaction" id="bennuReaction">🐦 "Tap. Tap. You got this."</span>
+    </div>
+
+    <div class="level-selector">
+      <button class="level-btn active" data-level="easy">🟢 Easy (6 pairs)</button>
+      <button class="level-btn" data-level="medium">🟡 Medium (8 pairs)</button>
+      <button class="level-btn" data-level="hard">🔴 Hard (12 pairs)</button>
+    </div>
+
+    <div id="gameContainer">
+      <!-- Game grid rendered by JavaScript -->
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== CARD DATA =====
+    const cardEmojis = [
+      '🐦', '🌻', '🍫', '🥭', '🔺', '🏛️',
+      '📚', '🎒', '🌟', '🏝️', '🧭', '🗺️',
+      '🐪', '🌴', '📖', '✨', '🫂', '🌿'
+    ];
+
+    const cardPairs = {
+      easy: 6,
+      medium: 8,
+      hard: 12
+    };
+
+    // Bennu reactions
+    const bennuReactions = {
+      match: [
+        'TAP! Well done!',
+        'TAP TAP. Not bad at all.',
+        'TAP! You\'re a natural!',
+        'TAP TAP TAP. Snack time!'
+      ],
+      noMatch: [
+        'TAP TAP. Try again.',
+        'TAP. Close, but no.',
+        'TAP TAP. Keep going.',
+        'TAP. I\'m not mad. Just disappointed.'
+      ],
+      win: [
+        '🎉 TAP TAP TAP! You win!',
+        '🏆 TAP! You\'re the memory master!',
+        '👏 TAP TAP. Amazing!',
+        '🐦 TAP! The Imaginarium is proud!'
+      ],
+      lose: [
+        '⏰ TAP TAP. Time\'s up!',
+        '🐦 TAP. You tried. That\'s all that matters.',
+        '📖 TAP TAP. Maybe read more memory books?'
+      ]
+    };
+
+    // ===== GAME STATE =====
+    let currentLevel = 'easy';
+    let cards = [];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let moves = 0;
+    let timer = 60;
+    let timerInterval = null;
+    let isLocked = false;
+    let totalPairs = 6;
+    let isGameOver = false;
+
+    const reactions = document.getElementById('bennuReaction');
+
+    // ===== DOM ELEMENTS =====
+    const gameContainer = document.getElementById('gameContainer');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const movesDisplay = document.getElementById('movesDisplay');
+    const matchesDisplay = document.getElementById('matchesDisplay');
+
+    // ===== LEVEL SELECTION =====
+    document.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentLevel = this.dataset.level;
+        startGame();
+      });
+    });
+
+    // ===== START GAME =====
+    function startGame() {
+      // Clear timer
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+
+      totalPairs = cardPairs[currentLevel];
+      const emojisToUse = cardEmojis.slice(0, totalPairs);
+      const deck = [...emojisToUse, ...emojisToUse];
+      cards = shuffle(deck).map((emoji, index) => ({
+        id: index,
+        emoji: emoji,
+        isFlipped: false,
+        isMatched: false
+      }));
+
+      flippedCards = [];
+      matchedPairs = 0;
+      moves = 0;
+      timer = 60;
+      isGameOver = false;
+      isLocked = false;
+
+      updateStats();
+      renderGrid();
+      updateReaction('🐦 "Tap. Tap. You got this."');
+
+      // Start timer
+      timerInterval = setInterval(() => {
+        timer--;
+        timerDisplay.textContent = `${timer}s`;
+        if (timer <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          endGame(false);
+        }
+      }, 1000);
+    }
+
+    // ===== SHUFFLE =====
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // ===== RENDER GRID =====
+    function renderGrid() {
+      const gridClass = currentLevel;
+      gameContainer.innerHTML = `<div class="game-grid ${gridClass}" id="cardGrid"></div>`;
+      const grid = document.getElementById('cardGrid');
+
+      cards.forEach(card => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.dataset.id = card.id;
+        div.innerHTML = `
+          <span class="card-content">${card.isFlipped || card.isMatched ? card.emoji : '❓'}</span>
+        `;
+        if (card.isMatched) div.classList.add('matched');
+        if (card.isFlipped) div.classList.add('flipped');
+        div.addEventListener('click', () => handleCardClick(card.id));
+        grid.appendChild(div);
+      });
+    }
+
+    // ===== UPDATE STATS =====
+    function updateStats() {
+      matchesDisplay.textContent = matchedPairs;
+      movesDisplay.textContent = moves;
+      timerDisplay.textContent = `${timer}s`;
+    }
+
+    // ===== UPDATE REACTION =====
+    function updateReaction(text) {
+      reactions.textContent = text;
+    }
+
+    // ===== HANDLE CARD CLICK =====
+    function handleCardClick(cardId) {
+      if (isLocked || isGameOver) return;
+
+      const card = cards.find(c => c.id === cardId);
+      if (!card || card.isFlipped || card.isMatched) return;
+
+      // Flip the card
+      card.isFlipped = true;
+      moves++;
+      updateStats();
+      renderGrid();
+
+      flippedCards.push(card);
+
+      if (flippedCards.length === 2) {
+        isLocked = true;
+        const [card1, card2] = flippedCards;
+
+        if (card1.emoji === card2.emoji && card1.id !== card2.id) {
+          // Match!
+          card1.isMatched = true;
+          card2.isMatched = true;
+          matchedPairs++;
+          flippedCards = [];
+          isLocked = false;
+          updateStats();
+          updateReaction(`🐦 ${bennuReactions.match[Math.floor(Math.random() * bennuReactions.match.length)]}`);
+          renderGrid();
+
+          if (matchedPairs === totalPairs) {
+            endGame(true);
+          }
+        } else {
+          // No match
+          updateReaction(`🐦 ${bennuReactions.noMatch[Math.floor(Math.random() * bennuReactions.noMatch.length)]}`);
+          setTimeout(() => {
+            card1.isFlipped = false;
+            card2.isFlipped = false;
+            flippedCards = [];
+            isLocked = false;
+            renderGrid();
+          }, 800);
+        }
+      }
+    }
+
+    // ===== END GAME =====
+    function endGame(won) {
+      isGameOver = true;
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+
+      const reaction = won ? bennuReactions.win : bennuReactions.lose;
+      updateReaction(`🐦 ${reaction[Math.floor(Math.random() * reaction.length)]}`);
+
+      const grid = document.getElementById('cardGrid');
+      if (grid) {
+        grid.innerHTML = '';
+        gameContainer.innerHTML = `
+          <div class="game-over">
+            <span class="big-icon">${won ? '🏆' : '⏰'}</span>
+            <h2>${won ? 'You Win!' : 'Time\'s Up!'}</h2>
+            <div class="final-stats">
+              <p>🎯 Matches: <strong>${matchedPairs}</strong> / ${totalPairs}</p>
+              <p>🔢 Moves: <strong>${moves}</strong></p>
+              <p>⏱️ Time: <strong>${60 - timer}s</strong></p>
+            </div>
+            <p style="font-size:0.95rem; color:#5c4530; margin-top:8px;">
+              ${won ? 'Bennu taps three times in approval!' : 'Bennu says: "Try again. Or don\'t. I\'m a bird."'}
+            </p>
+            <button class="restart-btn" onclick="startGame()">🔄 Play Again</button>
+          </div>
+        `;
+      }
+    }
+
+    // ===== INIT =====
+    startGame();
+    console.log('🧠 Bennu\'s Memory Game loaded!');
+  </script>
+</body>
+</html>

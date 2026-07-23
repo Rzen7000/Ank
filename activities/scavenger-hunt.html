@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imaginarium Scavenger Hunt</title>
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .hunt-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .hunt-progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hunt-step {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      border-radius: 20px;
+      padding: 4px 14px 4px 8px;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+    .hunt-step .num {
+      background: #d4c5a0;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: #3e2e1f;
+    }
+    .hunt-step.found {
+      border-color: #4caf50;
+      background: #e8f5e9;
+    }
+    .hunt-step.found .num {
+      background: #4caf50;
+      color: white;
+    }
+    .hunt-step.active {
+      border-color: #b45f2a;
+      background: #f5ede3;
+    }
+    .hunt-step.active .num {
+      background: #b45f2a;
+      color: #fdf6e3;
+    }
+
+    .clue-container {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .clue-number {
+      font-size: 0.9rem;
+      color: #5c4530;
+      margin-bottom: 8px;
+    }
+    .clue-text {
+      font-size: 1.3rem;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .clue-hint {
+      background: #fdf6e3;
+      border-left: 4px solid #c9a84c;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #5c4530;
+      margin-bottom: 16px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .clue-hint strong {
+      color: #b45f2a;
+    }
+
+    .clue-locations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .loc-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.95rem;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .loc-btn:hover:not(:disabled) {
+      border-color: #b45f2a;
+      background: #fdf6e3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(180, 95, 42, 0.1);
+    }
+    .loc-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .loc-btn.correct {
+      border-color: #4caf50;
+      background: #e8f5e9;
+    }
+    .loc-btn.wrong {
+      border-color: #f44336;
+      background: #ffebee;
+    }
+
+    .clue-feedback {
+      font-size: 1rem;
+      min-height: 30px;
+      margin: 12px 0;
+      font-style: italic;
+      color: #5c4530;
+      text-align: center;
+    }
+
+    /* ===== COMPLETE SECTION ===== */
+    .hunt-complete {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .hunt-complete .big-icon {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .hunt-complete h2 {
+      font-size: 2rem;
+      color: #b45f2a;
+      margin-bottom: 8px;
+    }
+    .hunt-complete p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .secret-message {
+      background: #fdf6e3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 20px 24px;
+      max-width: 600px;
+      margin: 16px auto;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #3e2e1f;
+    }
+    .secret-message strong {
+      color: #b45f2a;
+    }
+
+    .cert-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 16px 0;
+    }
+    .download-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .download-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .download-btn.secondary {
+      background: #d4c5a0;
+      color: #3e2e1f;
+    }
+    .download-btn.secondary:hover {
+      background: #c9b89a;
+    }
+
+    /* ===== CERTIFICATE PREVIEW ===== */
+    #certificatePreview {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    #certificatePreview.active {
+      display: flex;
+    }
+    .cert-preview-card {
+      background: #fdf6e3;
+      border-radius: 24px;
+      border: 4px solid #b45f2a;
+      padding: 30px;
+      max-width: 950px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    .cert-preview-card .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #3e2e1f;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: 0.3s;
+      z-index: 10;
+    }
+    .cert-preview-card .close-btn:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+
+    /* ===== CERTIFICATE DESIGN - FIXED FOR PRINT ===== */
+    #certificate {
+      background: #fdf6e3;
+      padding: 40px 35px 35px;
+      border: 6px double #b45f2a;
+      border-radius: 20px;
+      text-align: center;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+      width: 100%;
+    }
+    #certificate .border-decoration {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 2px solid #c9a84c;
+      border-radius: 16px;
+      pointer-events: none;
+    }
+    #certificate .corner {
+      position: absolute;
+      font-size: 2rem;
+      color: #c9a84c;
+      opacity: 0.7;
+    }
+    #certificate .corner-tl { top: 18px; left: 22px; }
+    #certificate .corner-tr { top: 18px; right: 22px; }
+    #certificate .corner-bl { bottom: 18px; left: 22px; }
+    #certificate .corner-br { bottom: 18px; right: 22px; }
+
+    /* Bennu Image */
+    #certificate .cert-bennu {
+      display: block;
+      margin: 0 auto 10px;
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(180, 95, 42, 0.2));
+    }
+
+    #certificate .cert-title {
+      font-size: 2rem;
+      color: #b45f2a;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+    #certificate .cert-subtitle {
+      font-size: 1rem;
+      color: #5c4530;
+      margin-bottom: 10px;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+    #certificate .cert-divider {
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #c9a84c, transparent);
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+    #certificate .cert-divider.thick {
+      height: 2px;
+      background: #d4c5a0;
+    }
+
+    #certificate .cert-recipient {
+      font-size: 1.8rem;
+      color: #3e2e1f;
+      margin: 6px 0;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+    }
+
+    #certificate .cert-body {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #3e2e1f;
+      max-width: 500px;
+      margin: 6px auto;
+    }
+
+    /* Location Badges */
+    #certificate .cert-locations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin: 12px auto;
+      max-width: 550px;
+    }
+    #certificate .cert-locations span {
+      background: #f5ede3;
+      padding: 4px 14px;
+      border-radius: 18px;
+      font-size: 0.8rem;
+      border: 1px solid #d4c5a0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Footer with Signatures */
+    #certificate .cert-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    #certificate .cert-footer .signature-block {
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+    #certificate .cert-footer .signature-line {
+      width: 120px;
+      height: 2px;
+      background: #3e2e1f;
+      margin: 3px auto 4px;
+    }
+    #certificate .cert-footer .signature-name {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.3rem;
+      color: #3e2e1f;
+      margin-bottom: 2px;
+    }
+    #certificate .cert-footer .signature-title {
+      font-size: 0.7rem;
+      color: #5c4530;
+      letter-spacing: 0.5px;
+    }
+    #certificate .cert-footer .signature-icon {
+      display: block;
+      margin: 0 auto 4px;
+    }
+    #certificate .cert-footer .signature-icon img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    /* Hoopoe Footprints */
+    #certificate .hoopoe-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed #d4c5a0;
+      opacity: 0.6;
+    }
+    #certificate .hoopoe-row img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+    #certificate .hoopoe-row .footprint-label {
+      font-size: 0.6rem;
+      color: #5c4530;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    #certificate .cert-date {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #5c4530;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    #certificate .cert-seal {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 0.7rem;
+      color: #c9a84c;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+
+    /* ===== PRINT STYLES - FIXED ===== */
+    @media print {
+      /* Hide everything except the certificate */
+      header, footer, .hunt-container, .cert-buttons, .download-btn, 
+      .close-btn, #closeCertBtn, #downloadPdfBtn, #printPdfBtn {
+        display: none !important;
+      }
+      
+      /* Show the certificate preview */
+      #certificatePreview {
+        position: static !important;
+        background: none !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        border: none !important;
+      }
+      .cert-preview-card {
+        max-width: 100% !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+      }
+      
+      /* Certificate itself */
+      #certificate {
+        border: 4px solid #b45f2a !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 30px 25px 25px !important;
+        background: #fdf6e3 !important;
+        border-radius: 12px !important;
+        width: 100% !important;
+        position: relative !important;
+      }
+      
+      /* Ensure all content fits on one page */
+      @page {
+        size: A4 portrait;
+        margin: 15mm 10mm;
+      }
+      
+      /* Adjust sizes for print */
+      .cert-bennu {
+        width: 60px !important;
+        height: 60px !important;
+      }
+      .hoopoe-row img {
+        width: 20px !important;
+        height: 20px !important;
+      }
+      #certificate .cert-title {
+        font-size: 1.6rem !important;
+        letter-spacing: 2px !important;
+      }
+      #certificate .cert-recipient {
+        font-size: 1.5rem !important;
+      }
+      #certificate .cert-body {
+        font-size: 0.85rem !important;
+      }
+      #certificate .cert-locations span {
+        font-size: 0.7rem !important;
+        padding: 3px 10px !important;
+      }
+      #certificate .cert-footer .signature-name {
+        font-size: 1.1rem !important;
+      }
+      #certificate .cert-footer .signature-line {
+        width: 100px !important;
+      }
+      #certificate .corner {
+        font-size: 1.5rem !important;
+      }
+      #certificate .border-decoration {
+        top: 8px !important;
+        left: 8px !important;
+        right: 8px !important;
+        bottom: 8px !important;
+      }
+      #certificate .cert-footer .signature-icon img {
+        width: 24px !important;
+        height: 24px !important;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .hunt-container { padding: 20px; }
+      .clue-text { font-size: 1.1rem; }
+      .clue-locations { gap: 6px; }
+      .loc-btn { font-size: 0.85rem; padding: 8px 14px; }
+      #certificate { padding: 25px 20px 20px; }
+      #certificate .cert-title { font-size: 1.6rem; }
+      #certificate .cert-recipient { font-size: 1.4rem; }
+      #certificate .cert-bennu { width: 55px; height: 55px; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; padding-left: 12px; }
+      .hunt-container { padding: 16px; }
+      .clue-text { font-size: 1rem; }
+      .loc-btn { font-size: 0.8rem; padding: 6px 10px; }
+      .hunt-step { font-size: 0.75rem; padding: 2px 10px 2px 6px; }
+      .hunt-step .num { width: 20px; height: 20px; font-size: 0.7rem; }
+      .secret-message { font-size: 0.9rem; padding: 14px 16px; }
+      #certificate { padding: 16px 12px 14px; }
+      #certificate .cert-title { font-size: 1.2rem; letter-spacing: 1px; }
+      #certificate .cert-recipient { font-size: 1.1rem; }
+      #certificate .cert-body { font-size: 0.8rem; }
+      #certificate .cert-locations span { font-size: 0.65rem; padding: 3px 8px; }
+      #certificate .cert-footer { flex-direction: column; align-items: center; }
+      #certificate .cert-footer .signature-line { width: 80px; }
+      #certificate .cert-bennu { width: 40px; height: 40px; }
+      #certificate .hoopoe-row img { width: 18px; height: 18px; }
+      .cert-preview-card { padding: 12px; }
+      .download-btn { font-size: 0.8rem; padding: 8px 16px; }
+      #certificate .corner { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🔍 Imaginarium Scavenger Hunt</h1>
+    <p class="subtitle">Follow the clues, find the locations. Bennu is your guide. (He's not very helpful.)</p>
+
+    <div class="hunt-container" id="huntContainer">
+      <div class="hunt-progress" id="huntProgress"></div>
+      <div id="huntContent">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== CERTIFICATE PREVIEW MODAL ===== -->
+  <div id="certificatePreview">
+    <div class="cert-preview-card">
+      <button class="close-btn" id="certClose">✕</button>
+      <div id="certificate">
+        <!-- Certificate rendered by JavaScript -->
+      </div>
+      <div style="text-align:center; margin-top:16px;">
+        <button class="download-btn" id="downloadPdfBtn">📄 Download PDF</button>
+        <button class="download-btn secondary" id="printPdfBtn">🖨️ Print / Save as PDF</button>
+        <button class="download-btn secondary" id="closeCertBtn">Close</button>
+        <p style="font-size:0.8rem; color:#5c4530; margin-top:8px;">
+          💡 For best results, use "Print / Save as PDF" → Choose "Save as PDF"
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <!-- ===== LIBRARIES ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    // ===== HUNT DATA =====
+    const huntClues = [
+      {
+        id: 1,
+        clue: "I have a nose but can't smell. I have a body but can't move. I've been sitting here for 4,500 years. Who am I?",
+        hint: "🐦 Bennu says: 'It's the big one. The one with the nose.'",
+        location: "giza",
+        locationName: "Great Sphinx of Giza",
+        emoji: "🔺"
+      },
+      {
+        id: 2,
+        clue: "I'm a city of learning. My library burned down, but we rebuilt it with more snacks. Where am I?",
+        hint: "🐦 Bennu says: 'Lots of books. Even more snacks.'",
+        location: "alexandria",
+        locationName: "Alexandria",
+        emoji: "📚"
+      },
+      {
+        id: 3,
+        clue: "I'm the oldest pyramid. Built step by step, like a good story. What am I?",
+        hint: "🐦 Bennu says: 'It's the one that looks like stairs.'",
+        location: "saqqara",
+        locationName: "Step Pyramid, Saqqara",
+        emoji: "🪦"
+      },
+      {
+        id: 4,
+        clue: "I'm an oasis where the best mangoes come from. The Mango Committee approves. Where am I?",
+        hint: "🐦 Bennu says: 'You'll find me in the green place.'",
+        location: "fayoum",
+        locationName: "Tunis Village, Fayoum",
+        emoji: "🌿"
+      },
+      {
+        id: 5,
+        clue: "I'm the city of columns. I have more pillars than Bennu has feathers. Where am I?",
+        hint: "🐦 Bennu says: 'Lots of pillars. Even more puzzles.'",
+        location: "luxor",
+        locationName: "Luxor",
+        emoji: "🏛️"
+      },
+      {
+        id: 6,
+        clue: "I'm a mountain where a prophet got tablets. I got a sunburn. We are not the same. What am I?",
+        hint: "🐦 Bennu says: 'It's the mountain. The one with the tablets.'",
+        location: "sinai",
+        locationName: "Sinai",
+        emoji: "🏔️"
+      },
+      {
+        id: 7,
+        clue: "I'm a temple built by a king with 200 wives. I have 200 feathers. Who's really winning? What am I?",
+        hint: "🐦 Bennu says: 'It's the one with the big statues.'",
+        location: "abusimbel",
+        locationName: "Abu Simbel",
+        emoji: "🏝️"
+      }
+    ];
+
+    // ===== GAME STATE =====
+    let currentClueIndex = 0;
+    let foundLocations = [];
+    let isHuntComplete = false;
+    let userName = 'Adventurer';
+
+    // ===== DOM ELEMENTS =====
+    const huntContainer = document.getElementById('huntContainer');
+    const huntProgress = document.getElementById('huntProgress');
+    const huntContent = document.getElementById('huntContent');
+    const certificatePreview = document.getElementById('certificatePreview');
+
+    // ===== RENDER FUNCTIONS =====
+    function renderHunt() {
+      let progressHTML = '';
+      huntClues.forEach((clue, index) => {
+        const isFound = foundLocations.includes(clue.location);
+        const isActive = index === currentClueIndex && !isHuntComplete;
+        let className = 'hunt-step';
+        if (isFound) className += ' found';
+        if (isActive) className += ' active';
+        progressHTML += `
+          <div class="${className}">
+            <span class="num">${index + 1}</span>
+            ${isFound ? '✅' : ''}
+          </div>
+        `;
+      });
+      huntProgress.innerHTML = progressHTML;
+
+      if (isHuntComplete) {
+        renderComplete();
+        return;
+      }
+
+      const clue = huntClues[currentClueIndex];
+      if (!clue) return;
+
+      const availableLocations = huntClues
+        .filter(c => !foundLocations.includes(c.location))
+        .map(c => ({
+          id: c.location,
+          name: c.locationName,
+          emoji: c.emoji
+        }));
+
+      let optionsHTML = '';
+      const shuffled = shuffle(availableLocations);
+      shuffled.forEach(loc => {
+        optionsHTML += `
+          <button class="loc-btn" data-location="${loc.id}">
+            <span>${loc.emoji}</span>
+            ${loc.name}
+          </button>
+        `;
+      });
+
+      huntContent.innerHTML = `
+        <div class="clue-container">
+          <div class="clue-number">🔍 Clue ${clue.id} of ${huntClues.length}</div>
+          <div class="clue-text">"${clue.clue}"</div>
+          <div class="clue-hint">💡 ${clue.hint}</div>
+          <div class="clue-locations" id="locationOptions">
+            ${optionsHTML}
+          </div>
+          <div class="clue-feedback" id="clueFeedback">🐦 Click a location to guess!</div>
+        </div>
+      `;
+
+      document.querySelectorAll('.loc-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const location = this.dataset.location;
+          handleGuess(location, this);
+        });
+      });
+    }
+
+    function handleGuess(location, button) {
+      const clue = huntClues[currentClueIndex];
+      const feedback = document.getElementById('clueFeedback');
+
+      if (location === clue.location) {
+        button.classList.add('correct');
+        foundLocations.push(location);
+        feedback.textContent = `✅ Correct! That's the ${clue.locationName}! Bennu taps once in approval.`;
+        feedback.style.color = '#4caf50';
+
+        document.querySelectorAll('.loc-btn').forEach(b => b.disabled = true);
+
+        setTimeout(() => {
+          if (foundLocations.length === huntClues.length) {
+            isHuntComplete = true;
+            renderHunt();
+          } else {
+            currentClueIndex++;
+            renderHunt();
+          }
+        }, 1200);
+      } else {
+        button.classList.add('wrong');
+        feedback.textContent = `❌ Not quite. That's not the right spot. Bennu taps twice. Try again!`;
+        feedback.style.color = '#f44336';
+        setTimeout(() => {
+          button.classList.remove('wrong');
+        }, 800);
+      }
+    }
+
+    // ===== COMPLETE =====
+    function renderComplete() {
+      if (userName === 'Adventurer') {
+        const nameInput = prompt('🎉 Congratulations! Enter your name for the certificate:', 'Adventurer');
+        if (nameInput && nameInput.trim()) {
+          userName = nameInput.trim();
+        }
+      }
+
+      huntContent.innerHTML = `
+        <div class="hunt-complete">
+          <span class="big-icon">🏆</span>
+          <h2>You Found Everything!</h2>
+          <p>You've discovered all 7 locations of the Imaginarium! Bennu is impressed (and slightly annoyed that you're so good at this).</p>
+
+          <div class="secret-message">
+            <strong>📜 Secret Message from the Mango Committee:</strong><br>
+            "You have proven yourself worthy. The Imaginarium holds many more secrets, but for now, enjoy this exclusive preview: The next Quest Pack will feature a journey through time, where Jimba discovers the ancient origins of snacks. 🥭"
+          </div>
+
+          <div class="cert-buttons">
+            <button class="download-btn" onclick="showCertificate('${userName}')">🏆 View & Download Certificate</button>
+            <button class="download-btn secondary" onclick="restartHunt()">🔄 Start Over</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== CERTIFICATE =====
+    function showCertificate(name) {
+      const certContainer = document.getElementById('certificate');
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+
+      const locationsList = huntClues.map(c => 
+        `<span>${c.emoji} ${c.locationName}</span>`
+      ).join('');
+
+      const bennuIconPath = '../images/bennu-icon.png';
+      const footprintPath = '../images/hoopoe-footprint.png';
+
+      certContainer.innerHTML = `
+        <div class="border-decoration"></div>
+        <span class="corner corner-tl">✦</span>
+        <span class="corner corner-tr">✦</span>
+        <span class="corner corner-bl">✦</span>
+        <span class="corner corner-br">✦</span>
+
+        <img src="${bennuIconPath}" alt="Bennu" class="cert-bennu">
+
+        <div class="cert-title">Certificate of Achievement</div>
+        <div class="cert-subtitle">Imaginarium Scavenger Hunt</div>
+        <div class="cert-divider"></div>
+
+        <div class="cert-recipient">${name}</div>
+        <div class="cert-body">
+          has successfully completed the Imaginarium Scavenger Hunt,
+          discovering all 7 sacred locations across Egypt.
+        </div>
+
+        <div class="cert-locations">
+          ${locationsList}
+        </div>
+
+        <div class="cert-divider thick"></div>
+
+        <div class="cert-footer">
+          <div class="signature-block">
+            <span class="signature-icon"><img src="${bennuIconPath}" alt="Bennu"></span>
+            <div class="signature-name">Bennu</div>
+            <div class="signature-line"></div>
+            <div class="signature-title">The Hoopoe • Guardian of the Imaginarium</div>
+          </div>
+          <div class="signature-block">
+            <span style="font-size:1.8rem;">🥭</span>
+            <div class="signature-name">The Mango Committee</div>
+            <div class="signature-line"></div>
+            <div class="signature-title">Official Fruit Council • Keepers of Snacks</div>
+          </div>
+        </div>
+
+        <div class="cert-date">Issued this ${dateStr}</div>
+
+        <div class="hoopoe-row">
+          <img src="${footprintPath}" alt="Hoopoe footprint">
+          <img src="${footprintPath}" alt="Hoopoe footprint">
+          <span class="footprint-label">✦ Friend of the Imaginarium ✦</span>
+          <img src="${footprintPath}" alt="Hoopoe footprint">
+          <img src="${footprintPath}" alt="Hoopoe footprint">
+        </div>
+
+        <div class="cert-seal">✦ ✦ ✦</div>
+      `;
+
+      certificatePreview.classList.add('active');
+    }
+
+    function closeCertificate() {
+      certificatePreview.classList.remove('active');
+    }
+
+    // ===== DOWNLOAD PDF - FIXED =====
+    async function downloadPDF() {
+      const element = document.getElementById('certificate');
+      const btn = document.getElementById('downloadPdfBtn');
+      const originalText = btn.textContent;
+      btn.textContent = '⏳ Loading...';
+      btn.disabled = true;
+
+      try {
+        // Wait for images
+        const images = element.querySelectorAll('img');
+        await Promise.all(Array.from(images).map(img => {
+          return new Promise((resolve) => {
+            if (img.complete && img.naturalHeight !== 0) {
+              resolve();
+            } else {
+              img.onload = resolve;
+              img.onerror = resolve;
+              // Force reload
+              img.src = img.src;
+            }
+          });
+        }));
+
+        btn.textContent = '⏳ Generating PDF...';
+
+        // Capture with proper dimensions
+        const canvas = await html2canvas(element, {
+          scale: 2.5,
+          backgroundColor: '#fdf6e3',
+          useCORS: true,
+          allowTaint: true,
+          logging: false,
+          width: 800,
+          height: 600,
+          onclone: function(clonedDoc) {
+            const imgs = clonedDoc.querySelectorAll('img');
+            imgs.forEach(img => {
+              img.crossOrigin = 'anonymous';
+            });
+          }
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+
+        // Calculate proper scaling to fit the full certificate on one page
+        const imgAspect = canvas.width / canvas.height;
+        const pageAspect = pdfWidth / pdfHeight;
+
+        let finalWidth, finalHeight;
+        if (imgAspect > pageAspect) {
+          finalWidth = pdfWidth;
+          finalHeight = pdfWidth / imgAspect;
+        } else {
+          finalHeight = pdfHeight;
+          finalWidth = pdfHeight * imgAspect;
+        }
+
+        // Center the certificate on the page
+        const xOffset = (pdfWidth - finalWidth) / 2;
+        const yOffset = (pdfHeight - finalHeight) / 2;
+
+        pdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight);
+        pdf.save('Imaginarium_Certificate.pdf');
+
+      } catch (error) {
+        console.error('Error:', error);
+        if (confirm('PDF generation failed. Would you like to use "Print to PDF" instead?')) {
+          printToPDF();
+        } else {
+          alert('You can also right-click on the certificate and select "Save as Image" or take a screenshot.');
+        }
+      }
+
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+
+    // ===== PRINT TO PDF - FIXED =====
+    function printToPDF() {
+      // Close the modal
+      certificatePreview.classList.remove('active');
+      
+      // Create a clean print version
+      const certElement = document.getElementById('certificate');
+      
+      // Open print dialog
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      
+      if (!printWindow) {
+        alert('Please allow popups, or use File → Print in your browser.');
+        return;
+      }
+
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Imaginarium Certificate</title>
+          <style>
+            /* Reset styles for print */
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            
+            body {
+              margin: 0;
+              padding: 20px;
+              background: #fdf6e3;
+              font-family: 'Georgia', serif;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh;
+            }
+            
+            #certificate-print {
+              background: #fdf6e3;
+              padding: 40px 35px 35px;
+              border: 6px double #b45f2a;
+              border-radius: 20px;
+              text-align: center;
+              font-family: 'Georgia', 'Times New Roman', serif;
+              max-width: 800px;
+              width: 100%;
+              margin: 0 auto;
+              position: relative;
+              box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+            }
+            
+            #certificate-print .border-decoration {
+              position: absolute;
+              top: 12px;
+              left: 12px;
+              right: 12px;
+              bottom: 12px;
+              border: 2px solid #c9a84c;
+              border-radius: 16px;
+              pointer-events: none;
+            }
+            
+            #certificate-print .corner {
+              position: absolute;
+              font-size: 2rem;
+              color: #c9a84c;
+              opacity: 0.7;
+            }
+            #certificate-print .corner-tl { top: 18px; left: 22px; }
+            #certificate-print .corner-tr { top: 18px; right: 22px; }
+            #certificate-print .corner-bl { bottom: 18px; left: 22px; }
+            #certificate-print .corner-br { bottom: 18px; right: 22px; }
+            
+            #certificate-print .cert-bennu {
+              display: block;
+              margin: 0 auto 10px;
+              width: 70px;
+              height: 70px;
+              object-fit: contain;
+            }
+            
+            #certificate-print .cert-title {
+              font-size: 2rem;
+              color: #b45f2a;
+              font-weight: bold;
+              letter-spacing: 3px;
+              margin-bottom: 2px;
+              text-transform: uppercase;
+            }
+            #certificate-print .cert-subtitle {
+              font-size: 1rem;
+              color: #5c4530;
+              margin-bottom: 10px;
+              font-style: italic;
+              letter-spacing: 1px;
+            }
+            #certificate-print .cert-divider {
+              width: 200px;
+              height: 2px;
+              background: linear-gradient(to right, transparent, #c9a84c, transparent);
+              margin: 10px auto;
+              border-radius: 2px;
+            }
+            #certificate-print .cert-divider.thick {
+              height: 2px;
+              background: #d4c5a0;
+            }
+            
+            #certificate-print .cert-recipient {
+              font-size: 1.8rem;
+              color: #3e2e1f;
+              margin: 6px 0;
+              font-family: 'Georgia', serif;
+              font-style: italic;
+            }
+            
+            #certificate-print .cert-body {
+              font-size: 0.95rem;
+              line-height: 1.7;
+              color: #3e2e1f;
+              max-width: 500px;
+              margin: 6px auto;
+            }
+            
+            #certificate-print .cert-locations {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 6px;
+              justify-content: center;
+              margin: 12px auto;
+              max-width: 550px;
+            }
+            #certificate-print .cert-locations span {
+              background: #f5ede3;
+              padding: 4px 14px;
+              border-radius: 18px;
+              font-size: 0.8rem;
+              border: 1px solid #d4c5a0;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+            }
+            
+            #certificate-print .cert-footer {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              margin-top: 16px;
+              padding-top: 14px;
+              border-top: 2px solid #d4c5a0;
+              flex-wrap: wrap;
+              gap: 12px;
+            }
+            #certificate-print .cert-footer .signature-block {
+              text-align: center;
+              flex: 1;
+              min-width: 100px;
+            }
+            #certificate-print .cert-footer .signature-line {
+              width: 120px;
+              height: 2px;
+              background: #3e2e1f;
+              margin: 3px auto 4px;
+            }
+            #certificate-print .cert-footer .signature-name {
+              font-family: 'Brush Script MT', cursive;
+              font-size: 1.3rem;
+              color: #3e2e1f;
+              margin-bottom: 2px;
+            }
+            #certificate-print .cert-footer .signature-title {
+              font-size: 0.7rem;
+              color: #5c4530;
+              letter-spacing: 0.5px;
+            }
+            #certificate-print .cert-footer .signature-icon {
+              display: block;
+              margin: 0 auto 4px;
+            }
+            #certificate-print .cert-footer .signature-icon img {
+              width: 28px;
+              height: 28px;
+              object-fit: contain;
+            }
+            
+            #certificate-print .hoopoe-row {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 6px;
+              margin-top: 12px;
+              padding-top: 10px;
+              border-top: 1px dashed #d4c5a0;
+              opacity: 0.6;
+            }
+            #certificate-print .hoopoe-row img {
+              width: 24px;
+              height: 24px;
+              object-fit: contain;
+            }
+            #certificate-print .hoopoe-row .footprint-label {
+              font-size: 0.6rem;
+              color: #5c4530;
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              display: flex;
+              align-items: center;
+              padding: 0 4px;
+            }
+            
+            #certificate-print .cert-date {
+              text-align: center;
+              font-size: 0.8rem;
+              color: #5c4530;
+              margin-top: 10px;
+              font-style: italic;
+            }
+            
+            #certificate-print .cert-seal {
+              text-align: center;
+              margin-top: 6px;
+              font-size: 0.7rem;
+              color: #c9a84c;
+              letter-spacing: 3px;
+              font-weight: bold;
+            }
+            
+            @page {
+              size: A4 portrait;
+              margin: 15mm 10mm;
+            }
+            
+            @media print {
+              body {
+                margin: 0;
+                padding: 0;
+                background: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+              }
+              #certificate-print {
+                box-shadow: none;
+                page-break-inside: avoid;
+                border: 4px solid #b45f2a;
+              }
+              .corner {
+                font-size: 1.5rem !important;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          ${certElement.outerHTML.replace(/id="certificate"/g, 'id="certificate-print"')}
+          <script>
+            window.onload = function() {
+              setTimeout(function() {
+                window.print();
+              }, 500);
+            };
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+    }
+
+    // ===== SHUFFLE =====
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // ===== RESTART =====
+    function restartHunt() {
+      currentClueIndex = 0;
+      foundLocations = [];
+      isHuntComplete = false;
+      renderHunt();
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.getElementById('certClose').addEventListener('click', closeCertificate);
+    document.getElementById('closeCertBtn').addEventListener('click', closeCertificate);
+    document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+    document.getElementById('printPdfBtn').addEventListener('click', function() {
+      // Close modal and open print
+      certificatePreview.classList.remove('active');
+      setTimeout(printToPDF, 300);
+    });
+    
+    certificatePreview.addEventListener('click', function(e) {
+      if (e.target === this) closeCertificate();
+    });
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p' && certificatePreview.classList.contains('active')) {
+        e.preventDefault();
+        certificatePreview.classList.remove('active');
+        setTimeout(printToPDF, 300);
+      }
+      if (e.key === 'Escape' && certificatePreview.classList.contains('active')) {
+        closeCertificate();
+      }
+    });
+
+    // ===== INIT =====
+    renderHunt();
+    console.log('🔍 Imaginarium Scavenger Hunt loaded!');
+    console.log('💡 Use "Print / Save as PDF" for the best results');
+  </script>
+</body>
+</html>

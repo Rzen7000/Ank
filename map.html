@@ -81,7 +81,6 @@
       width: 100%;
       transition: opacity 0.6s ease;
     }
-    /* CHANGE: Map opacity increased from 0.25 to 0.45 for better visibility */
     #map-wrapper.content-open {
       opacity: 0.45;
       pointer-events: none;
@@ -236,7 +235,6 @@
     }
     #bennu-container.content-open { opacity: 0.3; }
 
-    /* CHANGE: Bennu font-size increased from 36px to 56px */
     #bennu {
       position: absolute;
       font-size: 56px;
@@ -254,7 +252,6 @@
       0% { transform: rotate(-15deg) scaleY(0.8); }
       100% { transform: rotate(20deg) scaleY(1.2); }
     }
-    /* CHANGE: Bennu trail size increased from 60px to 100px */
     #bennu .trail {
       position: absolute;
       top: 50%; left: 50%;
@@ -294,7 +291,6 @@
       opacity: 1;
     }
 
-    /* LARGER CONTENT CARD - takes up most of the screen */
     #content-card {
       background: #fef9ef;
       border-radius: 24px;
@@ -340,7 +336,6 @@
       transform: rotate(90deg);
     }
 
-    /* Compact header with location info */
     #content-card .content-header {
       display: flex;
       align-items: center;
@@ -370,7 +365,6 @@
       font-weight: 600;
     }
 
-    /* IFRAME - takes up most of the space */
     #content-iframe {
       flex: 1;
       width: 100%;
@@ -383,7 +377,6 @@
       overflow-y: auto;
     }
 
-    /* Bennu quip - compact */
     #content-card .bennu-quip {
       background: #f5ede3;
       padding: 8px 14px;
@@ -396,7 +389,6 @@
       flex-shrink: 0;
     }
 
-    /* Action buttons - compact */
     #content-card .content-actions {
       display: flex;
       gap: 10px;
@@ -436,7 +428,9 @@
       border-color: #b45f2a;
     }
 
-    /* --- MENU POPUP --- */
+    /* ============================================================
+       MENU POPUP WITH ACTIVITIES SUB-MENU
+       ============================================================ */
     #menu-overlay {
       position: fixed;
       top: 0;
@@ -458,9 +452,9 @@
       border-radius: 24px;
       border: 4px solid #b45f2a;
       padding: 30px 35px;
-      max-width: 520px;
+      max-width: 560px;
       width: 92%;
-      max-height: 80vh;
+      max-height: 85vh;
       overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0,0,0,0.8);
       transform: scale(0.9);
@@ -484,9 +478,10 @@
       color: #3e2e1f;
       border-left: 5px solid #b45f2a;
       padding-left: 15px;
-      margin: 0 0 20px 0;
+      margin: 0 0 16px 0;
       font-size: 1.6rem;
     }
+
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -514,6 +509,47 @@
       box-shadow: 0 4px 15px rgba(180, 95, 42, 0.12);
     }
     .menu-item .icon { font-size: 1.3rem; }
+    .menu-item .arrow {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: #b45f2a;
+    }
+
+    /* --- ACTIVITIES SUB-MENU --- */
+    .sub-menu {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .sub-menu.active {
+      display: block;
+    }
+    .sub-menu .menu-item {
+      font-size: 0.85rem;
+      padding: 10px 14px;
+    }
+    .sub-menu .menu-item .icon {
+      font-size: 1.1rem;
+    }
+    .sub-menu .back-btn {
+      background: none;
+      border: none;
+      color: #b45f2a;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .sub-menu .back-btn:hover {
+      color: #8f4a1f;
+      transform: translateX(-4px);
+    }
 
     /* --- WELCOME OVERLAY --- */
     #welcome-overlay {
@@ -596,7 +632,6 @@
       .hotspot .dot { width: 16px; height: 16px; border-width: 2px; }
       .hotspot .label { font-size: 0.5rem; padding: 2px 8px; top: -22px; }
 
-      /* CHANGE: Bennu responsive size increased */
       #bennu { font-size: 42px; }
       #bennu .trail {
         width: 70px;
@@ -628,7 +663,7 @@
       }
 
       #menu-card { padding: 20px; }
-      .menu-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
 
       #welcome-card { padding: 25px; }
       #welcome-card h2 { font-size: 1.4rem; }
@@ -642,7 +677,6 @@
       .hotspot .dot { width: 14px; height: 14px; border-width: 1.5px; }
       .hotspot .label { display: none; }
 
-      /* CHANGE: Bennu responsive size increased */
       #bennu { font-size: 32px; }
       #bennu .trail {
         width: 50px;
@@ -688,6 +722,11 @@
         top: 6px;
         right: 8px;
       }
+
+      #menu-card { padding: 16px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 6px; }
+      .menu-item { font-size: 0.8rem; padding: 8px 12px; }
+      #menu-card h2 { font-size: 1.2rem; }
 
       #welcome-card { padding: 20px; }
       #welcome-card h2 { font-size: 1.2rem; }
@@ -741,7 +780,7 @@
       <!-- Hotspots Container -->
       <div id="hotspots-container"></div>
 
-      <!-- CHANGE: Bennu image size increased from 40px to 64px -->
+      <!-- Bennu -->
       <div id="bennu-container">
         <div id="bennu" style="left: 15%; top: 20%;">
           <span class="trail"></span>
@@ -778,12 +817,20 @@
     </div>
   </div>
 
-  <!-- ===== MENU POPUP ===== -->
+  <!-- ===== MENU POPUP WITH ACTIVITIES SUB-MENU ===== -->
   <div id="menu-overlay">
     <div id="menu-card">
       <button class="close-btn" id="menuClose">✕</button>
-      <h2>🏛️ Explore the Imaginarium</h2>
+      <h2 id="menuTitle">🏛️ Explore the Imaginarium</h2>
+      
+      <!-- Main Menu -->
       <div class="menu-grid" id="menuGrid"></div>
+      
+      <!-- Activities Sub-Menu -->
+      <div class="sub-menu" id="activitiesSubMenu">
+        <button class="back-btn" id="backToMainMenu">← Back to Menu</button>
+        <div class="menu-grid" id="activitiesGrid"></div>
+      </div>
     </div>
   </div>
 
@@ -810,101 +857,130 @@
       const contentIframe = document.getElementById('content-iframe');
 
       // --- 2. LOCATION DATA ---
-    // --- 2. LOCATION DATA ---
-const locations = [
-  { 
-    id: 'books',
-    x: 12, y: 14, 
-    icon: '📚', 
-    name: 'Quest Packs & Adventures', 
-    type: '📍 Page',
-    quip: 'Bennu says: "The library burned down. But we\'ve rebuilt it. With more snacks."',
-    page: 'books.html'
-  },
-  { 
-    id: 'home',
-    x: 22, y: 30, 
-    icon: '🏠', 
-    name: 'The Imaginarium', 
-    type: '📍 Home',
-    quip: 'Bennu says: "I\'ve been sitting here for 4,500 years. You\'re the one who looks tired."',
-    page: 'index.html'
-  },
-  { 
-    id: 'about',
-    x: 24, y: 36, 
-    icon: '📖', 
-    name: 'The Storykeeper', 
-    type: '📍 About',
-    quip: 'Bennu says: "They built it step by step. Like a good story. One layer at a time."',
-    page: 'about.html'
-  },
-  { 
-    id: 'latest',
-    x: 16, y: 40, 
-    icon: '📰', 
-    name: 'Bennu\'s Bulletin', 
-    type: '📍 Latest',
-    quip: 'Bennu says: "The best mangoes come from here. Don\'t tell the Mango Committee."',
-    page: 'latest.html'
-  },
-  { 
-    id: 'merchandise',
-    x: 58, y: 18, 
-    icon: '🎁', 
-    name: 'Gift Closet', 
-    type: '📍 Store',
-    quip: 'Bennu says: "Moses got the tablets here. I got a sunburn. We are not the same."',
-    page: 'merchandise.html'
-  },
-  { 
-    id: 'connect',
-    x: 50, y: 28, 
-    icon: '🐦', 
-    name: 'Caw, Caw', 
-    type: '📍 Contact',
-    quip: 'Bennu says: "I tried to visit once. Too hot. Even for me."',
-    page: 'connect.html'
-  },
-  { 
-    id: 'characters',
-    x: 40, y: 52, 
-    icon: '👥', 
-    name: 'Who\'s Who', 
-    type: '📍 Characters',
-    quip: 'Bennu says: "I\'ve never seen a giant. But I\'ve seen a very large mango. Close enough."',
-    page: 'characters.html'
-  },
-  { 
-    id: 'educators',
-    x: 32, y: 55, 
-    icon: '🍎', 
-    name: 'For Educators', 
-    type: '📍 Educators',
-    quip: 'Bennu says: "The temple has more columns than I have feathers. That\'s saying something."',
-    page: 'educators.html'
-  },
-  { 
-    id: 'map',
-    x: 12, y: 78, 
-    icon: '🗺️', 
-    name: 'Explore the Map', 
-    type: '📍 Map',
-    quip: 'Bennu says: "Ramesses had 200 wives. I have 200 feathers. Who\'s really winning?"',
-    page: 'map.html'
-  },
-  { 
-    id: 'contact',
-    x: 4, y: 10, 
-    icon: '📞', 
-    name: 'Contact', 
-    type: '📍 Contact',
-    quip: 'Bennu says: "I\'ve been underground once. Too dark. No snacks. Would not recommend."',
-    page: 'contact.html'
-  }
-];
+      const locations = [
+        { 
+          id: 'books',
+          x: 12, y: 14, 
+          icon: '📚', 
+          name: 'Quest Packs & Adventures', 
+          type: '📍 Page',
+          quip: 'Bennu says: "The library burned down. But we\'ve rebuilt it. With more snacks."',
+          page: 'books.html'
+        },
+        { 
+          id: 'home',
+          x: 22, y: 30, 
+          icon: '🏠', 
+          name: 'The Imaginarium', 
+          type: '📍 Home',
+          quip: 'Bennu says: "I\'ve been sitting here for 4,500 years. You\'re the one who looks tired."',
+          page: 'index.html'
+        },
+        { 
+          id: 'about',
+          x: 24, y: 36, 
+          icon: '📖', 
+          name: 'The Storykeeper', 
+          type: '📍 About',
+          quip: 'Bennu says: "They built it step by step. Like a good story. One layer at a time."',
+          page: 'about.html'
+        },
+        { 
+          id: 'latest',
+          x: 16, y: 40, 
+          icon: '📰', 
+          name: 'Bennu\'s Bulletin', 
+          type: '📍 Latest',
+          quip: 'Bennu says: "The best mangoes come from here. Don\'t tell the Mango Committee."',
+          page: 'latest.html'
+        },
+        { 
+          id: 'merchandise',
+          x: 58, y: 18, 
+          icon: '🎁', 
+          name: 'Gift Closet', 
+          type: '📍 Store',
+          quip: 'Bennu says: "Moses got the tablets here. I got a sunburn. We are not the same."',
+          page: 'merchandise.html'
+        },
+        { 
+          id: 'connect',
+          x: 50, y: 28, 
+          icon: '🐦', 
+          name: 'Caw, Caw', 
+          type: '📍 Contact',
+          quip: 'Bennu says: "I tried to visit once. Too hot. Even for me."',
+          page: 'connect.html'
+        },
+        { 
+          id: 'characters',
+          x: 40, y: 52, 
+          icon: '👥', 
+          name: 'Who\'s Who', 
+          type: '📍 Characters',
+          quip: 'Bennu says: "I\'ve never seen a giant. But I\'ve seen a very large mango. Close enough."',
+          page: 'characters.html'
+        },
+        { 
+          id: 'educators',
+          x: 32, y: 55, 
+          icon: '🍎', 
+          name: 'For Educators', 
+          type: '📍 Educators',
+          quip: 'Bennu says: "The temple has more columns than I have feathers. That\'s saying something."',
+          page: 'educators.html'
+        },
+        { 
+          id: 'contact',
+          x: 4, y: 10, 
+          icon: '📞', 
+          name: 'Contact', 
+          type: '📍 Contact',
+          quip: 'Bennu says: "I\'ve been underground once. Too dark. No snacks. Would not recommend."',
+          page: 'contact.html'
+        }
+      ];
 
-      // --- 3. BENNU QUIPS ---
+      // --- 3. ACTIVITIES DATA ---
+      const activities = [
+        {
+          id: 'tap-code',
+          icon: '🕊️',
+          name: 'Bennu\'s Tap Code',
+          description: 'Learn Morse code with Bennu',
+          page: 'activities/tap-code.html'
+        },
+        {
+          id: 'snack-portal',
+          icon: '🎒',
+          name: 'Snack Portal Adventure',
+          description: 'Explore Jimba\'s magical backpack',
+          page: 'activities/snack-portal.html'
+        },
+        {
+          id: 'mango-quiz',
+          icon: '🥭',
+          name: 'Mango Committee Quiz',
+          description: 'Discover your Imaginarium personality',
+          page: 'activities/mango-quiz.html'
+        },
+        {
+          id: 'memory-game',
+          icon: '🧠',
+          name: 'Bennu\'s Memory Game',
+          description: 'Match the pairs with Bennu',
+          page: 'activities/memory-game.html'
+        },
+        {
+          id: 'scavenger-hunt',
+          icon: '🔍',
+          name: 'Scavenger Hunt',
+          description: 'Find all 7 locations with clues',
+          page: 'activities/scavenger-hunt.html'
+        }
+      ];
+
+      // --- 4. BENNU QUIPS ---
       const bennuQuips = [
         'Bennu says: "The Nile is just a really long snack delivery system. Prove me wrong."',
         'Bennu says: "If you\'re not eating mangoes while reading, are you even living?"',
@@ -914,7 +990,7 @@ const locations = [
         'Bennu says: "The pyramids were built by aliens. Just kidding. They were built by Egyptians with very strong backs."'
       ];
 
-      // --- 4. FLIGHT PATH ---
+      // --- 5. FLIGHT PATH ---
       const flightPath = [
         { x: 12, y: 14 }, { x: 58, y: 18 }, { x: 50, y: 28 }, { x: 22, y: 30 },
         { x: 24, y: 36 }, { x: 16, y: 40 }, { x: 40, y: 52 }, { x: 32, y: 55 }, { x: 12, y: 78 }
@@ -962,7 +1038,7 @@ const locations = [
         }, 1200);
       }
 
-      // --- 5. CREATE HOTSPOTS ---
+      // --- 6. CREATE HOTSPOTS ---
       function createHotspots() {
         const container = document.getElementById('hotspots-container');
         
@@ -993,11 +1069,12 @@ const locations = [
         });
       }
 
-      // --- 6. CREATE MENU ---
+      // --- 7. CREATE MENU ---
       function createMenuItems() {
         const grid = document.getElementById('menuGrid');
         grid.innerHTML = '';
         
+        // Add all location items except the map one (which is replaced by Activities)
         locations.forEach((loc, index) => {
           const item = document.createElement('div');
           item.className = 'menu-item';
@@ -1008,9 +1085,56 @@ const locations = [
           });
           grid.appendChild(item);
         });
+
+        // Add Activities item (replaces "Explore the Map")
+        const activitiesItem = document.createElement('div');
+        activitiesItem.className = 'menu-item';
+        activitiesItem.style.borderColor = '#c9a84c';
+        activitiesItem.style.background = '#f5ede3';
+        activitiesItem.innerHTML = `
+          <span class="icon">🎮</span>
+          Activities
+          <span class="arrow">→</span>
+        `;
+        activitiesItem.addEventListener('click', function(e) {
+          e.stopPropagation();
+          showActivitiesSubMenu();
+        });
+        grid.appendChild(activitiesItem);
       }
 
-      // --- 7. CONTENT OVERLAY WITH IFRAME ---
+      // --- 8. CREATE ACTIVITIES SUB-MENU ---
+      function createActivitiesSubMenu() {
+        const grid = document.getElementById('activitiesGrid');
+        grid.innerHTML = '';
+        
+        activities.forEach(activity => {
+          const item = document.createElement('div');
+          item.className = 'menu-item';
+          item.innerHTML = `<span class="icon">${activity.icon}</span> ${activity.name}`;
+          item.title = activity.description;
+          item.addEventListener('click', function() {
+            // Open the activity in a new tab or navigate to it
+            window.open(activity.page, '_blank');
+            document.getElementById('menu-overlay').classList.remove('active');
+          });
+          grid.appendChild(item);
+        });
+      }
+
+      function showActivitiesSubMenu() {
+        document.getElementById('menuGrid').style.display = 'none';
+        document.getElementById('menuTitle').textContent = '🎮 Activities';
+        document.getElementById('activitiesSubMenu').classList.add('active');
+      }
+
+      function hideActivitiesSubMenu() {
+        document.getElementById('menuGrid').style.display = 'grid';
+        document.getElementById('menuTitle').textContent = '🏛️ Explore the Imaginarium';
+        document.getElementById('activitiesSubMenu').classList.remove('active');
+      }
+
+      // --- 9. CONTENT OVERLAY WITH IFRAME ---
       const contentClose = document.getElementById('contentClose');
       const contentBack = document.getElementById('contentBack');
       const contentIcon = document.getElementById('contentIcon');
@@ -1030,18 +1154,15 @@ const locations = [
         const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
         contentQuip.textContent = '🐦 ' + quip;
         
-        // Load the full HTML page in the iframe
         contentIframe.src = loc.page || 'about:blank';
         contentLink.href = loc.page || '#';
         contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
         
-        // Dim the map
         mapWrapper.classList.add('content-open');
         hotspotsContainer.classList.add('content-open');
         bennuContainer.classList.add('content-open');
         mapOverlays.classList.add('hidden');
         
-        // Show full-screen overlay
         contentOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
@@ -1053,7 +1174,6 @@ const locations = [
         hotspotsContainer.classList.remove('content-open');
         bennuContainer.classList.remove('content-open');
         mapOverlays.classList.remove('hidden');
-        // Clear iframe after closing
         setTimeout(() => {
           contentIframe.src = 'about:blank';
         }, 300);
@@ -1065,18 +1185,24 @@ const locations = [
         if (e.target === this) closeContent();
       });
 
-      // --- 8. MENU ---
+      // --- 10. MENU ---
       const menuBtn = document.getElementById('menuBtn');
       const menuOverlay = document.getElementById('menu-overlay');
       const menuClose = document.getElementById('menuClose');
+      const backToMain = document.getElementById('backToMainMenu');
 
-      menuBtn.addEventListener('click', () => menuOverlay.classList.add('active'));
+      menuBtn.addEventListener('click', () => {
+        // Reset to main menu view
+        hideActivitiesSubMenu();
+        menuOverlay.classList.add('active');
+      });
       menuClose.addEventListener('click', () => menuOverlay.classList.remove('active'));
+      backToMain.addEventListener('click', hideActivitiesSubMenu);
       menuOverlay.addEventListener('click', (e) => {
         if (e.target === menuOverlay) menuOverlay.classList.remove('active');
       });
 
-      // --- 9. WELCOME ---
+      // --- 11. WELCOME ---
       const welcomeOverlay = document.getElementById('welcome-overlay');
       const welcomeBtn = document.getElementById('welcomeBtn');
 
@@ -1097,7 +1223,7 @@ const locations = [
         }
       });
 
-      // --- 10. KEYBOARD ---
+      // --- 12. KEYBOARD ---
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (contentOverlay.classList.contains('active')) closeContent();
@@ -1109,13 +1235,17 @@ const locations = [
         }
       });
 
-      // --- 11. INIT ---
+      // --- 13. INIT ---
       function initMap() {
         createHotspots();
         createMenuItems();
+        createActivitiesSubMenu();
+        // Ensure sub-menu is hidden initially
+        hideActivitiesSubMenu();
         setTimeout(flyBennuToNextPoint, 1000);
         console.log('🐦 The Imaginarium Map loaded!');
         console.log(`📍 ${locations.length} locations ready.`);
+        console.log(`🎮 ${activities.length} activities ready.`);
         console.log('🕊️ Bennu is flying across Egypt!');
       }
 

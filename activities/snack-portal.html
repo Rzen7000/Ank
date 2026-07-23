@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jimba's Snack Portal Adventure</title>
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 8px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 24px;
+    }
+
+    .adventure-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+      min-height: 500px;
+      position: relative;
+    }
+
+    .scene-image {
+      text-align: center;
+      font-size: 4rem;
+      margin-bottom: 16px;
+      min-height: 80px;
+    }
+
+    .scene-title {
+      font-size: 1.4rem;
+      color: #b45f2a;
+      text-align: center;
+      margin-bottom: 8px;
+      font-family: 'Georgia', serif;
+    }
+
+    .scene-text {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+      text-align: center;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .scene-learning {
+      background: #fdf6e3;
+      border-left: 4px solid #c9a84c;
+      padding: 12px 18px;
+      border-radius: 8px;
+      margin: 12px 0 20px;
+      font-size: 0.95rem;
+      color: #5c4530;
+      font-style: italic;
+    }
+    .scene-learning strong {
+      color: #b45f2a;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .choice-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 14px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      transition: 0.3s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .choice-btn:hover {
+      border-color: #b45f2a;
+      background: #fdf6e3;
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(180, 95, 42, 0.1);
+    }
+    .choice-btn .emoji {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .choice-btn .label {
+      flex: 1;
+    }
+    .choice-btn.trap {
+      border-color: #f44336;
+    }
+    .choice-btn.trap:hover {
+      border-color: #d32f2f;
+      background: #ffebee;
+    }
+
+    .ending {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .ending .big-emoji {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .ending h2 {
+      color: #b45f2a;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .ending p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+    .restart-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .restart-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+
+    .progress-bar {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .progress-step {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d4c5a0;
+      transition: 0.3s;
+    }
+    .progress-step.active {
+      background: #b45f2a;
+      transform: scale(1.2);
+    }
+    .progress-step.visited {
+      background: #c9a84c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .adventure-container { padding: 20px; }
+      .scene-image { font-size: 3rem; }
+      .scene-title { font-size: 1.2rem; }
+      .scene-text { font-size: 0.95rem; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; padding-left: 12px; }
+      .adventure-container { padding: 16px; }
+      .choice-btn { font-size: 0.9rem; padding: 10px 14px; }
+      .scene-image { font-size: 2.5rem; min-height: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🎒 Jimba's Snack Portal Adventure</h1>
+    <p class="subtitle">Jimba's backpack is a portal to another dimension. Today, you're going inside. Bring snacks.</p>
+
+    <div class="adventure-container" id="adventureContainer">
+      <div class="progress-bar" id="progressBar"></div>
+      <div id="sceneContent">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== ADVENTURE DATA =====
+    const adventure = {
+      start: {
+        id: 'start',
+        image: '🎒',
+        title: 'The Snack Portal',
+        text: 'Jimba\'s backpack is glowing. You\'ve seen him pull out mangoes, chocolate, and even a small portal to another dimension. Today, he\'s letting you go inside. What do you grab first?',
+        learning: '💡 Did you know? The ancient Egyptians believed that the heart was the seat of intelligence, not the brain. So technically, Jimba is using his snack-filled heart to make decisions!',
+        choices: [
+          { id: 'chocolate', emoji: '🍫', label: 'Grab the dark chocolate', next: 'chocolate_path' },
+          { id: 'mango', emoji: '🥭', label: 'Take the magical mango', next: 'mango_path' },
+          { id: 'seeds', emoji: '🌻', label: 'Snatch the sunflower seeds', next: 'seeds_path' }
+        ]
+      },
+      chocolate_path: {
+        id: 'chocolate_path',
+        image: '🍫',
+        title: 'The Chocolate Path',
+        text: 'You grab the dark chocolate. It\'s 80% cocoa — the good stuff. Suddenly, the backpack opens into a world made entirely of chocolate. Rivers of fudge. Mountains of cocoa powder. You\'re in heaven. But wait... what\'s that in the distance?',
+        learning: '💡 Dark chocolate contains flavonoids that can help improve blood flow and brain function. Jimba is basically a genius. (He\'ll never admit it.)',
+        choices: [
+          { id: 'choc_eat', emoji: '😋', label: 'Eat the chocolate river', next: 'choc_eat_ending' },
+          { id: 'choc_explore', emoji: '🔍', label: 'Explore the cocoa mountains', next: 'choc_explore_ending' },
+          { id: 'choc_share', emoji: '🐦', label: 'Share with Bennu', next: 'choc_share_ending' }
+        ]
+      },
+      mango_path: {
+        id: 'mango_path',
+        image: '🥭',
+        title: 'The Mango Path',
+        text: 'The mango glows with an otherworldly light. You take a bite and suddenly you\'re in a grove where mangoes grow in every color of the rainbow. The Mango Committee appears in a puff of golden dust. "You have been chosen," they say. "But first... you must pass the test."',
+        learning: '💡 Mangoes are packed with Vitamin C and A. One mango provides nearly 70% of your daily vitamin C needs. The Mango Committee knows what they\'re talking about!',
+        choices: [
+          { id: 'mango_test', emoji: '📝', label: 'Take the Mango Test', next: 'mango_test_ending' },
+          { id: 'mango_escape', emoji: '🏃', label: 'Run away with the mango', next: 'mango_escape_ending' },
+          { id: 'mango_talk', emoji: '🗣️', label: 'Negotiate with the Committee', next: 'mango_committee_ending' }
+        ]
+      },
+      seeds_path: {
+        id: 'seeds_path',
+        image: '🌻',
+        title: 'The Seed Path',
+        text: 'You grab the sunflower seeds. Bennu appears out of nowhere, tapping his beak. "Good choice," he says. "Seeds are the original snack. You\'re about to enter the Garden of Infinite Snacks." The portal opens into a garden where snacks grow on trees. But beware... the Evil Salad lurks nearby.',
+        learning: '💡 Sunflower seeds are a great source of vitamin E, magnesium, and healthy fats. Bennu\'s favourite snack (he\'ll never admit it).',
+        choices: [
+          { id: 'seed_garden', emoji: '🌿', label: 'Explore the garden', next: 'seed_garden_ending' },
+          { id: 'seed_salad', emoji: '🥗', label: 'Confront the Evil Salad', next: 'seed_salad_ending' },
+          { id: 'seed_share', emoji: '🫂', label: 'Share seeds with the garden creatures', next: 'seed_share_ending' }
+        ]
+      },
+      // ===== ENDINGS =====
+      choc_eat_ending: {
+        id: 'choc_eat_ending',
+        image: '😋',
+        title: '🏆 Ending: The Chocolate Coma',
+        text: 'You eat the entire chocolate river. It\'s delicious. You\'re happy. You\'re also completely covered in chocolate and unable to move. Bennu taps four times. That means: "You\'re being ridiculous." But was it worth it? Absolutely. You wake up back in the classroom with a chocolate stain on your shirt and a smile on your face.',
+        ending: true
+      },
+      choc_explore_ending: {
+        id: 'choc_explore_ending',
+        image: '⛰️',
+        title: '🏆 Ending: The Cocoa King',
+        text: 'You climb the cocoa mountains and discover the legendary Cocoa King — a wise old chocolate bar who shares the secret of the universe: "Life is like dark chocolate. It\'s bitter, sweet, and best enjoyed with good company." You return with newfound wisdom and a pocket full of cocoa beans. The classroom smells amazing.',
+        ending: true
+      },
+      choc_share_ending: {
+        id: 'choc_share_ending',
+        image: '🐦',
+        title: '🏆 Ending: Bennu\'s Best Friend',
+        text: 'You share the chocolate with Bennu. He taps once — that means "Yes." He taps three times — that means "Snack time." You\'ve officially become Bennu\'s favourite human. He gives you a feather as a token of friendship. You frame it. You\'ve never been prouder.',
+        ending: true
+      },
+      mango_test_ending: {
+        id: 'mango_test_ending',
+        image: '📝',
+        title: '🏆 Ending: The Mango Scholar',
+        text: 'You pass the Mango Test with flying colours. The Mango Committee grants you the title of "Mango Scholar" and sends you back with a magical mango that never runs out. You become famous throughout the Imaginarium. Jimba is jealous. You share your mango with him anyway.',
+        ending: true
+      },
+      mango_escape_ending: {
+        id: 'mango_escape_ending',
+        image: '🏃',
+        title: '🏆 Ending: The Great Mango Escape',
+        text: 'You run away with the magical mango. The Mango Committee is furious. They chase you through the portal, but you\'re too fast. You return to the classroom and eat the mango in one glorious bite. It tastes like victory. And also like victory.',
+        ending: true
+      },
+      mango_committee_ending: {
+        id: 'mango_committee_ending',
+        image: '🥭✨',
+        title: '🏆 Secret Ending: The Mango Committee Member',
+        text: 'You impress the Mango Committee with your negotiation skills. They offer you a position as an honorary member. Your first task: tasting mangoes from around the world. You accept. You now spend your days eating mangoes and making important decisions about fruit. Life is good.',
+        ending: true
+      },
+      seed_garden_ending: {
+        id: 'seed_garden_ending',
+        image: '🌿',
+        title: '🏆 Ending: The Garden Keeper',
+        text: 'You explore the Garden of Infinite Snacks and discover the secret to eternal snack happiness: sharing. The garden creatures teach you that snacks are best enjoyed in company. You return to the classroom with a basket of snacks and a heart full of joy. Jimba cries. It\'s beautiful.',
+        ending: true
+      },
+      seed_salad_ending: {
+        id: 'seed_salad_ending',
+        image: '🥗⚔️',
+        title: '🏆 Ending: The Salad Slayer',
+        text: 'You confront the Evil Salad. It\'s a terrifying battle of wills. You throw sunflower seeds at it, and it starts to wilt. You\'re victorious. The garden celebrates. You\'ve defeated the greatest enemy of snack lovers everywhere. Bennu taps twice: "No, but also yes."',
+        ending: true
+      },
+      seed_share_ending: {
+        id: 'seed_share_ending',
+        image: '🫂',
+        title: '🏆 Ending: The Seed Ambassador',
+        text: 'You share the seeds with all the garden creatures. They love you. They give you a magical seed that grows into a plant that produces any snack you want. You\'ve become the Seed Ambassador. Jimba asks for chocolate. You grow him some. This is paradise.',
+        ending: true
+      }
+    };
+
+    // ===== GAME STATE =====
+    let currentScene = 'start';
+    let visitedScenes = ['start'];
+    let totalScenes = 0;
+
+    // ===== RENDER FUNCTION =====
+    function renderScene(sceneId) {
+      const scene = adventure[sceneId];
+      if (!scene) return;
+
+      currentScene = sceneId;
+      if (!visitedScenes.includes(sceneId)) {
+        visitedScenes.push(sceneId);
+      }
+
+      const container = document.getElementById('sceneContent');
+      let html = '';
+
+      // Progress bar
+      updateProgress();
+
+      // Scene image
+      html += `<div class="scene-image">${scene.image || '🎒'}</div>`;
+
+      // Title
+      html += `<div class="scene-title">${scene.title || ''}</div>`;
+
+      // Text
+      html += `<div class="scene-text">${scene.text || ''}</div>`;
+
+      // Learning point
+      if (scene.learning) {
+        html += `<div class="scene-learning">${scene.learning}</div>`;
+      }
+
+      // Choices or Ending
+      if (scene.ending) {
+        html += `<div class="ending">
+          <span class="big-emoji">${scene.image || '🎉'}</span>
+          <h2>${scene.title || 'The End'}</h2>
+          <p>${scene.text || ''}</p>
+          <button class="restart-btn" onclick="restartAdventure()">🔄 Start Again</button>
+        </div>`;
+      } else if (scene.choices) {
+        html += `<div class="choices">`;
+        scene.choices.forEach(choice => {
+          const isTrap = choice.id.includes('salad') || choice.id.includes('escape');
+          html += `<button class="choice-btn${isTrap ? ' trap' : ''}" onclick="makeChoice('${choice.next}')">
+            <span class="emoji">${choice.emoji || '➡️'}</span>
+            <span class="label">${choice.label || 'Continue'}</span>
+          </button>`;
+        });
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function makeChoice(nextId) {
+      renderScene(nextId);
+      // Scroll to top of adventure
+      document.getElementById('adventureContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateProgress() {
+      const bar = document.getElementById('progressBar');
+      // Count all scenes (including endings)
+      const allSceneIds = Object.keys(adventure);
+      totalScenes = allSceneIds.length;
+      const progress = Math.round((visitedScenes.length / totalScenes) * 100);
+      let html = '';
+      // Simple dots
+      allSceneIds.forEach(id => {
+        let className = 'progress-step';
+        if (id === currentScene) className += ' active';
+        else if (visitedScenes.includes(id)) className += ' visited';
+        html += `<div class="${className}"></div>`;
+      });
+      bar.innerHTML = html;
+    }
+
+    function restartAdventure() {
+      visitedScenes = ['start'];
+      renderScene('start');
+    }
+
+    // ===== START =====
+    renderScene('start');
+    console.log('🎒 Jimba\'s Snack Portal Adventure loaded!');
+  </script>
+</body>
+</html>
