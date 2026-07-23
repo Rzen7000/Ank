@@ -1,0 +1,239 @@
+/* ============================================================
+   ICON SYSTEM - 3ANKAA Imaginarium
+   ============================================================ */
+
+/* -------- 1. BENNU ICON (Primary) -------- */
+.icon-bennu {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/bennu-icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon-bennu-sm {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-bennu-lg {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-bennu-xl {
+  width: 48px;
+  height: 48px;
+}
+
+.icon-bennu-xxl {
+  width: 64px;
+  height: 64px;
+}
+
+/* Hover effect */
+.icon-bennu:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* -------- 2. HOOPOE FOOTPRINT -------- */
+.icon-footprint {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/hoopoe-footprint.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon-footprint-sm {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-footprint-lg {
+  width: 28px;
+  height: 28px;
+}
+
+/* -------- 3. ACTIVITIES ICONS -------- */
+/* Base class for all activity icons */
+.icon-activity {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon-activity-sm {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-activity-lg {
+  width: 48px;
+  height: 48px;
+}
+
+.icon-activity-xl {
+  width: 64px;
+  height: 64px;
+}
+
+/* Individual activity icons */
+.icon-tap-code {
+  background-image: url('../images/activities/tap-code-icon.png');
+}
+
+.icon-snack-portal {
+  background-image: url('../images/activities/snack-portal-icon.png');
+}
+
+.icon-mango-quiz {
+  background-image: url('../images/activities/mango-quiz-icon.png');
+}
+
+.icon-memory-game {
+  background-image: url('../images/activities/memory-game-icon.png');
+}
+
+.icon-scavenger-hunt {
+  background-image: url('../images/activities/scavenger-hunt-icon.png');
+}
+
+.icon-word-puzzle {
+  background-image: url('../images/activities/word-puzzle-icon.png');
+}
+
+.icon-mango-match {
+  background-image: url('../images/activities/mango-match-icon.png');
+}
+
+.icon-great-debate {
+  background-image: url('../images/activities/great-debate-icon.png');
+}
+
+.icon-riddle-challenge {
+  background-image: url('../images/activities/riddle-challenge-icon.png');
+}
+
+.icon-story-builder {
+  background-image: url('../images/activities/story-builder-icon.png');
+}
+
+.icon-hoopoe-spot {
+  background-image: url('../images/activities/hoopoe-spot-icon.png');
+}
+
+.icon-decision-maker {
+  background-image: url('../images/activities/decision-maker-icon.png');
+}
+
+/* -------- 4. MENU ICONS -------- */
+.icon-menu {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Map icon (used in menu) */
+.icon-map {
+  background-image: url('../images/map-icon.png');
+}
+
+/* -------- 5. UTILITY CLASSES -------- */
+/* For inline icon + text combinations */
+.icon-with-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-with-text .icon-label {
+  font-size: inherit;
+  color: inherit;
+}
+
+/* For circular icon backgrounds */
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5ede3;
+  border: 2px solid #d4c5a0;
+}
+
+.icon-circle .icon-bennu,
+.icon-circle .icon-activity,
+.icon-circle .icon-menu {
+  width: 24px;
+  height: 24px;
+}
+
+/* For card headers */
+.icon-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-card-header .icon-bennu,
+.icon-card-header .icon-activity {
+  width: 36px;
+  height: 36px;
+}
+
+/* -------- 6. RESPONSIVE ICONS -------- */
+@media (max-width: 768px) {
+  .icon-bennu-lg {
+    width: 28px;
+    height: 28px;
+  }
+  .icon-activity {
+    width: 28px;
+    height: 28px;
+  }
+  .icon-bennu-xl {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon-bennu-lg {
+    width: 24px;
+    height: 24px;
+  }
+  .icon-activity {
+    width: 24px;
+    height: 24px;
+  }
+  .icon-bennu-xl {
+    width: 32px;
+    height: 32px;
+  }
+  .icon-bennu-xxl {
+    width: 48px;
+    height: 48px;
+  }
+}
