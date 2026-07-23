@@ -1,3 +1,446 @@
+<<<<<<< HEAD
+/* Base styles – mobile first */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+  background: white;
+  color: black;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header & navigation */
+header {
+  background: #111;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    text-align: left;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.site-title {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main content */
+main {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  border-left: 4px solid black;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem;
+}
+
+p, li {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Book grid – responsive cards */
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 480px) {
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .book-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .book-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.book-card {
+  position: relative;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  background: #fafafa;
+  border-radius: 8px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1), 
+              box-shadow 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.book-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background: #eee;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.book-card h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.3rem 0;
+}
+
+.book-card p {
+  font-size: 0.9rem;
+  color: #333;
+  flex-grow: 1;
+}
+
+.download-btn {
+  display: inline-block;
+  background: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin-top: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.download-btn:hover {
+  background: #333;
+}
+
+/* === FILTER BAR (Phase 2) === */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 2px solid #ddd;
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+  font-weight: 500;
+}
+
+.filter-btn:hover {
+  border-color: #999;
+  background: #f5f5f5;
+}
+
+.filter-btn.active {
+  background: black;
+  color: white;
+  border-color: black;
+}
+
+/* === PHASE 3: SEARCH & SORT BAR === */
+.search-sort-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+  align-items: center;
+}
+
+.search-sort-bar input {
+  flex: 1 1 200px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.search-sort-bar input:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.search-sort-bar select {
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23333' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.search-sort-bar select:focus {
+  outline: none;
+  border-color: #111;
+}
+
+/* === PHASE 2+3: BADGES (Coming Soon, Study Guide, Available) === */
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 0.2rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  pointer-events: none;
+  animation: pulse-badge 1.8s ease-in-out infinite;
+}
+
+/* Default Gold (Quest Packs & Adventures coming soon) */
+.badge.gold {
+  background: #f5b342;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(245, 179, 66, 0.3);
+}
+
+/* Teal for Study Guides (even if coming soon, they get a distinct color) */
+.badge.teal {
+  background: #26a69a;
+  color: white;
+  box-shadow: 0 2px 8px rgba(38, 166, 154, 0.3);
+}
+
+/* Green for Available (e.g., released books) */
+.badge.green {
+  background: #66bb6a;
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 187, 106, 0.3);
+  animation: none; /* No pulse for available, just static */
+}
+
+@keyframes pulse-badge {
+  0% { opacity: 0.8; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.08); box-shadow: 0 0 20px rgba(245, 179, 66, 0.5); }
+  100% { opacity: 0.8; transform: scale(0.95); }
+}
+/* Override pulse for teal */
+.badge.teal {
+  animation-name: pulse-teal;
+}
+@keyframes pulse-teal {
+  0% { opacity: 0.8; transform: scale(0.95); box-shadow: 0 2px 8px rgba(38, 166, 154, 0.2); }
+  50% { opacity: 1; transform: scale(1.08); box-shadow: 0 0 20px rgba(38, 166, 154, 0.5); }
+  100% { opacity: 0.8; transform: scale(0.95); }
+}
+
+/* Disabled "Coming Soon" button with shimmer */
+.download-btn.coming-soon {
+  background: #6c6c6c;
+  color: #e0e0e0;
+  cursor: not-allowed;
+  border: 1px solid #888;
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+.download-btn.coming-soon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shimmer 3s infinite ease-in-out;
+  transform: rotate(25deg);
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* Available button style */
+.download-btn.available {
+  background: #2e7d32;
+  color: white;
+}
+.download-btn.available:hover {
+  background: #1b5e20;
+}
+
+/* Latest list, contact form, etc. */
+.latest-list ul, .latest-list li {
+  margin-left: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin-top: 1.5rem;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, textarea {
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button:not(.filter-btn):not(.download-btn) {
+  background: black;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button:not(.filter-btn):hover {
+  background: #333;
+}
+
+/* Footer */
+footer {
+  background: #f0f0f0;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+  font-size: 0.85rem;
+}
+
+main img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Floating image */
+.welcome-section {
+  overflow: auto;
+}
+.welcome-image {
+  float: right;
+  width: 40%;
+  max-width: 250px;
+  height: auto;
+  margin: 0 0 1rem 1.5rem;
+  border-radius: 8px;
+  shape-outside: margin-box;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+.welcome-image:hover {
+  transform: rotate(6deg) scale(1.06);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.welcome-section .reveal:nth-child(2) { transition-delay: 0.05s; }
+.welcome-section .reveal:nth-child(3) { transition-delay: 0.10s; }
+.welcome-section .reveal:nth-child(4) { transition-delay: 0.15s; }
+.welcome-section .reveal:nth-child(5) { transition-delay: 0.20s; }
+.welcome-section .reveal:nth-child(6) { transition-delay: 0.25s; }
+.welcome-section .reveal:nth-child(7) { transition-delay: 0.30s; }
+.welcome-section .reveal:nth-child(8) { transition-delay: 0.35s; }
+.welcome-section .reveal:nth-child(9) { transition-delay: 0.40s; }
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .welcome-image { width: 35%; margin-left: 1rem; }
+}
+@media (max-width: 480px) {
+  .welcome-image { float: none; display: block; margin: 0 auto 1rem auto; width: 60%; max-width: 180px; }
+  .welcome-section h1 { text-align: center; }
+}
+.welcome-section h1 { margin-top: 0; }
+=======
 /* Base styles – mobile first */
 * {
   margin: 0;
@@ -253,3 +696,4 @@ main img {
 .welcome-section h1 {
   margin-top: 0;
 }
+>>>>>>> a7990674a4300c32499cb6d13629fd5b8d07c7c7
