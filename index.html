@@ -5,24 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>The Imaginarium – Interactive Map</title>
   
-  <!-- ===== PERFORMANCE OPTIMIZATIONS ===== -->
-  <!-- Preconnect for faster resource loading -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Load main CSS -->
+  <link rel="stylesheet" href="css/style.css">
   
-  <!-- Preload critical image (small version for mobile) -->
-  <link rel="preload" as="image" href="images/3Ankaa-website-map-small.webp" media="(max-width: 480px)" fetchpriority="high">
-  <link rel="preload" as="image" href="images/3Ankaa-website-map-medium.webp" media="(max-width: 1024px)" fetchpriority="high">
+  <!-- Load icon CSS -->
+  <link rel="stylesheet" href="css/icons.css">
   
-  <!-- Load main CSS with media="print" to make it non-blocking -->
-  <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
-  
-  <!-- Load icon CSS with media="print" to make it non-blocking -->
-  <link rel="stylesheet" href="css/icons.css" media="print" onload="this.media='all'">
-  
-  <!-- Inline critical CSS -->
   <style>
-    /* --- CRITICAL CSS (inlined for speed) --- */
+    /* --- RESET --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
@@ -34,7 +24,7 @@
       overflow-x: hidden;
     }
 
-    /* --- HEADER (visible immediately) --- */
+    /* --- HEADER --- */
     .map-header {
       position: sticky;
       top: 0;
@@ -111,35 +101,30 @@
       opacity: 0.6;
     }
     
-    /* === SKIP LOADING BUTTON === */
+    /* === FALLBACK SKIP BUTTON === */
     #skip-loading {
       position: fixed;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10001;
-      background: rgba(180, 95, 42, 0.95);
+      background: rgba(180, 95, 42, 0.9);
       color: #fdf6e3;
       border: 2px solid #c9a84c;
-      padding: 14px 32px;
+      padding: 12px 28px;
       border-radius: 40px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       font-family: 'Georgia', serif;
       transition: 0.3s;
       display: none;
       backdrop-filter: blur(4px);
-      box-shadow: 0 4px 30px rgba(0,0,0,0.6);
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
     #skip-loading:hover {
       background: #8f4a1f;
       transform: translateX(-50%) scale(1.02);
-    }
-    #skip-loading:active {
-      transform: translateX(-50%) scale(0.95);
     }
     #skip-loading.show {
       display: block;
@@ -183,15 +168,13 @@
       pointer-events: none;
     }
 
-    /* Mobile-first image: show small version immediately */
     #map-image {
       display: block;
       width: 100%;
       height: auto;
       pointer-events: none;
       user-select: none;
-      /* Blur-up technique for faster perceived load */
-      filter: blur(4px);
+      filter: blur(6px);
       transition: filter 0.6s ease;
     }
     #map-image.loaded {
@@ -272,7 +255,6 @@
       transform: translate(-50%, -50%);
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 10;
-      -webkit-tap-highlight-color: transparent;
     }
     .hotspot .dot {
       width: 20px;
@@ -620,7 +602,7 @@
       color: #b45f2a;
     }
 
-    /* --- MENU CTA --- */
+    /* --- MENU CTA (Call to Action) --- */
     .menu-cta {
       background: #f5ede3;
       border-radius: 12px;
@@ -722,31 +704,6 @@
       transform: scale(1.02);
     }
 
-    /* --- FOOTER --- */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(26, 20, 16, 0.9);
-      border-top: 1px solid rgba(212, 197, 160, 0.2);
-      color: #d4c5a0;
-      font-size: 0.85rem;
-      margin-top: auto;
-    }
-    footer img {
-      height: 1.2em;
-      vertical-align: middle;
-      margin: 0 4px;
-      opacity: 0.6;
-    }
-    footer a {
-      color: #d4c5a0;
-      text-decoration: none;
-    }
-    footer a:hover {
-      color: #fdf6e3;
-      text-decoration: underline;
-    }
-
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
       .map-header { padding: 8px 14px; }
@@ -799,14 +756,6 @@
 
       .compass-rose { bottom: 15px; left: 15px; font-size: 1.5rem; }
       .legend { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 0.6rem; }
-
-      #skip-loading {
-        padding: 12px 24px;
-        font-size: 0.9rem;
-        bottom: 30px;
-        width: 90%;
-        max-width: 320px;
-      }
     }
 
     @media (max-width: 480px) {
@@ -873,14 +822,6 @@
 
       .compass-rose { display: none; }
       .legend { display: none; }
-
-      #skip-loading {
-        padding: 10px 20px;
-        font-size: 0.85rem;
-        bottom: 20px;
-        width: 92%;
-        max-width: 280px;
-      }
     }
   </style>
 </head>
@@ -909,26 +850,13 @@
     
     <!-- Map Wrapper -->
     <div id="map-wrapper">
-      <!-- ===== OPTIMIZED IMAGE WITH FETCHPRIORITY ===== -->
+      <!-- Responsive image with mobile-friendly versions -->
       <picture>
-        <!-- Mobile: small image -->
-        <source 
-          media="(max-width: 480px)" 
-          srcset="images/3Ankaa-website-map-small.webp"
-          fetchpriority="high">
-        <!-- Tablet: medium image -->
-        <source 
-          media="(max-width: 1024px)" 
-          srcset="images/3Ankaa-website-map-medium.webp"
-          fetchpriority="high">
-        <!-- Desktop: full image -->
-        <img 
-          id="map-image" 
-          src="images/3Ankaa-website-map.webp" 
-          alt="Map of Egypt - The Imaginarium"
-          fetchpriority="high"
-          loading="eager"
-          decoding="async" />
+        <source media="(max-width: 480px)" srcset="images/3Ankaa-website-map-small.webp">
+        <source media="(max-width: 1024px)" srcset="images/3Ankaa-website-map-medium.webp">
+        <img id="map-image" 
+             src="images/3Ankaa-website-map.webp" 
+             alt="Map of Egypt - The Imaginarium" />
       </picture>
       
       <!-- Map Overlays -->
@@ -961,7 +889,7 @@
         <div id="bennu" style="left: 15%; top: 20%;">
           <span class="trail"></span>
           <span class="wing">
-            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;" loading="lazy">
+            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;">
           </span>
         </div>
       </div>
@@ -999,9 +927,11 @@
       
       <!-- === CTA MESSAGE === -->
       <div class="menu-cta">
+        <p class="cta-headline">✨ Your Adventure Awaits</p>
         <p class="cta-text">You've read the stories. Now step into the world behind it.</p>
         <p class="cta-text">Explore the map, play games, solve puzzles, and meet the characters. The Imaginarium is where the journey of Bennu's Universe continues.</p>
-</div>
+        <div class="cta-divider"></div>
+      </div>
 
       <h2 id="menuTitle">🏛️ Explore the Imaginarium</h2>
       <div class="menu-grid" id="menuGrid"></div>
@@ -1033,7 +963,6 @@
   </footer>
 
   <!-- ===== JAVASCRIPT ===== -->
-  <!-- Defer non-critical scripts -->
   <script>
     (function() {
       // --- 1. DOM REFERENCES ---
@@ -1321,8 +1250,6 @@
       });
 
       // --- 9. SKIP LOADING FUNCTION ---
-      let skipTimer;
-
       function showSkipButton() {
         skipButton.classList.add('show');
       }
@@ -1336,14 +1263,10 @@
         initMap();
         // Hide skip button
         skipButton.classList.remove('show');
-        // Clear the timer
-        if (skipTimer) {
-          clearTimeout(skipTimer);
-        }
-        // Open menu automatically after a short delay
+        // Open menu automatically
         setTimeout(() => {
           menuOverlay.classList.add('active');
-        }, 400);
+        }, 300);
       }
 
       skipButton.addEventListener('click', skipLoading);
@@ -1397,10 +1320,10 @@
 
       // --- 13. LOAD MAP WITH SKIP FUNCTIONALITY ---
       function loadMap() {
-        // Show skip button after 2.5 seconds if not loaded (faster for mobile)
-        skipTimer = setTimeout(() => {
+        // Show skip button after 3 seconds if not loaded
+        const skipTimer = setTimeout(() => {
           showSkipButton();
-        }, 2500);
+        }, 3000);
 
         // Check if image is already loaded
         if (mapImage.complete && mapImage.naturalHeight > 0) {
@@ -1409,7 +1332,6 @@
           loadingScreen.classList.add('hidden');
           mapContainer.classList.add('visible');
           initMap();
-          skipButton.classList.remove('show');
           return;
         }
 
@@ -1433,7 +1355,7 @@
           skipButton.classList.remove('show');
         });
 
-        // Safety timeout - show page regardless after 8 seconds
+        // Safety timeout
         setTimeout(() => {
           if (!loadingScreen.classList.contains('hidden')) {
             console.warn('Image load timeout, showing page anyway');
@@ -1453,10 +1375,5 @@
 
     })();
   </script>
-  
-  <!-- Defer loading of non-critical libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-
 </body>
 </html>
