@@ -3,13 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>The Imaginarium – Interactive Map</title>
+  <title>The Imaginarium – Explore</title>
   
-  <!-- ===== PERFORMANCE OPTIMIZATIONS ===== -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Load main CSS -->
+  <!-- Load CSS -->
   <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="css/icons.css" media="print" onload="this.media='all'">
   
@@ -72,7 +68,7 @@
       transform: scale(1.02);
     }
 
-    /* --- LOADING SCREEN (shown briefly on all devices) --- */
+    /* --- LOADING SCREEN --- */
     #loading-screen {
       position: fixed;
       top: 0;
@@ -108,212 +104,85 @@
       100% { opacity: 1; transform: scale(1.02); }
     }
 
-    /* --- MAP CONTAINER (hidden by default, shown on desktop) --- */
-    #map-container {
+    /* --- HERO SECTION --- */
+    #hero-section {
       flex: 1;
-      position: relative;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      background: #1a1410;
-      overflow: hidden;
-      min-height: 500px;
-      display: none;
-    }
-    #map-container.visible {
-      display: block;
-    }
-
-    /* --- MAP IMAGE --- */
-    #map-wrapper {
-      position: relative;
-      width: 100%;
-      transition: opacity 0.6s ease;
-    }
-    #map-wrapper.content-open {
-      opacity: 0.45;
-      pointer-events: none;
-    }
-
-    #map-image {
-      display: block;
-      width: 100%;
-      height: auto;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* --- COMPASS ROSE & LEGEND --- */
-    #map-overlays {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 5;
-      transition: opacity 0.6s ease;
-    }
-    #map-overlays.hidden { opacity: 0; }
-
-    .compass-rose {
-      position: absolute;
-      bottom: 30px;
-      left: 30px;
-      font-size: 2rem;
-      opacity: 0.7;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
-      line-height: 1.2;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+      min-height: 60vh;
+      background: #1a1410;
+      background-image: radial-gradient(ellipse at center, rgba(180, 95, 42, 0.1) 0%, transparent 70%);
     }
-    .compass-rose .n { font-size: 0.8rem; color: #fdf6e3; letter-spacing: 2px; font-weight: bold; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
-    .compass-rose .rose { font-size: 2.2rem; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
-
-    .legend {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(26, 20, 16, 0.8);
-      backdrop-filter: blur(4px);
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(212, 197, 160, 0.2);
-      color: #d4c5a0;
-      font-size: 0.7rem;
-      pointer-events: none;
+    #hero-section .hero-icon {
+      margin-bottom: 16px;
     }
-    .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
-    .legend-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ff6b35, #b45f2a);
-      border: 1px solid #fdf6e3; flex-shrink: 0;
+    #hero-section .hero-icon img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 30px rgba(245, 179, 66, 0.2));
+      animation: float 3s ease-in-out infinite;
     }
-    .legend-dot.fictional {
-      background: radial-gradient(circle at 35% 35%, #f5b342, #b45f2a);
-      border-color: #f5b342;
-      box-shadow: 0 0 10px rgba(245, 179, 66, 0.3);
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    .legend-label { color: #d4c5a0; }
-
-    /* --- HOTSPOT OVERLAY --- */
-    #hotspots-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-      transition: opacity 0.6s ease;
-    }
-    #hotspots-container.content-open { opacity: 0.3; pointer-events: none; }
-
-    .hotspot {
-      position: absolute;
-      pointer-events: all;
-      cursor: pointer;
-      transform: translate(-50%, -50%);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 10;
-    }
-    .hotspot .dot {
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle at 35% 35%, rgba(255, 107, 53, 0.7), rgba(180, 95, 42, 0.5));
-      border-radius: 50%;
-      border: 2px solid rgba(253, 246, 227, 0.6);
-      box-shadow: 0 0 15px rgba(180, 95, 42, 0.3);
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    .hotspot .dot::after {
-      content: '';
-      position: absolute;
-      top: -4px; left: -4px; right: -4px; bottom: -4px;
-      border-radius: 50%;
-      border: 2px solid rgba(245, 179, 66, 0.2);
-      animation: ripple 2.5s infinite;
-    }
-    .hotspot.fictional .dot {
-      background: radial-gradient(circle at 35% 35%, rgba(245, 179, 66, 0.7), rgba(180, 95, 42, 0.5));
-      box-shadow: 0 0 15px rgba(245, 179, 66, 0.3);
-    }
-    .hotspot.fictional .dot::after { border-color: rgba(245, 179, 66, 0.3); }
-
-    @keyframes ripple {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(2.5); opacity: 0; }
-    }
-    .hotspot:hover .dot {
-      transform: scale(1.5);
-      box-shadow: 0 0 30px rgba(245, 179, 66, 0.5);
-    }
-    .hotspot .label {
-      position: absolute;
-      top: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(26, 20, 16, 0.85);
-      backdrop-filter: blur(4px);
+    #hero-section h1 {
+      font-size: 2.8rem;
       color: #fdf6e3;
-      padding: 3px 10px;
-      border-radius: 10px;
-      font-size: 0.6rem;
+      font-family: 'Georgia', serif;
+      margin-bottom: 8px;
+    }
+    #hero-section h1 .highlight {
+      color: #c9a84c;
+    }
+    #hero-section .subtitle {
+      font-size: 1.2rem;
+      color: #d4c5a0;
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    #hero-section .bennu-quote {
+      font-style: italic;
+      background: rgba(245, 237, 227, 0.08);
+      padding: 12px 24px;
+      border-radius: 12px;
+      border-left: 4px solid #c9a84c;
+      font-size: 0.95rem;
+      margin: 16px 0;
+      max-width: 500px;
+      color: #d4c5a0;
+    }
+    #hero-section .explore-cta {
+      margin-top: 16px;
+    }
+    #hero-section .explore-cta button {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 40px;
+      font-size: 1.1rem;
       font-weight: 600;
-      white-space: nowrap;
-      border: 1px solid rgba(212, 197, 160, 0.2);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      letter-spacing: 0.5px;
-      pointer-events: none;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+      box-shadow: 0 4px 20px rgba(180, 95, 42, 0.3);
     }
-    .hotspot:hover .label { opacity: 1; }
-
-    /* --- BENNU --- */
-    #bennu-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 20;
-      transition: opacity 0.6s ease;
+    #hero-section .explore-cta button:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
     }
-    #bennu-container.content-open { opacity: 0.3; }
-
-    #bennu {
-      position: absolute;
-      font-size: 56px;
-      transform: translate(-50%, -50%);
-      transition: left 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                  top 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-      filter: drop-shadow(0 0 30px rgba(245, 179, 66, 0.3));
-      will-change: transform, left, top;
-      pointer-events: none;
-      user-select: none;
-      z-index: 25;
-    }
-    #bennu .wing { display: inline-block; animation: flap 0.4s infinite alternate ease-in-out; }
-    @keyframes flap {
-      0% { transform: rotate(-15deg) scaleY(0.8); }
-      100% { transform: rotate(20deg) scaleY(1.2); }
-    }
-    #bennu .trail {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245, 179, 66, 0.15) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      animation: trail-pulse 1.5s infinite alternate;
-    }
-    @keyframes trail-pulse {
-      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.2; }
-      100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0.6; }
+    #hero-section .hero-footer {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: #5c4530;
+      opacity: 0.6;
     }
 
     /* --- CONTENT OVERLAY --- */
@@ -694,15 +563,6 @@
       .map-header .logo-img { height: 24px; }
       .menu-btn { padding: 6px 14px; font-size: 0.8rem; }
 
-      .hotspot .dot { width: 16px; height: 16px; border-width: 2px; }
-      .hotspot .label { font-size: 0.5rem; padding: 2px 8px; top: -22px; }
-
-      #bennu { font-size: 42px; }
-      #bennu .trail {
-        width: 70px;
-        height: 70px;
-      }
-
       #content-overlay { padding: 15px; }
       #content-card {
         padding: 15px 18px 18px 18px;
@@ -737,20 +597,12 @@
       #welcome-card h2 { font-size: 1.4rem; }
       #welcome-card .icon { font-size: 3rem; }
 
-      .compass-rose { bottom: 15px; left: 15px; font-size: 1.5rem; }
-      .legend { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 0.6rem; }
+      #hero-section h1 { font-size: 2rem; }
+      #hero-section .subtitle { font-size: 1rem; }
+      #hero-section .hero-icon img { width: 80px; height: 80px; }
     }
 
     @media (max-width: 480px) {
-      .hotspot .dot { width: 14px; height: 14px; border-width: 1.5px; }
-      .hotspot .label { display: none; }
-
-      #bennu { font-size: 32px; }
-      #bennu .trail {
-        width: 50px;
-        height: 50px;
-      }
-
       #content-overlay { padding: 10px; }
       #content-card {
         padding: 12px 14px 14px 14px;
@@ -803,25 +655,11 @@
       #welcome-card h2 { font-size: 1.2rem; }
       #welcome-card p { font-size: 0.9rem; }
 
-      .compass-rose { display: none; }
-      .legend { display: none; }
-    }
-
-    /* --- MOBILE-FIRST: Hide map and show menu directly --- */
-    @media (max-width: 768px) {
-      #map-container {
-        display: none !important;
-      }
-      .mobile-map-hint {
-        display: block !important;
-        text-align: center;
-        padding: 20px;
-        color: #d4c5a0;
-      }
-    }
-
-    .mobile-map-hint {
-      display: none;
+      #hero-section h1 { font-size: 1.6rem; }
+      #hero-section .subtitle { font-size: 0.9rem; }
+      #hero-section .hero-icon img { width: 60px; height: 60px; }
+      #hero-section .bennu-quote { font-size: 0.85rem; padding: 10px 16px; }
+      #hero-section .explore-cta button { padding: 12px 28px; font-size: 1rem; }
     }
   </style>
 </head>
@@ -842,69 +680,21 @@
     <button class="menu-btn" id="menuBtn">📜 Explore</button>
   </header>
 
-  <!-- ===== MAP CONTAINER (Desktop Only) ===== -->
-  <div id="map-container" class="visible">
-    
-    <!-- Map Wrapper -->
-    <div id="map-wrapper">
-      <picture>
-        <source media="(max-width: 480px)" srcset="images/3Ankaa-website-map-small.webp">
-        <source media="(max-width: 1024px)" srcset="images/3Ankaa-website-map-medium.webp">
-        <img 
-          id="map-image" 
-          src="images/3Ankaa-website-map.webp" 
-          alt="Map of Egypt - The Imaginarium"
-          fetchpriority="high"
-          loading="eager" />
-      </picture>
-      
-      <!-- Map Overlays -->
-      <div id="map-overlays">
-        <div class="compass-rose">
-          <span class="n">N</span>
-          <span class="rose">🧭</span>
-        </div>
-        <div class="legend">
-          <div class="legend-item">
-            <span class="legend-dot"></span>
-            <span class="legend-label">Real Location</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-dot fictional"></span>
-            <span class="legend-label">Fictional Location</span>
-          </div>
-          <div class="legend-item" style="margin-top:6px; border-top:1px solid rgba(212,197,160,0.2); padding-top:6px;">
-            <span style="font-size:1rem;">🐦</span>
-            <span class="legend-label">Bennu (flying across Egypt)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hotspots Container -->
-      <div id="hotspots-container"></div>
-
-      <!-- Bennu -->
-      <div id="bennu-container">
-        <div id="bennu" style="left: 15%; top: 20%;">
-          <span class="trail"></span>
-          <span class="wing">
-            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;" loading="lazy">
-          </span>
-        </div>
-      </div>
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero-section">
+    <div class="hero-icon">
+      <img src="images/bennu-icon.png" alt="Bennu">
     </div>
-  </div>
-
-  <!-- ===== MOBILE HINT (shown on mobile instead of map) ===== -->
-  <div class="mobile-map-hint">
-    <p style="font-size:1.2rem; color:#b45f2a;">🗺️ Explore the Imaginarium</p>
-    <p style="font-size:0.9rem; color:#d4c5a0; max-width:400px; margin:10px auto;">
-      Click "Explore" to discover all the magical places, games, and stories waiting for you!
-    </p>
-    <button class="menu-btn" style="margin-top:16px;" onclick="document.getElementById('menuBtn').click();">
-      🚪 Explore Now
-    </button>
-  </div>
+    <h1>The <span class="highlight">Imaginarium</span></h1>
+    <p class="subtitle">A place where stories come alive, and a sarcastic hoopoe named Bennu is your guide.</p>
+    <div class="bennu-quote">🐦 <em>"I've been flying across Egypt for 4,500 years. You're the one who looks tired." — Bennu</em></div>
+    <div class="explore-cta">
+      <button id="heroExploreBtn">📜 Explore the Imaginarium</button>
+    </div>
+    <div class="hero-footer">
+      <p>🎮 Games • 🧩 Puzzles • 📖 Stories • 🗺️ Map</p>
+    </div>
+  </section>
 
   <!-- ===== CONTENT OVERLAY ===== -->
   <div id="content-overlay">
@@ -925,7 +715,7 @@
       
       <div class="content-actions">
         <a href="#" class="content-btn" id="contentLink" target="_blank">📖 Open in New Tab</a>
-        <button class="content-btn secondary" id="contentBack">🗺️ Back to Map</button>
+        <button class="content-btn secondary" id="contentBack">🗺️ Back</button>
       </div>
     </div>
   </div>
@@ -976,30 +766,18 @@
     (function() {
       // --- 1. DOM REFERENCES ---
       const loadingScreen = document.getElementById('loading-screen');
-      const mapContainer = document.getElementById('map-container');
-      const mapImage = document.getElementById('map-image');
-      const mapWrapper = document.getElementById('map-wrapper');
-      const hotspotsContainer = document.getElementById('hotspots-container');
-      const bennuContainer = document.getElementById('bennu-container');
-      const mapOverlays = document.getElementById('map-overlays');
       const contentOverlay = document.getElementById('content-overlay');
       const contentIframe = document.getElementById('content-iframe');
       const menuBtn = document.getElementById('menuBtn');
+      const heroExploreBtn = document.getElementById('heroExploreBtn');
       const menuOverlay = document.getElementById('menu-overlay');
 
       // --- 2. LOCATION DATA ---
+      // Note: "Who's Who" (characters.html) has been removed from the menu.
+      // It's still accessible via the Imaginarium page (home.html) or direct link.
       const locations = [
         { 
-          id: 'alexandria',
-          x: 12, y: 14, 
-          icon: '📚', 
-          name: 'Quest Packs & Adventures', 
-          type: '📍 Page',
-          quip: 'Bennu says: "The library burned down. But we\'ve rebuilt it. With more snacks."',
-          page: 'books.html'
-        },
-        { 
-          id: 'giza',
+          id: 'home',
           x: 22, y: 30, 
           icon: '🏠', 
           name: 'The Imaginarium', 
@@ -1008,7 +786,16 @@
           page: 'home.html'
         },
         { 
-          id: 'saqqara',
+          id: 'books',
+          x: 12, y: 14, 
+          icon: '📚', 
+          name: 'Quest Packs & Adventures', 
+          type: '📍 Page',
+          quip: 'Bennu says: "The library burned down. But we\'ve rebuilt it. With more snacks."',
+          page: 'books.html'
+        },
+        { 
+          id: 'about',
           x: 24, y: 36, 
           icon: '📖', 
           name: 'The Storykeeper', 
@@ -1017,7 +804,7 @@
           page: 'about.html'
         },
         { 
-          id: 'fayoum',
+          id: 'latest',
           x: 16, y: 40, 
           icon: '📰', 
           name: 'Bennu\'s Bulletin', 
@@ -1026,7 +813,7 @@
           page: 'latest.html'
         },
         { 
-          id: 'sinai',
+          id: 'merchandise',
           x: 58, y: 18, 
           icon: '🎁', 
           name: 'Gift Closet', 
@@ -1035,7 +822,7 @@
           page: 'merchandise.html'
         },
         { 
-          id: 'monastery',
+          id: 'connect',
           x: 50, y: 28, 
           icon: '🐦', 
           name: 'Caw, Caw', 
@@ -1043,17 +830,18 @@
           quip: 'Bennu says: "I tried to visit once. Too hot. Even for me."',
           page: 'connect.html'
         },
+        // --- NEW: "Explore the Map" replaces "Who's Who" ---
         { 
-          id: 'giants',
+          id: 'map',
           x: 40, y: 52, 
-          icon: '👥', 
-          name: 'Who\'s Who', 
-          type: '📍 Characters',
-          quip: 'Bennu says: "I\'ve never seen a giant. But I\'ve seen a very large mango. Close enough."',
-          page: 'characters.html'
+          icon: '🗺️', 
+          name: 'Explore the Map', 
+          type: '📍 Map',
+          quip: 'Bennu says: "Every great adventure starts with a map. Click to explore!"',
+          page: 'map.html'
         },
         { 
-          id: 'luxor',
+          id: 'educators',
           x: 32, y: 55, 
           icon: '🍎', 
           name: 'For Educators', 
@@ -1062,8 +850,8 @@
           page: 'educators.html'
         },
         { 
-          id: 'abusimbel',
-          x: 12, y: 78, 
+          id: 'contact',
+          x: 4, y: 10, 
           icon: '📞', 
           name: 'Contact', 
           type: '📍 Contact',
@@ -1082,86 +870,7 @@
         'Bennu says: "The pyramids were built by aliens. Just kidding. They were built by Egyptians with very strong backs."'
       ];
 
-      // --- 4. FLIGHT PATH ---
-      const flightPath = [
-        { x: 12, y: 14 }, { x: 58, y: 18 }, { x: 50, y: 28 }, { x: 22, y: 30 },
-        { x: 24, y: 36 }, { x: 16, y: 40 }, { x: 40, y: 52 }, { x: 32, y: 55 }, { x: 12, y: 78 }
-      ];
-
-      let flightIndex = 0;
-      let isFlying = false;
-
-      function flyBennuToNextPoint() {
-        if (isFlying) return;
-        isFlying = true;
-        
-        const target = flightPath[flightIndex % flightPath.length];
-        const bennu = document.getElementById('bennu');
-        const offsetX = -2;
-        const offsetY = -4;
-        
-        bennu.style.left = (target.x + offsetX) + '%';
-        bennu.style.top = (target.y + offsetY) + '%';
-        
-        setTimeout(() => {
-          bennu.style.transform = 'translate(-50%, -50%) scale(1.2)';
-          setTimeout(() => { bennu.style.transform = 'translate(-50%, -50%) scale(1)'; }, 300);
-        }, 1200);
-        
-        flightIndex++;
-        isFlying = false;
-        
-        const nextDelay = 3000 + Math.random() * 5000;
-        setTimeout(flyBennuToNextPoint, nextDelay);
-      }
-
-      function flyBennuRandom() {
-        const bennu = document.getElementById('bennu');
-        const randomPoint = flightPath[Math.floor(Math.random() * flightPath.length)];
-        const offsetX = -2;
-        const offsetY = -4;
-        
-        bennu.style.left = (randomPoint.x + offsetX) + '%';
-        bennu.style.top = (randomPoint.y + offsetY) + '%';
-        
-        setTimeout(() => {
-          bennu.style.transform = 'translate(-50%, -50%) scale(1.2)';
-          setTimeout(() => { bennu.style.transform = 'translate(-50%, -50%) scale(1)'; }, 300);
-        }, 1200);
-      }
-
-      // --- 5. CREATE HOTSPOTS ---
-      function createHotspots() {
-        const container = document.getElementById('hotspots-container');
-        
-        locations.forEach((loc, index) => {
-          const hotspot = document.createElement('div');
-          hotspot.className = 'hotspot' + (loc.type.includes('Fictional') ? ' fictional' : '');
-          hotspot.dataset.index = index;
-          hotspot.style.left = loc.x + '%';
-          hotspot.style.top = loc.y + '%';
-          
-          const dot = document.createElement('div');
-          dot.className = 'dot';
-          hotspot.appendChild(dot);
-          
-          const label = document.createElement('div');
-          label.className = 'label';
-          label.textContent = loc.icon + ' ' + loc.name;
-          hotspot.appendChild(label);
-          
-          hotspot.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.dataset.index);
-            openContent(idx);
-            flyBennuRandom();
-          });
-          
-          container.appendChild(hotspot);
-        });
-      }
-
-      // --- 6. CREATE MENU ---
+      // --- 4. CREATE MENU ---
       function createMenuItems() {
         const grid = document.getElementById('menuGrid');
         grid.innerHTML = '';
@@ -1177,6 +886,7 @@
           grid.appendChild(item);
         });
 
+        // Activities Hub item
         const activitiesItem = document.createElement('div');
         activitiesItem.className = 'menu-item';
         activitiesItem.style.borderColor = '#c9a84c';
@@ -1194,7 +904,7 @@
         grid.appendChild(activitiesItem);
       }
 
-      // --- 7. CONTENT OVERLAY ---
+      // --- 5. CONTENT OVERLAY ---
       const contentClose = document.getElementById('contentClose');
       const contentBack = document.getElementById('contentBack');
       const contentIcon = document.getElementById('contentIcon');
@@ -1218,11 +928,6 @@
         contentLink.href = loc.page || '#';
         contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
         
-        mapWrapper.classList.add('content-open');
-        hotspotsContainer.classList.add('content-open');
-        bennuContainer.classList.add('content-open');
-        mapOverlays.classList.add('hidden');
-        
         contentOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
@@ -1230,10 +935,6 @@
       function closeContent() {
         contentOverlay.classList.remove('active');
         document.body.style.overflow = '';
-        mapWrapper.classList.remove('content-open');
-        hotspotsContainer.classList.remove('content-open');
-        bennuContainer.classList.remove('content-open');
-        mapOverlays.classList.remove('hidden');
         setTimeout(() => {
           contentIframe.src = 'about:blank';
         }, 300);
@@ -1245,25 +946,28 @@
         if (e.target === this) closeContent();
       });
 
-      // --- 8. MENU ---
+      // --- 6. MENU ---
       const menuClose = document.getElementById('menuClose');
 
-      menuBtn.addEventListener('click', () => {
+      function openMenu() {
         menuOverlay.classList.add('active');
-      });
+      }
+
+      menuBtn.addEventListener('click', openMenu);
+      heroExploreBtn.addEventListener('click', openMenu);
       menuClose.addEventListener('click', () => menuOverlay.classList.remove('active'));
       menuOverlay.addEventListener('click', (e) => {
         if (e.target === menuOverlay) menuOverlay.classList.remove('active');
       });
 
-      // --- 9. WELCOME ---
+      // --- 7. WELCOME ---
       const welcomeOverlay = document.getElementById('welcome-overlay');
       const welcomeBtn = document.getElementById('welcomeBtn');
 
       if (!localStorage.getItem('imaginarium_visited')) {
         setTimeout(() => {
           welcomeOverlay.classList.add('active');
-        }, 800);
+        }, 600);
       }
 
       welcomeBtn.addEventListener('click', () => {
@@ -1277,7 +981,7 @@
         }
       });
 
-      // --- 10. KEYBOARD ---
+      // --- 8. KEYBOARD ---
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (contentOverlay.classList.contains('active')) closeContent();
@@ -1289,100 +993,31 @@
         }
       });
 
-      // --- 11. INIT ---
-      let mapInitialized = false;
-
-      function initMap() {
-        if (mapInitialized) return;
-        mapInitialized = true;
-        createHotspots();
-        createMenuItems();
-        setTimeout(flyBennuToNextPoint, 1000);
-        console.log('🐦 The Imaginarium Map loaded!');
-        console.log(`📍 ${locations.length} locations ready.`);
-        console.log('🕊️ Bennu is flying across Egypt!');
-      }
-
-      // --- 12. DETECT MOBILE AND LOAD APPROPRIATELY ---
-      function isMobile() {
-        return window.innerWidth <= 768;
-      }
-
-      function loadPage() {
-        // Hide loading screen quickly
+      // --- 9. INIT ---
+      function init() {
+        // Hide loading screen after a moment
         setTimeout(() => {
           loadingScreen.classList.add('hidden');
-        }, 500);
-
-        if (isMobile()) {
-          // Mobile: show the hint, hide the map
-          console.log('📱 Mobile device detected - showing explore menu instead of map');
-          document.querySelector('.mobile-map-hint').style.display = 'block';
-          mapContainer.classList.remove('visible');
-          // Initialize the menu only (not the map)
-          createMenuItems();
-          // Auto-open the menu after a short delay
+        }, 600);
+        
+        createMenuItems();
+        
+        // Auto-open menu on first visit (if welcome overlay isn't active)
+        if (!localStorage.getItem('imaginarium_visited')) {
           setTimeout(() => {
-            menuOverlay.classList.add('active');
-          }, 800);
-        } else {
-          // Desktop: load the map
-          console.log('💻 Desktop detected - loading map');
-          document.querySelector('.mobile-map-hint').style.display = 'none';
-          mapContainer.classList.add('visible');
-          
-          // Load the map image
-          if (mapImage.complete && mapImage.naturalHeight > 0) {
-            mapImage.classList.add('loaded');
-            initMap();
-          } else {
-            mapImage.addEventListener('load', function() {
-              this.classList.add('loaded');
-              initMap();
-            });
-            mapImage.addEventListener('error', function() {
-              console.warn('Map image failed to load, showing menu instead');
-              // Fallback: show menu
-              mapContainer.classList.remove('visible');
-              document.querySelector('.mobile-map-hint').style.display = 'block';
-              createMenuItems();
-              setTimeout(() => {
-                menuOverlay.classList.add('active');
-              }, 500);
-            });
-            // Timeout fallback
-            setTimeout(() => {
-              if (!mapInitialized) {
-                console.warn('Map load timeout, showing menu');
-                mapContainer.classList.remove('visible');
-                document.querySelector('.mobile-map-hint').style.display = 'block';
-                createMenuItems();
-                setTimeout(() => {
-                  menuOverlay.classList.add('active');
-                }, 500);
-              }
-            }, 10000);
-          }
+            if (!welcomeOverlay.classList.contains('active')) {
+              menuOverlay.classList.add('active');
+            }
+          }, 1200);
         }
+        
+        console.log('🐦 The Imaginarium loaded!');
+        console.log(`📍 ${locations.length} destinations available.`);
+        console.log('🕊️ Bennu says: "Welcome!"');
       }
 
-      // --- 13. START ---
-      loadPage();
-
-      // --- 14. Handle resize (mobile to desktop) ---
-      let resizeTimeout;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-          // Reload the page on resize to switch modes
-          // Only do this if the user has been on the page for more than 2 seconds
-          if (performance.now() > 2000) {
-            location.reload();
-          }
-        }, 500);
-      });
-
-      console.log('🕊️ Bennu says: "Welcome to the Imaginarium!"');
+      // --- 10. START ---
+      init();
 
     })();
   </script>
