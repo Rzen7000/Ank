@@ -100,9 +100,45 @@
       margin-top: 12px;
       opacity: 0.6;
     }
+    
+    /* === FALLBACK SKIP BUTTON === */
+    #skip-loading {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10001;
+      background: rgba(180, 95, 42, 0.9);
+      color: #fdf6e3;
+      border: 2px solid #c9a84c;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+      display: none;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    #skip-loading:hover {
+      background: #8f4a1f;
+      transform: translateX(-50%) scale(1.02);
+    }
+    #skip-loading.show {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
     @keyframes pulse {
       0% { opacity: 0.4; transform: scale(0.98); }
       100% { opacity: 1; transform: scale(1.02); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
     /* --- MAP CONTAINER --- */
@@ -566,6 +602,37 @@
       color: #b45f2a;
     }
 
+    /* --- MENU CTA (Call to Action) --- */
+    .menu-cta {
+      background: #f5ede3;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      border-left: 4px solid #c9a84c;
+      text-align: center;
+    }
+    .menu-cta .cta-headline {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #b45f2a;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+      letter-spacing: 1px;
+    }
+    .menu-cta .cta-text {
+      font-size: 0.9rem;
+      color: #3e2e1f;
+      line-height: 1.6;
+      margin: 2px 0;
+    }
+    .menu-cta .cta-divider {
+      width: 60px;
+      height: 2px;
+      background: #c9a84c;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
     /* --- WELCOME OVERLAY --- */
     #welcome-overlay {
       position: fixed;
@@ -679,6 +746,9 @@
 
       #menu-card { padding: 20px; }
       .menu-grid { grid-template-columns: 1fr 1fr; }
+      .menu-cta { padding: 12px 16px; }
+      .menu-cta .cta-headline { font-size: 1rem; }
+      .menu-cta .cta-text { font-size: 0.85rem; }
 
       #welcome-card { padding: 25px; }
       #welcome-card h2 { font-size: 1.4rem; }
@@ -742,6 +812,9 @@
       .menu-grid { grid-template-columns: 1fr; gap: 6px; }
       .menu-item { font-size: 0.8rem; padding: 8px 12px; }
       #menu-card h2 { font-size: 1.2rem; }
+      .menu-cta { padding: 10px 12px; }
+      .menu-cta .cta-headline { font-size: 0.9rem; }
+      .menu-cta .cta-text { font-size: 0.8rem; }
 
       #welcome-card { padding: 20px; }
       #welcome-card h2 { font-size: 1.2rem; }
@@ -759,6 +832,9 @@
     <div class="loader">🐦 Loading the Imaginarium...</div>
     <div class="sub">Bennu is flying across Egypt</div>
   </div>
+
+  <!-- ===== SKIP LOADING BUTTON ===== -->
+  <button id="skip-loading">🚪 Skip to Explore</button>
 
   <!-- ===== HEADER ===== -->
   <header class="map-header">
@@ -848,6 +924,15 @@
   <div id="menu-overlay">
     <div id="menu-card">
       <button class="close-btn" id="menuClose">✕</button>
+      
+      <!-- === CTA MESSAGE === -->
+      <div class="menu-cta">
+        <p class="cta-headline">✨ Your Adventure Awaits</p>
+        <p class="cta-text">You've read the stories. Now step into the world behind it.</p>
+        <p class="cta-text">Explore the map, play games, solve puzzles, and meet the characters. The Imaginarium is where the journey of Bennu's Universe continues.</p>
+        <div class="cta-divider"></div>
+      </div>
+
       <h2 id="menuTitle">🏛️ Explore the Imaginarium</h2>
       <div class="menu-grid" id="menuGrid"></div>
     </div>
@@ -863,11 +948,26 @@
     </div>
   </div>
 
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+    <p style="font-size:0.8rem; margin-top:8px;">
+      <a href="sitemap.html" style="color:#d4c5a0; text-decoration:none;">🗺️ Sitemap</a>
+    </p>
+  </footer>
+
   <!-- ===== JAVASCRIPT ===== -->
   <script>
     (function() {
       // --- 1. DOM REFERENCES ---
       const loadingScreen = document.getElementById('loading-screen');
+      const skipButton = document.getElementById('skip-loading');
       const mapContainer = document.getElementById('map-container');
       const mapImage = document.getElementById('map-image');
       const mapWrapper = document.getElementById('map-wrapper');
@@ -876,6 +976,8 @@
       const mapOverlays = document.getElementById('map-overlays');
       const contentOverlay = document.getElementById('content-overlay');
       const contentIframe = document.getElementById('content-iframe');
+      const menuBtn = document.getElementById('menuBtn');
+      const menuOverlay = document.getElementById('menu-overlay');
 
       // --- 2. LOCATION DATA ---
       const locations = [
@@ -1105,7 +1207,6 @@
         const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
         contentQuip.textContent = '🐦 ' + quip;
         
-        // Load the full HTML page in the iframe
         contentIframe.src = loc.page || 'about:blank';
         contentLink.href = loc.page || '#';
         contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
@@ -1138,8 +1239,6 @@
       });
 
       // --- 8. MENU ---
-      const menuBtn = document.getElementById('menuBtn');
-      const menuOverlay = document.getElementById('menu-overlay');
       const menuClose = document.getElementById('menuClose');
 
       menuBtn.addEventListener('click', () => {
@@ -1150,7 +1249,29 @@
         if (e.target === menuOverlay) menuOverlay.classList.remove('active');
       });
 
-      // --- 9. WELCOME ---
+      // --- 9. SKIP LOADING FUNCTION ---
+      function showSkipButton() {
+        skipButton.classList.add('show');
+      }
+
+      function skipLoading() {
+        // Hide loading screen
+        loadingScreen.classList.add('hidden');
+        // Show map container
+        mapContainer.classList.add('visible');
+        // Initialize map even if image isn't fully loaded
+        initMap();
+        // Hide skip button
+        skipButton.classList.remove('show');
+        // Open menu automatically
+        setTimeout(() => {
+          menuOverlay.classList.add('active');
+        }, 300);
+      }
+
+      skipButton.addEventListener('click', skipLoading);
+
+      // --- 10. WELCOME ---
       const welcomeOverlay = document.getElementById('welcome-overlay');
       const welcomeBtn = document.getElementById('welcomeBtn');
 
@@ -1171,7 +1292,7 @@
         }
       });
 
-      // --- 10. KEYBOARD ---
+      // --- 11. KEYBOARD ---
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (contentOverlay.classList.contains('active')) closeContent();
@@ -1183,20 +1304,30 @@
         }
       });
 
-      // --- 11. INIT ---
+      // --- 12. INIT ---
+      let mapInitialized = false;
+
       function initMap() {
+        if (mapInitialized) return;
+        mapInitialized = true;
         createHotspots();
         createMenuItems();
         setTimeout(flyBennuToNextPoint, 1000);
-        console.log(' The Imaginarium Map loaded!');
+        console.log('🐦 The Imaginarium Map loaded!');
         console.log(`📍 ${locations.length} locations ready.`);
-        console.log(' Bennu is flying across Egypt!');
+        console.log('🕊️ Bennu is flying across Egypt!');
       }
 
-      // --- 12. LOAD MAP ---
+      // --- 13. LOAD MAP WITH SKIP FUNCTIONALITY ---
       function loadMap() {
+        // Show skip button after 3 seconds if not loaded
+        const skipTimer = setTimeout(() => {
+          showSkipButton();
+        }, 3000);
+
         // Check if image is already loaded
         if (mapImage.complete && mapImage.naturalHeight > 0) {
+          clearTimeout(skipTimer);
           mapImage.classList.add('loaded');
           loadingScreen.classList.add('hidden');
           mapContainer.classList.add('visible');
@@ -1206,20 +1337,22 @@
 
         // Set up load event
         mapImage.addEventListener('load', function() {
+          clearTimeout(skipTimer);
           this.classList.add('loaded');
           loadingScreen.classList.add('hidden');
           mapContainer.classList.add('visible');
           initMap();
+          skipButton.classList.remove('show');
         });
 
         // Set up error event (fallback)
         mapImage.addEventListener('error', function() {
           console.warn('Map image failed to load, showing page anyway');
-          setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-            mapContainer.classList.add('visible');
-            initMap();
-          }, 1000);
+          clearTimeout(skipTimer);
+          loadingScreen.classList.add('hidden');
+          mapContainer.classList.add('visible');
+          initMap();
+          skipButton.classList.remove('show');
         });
 
         // Safety timeout
@@ -1229,15 +1362,16 @@
             loadingScreen.classList.add('hidden');
             mapContainer.classList.add('visible');
             initMap();
+            skipButton.classList.remove('show');
           }
-        }, 6000);
+        }, 8000);
       }
 
-      // --- 13. START LOADING ---
+      // --- 14. START LOADING ---
       loadMap();
 
-      console.log(' Bennu says: "Welcome to the Imaginarium!"');
-      console.log('📱 Using responsive images for faster loading.');
+      console.log('🕊️ Bennu says: "Welcome to the Imaginarium!"');
+      console.log('📱 If loading is slow, click "Skip to Explore"');
 
     })();
   </script>
