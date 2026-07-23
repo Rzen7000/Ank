@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imaginarium Story Builder</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .story-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .generator-section {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .prompt-display {
+      background: #fdf6e3;
+      border: 2px solid #c9a84c;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #3e2e1f;
+      min-height: 80px;
+    }
+    .prompt-display .highlight {
+      color: #b45f2a;
+      font-weight: bold;
+    }
+
+    .generate-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .generate-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+
+    .story-section {
+      border-top: 2px solid #d4c5a0;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    .story-section textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 16px;
+      border: 2px solid #d4c5a0;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Georgia', serif;
+      background: #fdf6e3;
+      color: #3e2e1f;
+      resize: vertical;
+      transition: 0.3s;
+      margin-bottom: 12px;
+    }
+    .story-section textarea:focus {
+      outline: none;
+      border-color: #b45f2a;
+      box-shadow: 0 0 0 3px rgba(180, 95, 42, 0.15);
+    }
+
+    .story-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .story-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .story-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .story-btn.secondary {
+      background: #d4c5a0;
+      color: #3e2e1f;
+    }
+    .story-btn.secondary:hover {
+      background: #c9b89a;
+    }
+    .story-btn.green {
+      background: #4caf50;
+    }
+    .story-btn.green:hover {
+      background: #388e3c;
+    }
+
+    .saved-stories {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .saved-stories h3 {
+      color: #b45f2a;
+      margin-bottom: 10px;
+    }
+    .saved-stories .story-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .saved-stories .story-entry .date {
+      font-size: 0.75rem;
+      color: #5c4530;
+      font-style: italic;
+    }
+    .saved-stories .story-entry .delete-btn {
+      background: none;
+      border: none;
+      color: #f44336;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0 4px;
+      transition: 0.3s;
+    }
+    .saved-stories .story-entry .delete-btn:hover {
+      transform: scale(1.2);
+    }
+    .saved-stories .empty-message {
+      color: #5c4530;
+      font-style: italic;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .feedback {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #5c4530;
+      min-height: 30px;
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .story-container { padding: 20px; }
+      .prompt-display { font-size: 1rem; padding: 16px; }
+      .saved-stories .story-entry { flex-direction: column; align-items: stretch; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; }
+      .story-container { padding: 16px; }
+      .prompt-display { font-size: 0.95rem; padding: 12px; }
+      .story-section textarea { min-height: 120px; font-size: 0.9rem; padding: 12px; }
+      .generate-btn { font-size: 0.95rem; padding: 10px 24px; }
+      .story-btn { font-size: 0.85rem; padding: 6px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>✍️ Imaginarium Story Builder</h1>
+    <p class="subtitle">Generate story ideas, write your own tales, and share with friends!</p>
+
+    <div class="story-container">
+      <div class="generator-section">
+        <h3>📖 Story Prompt Generator</h3>
+        <p style="color:#5c4530; font-size:0.95rem;">Click to generate a random story idea!</p>
+        <div class="prompt-display" id="promptDisplay">
+          <span style="color:#d4c5a0;">Click the button below to start your story...</span>
+        </div>
+        <button class="generate-btn" id="generateBtn">🔄 Generate Story Idea</button>
+      </div>
+
+      <div class="story-section">
+        <h3>📝 Write Your Story</h3>
+        <textarea id="storyInput" placeholder="Start writing your Imaginarium story here..."></textarea>
+        <div class="story-controls">
+          <button class="story-btn" id="saveStoryBtn">💾 Save Story</button>
+          <button class="story-btn secondary" id="clearStoryBtn">🗑️ Clear</button>
+          <button class="story-btn secondary" id="copyStoryBtn">📋 Copy</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+      </div>
+
+      <div class="saved-stories" id="savedStories">
+        <h3>📚 Your Saved Stories</h3>
+        <div id="storiesList"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== STORY ELEMENTS =====
+    const CHARACTERS = [
+      'Bennu', 'Jimba', 'Ali', 'The Storykeeper',
+      'The Mango Committee', 'A mysterious traveller',
+      'A talking camel', 'A mischievous hoopoe',
+      'A curious student', 'An ancient scribe'
+    ];
+
+    const SETTINGS = [
+      'the Great Sphinx', 'the Alexandria Library',
+      'the Step Pyramid', 'the Fayoum Oasis',
+      'the City of Giants', 'the Monastery of the Fire',
+      'the Nile River', 'the bustling Cairo market',
+      'a hidden temple', 'a magical classroom'
+    ];
+
+    const CONFLICTS = [
+      'a disappearing snack', 'a riddle that must be solved',
+      'a race against time', 'a secret that must be kept',
+      'a friendship that is tested', 'a journey to find the truth',
+      'a magical portal that leads to another world',
+      'a lesson in courage', 'an unexpected friendship',
+      'a mystery that needs to be solved'
+    ];
+
+    // ===== STORAGE =====
+    const STORAGE_KEY = 'imaginarium_stories';
+
+    // ===== DOM ELEMENTS =====
+    const promptDisplay = document.getElementById('promptDisplay');
+    const storyInput = document.getElementById('storyInput');
+    const feedback = document.getElementById('feedback');
+    const storiesList = document.getElementById('storiesList');
+
+    // ===== STORY GENERATOR =====
+    function generatePrompt() {
+      const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+      const setting = SETTINGS[Math.floor(Math.random() * SETTINGS.length)];
+      const conflict = CONFLICTS[Math.floor(Math.random() * CONFLICTS.length)];
+      
+      const templates = [
+        `${char} at ${setting} with ${conflict}. What happens next?`,
+        `When ${char} discovers ${conflict} at ${setting}, everything changes.`,
+        `${char} and ${conflict} at ${setting} — a tale of adventure!`,
+        `The story of ${char} who faced ${conflict} at ${setting}.`,
+        `What if ${char} encountered ${conflict} in ${setting}?`
+      ];
+      
+      return templates[Math.floor(Math.random() * templates.length)];
+    }
+
+    function displayPrompt() {
+      const prompt = generatePrompt();
+      const parts = prompt.split(/(Bennu|Jimba|Ali|The Storykeeper|The Mango Committee|a mysterious traveller|a talking camel|a mischievous hoopoe|a curious student|an ancient scribe)/);
+      
+      let html = '';
+      parts.forEach(part => {
+        if (CHARACTERS.includes(part.trim()) || part.includes('The Storykeeper')) {
+          html += `<span class="highlight">${part}</span>`;
+        } else {
+          html += part;
+        }
+      });
+      
+      promptDisplay.innerHTML = html;
+    }
+
+    // ===== STORY MANAGEMENT =====
+    function getStories() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveStories(stories) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stories));
+      renderStories();
+    }
+
+    function saveStory() {
+      const text = storyInput.value.trim();
+      if (!text) {
+        feedback.textContent = '📝 Write something first!';
+        feedback.style.color = '#f44336';
+        return;
+      }
+
+      const stories = getStories();
+      stories.push({
+        id: Date.now(),
+        text: text,
+        date: new Date().toLocaleString()
+      });
+      saveStories(stories);
+      
+      feedback.textContent = '✅ Story saved! Bennu taps once in approval.';
+      feedback.style.color = '#4caf50';
+      storyInput.value = '';
+    }
+
+    function deleteStory(id) {
+      const stories = getStories();
+      const filtered = stories.filter(s => s.id !== id);
+      saveStories(filtered);
+      feedback.textContent = '🗑️ Story deleted.';
+      feedback.style.color = '#5c4530';
+    }
+
+    function renderStories() {
+      const stories = getStories();
+      if (stories.length === 0) {
+        storiesList.innerHTML = `<div class="empty-message">📚 No stories saved yet. Write your first Imaginarium tale!</div>`;
+        return;
+      }
+
+      storiesList.innerHTML = '';
+      // Show most recent first
+      stories.reverse().forEach(story => {
+        const div = document.createElement('div');
+        div.className = 'story-entry';
+        div.innerHTML = `
+          <span>${story.text}</span>
+          <span style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="date">${story.date}</span>
+            <button class="delete-btn" data-id="${story.id}">✕</button>
+          </span>
+        `;
+        div.querySelector('.delete-btn').addEventListener('click', function() {
+          deleteStory(parseInt(this.dataset.id));
+        });
+        storiesList.appendChild(div);
+      });
+    }
+
+    // ===== COPY =====
+    function copyStory() {
+      const text = storyInput.value.trim();
+      if (!text) {
+        feedback.textContent = '📝 Nothing to copy!';
+        feedback.style.color = '#f44336';
+        return;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        feedback.textContent = '📋 Copied to clipboard!';
+        feedback.style.color = '#4caf50';
+      }).catch(() => {
+        // Fallback
+        storyInput.select();
+        document.execCommand('copy');
+        feedback.textContent = '📋 Copied!';
+        feedback.style.color = '#4caf50';
+      });
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      displayPrompt();
+      feedback.textContent = '✨ Bennu whispers a story idea...';
+      feedback.style.color = '#5c4530';
+    });
+
+    document.getElementById('saveStoryBtn').addEventListener('click', saveStory);
+    document.getElementById('clearStoryBtn').addEventListener('click', () => {
+      storyInput.value = '';
+      feedback.textContent = '🗑️ Cleared. Start fresh!';
+      feedback.style.color = '#5c4530';
+    });
+    document.getElementById('copyStoryBtn').addEventListener('click', copyStory);
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveStory();
+      }
+    });
+
+    // ===== INIT =====
+    renderStories();
+    console.log('✍️ Imaginarium Story Builder loaded!');
+  </script>
+</body>
+</html>

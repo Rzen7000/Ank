@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mango Match</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .game-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .game-stats .stat {
+      font-size: 1rem;
+      color: #5c4530;
+    }
+    .game-stats .stat strong {
+      color: #b45f2a;
+    }
+
+    .match-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .fruits-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .fruit-item {
+      background: #fdf6e3;
+      border: 3px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 16px 20px;
+      cursor: grab;
+      transition: 0.3s;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 80px;
+      justify-content: center;
+    }
+    .fruit-item:hover {
+      border-color: #b45f2a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(180, 95, 42, 0.15);
+    }
+    .fruit-item.dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+    .fruit-item.matched {
+      opacity: 0.4;
+      cursor: default;
+      border-color: #4caf50;
+      background: #e8f5e9;
+    }
+
+    .facts-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .fact-item {
+      background: #fdf6e3;
+      border: 3px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 16px 20px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex: 1;
+      min-width: 150px;
+      max-width: 250px;
+      transition: 0.3s;
+      color: #5c4530;
+    }
+    .fact-item.droppable {
+      border-color: #c9a84c;
+      background: #fdf6e3;
+    }
+    .fact-item.highlight {
+      border-color: #b45f2a;
+      background: #f5ede3;
+      box-shadow: 0 0 20px rgba(180, 95, 42, 0.15);
+    }
+    .fact-item.correct {
+      border-color: #4caf50;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .fact-item.wrong {
+      border-color: #f44336;
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .feedback {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #5c4530;
+      min-height: 40px;
+      margin: 12px 0;
+    }
+
+    .game-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+      margin: 8px;
+    }
+    .game-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .game-btn.secondary {
+      background: #d4c5a0;
+      color: #3e2e1f;
+    }
+    .game-btn.secondary:hover {
+      background: #c9b89a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .game-container { padding: 20px; }
+      .fruit-item { font-size: 1rem; padding: 12px 16px; min-width: 60px; }
+      .fact-item { font-size: 0.8rem; min-width: 120px; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; }
+      .game-container { padding: 16px; }
+      .fruit-item { font-size: 0.9rem; padding: 8px 12px; }
+      .fact-item { font-size: 0.75rem; padding: 10px 14px; min-width: 100px; }
+      .game-stats { gap: 12px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🥭 Mango Match</h1>
+    <p class="subtitle">Drag the fruit to match its description!</p>
+
+    <div class="game-container">
+      <div class="game-stats">
+        <span class="stat">🎯 Matched: <strong id="matchesCount">0</strong>/7</span>
+        <span class="stat">⏱️ Time: <strong id="timerDisplay">00:00</strong></span>
+        <span class="stat">🔢 Attempts: <strong id="attemptsCount">0</strong></span>
+      </div>
+
+      <div class="match-area">
+        <div class="fruits-row" id="fruitsRow"></div>
+        <div class="facts-row" id="factsRow"></div>
+      </div>
+
+      <div class="feedback" id="feedback">🍍 Drag a fruit to its correct description!</div>
+
+      <div>
+        <button class="game-btn" id="resetBtn">🔄 New Game</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== FRUIT DATA =====
+    const FRUIT_DATA = [
+      { id: 1, name: '🥭 Mango', emoji: '🥭', fact: 'Rich in Vitamin C and A', color: '#f5b342' },
+      { id: 2, name: '🍌 Banana', emoji: '🍌', fact: 'Contains potassium for energy', color: '#f9e05a' },
+      { id: 3, name: '🍇 Pomegranate', emoji: '🍇', fact: 'Symbol of fertility in Egypt', color: '#c62828' },
+      { id: 4, name: '🌴 Date', emoji: '🌴', fact: 'Egyptian staple fruit, high in fibre', color: '#6d4c41' },
+      { id: 5, name: '🍋 Lemon', emoji: '🍋', fact: 'Used in Egyptian tea and cooking', color: '#fdd835' },
+      { id: 6, name: '🍈 Fig', emoji: '🍈', fact: 'Grown in Egypt since ancient times', color: '#7b1fa2' },
+      { id: 7, name: '🍊 Orange', emoji: '🍊', fact: 'Egyptian oranges are famous worldwide', color: '#ff6f00' }
+    ];
+
+    // ===== GAME STATE =====
+    let matches = 0;
+    let attempts = 0;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let matchedFruits = [];
+    let draggedFruit = null;
+    let currentLevel = 1;
+
+    // ===== DOM ELEMENTS =====
+    const fruitsRow = document.getElementById('fruitsRow');
+    const factsRow = document.getElementById('factsRow');
+    const feedback = document.getElementById('feedback');
+    const matchesDisplay = document.getElementById('matchesCount');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const attemptsDisplay = document.getElementById('attemptsCount');
+
+    // ===== INIT =====
+    function initGame() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerSeconds = 0;
+      matches = 0;
+      attempts = 0;
+      matchedFruits = [];
+      timerDisplay.textContent = '00:00';
+      matchesDisplay.textContent = '0';
+      attemptsDisplay.textContent = '0';
+      feedback.textContent = '🍍 Drag a fruit to its correct description!';
+      
+      renderFruits();
+      renderFacts();
+      startTimer();
+    }
+
+    function renderFruits() {
+      fruitsRow.innerHTML = '';
+      const shuffled = [...FRUIT_DATA].sort(() => Math.random() - 0.5);
+      shuffled.forEach(fruit => {
+        const div = document.createElement('div');
+        div.className = 'fruit-item';
+        div.textContent = fruit.emoji;
+        div.dataset.id = fruit.id;
+        div.draggable = true;
+        div.addEventListener('dragstart', (e) => {
+          if (matchedFruits.includes(fruit.id)) {
+            e.preventDefault();
+            return;
+          }
+          draggedFruit = fruit;
+          div.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        div.addEventListener('dragend', () => {
+          div.classList.remove('dragging');
+        });
+        fruitsRow.appendChild(div);
+      });
+    }
+
+    function renderFacts() {
+      factsRow.innerHTML = '';
+      const shuffled = [...FRUIT_DATA].sort(() => Math.random() - 0.5);
+      shuffled.forEach(fruit => {
+        const div = document.createElement('div');
+        div.className = 'fact-item';
+        div.textContent = fruit.fact;
+        div.dataset.id = fruit.id;
+        div.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          if (matchedFruits.includes(parseInt(div.dataset.id))) return;
+          div.classList.add('highlight');
+        });
+        div.addEventListener('dragleave', () => {
+          div.classList.remove('highlight');
+        });
+        div.addEventListener('drop', (e) => {
+          e.preventDefault();
+          div.classList.remove('highlight');
+          handleDrop(fruit.id, div);
+        });
+        factsRow.appendChild(div);
+      });
+    }
+
+    function handleDrop(factId, element) {
+      if (!draggedFruit) return;
+      if (matchedFruits.includes(factId) || matchedFruits.includes(draggedFruit.id)) return;
+      
+      attempts++;
+      attemptsDisplay.textContent = attempts;
+
+      if (draggedFruit.id === factId) {
+        // Correct match
+        matches++;
+        matchedFruits.push(factId);
+        matchesDisplay.textContent = matches;
+        element.classList.add('correct');
+        element.textContent = '✅ ' + element.textContent;
+        
+        // Mark fruit as matched
+        const fruitEl = fruitsRow.querySelector(`[data-id="${factId}"]`);
+        if (fruitEl) fruitEl.classList.add('matched');
+        
+        feedback.textContent = `✅ Correct! ${draggedFruit.name} = ${draggedFruit.fact}. Bennu taps once!`;
+        
+        if (matches === FRUIT_DATA.length) {
+          feedback.textContent = '🎉 TAP TAP TAP! You matched ALL the fruits! Bennu is impressed!';
+          if (timerInterval) clearInterval(timerInterval);
+        }
+      } else {
+        // Wrong match
+        element.classList.add('wrong');
+        feedback.textContent = `❌ Not quite. That's not ${draggedFruit.name}. Try again!`;
+        setTimeout(() => {
+          element.classList.remove('wrong');
+        }, 800);
+      }
+      
+      draggedFruit = null;
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        timerDisplay.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    document.getElementById('resetBtn').addEventListener('click', initGame);
+
+    // ===== INIT =====
+    initGame();
+    console.log('🥭 Mango Match loaded!');
+  </script>
+</body>
+</html>

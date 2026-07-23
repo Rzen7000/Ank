@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Great Debate – Imaginarium</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .debate-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+    }
+
+    .topic-selector {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .topic-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 8px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .topic-btn:hover {
+      border-color: #b45f2a;
+    }
+    .topic-btn.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    .debate-area {
+      text-align: center;
+      padding: 10px 0;
+    }
+    .debate-question {
+      font-size: 1.4rem;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .vote-options {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .vote-btn {
+      background: #fdf6e3;
+      border: 3px solid #d4c5a0;
+      padding: 14px 30px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      min-width: 120px;
+    }
+    .vote-btn:hover:not(:disabled) {
+      border-color: #b45f2a;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 16px rgba(180, 95, 42, 0.15);
+    }
+    .vote-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .vote-btn .vote-emoji {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+    .vote-btn .vote-label {
+      font-weight: 500;
+    }
+    .vote-btn .vote-count {
+      font-size: 0.85rem;
+      color: #5c4530;
+      margin-top: 4px;
+    }
+
+    .results-bar {
+      max-width: 500px;
+      margin: 16px auto;
+    }
+    .result-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 6px 0;
+    }
+    .result-row .label {
+      min-width: 80px;
+      font-size: 0.9rem;
+      text-align: right;
+      color: #3e2e1f;
+    }
+    .result-row .bar-track {
+      flex: 1;
+      height: 20px;
+      background: #fdf6e3;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #d4c5a0;
+    }
+    .result-row .bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.6s ease;
+      width: 0%;
+    }
+    .result-row .bar-fill.for {
+      background: #4caf50;
+    }
+    .result-row .bar-fill.against {
+      background: #f44336;
+    }
+    .result-row .percentage {
+      min-width: 50px;
+      font-size: 0.9rem;
+      color: #5c4530;
+    }
+
+    .bennu-verdict {
+      background: #fdf6e3;
+      border-left: 4px solid #c9a84c;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin: 16px 0;
+      font-style: italic;
+      font-size: 1rem;
+      color: #5c4530;
+    }
+    .bennu-verdict strong {
+      color: #b45f2a;
+    }
+
+    .feedback {
+      font-size: 1rem;
+      font-style: italic;
+      color: #5c4530;
+      min-height: 30px;
+      margin: 8px 0;
+    }
+
+    .debate-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+      margin: 8px;
+    }
+    .debate-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .debate-btn.secondary {
+      background: #d4c5a0;
+      color: #3e2e1f;
+    }
+    .debate-btn.secondary:hover {
+      background: #c9b89a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .debate-container { padding: 20px; }
+      .debate-question { font-size: 1.2rem; }
+      .vote-btn { padding: 10px 20px; font-size: 1rem; min-width: 100px; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; }
+      .debate-container { padding: 16px; }
+      .vote-btn { padding: 8px 14px; font-size: 0.9rem; min-width: 80px; }
+      .vote-btn .vote-emoji { font-size: 1.5rem; }
+      .result-row .label { min-width: 60px; font-size: 0.8rem; }
+      .bennu-verdict { font-size: 0.9rem; padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>⚖️ The Great Debate</h1>
+    <p class="subtitle">Vote on the important questions. Bennu will judge you. (In a nice way.)</p>
+
+    <div class="debate-container">
+      <div class="topic-selector" id="topicSelector"></div>
+
+      <div class="debate-area">
+        <div class="debate-question" id="debateQuestion"></div>
+
+        <div class="vote-options" id="voteOptions"></div>
+
+        <div class="results-bar" id="resultsBar"></div>
+
+        <div class="bennu-verdict" id="bennuVerdict">🐦 Bennu is waiting for your vote...</div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div>
+          <button class="debate-btn secondary" id="resetVotesBtn">🔄 Reset All Votes</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== DEBATE TOPICS =====
+    const TOPICS = [
+      {
+        id: 1,
+        question: 'Is Die Hard a Christmas movie?',
+        for: '🎄 Yes, it\'s a Christmas classic!',
+        against: '🎬 No, it\'s just an action movie!',
+        bennuVerdict: {
+          for: '🐦 Bennu taps once. "Of course it is. It has snow. And Christmas music. And Bruce Willis. Case closed."',
+          against: '🐦 Bennu taps twice. "You\'re entitled to your wrong opinion. But it\'s a Christmas movie."'
+        }
+      },
+      {
+        id: 2,
+        question: 'Tameya vs Falafel: Which is superior?',
+        for: '🥙 Tameya (Egyptian style)!',
+        against: '🧆 Falafel (Levantine style)!',
+        bennuVerdict: {
+          for: '🐦 Bennu taps three times. "Tameya is clearly superior. The herbs make it magical."',
+          against: '🐦 Bennu taps twice. "I respect your choice. Even if it\'s wrong. Enjoy your chickpeas."'
+        }
+      },
+      {
+        id: 3,
+        question: 'Mangoes: Best eaten alone or with chocolate?',
+        for: '🥭 Alone! Pure mango bliss!',
+        against: '🍫 With chocolate! The ultimate combo!',
+        bennuVerdict: {
+          for: '🐦 Bennu taps once. "Pure mango is the way. The Mango Committee agrees."',
+          against: '🐦 Bennu taps thrice. "Snack time! Chocolate mango is genius. You\'re a visionary."'
+        }
+      },
+      {
+        id: 4,
+        question: 'Homework: Useful or evil?',
+        for: '📚 Useful! It helps you learn!',
+        against: '😈 Evil! It steals your free time!',
+        bennuVerdict: {
+          for: '🐦 Bennu taps once. "Homework builds character. Also, I need something to peck at."',
+          against: '🐦 Bennu taps four times. "You\'re being ridiculous. But also... I understand."'
+        }
+      },
+      {
+        id: 5,
+        question: 'Pineapple on pizza: Yes or no?',
+        for: '🍍 Yes! Sweet and savoury!',
+        against: '🍕 No! It\'s an abomination!',
+        bennuVerdict: {
+          for: '🐦 Bennu taps twice. "You\'re being ridiculous. But I respect your chaos."',
+          against: '🐦 Bennu taps once. "Finally! Someone with taste. The Mango Committee approves."'
+        }
+      }
+    ];
+
+    // ===== STORAGE KEY =====
+    const STORAGE_KEY = 'imaginarium_debate_votes';
+
+    // ===== DOM ELEMENTS =====
+    let currentTopic = 0;
+    let votes = {};
+
+    function loadVotes() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        votes = JSON.parse(stored);
+      } else {
+        votes = {};
+        TOPICS.forEach(t => {
+          votes[t.id] = { for: 0, against: 0 };
+        });
+        saveVotes();
+      }
+    }
+
+    function saveVotes() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+    }
+
+    function renderTopics() {
+      const container = document.getElementById('topicSelector');
+      container.innerHTML = '';
+      TOPICS.forEach((topic, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'topic-btn' + (index === currentTopic ? ' active' : '');
+        btn.textContent = `#${index + 1}`;
+        btn.title = topic.question;
+        btn.addEventListener('click', () => {
+          currentTopic = index;
+          renderTopics();
+          renderDebate();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function renderDebate() {
+      const topic = TOPICS[currentTopic];
+      const voteData = votes[topic.id] || { for: 0, against: 0 };
+      const total = voteData.for + voteData.against;
+      const forPercent = total > 0 ? (voteData.for / total) * 100 : 0;
+      const againstPercent = total > 0 ? (voteData.against / total) * 100 : 0;
+
+      // Question
+      document.getElementById('debateQuestion').textContent = topic.question;
+
+      // Vote buttons
+      const optionsContainer = document.getElementById('voteOptions');
+      optionsContainer.innerHTML = `
+        <button class="vote-btn" data-vote="for" ${total > 0 ? 'disabled' : ''}>
+          <span class="vote-emoji">👍</span>
+          <span class="vote-label">${topic.for}</span>
+          <span class="vote-count">${voteData.for} votes</span>
+        </button>
+        <button class="vote-btn" data-vote="against" ${total > 0 ? 'disabled' : ''}>
+          <span class="vote-emoji">👎</span>
+          <span class="vote-label">${topic.against}</span>
+          <span class="vote-count">${voteData.against} votes</span>
+        </button>
+      `;
+
+      // Add vote listeners
+      optionsContainer.querySelectorAll('.vote-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const vote = this.dataset.vote;
+          castVote(vote);
+        });
+      });
+
+      // Results bar
+      const resultsContainer = document.getElementById('resultsBar');
+      resultsContainer.innerHTML = `
+        <div class="result-row">
+          <span class="label">✅ For</span>
+          <div class="bar-track">
+            <div class="bar-fill for" style="width: ${forPercent}%;"></div>
+          </div>
+          <span class="percentage">${Math.round(forPercent)}%</span>
+        </div>
+        <div class="result-row">
+          <span class="label">❌ Against</span>
+          <div class="bar-track">
+            <div class="bar-fill against" style="width: ${againstPercent}%;"></div>
+          </div>
+          <span class="percentage">${Math.round(againstPercent)}%</span>
+        </div>
+        <div style="text-align:center; font-size:0.85rem; color:#5c4530; margin-top:6px;">
+          ${total} total votes
+        </div>
+      `;
+
+      // Bennu's verdict
+      const verdictEl = document.getElementById('bennuVerdict');
+      if (total > 0) {
+        const winner = voteData.for > voteData.against ? 'for' : 'against';
+        const verdict = topic.bennuVerdict[winner] || '🐦 Bennu says: "Interesting. Very interesting."';
+        verdictEl.innerHTML = verdict;
+      } else {
+        verdictEl.innerHTML = '🐦 Bennu is waiting for your vote...';
+      }
+
+      // Feedback
+      document.getElementById('feedback').textContent = total > 0 ? `🗳️ ${total} people have voted!` : '🗳️ Be the first to vote!';
+    }
+
+    function castVote(vote) {
+      const topic = TOPICS[currentTopic];
+      const voteData = votes[topic.id];
+      
+      if (!voteData) return;
+      if (voteData.for + voteData.against > 0) return; // Already voted
+
+      voteData[vote] = (voteData[vote] || 0) + 1;
+      saveVotes();
+      renderDebate();
+    }
+
+    function resetVotes() {
+      if (confirm('Reset all votes for all topics?')) {
+        TOPICS.forEach(t => {
+          votes[t.id] = { for: 0, against: 0 };
+        });
+        saveVotes();
+        renderDebate();
+        document.getElementById('feedback').textContent = '🗳️ All votes have been reset!';
+      }
+    }
+
+    // ===== INIT =====
+    loadVotes();
+    renderTopics();
+    renderDebate();
+    document.getElementById('resetVotesBtn').addEventListener('click', resetVotes);
+
+    console.log('⚖️ The Great Debate loaded!');
+  </script>
+</body>
+</html>

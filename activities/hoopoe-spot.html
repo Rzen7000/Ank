@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoopoe Spot – Find Bennu!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .game-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .game-stats .stat {
+      font-size: 0.95rem;
+      color: #5c4530;
+    }
+    .game-stats .stat strong {
+      color: #b45f2a;
+    }
+
+    .scene-area {
+      position: relative;
+      margin: 16px auto;
+      max-width: 600px;
+      border: 3px solid #d4c5a0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fdf6e3;
+      cursor: pointer;
+      aspect-ratio: 16/10;
+    }
+    .scene-area .scene-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      user-select: none;
+      position: relative;
+    }
+    .scene-area .bennu-hidden {
+      position: absolute;
+      font-size: 3rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .scene-area .bennu-hidden.found {
+      opacity: 1;
+    }
+    .scene-area .bennu-hidden .bennu-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .level-indicator {
+      margin: 12px 0;
+      font-size: 0.95rem;
+      color: #5c4530;
+    }
+    .level-indicator .level-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .level-indicator .level-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d4c5a0;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .level-indicator .level-dots .dot.completed {
+      background: #4caf50;
+    }
+    .level-indicator .level-dots .dot.active {
+      border-color: #b45f2a;
+      background: #b45f2a;
+      transform: scale(1.2);
+    }
+
+    .feedback {
+      font-size: 1rem;
+      font-style: italic;
+      color: #5c4530;
+      min-height: 30px;
+      margin: 12px 0;
+    }
+
+    .game-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+      margin: 8px;
+    }
+    .game-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .game-btn.secondary {
+      background: #d4c5a0;
+      color: #3e2e1f;
+    }
+    .game-btn.secondary:hover {
+      background: #c9b89a;
+    }
+
+    .hint-area {
+      background: #fdf6e3;
+      border-left: 4px solid #c9a84c;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #5c4530;
+      margin: 8px auto;
+      max-width: 500px;
+      display: none;
+    }
+    .hint-area.show {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .game-container { padding: 20px; }
+      .scene-area .scene-content { font-size: 5rem; }
+      .scene-area .bennu-hidden { font-size: 2.5rem; }
+      .scene-area .bennu-hidden .bennu-img { width: 40px; height: 40px; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; }
+      .game-container { padding: 16px; }
+      .scene-area .scene-content { font-size: 3.5rem; }
+      .scene-area .bennu-hidden { font-size: 2rem; }
+      .scene-area .bennu-hidden .bennu-img { width: 30px; height: 30px; }
+      .game-stats { gap: 12px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🔍 Hoopoe Spot</h1>
+    <p class="subtitle">Find Bennu hidden in the scenes! He's getting harder to spot...</p>
+
+    <div class="game-container">
+      <div class="game-stats">
+        <span class="stat">🎯 Found: <strong id="foundCount">0</strong>/5</span>
+        <span class="stat">⏱️ Time: <strong id="timerDisplay">00:00</strong></span>
+        <span class="stat">💡 Hints: <strong id="hintCount">3</strong></span>
+      </div>
+
+      <div class="level-indicator">
+        <span id="levelLabel">Level 1: The Pyramids</span>
+        <div class="level-dots" id="levelDots"></div>
+      </div>
+
+      <div class="scene-area" id="sceneArea">
+        <div class="scene-content" id="sceneContent">
+          <span style="font-size:6rem;">🏛️</span>
+          <div class="bennu-hidden" id="bennuHidden" style="top:30%; left:60%;">
+            <img src="../images/bennu-icon.png" alt="Bennu" class="bennu-img">
+          </div>
+        </div>
+      </div>
+
+      <div class="hint-area" id="hintArea">💡 Bennu whispers: "Look in the shadows..."</div>
+
+      <div class="feedback" id="feedback">🔍 Click on Bennu when you spot him!</div>
+
+      <div>
+        <button class="game-btn secondary" id="hintBtn">💡 Give Hint</button>
+        <button class="game-btn" id="resetBtn">🔄 New Game</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== SCENES =====
+    const SCENES = [
+      { emoji: '🏛️', name: 'The Pyramids', hint: 'Look near the biggest pyramid...', bennuPos: { top: '30%', left: '60%' } },
+      { emoji: '🌊', name: 'The Nile', hint: 'Check by the riverbank...', bennuPos: { top: '50%', left: '70%' } },
+      { emoji: '🌿', name: 'The Oasis', hint: 'Bennu loves palm trees...', bennuPos: { top: '20%', left: '40%' } },
+      { emoji: '📚', name: 'The Library', hint: 'He\'s hiding among the books...', bennuPos: { top: '60%', left: '30%' } },
+      { emoji: '🏜️', name: 'The Desert', hint: 'Look at the dunes...', bennuPos: { top: '40%', left: '80%' } }
+    ];
+
+    // ===== GAME STATE =====
+    let currentLevel = 0;
+    let found = [];
+    let hintsRemaining = 3;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let isGameComplete = false;
+    let bennuFound = false;
+
+    // ===== DOM ELEMENTS =====
+    const sceneContent = document.getElementById('sceneContent');
+    const bennuHidden = document.getElementById('bennuHidden');
+    const feedback = document.getElementById('feedback');
+    const hintArea = document.getElementById('hintArea');
+    const foundDisplay = document.getElementById('foundCount');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const hintDisplay = document.getElementById('hintCount');
+    const levelLabel = document.getElementById('levelLabel');
+    const levelDots = document.getElementById('levelDots');
+
+    // ===== INIT =====
+    function initGame() {
+      currentLevel = 0;
+      found = [];
+      hintsRemaining = 3;
+      timerSeconds = 0;
+      isGameComplete = false;
+      bennuFound = false;
+      
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+        const secs = String(timerSeconds % 60).padStart(2, '0');
+        timerDisplay.textContent = `${mins}:${secs}`;
+      }, 1000);
+
+      updateStats();
+      renderDots();
+      renderScene();
+      feedback.textContent = '🔍 Click on Bennu when you spot him!';
+      hintArea.classList.remove('show');
+    }
+
+    function renderScene() {
+      const scene = SCENES[currentLevel];
+      levelLabel.textContent = `Level ${currentLevel + 1}: ${scene.name}`;
+      
+      // Set scene emoji
+      const emojiSpan = sceneContent.querySelector('span') || document.createElement('span');
+      emojiSpan.textContent = scene.emoji;
+      emojiSpan.style.fontSize = '6rem';
+      sceneContent.innerHTML = '';
+      sceneContent.appendChild(emojiSpan);
+      
+      // Position Bennu
+      bennuHidden.style.top = scene.bennuPos.top;
+      bennuHidden.style.left = scene.bennuPos.left;
+      bennuHidden.classList.remove('found');
+      bennuHidden.style.opacity = '0';
+      bennuFound = false;
+      
+      sceneContent.appendChild(bennuHidden);
+      
+      // Bennu click listener
+      bennuHidden.onclick = function(e) {
+        e.stopPropagation();
+        if (bennuFound || isGameComplete) return;
+        findBennu();
+      };
+      
+      // Click on scene to check if user missed Bennu
+      sceneContent.onclick = function(e) {
+        if (e.target === this && !bennuFound && !isGameComplete) {
+          feedback.textContent = '❌ Bennu is hiding! Keep looking!';
+          feedback.style.color = '#f44336';
+        }
+      };
+    }
+
+    function findBennu() {
+      if (bennuFound) return;
+      bennuFound = true;
+      bennuHidden.classList.add('found');
+      bennuHidden.style.opacity = '1';
+      found.push(currentLevel);
+      
+      feedback.textContent = `🎉 Found Bennu at ${SCENES[currentLevel].name}! TAP!`;
+      feedback.style.color = '#4caf50';
+      updateStats();
+
+      if (found.length === SCENES.length) {
+        // Game complete!
+        isGameComplete = true;
+        if (timerInterval) clearInterval(timerInterval);
+        feedback.textContent = `🏆 TAP TAP TAP! You found Bennu in all 5 scenes! You're a true Hoopoe Spotter!`;
+        feedback.style.color = '#b45f2a';
+        return;
+      }
+
+      // Move to next scene after delay
+      setTimeout(() => {
+        currentLevel++;
+        renderDots();
+        renderScene();
+        feedback.textContent = `🔍 Find Bennu in ${SCENES[currentLevel].name}!`;
+        feedback.style.color = '#5c4530';
+        hintArea.classList.remove('show');
+      }, 1500);
+    }
+
+    function renderDots() {
+      levelDots.innerHTML = '';
+      SCENES.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (found.includes(index)) dot.classList.add('completed');
+        if (index === currentLevel && !found.includes(index)) dot.classList.add('active');
+        levelDots.appendChild(dot);
+      });
+    }
+
+    function updateStats() {
+      foundDisplay.textContent = found.length;
+      hintDisplay.textContent = hintsRemaining;
+    }
+
+    function showHint() {
+      if (isGameComplete) {
+        feedback.textContent = '🏆 You already found Bennu everywhere!';
+        feedback.style.color = '#b45f2a';
+        return;
+      }
+      if (hintsRemaining <= 0) {
+        feedback.textContent = '❌ No hints left! Bennu says: "Look harder!"';
+        feedback.style.color = '#f44336';
+        return;
+      }
+      if (bennuFound) {
+        feedback.textContent = '🤷 Bennu is already found! Move to the next level.';
+        feedback.style.color = '#5c4530';
+        return;
+      }
+      
+      hintsRemaining--;
+      hintDisplay.textContent = hintsRemaining;
+      hintArea.textContent = `💡 Bennu whispers: "${SCENES[currentLevel].hint}"`;
+      hintArea.classList.add('show');
+      feedback.textContent = `💡 Hint used! ${hintsRemaining} remaining.`;
+      feedback.style.color = '#c9a84c';
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.getElementById('hintBtn').addEventListener('click', showHint);
+    document.getElementById('resetBtn').addEventListener('click', initGame);
+
+    // ===== KEYBOARD =====
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'h' || e.key === 'H') showHint();
+    });
+
+    // ===== INIT =====
+    initGame();
+    console.log('🔍 Hoopoe Spot loaded!');
+  </script>
+</body>
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bennu's Word Puzzle</title>
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    .puzzle-container {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .level-selector {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .level-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .level-btn:hover {
+      border-color: #b45f2a;
+    }
+    .level-btn.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    .puzzle-type-selector {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .type-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .type-btn:hover {
+      border-color: #b45f2a;
+    }
+    .type-btn.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    .puzzle-area {
+      margin: 20px 0;
+      display: none;
+    }
+    .puzzle-area.active {
+      display: block;
+    }
+
+    /* Word Search */
+    .wordsearch-grid {
+      display: grid;
+      gap: 3px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .wordsearch-grid.easy { grid-template-columns: repeat(10, 1fr); }
+    .wordsearch-grid.medium { grid-template-columns: repeat(12, 1fr); }
+    .wordsearch-grid.hard { grid-template-columns: repeat(14, 1fr); }
+
+    .ws-cell {
+      aspect-ratio: 1;
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+      font-family: 'Courier New', monospace;
+    }
+    .ws-cell:hover {
+      background: #f5ede3;
+    }
+    .ws-cell.found {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+    .ws-cell.selected {
+      background: #c9a84c;
+      border-color: #b45f2a;
+      color: #fdf6e3;
+    }
+
+    .word-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 16px 0;
+    }
+    .word-item {
+      background: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 2px solid #d4c5a0;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .word-item.found {
+      border-color: #4caf50;
+      background: #e8f5e9;
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    /* Crossword */
+    .crossword-grid {
+      display: grid;
+      gap: 3px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .crossword-grid { grid-template-columns: repeat(10, 1fr); }
+
+    .cw-cell {
+      aspect-ratio: 1;
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      font-family: 'Courier New', monospace;
+    }
+    .cw-cell.black {
+      background: #3e2e1f;
+      border-color: #3e2e1f;
+    }
+    .cw-cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      font-family: 'Courier New', monospace;
+      color: #3e2e1f;
+      outline: none;
+    }
+    .cw-cell input:focus {
+      background: #f5ede3;
+    }
+    .cw-cell.correct {
+      background: #e8f5e9;
+    }
+    .cw-cell.wrong {
+      background: #ffebee;
+    }
+
+    .crossword-clues {
+      text-align: left;
+      margin: 16px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+    .crossword-clues .clue-item {
+      font-size: 0.9rem;
+      padding: 4px 0;
+      border-bottom: 1px dotted #d4c5a0;
+    }
+    .crossword-clues .clue-item .num {
+      font-weight: bold;
+      color: #b45f2a;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 16px 0;
+      flex-wrap: wrap;
+    }
+    .game-stats .stat {
+      font-size: 0.95rem;
+      color: #5c4530;
+    }
+    .game-stats .stat strong {
+      color: #b45f2a;
+    }
+
+    .puzzle-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .puzzle-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .puzzle-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .puzzle-btn.secondary {
+      background: #d4c5a0;
+      color: #3e2e1f;
+    }
+    .puzzle-btn.secondary:hover {
+      background: #c9b89a;
+    }
+
+    .feedback {
+      font-size: 1rem;
+      font-style: italic;
+      color: #5c4530;
+      min-height: 30px;
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .puzzle-container { padding: 20px; }
+      .ws-cell { font-size: 1rem; }
+      .cw-cell input { font-size: 1rem; }
+      .crossword-clues { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; }
+      .wordsearch-grid.easy { grid-template-columns: repeat(8, 1fr); }
+      .wordsearch-grid.medium { grid-template-columns: repeat(10, 1fr); }
+      .wordsearch-grid.hard { grid-template-columns: repeat(12, 1fr); }
+      .ws-cell { font-size: 0.8rem; }
+      .cw-cell input { font-size: 0.9rem; }
+      .puzzle-container { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🧩 Bennu's Word Puzzle</h1>
+    <p class="subtitle">Word Search • Crossword • 15 Imaginarium Words</p>
+
+    <div class="puzzle-container">
+      <div class="level-selector">
+        <button class="level-btn active" data-level="easy">🟢 Easy</button>
+        <button class="level-btn" data-level="medium">🟡 Medium</button>
+        <button class="level-btn" data-level="hard">🔴 Hard</button>
+      </div>
+
+      <div class="puzzle-type-selector">
+        <button class="type-btn active" data-type="wordsearch">🔍 Word Search</button>
+        <button class="type-btn" data-type="crossword">📝 Crossword</button>
+      </div>
+
+      <div id="wordsearchArea" class="puzzle-area active">
+        <div class="game-stats">
+          <span class="stat">🔢 Words Found: <strong id="wsFound">0</strong>/15</span>
+          <span class="stat">⏱️ Time: <strong id="wsTimer">00:00</strong></span>
+        </div>
+        <div id="wsGrid"></div>
+        <div class="word-list" id="wsWordList"></div>
+        <div class="feedback" id="wsFeedback">🔍 Click and drag across letters to find words!</div>
+        <div class="puzzle-controls">
+          <button class="puzzle-btn" id="wsCheck">✅ Check Answers</button>
+          <button class="puzzle-btn secondary" id="wsReset">🔄 New Puzzle</button>
+        </div>
+      </div>
+
+      <div id="crosswordArea" class="puzzle-area">
+        <div class="game-stats">
+          <span class="stat">📝 Solved: <strong id="cwSolved">0</strong>/15</span>
+          <span class="stat">⏱️ Time: <strong id="cwTimer">00:00</strong></span>
+        </div>
+        <div id="cwGrid"></div>
+        <div class="crossword-clues" id="cwClues"></div>
+        <div class="feedback" id="cwFeedback">📝 Type letters into the grid!</div>
+        <div class="puzzle-controls">
+          <button class="puzzle-btn" id="cwCheck">✅ Check Answers</button>
+          <button class="puzzle-btn secondary" id="cwReset">🔄 New Puzzle</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== WORD LIST (15 words) =====
+    const WORDS = [
+      'HOOPOE', 'MANGO', 'PYRAMID', 'SPHINX', 'BENNU',
+      'JIMBA', 'ALI', 'SNACK', 'PORTAL', 'MAGIC',
+      'EGYPT', 'DESERT', 'NILE', 'TEMPLE', 'SCARAB'
+    ];
+
+    // ===== CROSSWORD DATA =====
+    const CLUES = [
+      { num: 1, across: 'The sarcastic bird (6 letters)', answer: 'HOOPOE' },
+      { num: 2, across: 'Exotic fruit loved by the committee (5 letters)', answer: 'MANGO' },
+      { num: 3, across: 'Ancient structure, step by step (7 letters)', answer: 'PYRAMID' },
+      { num: 4, across: 'Statue with a nose (6 letters)', answer: 'SPHINX' },
+      { num: 5, across: 'Jimba\'s favourite thing (5 letters)', answer: 'SNACK' },
+      { num: 6, across: 'A magical doorway (6 letters)', answer: 'PORTAL' },
+      { num: 7, across: 'The river of Egypt (4 letters)', answer: 'NILE' }
+    ];
+
+    // ===== DOM ELEMENTS =====
+    let currentLevel = 'easy';
+    let currentType = 'wordsearch';
+    let wordSearchGrid = [];
+    let foundWords = [];
+    let wsTimerInterval = null;
+    let wsSeconds = 0;
+    let selectedCells = [];
+    let isDragging = false;
+
+    // ===== INIT =====
+    document.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentLevel = this.dataset.level;
+        resetPuzzle();
+      });
+    });
+
+    document.querySelectorAll('.type-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentType = this.dataset.type;
+        document.querySelectorAll('.puzzle-area').forEach(el => el.classList.remove('active'));
+        document.getElementById(currentType + 'Area').classList.add('active');
+        resetPuzzle();
+      });
+    });
+
+    document.getElementById('wsReset').addEventListener('click', resetPuzzle);
+    document.getElementById('wsCheck').addEventListener('click', checkWordSearch);
+    document.getElementById('cwReset').addEventListener('click', resetPuzzle);
+    document.getElementById('cwCheck').addEventListener('click', checkCrossword);
+
+    // ===== WORD SEARCH =====
+    function generateWordSearch() {
+      const sizeMap = { easy: 10, medium: 12, hard: 14 };
+      const size = sizeMap[currentLevel];
+      const grid = Array(size).fill(null).map(() => Array(size).fill(''));
+      const placedWords = [];
+      const usedCells = new Set();
+
+      // Shuffle words
+      const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
+      const wordsToPlace = shuffled.slice(0, Math.min(15, shuffled.length));
+
+      wordsToPlace.forEach(word => {
+        const len = word.length;
+        let placed = false;
+        let attempts = 0;
+        const maxAttempts = 100;
+
+        while (!placed && attempts < maxAttempts) {
+          attempts++;
+          const dir = Math.floor(Math.random() * 8);
+          const dirs = [
+            [0, 1], [1, 0], [1, 1], [1, -1],
+            [0, -1], [-1, 0], [-1, -1], [-1, 1]
+          ];
+          const [dr, dc] = dirs[dir];
+          
+          const row = Math.floor(Math.random() * size);
+          const col = Math.floor(Math.random() * size);
+
+          if (row + dr * (len - 1) < 0 || row + dr * (len - 1) >= size ||
+              col + dc * (len - 1) < 0 || col + dc * (len - 1) >= size) {
+            continue;
+          }
+
+          let canPlace = true;
+          const positions = [];
+          for (let i = 0; i < len; i++) {
+            const r = row + dr * i;
+            const c = col + dc * i;
+            const key = r + ',' + c;
+            if (usedCells.has(key) && grid[r][c] !== word[i]) {
+              canPlace = false;
+              break;
+            }
+            positions.push({ r, c });
+          }
+
+          if (canPlace) {
+            positions.forEach((pos, i) => {
+              grid[pos.r][pos.c] = word[i];
+              usedCells.add(pos.r + ',' + pos.c);
+            });
+            placedWords.push(word);
+            placed = true;
+          }
+        }
+      });
+
+      // Fill empty cells with random letters
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if (grid[r][c] === '') {
+            grid[r][c] = letters[Math.floor(Math.random() * letters.length)];
+          }
+        }
+      }
+
+      return { grid, words: placedWords };
+    }
+
+    function renderWordSearch() {
+      const data = generateWordSearch();
+      wordSearchGrid = data.grid;
+      foundWords = [];
+      selectedCells = [];
+      
+      const grid = document.getElementById('wsGrid');
+      grid.className = 'wordsearch-grid ' + currentLevel;
+      grid.innerHTML = '';
+
+      data.words.forEach(word => {
+        const span = document.createElement('span');
+        span.className = 'word-item';
+        span.textContent = word;
+        span.dataset.word = word;
+        document.getElementById('wsWordList').appendChild(span);
+      });
+
+      wordSearchGrid.forEach((row, r) => {
+        row.forEach((letter, c) => {
+          const cell = document.createElement('div');
+          cell.className = 'ws-cell';
+          cell.textContent = letter;
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          
+          cell.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startSelection(r, c);
+          });
+          cell.addEventListener('mouseover', () => {
+            if (isDragging) continueSelection(r, c);
+          });
+          cell.addEventListener('mouseup', endSelection);
+          cell.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = cell.getBoundingClientRect();
+            startSelection(r, c);
+          });
+          cell.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const el = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (el && el.classList.contains('ws-cell')) {
+              const row = parseInt(el.dataset.row);
+              const col = parseInt(el.dataset.col);
+              continueSelection(row, col);
+            }
+          });
+          cell.addEventListener('touchend', endSelection);
+          
+          grid.appendChild(cell);
+        });
+      });
+
+      updateWSStats();
+      startWSTimer();
+      document.getElementById('wsFeedback').textContent = '🔍 Click and drag across letters to find words!';
+    }
+
+    function startSelection(row, col) {
+      isDragging = true;
+      selectedCells = [{ r: row, c: col }];
+      highlightCells();
+    }
+
+    function continueSelection(row, col) {
+      if (!isDragging) return;
+      if (selectedCells.length === 0) return;
+      
+      const first = selectedCells[0];
+      const dr = row - first.r;
+      const dc = col - first.c;
+      
+      // Check if in a straight line
+      if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return;
+      
+      const steps = Math.max(Math.abs(dr), Math.abs(dc));
+      const dirR = steps === 0 ? 0 : dr / steps;
+      const dirC = steps === 0 ? 0 : dc / steps;
+      
+      const newCells = [];
+      for (let i = 0; i <= steps; i++) {
+        const r = first.r + dirR * i;
+        const c = first.c + dirC * i;
+        if (r >= 0 && r < wordSearchGrid.length && c >= 0 && c < wordSearchGrid[0].length) {
+          newCells.push({ r, c });
+        }
+      }
+      
+      selectedCells = newCells;
+      highlightCells();
+    }
+
+    function endSelection() {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      if (selectedCells.length < 2) {
+        selectedCells = [];
+        return;
+      }
+
+      // Get the word
+      let word = '';
+      selectedCells.forEach(cell => {
+        word += wordSearchGrid[cell.r][cell.c];
+      });
+      
+      // Check if it's a valid word (forward or backward)
+      const reversed = word.split('').reverse().join('');
+      let foundWord = null;
+      WORDS.forEach(w => {
+        if (word === w || reversed === w) {
+          foundWord = w;
+        }
+      });
+
+      if (foundWord && !foundWords.includes(foundWord)) {
+        foundWords.push(foundWord);
+        document.querySelectorAll('.word-item').forEach(el => {
+          if (el.dataset.word === foundWord) {
+            el.classList.add('found');
+          }
+        });
+        selectedCells.forEach(cell => {
+          const idx = cell.r * wordSearchGrid[0].length + cell.c;
+          const el = document.querySelectorAll('.ws-cell')[idx];
+          if (el) el.classList.add('found');
+        });
+        document.getElementById('wsFeedback').textContent = `✅ Found "${foundWord}"! Bennu taps in approval!`;
+        updateWSStats();
+        
+        if (foundWords.length === WORDS.length) {
+          document.getElementById('wsFeedback').textContent = '🎉 TAP TAP TAP! You found ALL the words! Bennu is impressed!';
+        }
+      } else if (foundWord && foundWords.includes(foundWord)) {
+        document.getElementById('wsFeedback').textContent = `🔁 You already found "${foundWord}"! Keep going!`;
+      } else {
+        document.getElementById('wsFeedback').textContent = `❌ Not a word in the list. Try again!`;
+      }
+      
+      selectedCells = [];
+      highlightCells();
+    }
+
+    function highlightCells() {
+      document.querySelectorAll('.ws-cell').forEach(el => el.classList.remove('selected'));
+      selectedCells.forEach(cell => {
+        const idx = cell.r * wordSearchGrid[0].length + cell.c;
+        const el = document.querySelectorAll('.ws-cell')[idx];
+        if (el) el.classList.add('selected');
+      });
+    }
+
+    function updateWSStats() {
+      document.getElementById('wsFound').textContent = foundWords.length;
+    }
+
+    function startWSTimer() {
+      if (wsTimerInterval) clearInterval(wsTimerInterval);
+      wsSeconds = 0;
+      wsTimerInterval = setInterval(() => {
+        wsSeconds++;
+        const mins = String(Math.floor(wsSeconds / 60)).padStart(2, '0');
+        const secs = String(wsSeconds % 60).padStart(2, '0');
+        document.getElementById('wsTimer').textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function checkWordSearch() {
+      const total = WORDS.length;
+      const found = foundWords.length;
+      if (found === total) {
+        document.getElementById('wsFeedback').textContent = '🎉 Perfect! You found everything!';
+      } else {
+        document.getElementById('wsFeedback').textContent = `📊 You found ${found}/${total} words. Keep going!`;
+      }
+    }
+
+    // ===== CROSSWORD =====
+    function renderCrossword() {
+      const size = 10;
+      const grid = Array(size).fill(null).map(() => Array(size).fill(''));
+      const cellData = Array(size).fill(null).map(() => Array(size).fill(null));
+      
+      // Place words in crossword
+      const answers = CLUES.map(c => c.answer);
+      // Place horizontally
+      answers.forEach((word, idx) => {
+        const row = idx + 1;
+        const col = 2;
+        for (let i = 0; i < word.length && col + i < size; i++) {
+          grid[row][col + i] = word[i];
+          cellData[row][col + i] = { num: idx + 1, letter: word[i], wordIndex: idx };
+        }
+      });
+
+      // Render grid
+      const gridEl = document.getElementById('cwGrid');
+      gridEl.className = 'crossword-grid';
+      gridEl.innerHTML = '';
+
+      grid.forEach((row, r) => {
+        row.forEach((letter, c) => {
+          const cell = document.createElement('div');
+          cell.className = 'cw-cell';
+          if (!letter) {
+            cell.classList.add('black');
+          } else {
+            const input = document.createElement('input');
+            input.maxLength = 1;
+            input.dataset.row = r;
+            input.dataset.col = c;
+            input.dataset.answer = letter;
+            input.dataset.filled = 'false';
+            input.addEventListener('input', function() {
+              this.value = this.value.toUpperCase();
+              if (this.value === this.dataset.answer) {
+                this.dataset.filled = 'true';
+                this.parentElement.classList.add('correct');
+                updateCWStats();
+              } else if (this.value) {
+                this.parentElement.classList.add('wrong');
+                setTimeout(() => {
+                  this.parentElement.classList.remove('wrong');
+                }, 800);
+              }
+            });
+            cell.appendChild(input);
+          }
+          gridEl.appendChild(cell);
+        });
+      });
+
+      // Render clues
+      const cluesEl = document.getElementById('cwClues');
+      cluesEl.innerHTML = '';
+      CLUES.forEach(clue => {
+        const div = document.createElement('div');
+        div.className = 'clue-item';
+        div.innerHTML = `<span class="num">${clue.num}.</span> ${clue.across}`;
+        cluesEl.appendChild(div);
+      });
+
+      updateCWStats();
+      startCWTimer();
+      document.getElementById('cwFeedback').textContent = '📝 Type letters into the grid!';
+    }
+
+    function updateCWStats() {
+      const inputs = document.querySelectorAll('#cwGrid input');
+      let filled = 0;
+      inputs.forEach(inp => {
+        if (inp.dataset.filled === 'true') filled++;
+      });
+      document.getElementById('cwSolved').textContent = filled;
+    }
+
+    function startCWTimer() {
+      if (cwTimerInterval) clearInterval(cwTimerInterval);
+      cwSeconds = 0;
+      cwTimerInterval = setInterval(() => {
+        cwSeconds++;
+        const mins = String(Math.floor(cwSeconds / 60)).padStart(2, '0');
+        const secs = String(cwSeconds % 60).padStart(2, '0');
+        document.getElementById('cwTimer').textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function checkCrossword() {
+      const inputs = document.querySelectorAll('#cwGrid input');
+      let correct = 0;
+      let total = 0;
+      inputs.forEach(inp => {
+        total++;
+        if (inp.dataset.filled === 'true') correct++;
+      });
+      document.getElementById('cwFeedback').textContent = `📊 You solved ${correct}/${total} letters. ${correct === total ? '🎉 Perfect!' : 'Keep going!'}`;
+    }
+
+    // ===== RESET =====
+    function resetPuzzle() {
+      if (wsTimerInterval) clearInterval(wsTimerInterval);
+      if (cwTimerInterval) clearInterval(cwTimerInterval);
+      
+      document.getElementById('wsWordList').innerHTML = '';
+      document.getElementById('wsFound').textContent = '0';
+      document.getElementById('cwSolved').textContent = '0';
+      
+      if (currentType === 'wordsearch') {
+        renderWordSearch();
+      } else {
+        renderCrossword();
+      }
+    }
+
+    // ===== INIT =====
+    resetPuzzle();
+    console.log('🧩 Bennu\'s Word Puzzle loaded!');
+  </script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activities Hub – The Imaginarium</title>
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img { height: 32px; width: auto; }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 4px;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 24px;
+    }
+
+    .hub-intro {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .hub-intro p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hub-intro .bennu-greeting {
+      font-style: italic;
+      color: #5c4530;
+      margin-top: 8px;
+      background: #fdf6e3;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+    .filter-btn:hover {
+      border-color: #b45f2a;
+    }
+    .filter-btn.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .activity-card {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 22px;
+      transition: 0.3s;
+      text-decoration: none;
+      color: #3e2e1f;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .activity-card:hover {
+      border-color: #b45f2a;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(180, 95, 42, 0.12);
+    }
+    .activity-card .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    .activity-card .card-title {
+      font-size: 1.1rem;
+      color: #b45f2a;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .activity-card .card-desc {
+      font-size: 0.9rem;
+      color: #5c4530;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .activity-card .card-tag {
+      display: inline-block;
+      background: #fdf6e3;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      color: #5c4530;
+      border: 1px solid #d4c5a0;
+      margin-top: 10px;
+      align-self: flex-start;
+    }
+    .activity-card .card-arrow {
+      position: absolute;
+      bottom: 16px;
+      right: 18px;
+      font-size: 1.2rem;
+      color: #d4c5a0;
+      transition: 0.3s;
+    }
+    .activity-card:hover .card-arrow {
+      color: #b45f2a;
+      transform: translateX(4px);
+    }
+
+    .activity-card.completed {
+      border-color: #4caf50;
+    }
+    .activity-card.completed .card-tag {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+
+    .activity-card .card-status {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
+      header nav { gap: 10px; }
+      header nav a { font-size: 0.8rem; }
+      h1 { font-size: 1.8rem; }
+      .activities-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      main { padding: 24px 16px; }
+      h1 { font-size: 1.4rem; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .activity-card { padding: 16px; }
+      .activity-card .card-icon { font-size: 2.2rem; }
+      .filter-bar { gap: 6px; }
+      .filter-btn { font-size: 0.75rem; padding: 6px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="../index.html">The Imaginarium</a>
+      <a href="../map.html">Explore the Map</a>
+      <a href="../books.html">Quest Packs</a>
+      <a href="../about.html">The Storykeeper</a>
+      <a href="../latest.html">Bennu's Bulletin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>🎮 Activities Hub</h1>
+    <p class="subtitle">Explore the Imaginarium through games, puzzles, and creative challenges!</p>
+
+    <div class="hub-intro">
+      <p>🐦 Welcome to the Activities Hub! Choose from 12 adventures, puzzles, and creative challenges. 
+      Each activity is designed to spark curiosity, creativity, and a little bit of laughter.</p>
+      <div class="bennu-greeting">💡 "Bennu says: 'Try them all. Or don't. I'm a bird.'"</div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="puzzle">🧩 Puzzles</button>
+      <button class="filter-btn" data-filter="game">🎮 Games</button>
+      <button class="filter-btn" data-filter="creative">✍️ Creative</button>
+      <button class="filter-btn" data-filter="quiz">📝 Quizzes</button>
+      <button class="filter-btn" data-filter="adventure">🏔️ Adventures</button>
+    </div>
+
+    <div class="activities-grid" id="activitiesGrid"></div>
+  </main>
+
+  <footer>
+    <p>
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+  <script>
+    // ===== ACTIVITIES DATA =====
+    const ACTIVITIES = [
+      {
+        id: 'tap-code',
+        icon: '🕊️',
+        title: 'Bennu\'s Tap Code',
+        desc: 'Learn Morse code with Egypt\'s most sarcastic hoopoe. Tap. Tap. TAP.',
+        category: 'puzzle',
+        page: 'tap-code.html',
+        completed: false
+      },
+      {
+        id: 'snack-portal',
+        icon: '🎒',
+        title: 'Snack Portal Adventure',
+        desc: 'Enter Jimba\'s magical backpack and explore a world of snacks and surprises.',
+        category: 'adventure',
+        page: 'snack-portal.html',
+        completed: false
+      },
+      {
+        id: 'mango-quiz',
+        icon: '🥭',
+        title: 'Mango Committee Quiz',
+        desc: 'Discover your Imaginarium personality! 5 questions, 5 personalities, 1 mango.',
+        category: 'quiz',
+        page: 'mango-quiz.html',
+        completed: false
+      },
+      {
+        id: 'memory-game',
+        icon: '🧠',
+        title: 'Bennu\'s Memory Game',
+        desc: 'Match the pairs with Bennu. 3 difficulty levels. 60 seconds. No pressure.',
+        category: 'game',
+        page: 'memory-game.html',
+        completed: false
+      },
+      {
+        id: 'scavenger-hunt',
+        icon: '🔍',
+        title: 'Scavenger Hunt',
+        desc: 'Find all 7 locations with clues. Bennu is your guide. (He\'s not very helpful.)',
+        category: 'adventure',
+        page: 'scavenger-hunt.html',
+        completed: false
+      },
+      {
+        id: 'word-puzzle',
+        icon: '🧩',
+        title: 'Bennu\'s Word Puzzle',
+        desc: 'Word Search + Crossword with 15 Imaginarium words. Two puzzles in one!',
+        category: 'puzzle',
+        page: 'word-puzzle.html',
+        completed: false
+      },
+      {
+        id: 'mango-match',
+        icon: '🍍',
+        title: 'Mango Match',
+        desc: 'Drag and drop fruits to match their descriptions. 7 fruits, 1 timer.',
+        category: 'game',
+        page: 'mango-match.html',
+        completed: false
+      },
+      {
+        id: 'great-debate',
+        icon: '⚖️',
+        title: 'The Great Debate',
+        desc: 'Vote on 5 important questions. Bennu will judge you. (In a nice way.)',
+        category: 'quiz',
+        page: 'great-debate.html',
+        completed: false
+      },
+      {
+        id: 'riddle-challenge',
+        icon: '🤔',
+        title: 'Bennu\'s Riddle Challenge',
+        desc: 'Solve 7 riddles with hints to reveal a secret message of wisdom.',
+        category: 'puzzle',
+        page: 'riddle-challenge.html',
+        completed: false
+      },
+      {
+        id: 'story-builder',
+        icon: '✍️',
+        title: 'Imaginarium Story Builder',
+        desc: 'Generate story ideas, write your own tales, and save your favourites.',
+        category: 'creative',
+        page: 'story-builder.html',
+        completed: false
+      },
+      {
+        id: 'hoopoe-spot',
+        icon: '👀',
+        title: 'Hoopoe Spot',
+        desc: 'Find Bennu hidden in 5 scenes. He gets harder to spot each level!',
+        category: 'game',
+        page: 'hoopoe-spot.html',
+        completed: false
+      },
+      {
+        id: 'decision-maker',
+        icon: '🔮',
+        title: 'The Mango Committee',
+        desc: 'Ask a yes/no question. The Mango Committee decides. Bennu might interrupt.',
+        category: 'creative',
+        page: 'decision-maker.html',
+        completed: false
+      }
+    ];
+
+    // ===== CHECK COMPLETION STATUS =====
+    function checkCompletion() {
+      // Check localStorage for completed activities
+      const completed = JSON.parse(localStorage.getItem('imaginarium_activities_completed') || '[]');
+      ACTIVITIES.forEach(act => {
+        act.completed = completed.includes(act.id);
+      });
+    }
+
+    function markCompleted(activityId) {
+      const completed = JSON.parse(localStorage.getItem('imaginarium_activities_completed') || '[]');
+      if (!completed.includes(activityId)) {
+        completed.push(activityId);
+        localStorage.setItem('imaginarium_activities_completed', JSON.stringify(completed));
+      }
+    }
+
+    // ===== RENDER ACTIVITIES =====
+    function renderActivities(filter = 'all') {
+      const grid = document.getElementById('activitiesGrid');
+      grid.innerHTML = '';
+
+      const filtered = filter === 'all' 
+        ? ACTIVITIES 
+        : ACTIVITIES.filter(act => act.category === filter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#5c4530;">
+          No activities in this category yet. Try another filter!
+        </div>`;
+        return;
+      }
+
+      filtered.forEach(act => {
+        const card = document.createElement('a');
+        card.className = `activity-card${act.completed ? ' completed' : ''}`;
+        card.href = act.page;
+        card.target = '_blank';
+        card.innerHTML = `
+          <span class="card-status">${act.completed ? '✅' : '⬜'}</span>
+          <span class="card-icon">${act.icon}</span>
+          <div class="card-title">${act.title}</div>
+          <div class="card-desc">${act.desc}</div>
+          <span class="card-tag">${act.category}</span>
+          <span class="card-arrow">→</span>
+        `;
+        // Mark as completed when clicked
+        card.addEventListener('click', function(e) {
+          // Don't prevent default, just mark as completed
+          markCompleted(act.id);
+          // Update local state
+          act.completed = true;
+          // Re-render to update status
+          renderActivities(filter);
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    // ===== FILTER BUTTONS =====
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderActivities(this.dataset.filter);
+      });
+    });
+
+    // ===== INIT =====
+    checkCompletion();
+    renderActivities('all');
+    console.log('🎮 Activities Hub loaded!');
+    console.log(`📚 ${ACTIVITIES.length} activities available`);
+  </script>
+</body>
+</html>
