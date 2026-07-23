@@ -4,7 +4,365 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quest Packs & Adventures</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section h2 {
+      font-size: 1.6rem;
+      color: #b45f2a;
+      border-left: 4px solid #c9a84c;
+      padding-left: 14px;
+      margin: 32px 0 16px 0;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section a {
+      color: #b45f2a;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+      transition: 0.3s;
+    }
+    .welcome-section a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    .welcome-image {
+      max-width: 200px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      border: 2px solid #d4c5a0;
+    }
+
+    /* --- FILTER BAR --- */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0 24px;
+    }
+    .filter-btn {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #3e2e1f;
+      transition: 0.3s;
+      font-family: 'Georgia', serif;
+    }
+    .filter-btn:hover {
+      border-color: #b45f2a;
+      background: #fdf6e3;
+    }
+    .filter-btn.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    /* --- BOOK GRID --- */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      margin: 24px 0 32px;
+    }
+    .book-card {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      transition: 0.3s;
+      position: relative;
+    }
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(180, 95, 42, 0.12);
+      border-color: #b45f2a;
+    }
+    .book-card .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #c9a84c;
+      color: #3e2e1f;
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .book-card .book-cover {
+      width: 100%;
+      max-height: 140px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: #fdf6e3;
+    }
+    .book-card h3 {
+      font-size: 1.1rem;
+      color: #b45f2a;
+      margin: 8px 0;
+      font-family: 'Georgia', serif;
+    }
+    .book-card p {
+      font-size: 0.9rem;
+      color: #5c4530;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .book-card .download-btn {
+      display: inline-block;
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Georgia', serif;
+      text-decoration: none;
+    }
+    .book-card .download-btn:hover:not(:disabled) {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .book-card .download-btn:disabled,
+    .book-card .download-btn.coming-soon {
+      background: #d4c5a0;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    /* --- LATEST LIST (short stories) --- */
+    .latest-list {
+      margin: 16px 0 24px;
+    }
+    .latest-list p {
+      background: #f5ede3;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border-left: 3px solid #c9a84c;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .latest-list p em {
+      color: #5c4530;
+      font-weight: 500;
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      .welcome-section h2 {
+        font-size: 1.3rem;
+      }
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+      .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+      }
+      .filter-btn {
+        font-size: 0.8rem;
+        padding: 6px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.4rem;
+        padding-left: 12px;
+      }
+      .welcome-section h2 {
+        font-size: 1.1rem;
+        padding-left: 10px;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+      .book-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .book-card {
+        padding: 12px;
+      }
+      .book-card h3 {
+        font-size: 0.95rem;
+      }
+      .book-card p {
+        font-size: 0.8rem;
+      }
+      .book-card .download-btn {
+        font-size: 0.7rem;
+        padding: 6px 14px;
+      }
+      .latest-list p {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+      }
+      .filter-bar {
+        gap: 6px;
+      }
+      .filter-btn {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,98 +371,224 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+      <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
-      <a href="connect.html">Caw, Caw</a>
-    </nav>
+      <a href="connect.html">Caw, Caw</a>    </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-<img src="images/Kareem.png" alt="Phoenix illustration" class="welcome-image">
-      <h1>Quest Packs & Adventures</h1>
-      <p>Here’s the deal: I write about serious stuff; philosophy, society, the human condition, why bananas are curved, <br>
-      but I wrap it in stories that involve a sarcastic hoopoe, a snack‑obsessed student named Jimba, his classmates,<br>
-      and a classroom that accidentally travels through time and space.</p>
-
-      <p>Some of these dives go very deep. Like, past the bottom of the rabbit hole.<br>
-      You might resurface questioning your existence, your grocery list, and whether Die Hard is a Christmas movie (it is).<br>
-      That’s normal. Or not. I’m not a therapist.</p>
-
-      <p><strong>What’s inside an Adventure or a Quest Pack?</strong><br>
-      #A full story (no abridgement; you get the whole adventure)<br>
-      #An Imaginarium Kit (simple materials to build, taste, or draw)<br>
-      #Bennu’s Field Log (portfolio prompts; draw, write, reflect)<br>
-      #Cross‑curricular connections for the nerds<br>
-      #A “Ibn Firnas Flight Festival” corner to celebrate glorious failures</p>
-
-      <p>Download a sample of free Quest Packs here.<br>
-      Like them and want more? Head to the store! (Gift Closet)<br>
-      The more people read, the more information gets out.<br>
-      Just don’t sell my work, or I’ll send a strongly worded email and a sad chocolate emoji.</p>
+      <h1 class="reveal">📚 Quest Packs & Adventures</h1>
+      <p class="reveal">
+        Here's the deal: I write about serious stuff; philosophy, society, why we are here and why bananas are curved, <br>
+        but I wrap it in stories that involve a sarcastic hoopoe, a snack‑obsessed student named Jimba, his classmates,<br>
+        and a classroom that accidentally travels through time and space.
+      </p>
+      <p class="reveal">
+        Fair warning: Some of these dives go very deep. Like, past the bottom of the rabbit hole deep.<br>
+        You might finish one and start questioning your existence, your grocery list, and whether Die Hard is a Christmas movie (it is).<br>
+        That's normal. Or not. I'm not a therapist.
+      </p>
+      <p class="reveal">
+        <strong>What's inside an Adventure or a Quest Pack?</strong><br>
+        #A full story: no abridgement; you get the whole thing.<br>
+        #An Imaginarium Kit: simple stuff to build, taste, or draw. (Yes, taste)<br>
+        #Bennu's Field Log: Draw, write, reflect.<br>
+        #Cross‑curricular connections for the nerds (It's okay, we love you)<br>
+        #An "Ibn Firnas Flight Festival" corner to celebrate glorious failures. Because crashing is learning
+      </p>
+      <p class="reveal">
+        Download a sample of free Quest Packs here.<br>
+        Like them and want more? Head to the store! (also called the Gift Closet)<br>
+        The more people read, the more the good stuff gets out there.<br>
+        One rule: Just don't sell my work, or I'll send you a strongly worded email and a sad chocolate emoji.
+      </p>
     </div>
 
-    <!-- Book grid for purchasable Quest Packs -->
-    <h2>📚 Full Quest Packs (available in the Gift Closet)</h2>
-    <div class="book-grid" id="book-list">
-      <!-- Example book card – replace with your own -->
-      <div class="book-card">
-        <img src="images/floatclassrm.png" alt="Quest Pack cover" class="book-cover">
-        <h3>The Floating Classroom</h3>
-        <p>When Jimba's snack goes missing, the class discovers a time‑traveling portal inside the supply closet.</p>
-        <a href="#" class="download-btn">Coming soon</a>
-      </div>
-      <div class="book-card">
-        <img src="images/sketch.png" alt="Quest Pack cover" class="book-cover">
-        <h3>Bennu's Riddle</h3>
-        <p>A philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers.</p>
-        <a href="#" class="download-btn">Coming soon</a>
-      </div>
+    <!-- === PHASE 2: Dynamic Book Grid with Filters === -->
+    <h2 class="reveal">📚 Full Quest Packs (available in the Gift Closet)</h2>
+    
+    <!-- Filter Bar -->
+    <div class="filter-bar reveal" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="quest">Quest Packs</button>
+      <button class="filter-btn" data-filter="adventure">Adventures</button>
     </div>
 
-    <!-- Free short stories section -->
-    <h2>📖 Free Short Stories (download)</h2>
-    <div class="latest-list">
-      <p><em>"Climate Change Denial"</em> – a short story. <a href="pdfs/climate_denial.pdf" download>Download</a></p>
-      <p><em>“It’s just weather,” Uncle Tarek said, waving at the flooded schoolyard. “The climate has always changed.” Amina wanted to argue. She had the graphs, the articles, the police records. But her uncle had never been wrong in front of her. She bit her lip. “Let’s walk,” she said. Maybe the drowned tomato plants could speak louder than she could.</em></p>
+    <!-- Book Grid Container (rendered by JavaScript) -->
+    <div class="book-grid reveal" id="book-grid-container">
+      <!-- Books will be injected here by JavaScript -->
+    </div>
 
-      <p><em>"Wealth inequality & Zakat"</em> – a short story. <a href="pdfs/wealth_zakat.pdf" download>Download</a></p>
-      <p><em>Layla watched Aya take a second bread roll and slip it into her pocket. She knew the food bank was for families who needed help. But Aya never said anything. Never asked. Now Layla’s father was bragging about their new car. She wondered: was giving zakat only about money? Or about seeing what you didn’t want to see?</em></p>
+    <!-- Free Short Stories section (unchanged) -->
+    <h2 class="reveal">📖 Free Short Stories (download)</h2>
+    <div class="latest-list reveal">
+      <p><em>"Climate Change Denial"</em> – a short story. <a href="pdfs/climate_denial.pdf" download>Download available soon</a></p>
+      <p><em>"It's just weather," Uncle Tarek said, waving at the flooded schoolyard. "The climate has always changed." Amina wanted to argue. She had the graphs, the articles, the police records. But her uncle had never been wrong in front of her. She bit her lip. "Let's walk," she said. Maybe the drowned tomato plants could speak louder than she could.</em></p>
 
-      <p><em>"Stereotypes"</em> – a short story. <a href="pdfs/stereotypes.pdf" download>Download</a></p>
-      <p><em>Tariq could jump higher than anyone. But the volleyball team was “for girls.” The boys laughed when he asked to try out. “You’ll get hurt,” they said. “It’s not football.” He didn’t answer. He just walked to the court, picked up the ball, and served. The net shook. The gym went quiet. He still didn’t know if he would make the team, but he knew he had to try.</em></p>
+      <p><em>"Wealth inequality & Zakat"</em> – a short story. <a href="pdfs/wealth_zakat.pdf" download>Download available soon</a></p>
+      <p><em>Layla watched Aya take a second bread roll and slip it into her pocket. She knew the food bank was for families who needed help. But Aya never said anything. Never asked. Now Layla's father was bragging about their new car. She wondered: was giving zakat only about money? Or about seeing what you didn't want to see?</em></p>
 
-      <p><em>"AI & Honesty"</em> – a short story. <a href="pdfs/ai_honesty.pdf" download>Download</a></p>
-      <p><em>The essay won first place. Everyone clapped. But Nour felt the letters burning in his pocket, the ones he typed, not the ones he wrote. The AI had done the work. He had only pressed “generate.” Now Mr. Zakaria wanted him to read it aloud at assembly. Nour looked at the podium. He had a choice: speak another’s words, or speak his own silence.</em></p>
+      <p><em>"Stereotypes"</em> – a short story. <a href="pdfs/stereotypes.pdf" download>Download available soon</a></p>
+      <p><em>Tariq could jump higher than anyone. But the volleyball team was "for girls." The boys laughed when he asked to try out. "You'll get hurt," they said. "It's not football." He didn't answer. He just walked to the court, picked up the ball, and served. The net shook. The gym went quiet. He still didn't know if he would make the team, but he knew he had to try.</em></p>
 
-      <p><em>"Animal Testing"</em> – a short story. <a href="pdfs/animal_testing.pdf" download>Download</a></p>
-      <p><em>Aisha hid the rabbit in the art supply closet before class. She knew she couldn’t keep it secret forever. Ms. Magda wanted data, skin reaction, redness, swelling. “It’s one small animal,” the teacher said. “For science. For human good.” But Aisha looked at the rabbit’s nose, soft and twitching. She thought of her grandmother’s words: No creature is small enough to be forgotten.</em></p>
+      <p><em>"AI & Honesty"</em> – a short story. <a href="pdfs/ai_honesty.pdf" download>Download available soon</a></p>
+      <p><em>The essay won first place. Everyone clapped. But Nour felt the letters burning in his pocket, the ones he typed, not the ones he wrote. The AI had done the work. He had only pressed "generate." Now Mr. Zakaria wanted him to read it aloud at assembly. Nour looked at the podium. He had a choice: speak another's words, or speak his own silence.</em></p>
 
-      <p><em>"Cultural Appropriation"</em> – a short story. <a href="pdfs/cultural_appropriation.pdf" download>Download</a></p>
-      <p><em>Leila watched Fatima put on the dirac – the Somali dress her own grandmother had sewn. Fatima called it “exotic.” She would wear it for a fashion show, then return to her own clothes. Leila’s grandmother stood at the back, silent. Afterward, Leila took Fatima aside. “Would you wear my skin, too?” she asked. Fatima blinked. The question hung like a dress on a hook.</em></p>
+      <p><em>"Animal Testing"</em> – a short story. <a href="pdfs/animal_testing.pdf" download>Download available soon</a></p>
+      <p><em>Aisha hid the rabbit in the art supply closet before class. She knew she couldn't keep it secret forever. Ms. Magda wanted data, skin reaction, redness, swelling. "It's one small animal," the teacher said. "For science. For human good." But Aisha looked at the rabbit's nose, soft and twitching. She thought of her grandmother's words: No creature is small enough to be forgotten.</em></p>
 
-      <p><em>"Freedom of Speech VS Respect for Beliefs"</em> – a short story. <a href="pdfs/freedom_speech.pdf" download>Download</a></p>
-      <p><em>“It’s just a joke,” Sami said, holding up the drawing. A few classmates laughed. More didn’t. Bilal stood up. “Would you draw my mother like that?” he asked. Sami’s smile faded. He hadn’t thought of it that way. He had only thought about his freedom. Now Mr. Ameen was writing on the board: Your freedom ends where someone else’s dignity begins. Sami erased the drawing.</em></p>
+      <p><em>"Cultural Appropriation"</em> – a short story. <a href="pdfs/cultural_appropriation.pdf" download>Download available soon</a></p>
+      <p><em>Leila watched Fatima put on the dirac – the Somali dress her own grandmother had sewn. Fatima called it "exotic." She would wear it for a fashion show, then return to her own clothes. Leila's grandmother stood at the back, silent. Afterward, Leila took Fatima aside. "Would you wear my skin, too?" she asked. Fatima blinked. The question hung like a dress on a hook.</em></p>
 
-      <p><em>"Water Wars (Geopolitics)"</em> – a short story. <a href="pdfs/water_wars.pdf" download>Download</a></p>
-      <p><em>“Your dam is stealing our water,” Youssef said. “Your farms use too much,” Alem replied. They stood on opposite sides of the model river they were supposed to build together. Ms. Molly didn’t intervene. She just placed two empty cups on the table. “Share,” she said. “One cup. Two sides. Figure it out.” Youssef looked at the cup. Alem looked at Youssef.</em></p>
+      <p><em>"Freedom of Speech VS Respect for Beliefs"</em> – a short story. <a href="pdfs/freedom_speech.pdf" download>Download available soon</a></p>
+      <p><em>"It's just a joke," Sami said, holding up the drawing. A few classmates laughed. More didn't. Bilal stood up. "Would you draw my mother like that?" he asked. Sami's smile faded. He hadn't thought of it that way. He had only thought about his freedom. Now Mr. Ameen was writing on the board: Your freedom ends where someone else's dignity begins. Sami erased the drawing.</em></p>
+
+      <p><em>"Water Wars (Geopolitics)"</em> – a short story. <a href="pdfs/water_wars.pdf" download>Download available soon</a></p>
+      <p><em>"Your dam is stealing our water," Youssef said. "Your farms use too much," Alem replied. They stood on opposite sides of the model river they were supposed to build together. Ms. Molly didn't intervene. She just placed two empty cups on the table. "Share," she said. "One cup. Two sides. Figure it out." Youssef looked at the cup. Alem looked at Youssef.</em></p>
     </div>
   </main>
 
-<footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
-  <!-- Netlify Identity Widget (same as index) -->
+  <!-- === PHASE 2: JavaScript for Data, Filtering, and Rendering === -->
+  <script>
+    (function() {
+      // --- 1. Book Data (JSON-like array) ---
+      const books = [
+        {
+          id: 1,
+          title: "The Floating Classroom",
+          category: "quest",
+          description: "When Jimba's snack goes missing, the class discovers a time‑traveling portal inside the supply closet.",
+          image: "images/floatclassrm.png",
+          status: "coming-soon"
+        },
+        {
+          id: 2,
+          title: "Bennu's Riddle",
+          category: "adventure",
+          description: "A philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers.",
+          image: "images/sketch.png",
+          status: "coming-soon"
+        },
+        {
+          id: 3,
+          title: "The Accidental Messenger",
+          category: "adventure",
+          description: "Ali stumbles upon a secret that could change everything. But delivering the message might be harder than receiving it.",
+          image: "images/floatclassrm.png",
+          status: "coming-soon"
+        },
+        {
+          id: 4,
+          title: "Silence of the Hive",
+          category: "quest",
+          description: "A colony of bees, a farmer with a dilemma, and a classroom that must decide who is right.",
+          image: "images/sketch.png",
+          status: "coming-soon"
+        }
+      ];
+
+      // --- 2. DOM Elements ---
+      const gridContainer = document.getElementById('book-grid-container');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+
+      // --- 3. Render Function ---
+      function renderBooks(category = 'all') {
+        const filteredBooks = category === 'all' 
+          ? books 
+          : books.filter(book => book.category === category);
+
+        if (filteredBooks.length === 0) {
+          gridContainer.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #5c4530;">No books in this category yet. Bennu is working on it!</p>`;
+          return;
+        }
+
+        let cardsHTML = '';
+        filteredBooks.forEach(book => {
+          const isComingSoon = book.status === 'coming-soon';
+          const badgeHTML = isComingSoon ? `<span class="badge">Coming Soon</span>` : '';
+          const buttonHTML = isComingSoon 
+            ? `<button class="download-btn coming-soon" disabled>Coming Soon</button>` 
+            : `<a href="#" class="download-btn">Download</a>`;
+
+          cardsHTML += `
+            <div class="book-card reveal">
+              ${badgeHTML}
+              <img src="${book.image}" alt="${book.title} cover" class="book-cover">
+              <h3>${book.title}</h3>
+              <p>${book.description}</p>
+              ${buttonHTML}
+            </div>
+          `;
+        });
+
+        gridContainer.innerHTML = cardsHTML;
+        initReveals();
+      }
+
+      // --- 4. Filter Logic ---
+      function setActiveFilter(activeButton) {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        activeButton.classList.add('active');
+      }
+
+      // --- 5. Event Listeners for Filters ---
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filter = this.dataset.filter;
+          setActiveFilter(this);
+          renderBooks(filter);
+        });
+      });
+
+      // --- 6. Scroll Reveal Initializer ---
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal:not(.visible)');
+        if (reveals.length === 0) return;
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -20px 0px'
+        });
+
+        reveals.forEach(el => observer.observe(el));
+      }
+
+      // --- 7. Initial Render ---
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          renderBooks('all');
+        });
+      } else {
+        renderBooks('all');
+      }
+
+      window.initReveals = initReveals;
+
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

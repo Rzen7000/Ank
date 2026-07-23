@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>The Imaginarium – Interactive Map</title>
+  <style>
+    /* --- RESET --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: #1a1410;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* --- HEADER --- */
+    .map-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(26, 20, 16, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(212, 197, 160, 0.2);
+    }
+    .map-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .map-header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    .map-header .site-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #fdf6e3;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    .menu-btn {
+      background: rgba(180, 95, 42, 0.8);
+      color: #fdf6e3;
+      border: 1px solid rgba(212, 197, 160, 0.3);
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    .menu-btn:hover {
+      background: #b45f2a;
+      transform: scale(1.02);
+    }
+
+    /* --- MAP CONTAINER --- */
+    #map-container {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #1a1410;
+      overflow: hidden;
+      min-height: 500px;
+    }
+
+    /* --- MAP IMAGE WRAPPER --- */
+    #map-wrapper {
+      position: relative;
+      width: 100%;
+      transition: opacity 0.6s ease;
+    }
+    /* CHANGE: Map opacity increased from 0.25 to 0.45 for better visibility */
+    #map-wrapper.content-open {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    #map-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* --- COMPASS ROSE & LEGEND --- */
+    #map-overlays {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      transition: opacity 0.6s ease;
+    }
+    #map-overlays.hidden { opacity: 0; }
+
+    .compass-rose {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      font-size: 2rem;
+      opacity: 0.7;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.2;
+    }
+    .compass-rose .n { font-size: 0.8rem; color: #fdf6e3; letter-spacing: 2px; font-weight: bold; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+    .compass-rose .rose { font-size: 2.2rem; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
+
+    .legend {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(26, 20, 16, 0.8);
+      backdrop-filter: blur(4px);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 197, 160, 0.2);
+      color: #d4c5a0;
+      font-size: 0.7rem;
+      pointer-events: none;
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ff6b35, #b45f2a);
+      border: 1px solid #fdf6e3; flex-shrink: 0;
+    }
+    .legend-dot.fictional {
+      background: radial-gradient(circle at 35% 35%, #f5b342, #b45f2a);
+      border-color: #f5b342;
+      box-shadow: 0 0 10px rgba(245, 179, 66, 0.3);
+    }
+    .legend-label { color: #d4c5a0; }
+
+    /* --- HOTSPOT OVERLAY --- */
+    #hotspots-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      transition: opacity 0.6s ease;
+    }
+    #hotspots-container.content-open { opacity: 0.3; pointer-events: none; }
+
+    .hotspot {
+      position: absolute;
+      pointer-events: all;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 10;
+    }
+    .hotspot .dot {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 107, 53, 0.7), rgba(180, 95, 42, 0.5));
+      border-radius: 50%;
+      border: 2px solid rgba(253, 246, 227, 0.6);
+      box-shadow: 0 0 15px rgba(180, 95, 42, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .hotspot .dot::after {
+      content: '';
+      position: absolute;
+      top: -4px; left: -4px; right: -4px; bottom: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(245, 179, 66, 0.2);
+      animation: ripple 2.5s infinite;
+    }
+    .hotspot.fictional .dot {
+      background: radial-gradient(circle at 35% 35%, rgba(245, 179, 66, 0.7), rgba(180, 95, 42, 0.5));
+      box-shadow: 0 0 15px rgba(245, 179, 66, 0.3);
+    }
+    .hotspot.fictional .dot::after { border-color: rgba(245, 179, 66, 0.3); }
+
+    @keyframes ripple {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+    .hotspot:hover .dot {
+      transform: scale(1.5);
+      box-shadow: 0 0 30px rgba(245, 179, 66, 0.5);
+    }
+    .hotspot .label {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(26, 20, 16, 0.85);
+      backdrop-filter: blur(4px);
+      color: #fdf6e3;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid rgba(212, 197, 160, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+    .hotspot:hover .label { opacity: 1; }
+
+    /* --- BENNU - MADE BIGGER --- */
+    #bennu-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 0.6s ease;
+    }
+    #bennu-container.content-open { opacity: 0.3; }
+
+    /* CHANGE: Bennu font-size increased from 36px to 56px */
+    #bennu {
+      position: absolute;
+      font-size: 56px;
+      transform: translate(-50%, -50%);
+      transition: left 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  top 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 0 30px rgba(245, 179, 66, 0.3));
+      will-change: transform, left, top;
+      pointer-events: none;
+      user-select: none;
+      z-index: 25;
+    }
+    #bennu .wing { display: inline-block; animation: flap 0.4s infinite alternate ease-in-out; }
+    @keyframes flap {
+      0% { transform: rotate(-15deg) scaleY(0.8); }
+      100% { transform: rotate(20deg) scaleY(1.2); }
+    }
+    /* CHANGE: Bennu trail size increased from 60px to 100px */
+    #bennu .trail {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 179, 66, 0.15) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      animation: trail-pulse 1.5s infinite alternate;
+    }
+    @keyframes trail-pulse {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.2; }
+      100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0.6; }
+    }
+
+    /* ============================================================
+       FULL-SCREEN CONTENT OVERLAY WITH IFRAME
+       ============================================================ */
+    #content-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: none;
+      background: rgba(26, 20, 16, 0.85);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      padding: 30px;
+    }
+    #content-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* LARGER CONTENT CARD - takes up most of the screen */
+    #content-card {
+      background: #fef9ef;
+      border-radius: 24px;
+      border: 4px solid #b45f2a;
+      padding: 20px 25px 25px 25px;
+      max-width: 1100px;
+      width: 95%;
+      max-height: 90vh;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+      transform: scale(0.9);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    #content-overlay.active #content-card {
+      transform: scale(1);
+    }
+
+    #content-card .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: rgba(180, 95, 42, 0.1);
+      border: none;
+      font-size: 1.8rem;
+      color: #3e2e1f;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: 0.3s;
+      line-height: 1;
+      z-index: 20;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #content-card .close-btn:hover { 
+      opacity: 1; 
+      background: rgba(180, 95, 42, 0.2);
+      transform: rotate(90deg);
+    }
+
+    /* Compact header with location info */
+    #content-card .content-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      padding-right: 45px;
+      border-bottom: 2px solid #f5ede3;
+    }
+    #content-card .content-header .icon { 
+      font-size: 1.8rem; 
+      flex-shrink: 0;
+    }
+    #content-card .content-header .title-group h2 {
+      font-family: 'Georgia', serif;
+      color: #3e2e1f;
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+    #content-card .content-header .title-group .type {
+      font-size: 0.6rem;
+      color: #5c4530;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* IFRAME - takes up most of the space */
+    #content-iframe {
+      flex: 1;
+      width: 100%;
+      min-height: 400px;
+      max-height: calc(90vh - 180px);
+      border: none;
+      border-radius: 12px;
+      background: white;
+      margin-bottom: 8px;
+      overflow-y: auto;
+    }
+
+    /* Bennu quip - compact */
+    #content-card .bennu-quip {
+      background: #f5ede3;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-style: italic;
+      color: #5c4530;
+      border-left: 4px solid #f5b342;
+      font-size: 0.8rem;
+      margin: 0 0 8px 0;
+      flex-shrink: 0;
+    }
+
+    /* Action buttons - compact */
+    #content-card .content-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .content-btn {
+      display: inline-block;
+      background: #b45f2a;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+      font-family: inherit;
+      box-shadow: 0 3px 12px rgba(180, 95, 42, 0.3);
+      flex: 1;
+      text-align: center;
+      min-width: 120px;
+    }
+    .content-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .content-btn.secondary {
+      background: transparent;
+      color: #5c4530;
+      border: 2px solid #d4c5a0;
+      box-shadow: none;
+    }
+    .content-btn.secondary:hover {
+      background: #f5ede3;
+      border-color: #b45f2a;
+    }
+
+    /* --- MENU POPUP --- */
+    #menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 9998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    #menu-overlay.active { display: flex; opacity: 1; }
+    #menu-card {
+      background: #fef9ef;
+      border-radius: 24px;
+      border: 4px solid #b45f2a;
+      padding: 30px 35px;
+      max-width: 520px;
+      width: 92%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    #menu-overlay.active #menu-card { transform: scale(1); }
+    #menu-card .close-btn {
+      position: absolute;
+      top: 12px; right: 18px;
+      background: none; border: none;
+      font-size: 1.8rem;
+      color: #3e2e1f;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: 0.3s;
+    }
+    #menu-card .close-btn:hover { opacity: 1; transform: rotate(90deg); }
+    #menu-card h2 {
+      font-family: 'Georgia', serif;
+      color: #3e2e1f;
+      border-left: 5px solid #b45f2a;
+      padding-left: 15px;
+      margin: 0 0 20px 0;
+      font-size: 1.6rem;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .menu-item {
+      background: #f5ede3;
+      border: 2px solid #e0d5c5;
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-decoration: none;
+      color: #3e2e1f;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      border-color: #b45f2a;
+      background: #fdf6e3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(180, 95, 42, 0.12);
+    }
+    .menu-item .icon { font-size: 1.3rem; }
+
+    /* --- WELCOME OVERLAY --- */
+    #welcome-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9997;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+    #welcome-overlay.active {
+      display: flex;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #welcome-card {
+      background: #fef9ef;
+      border-radius: 24px;
+      border: 4px solid #b45f2a;
+      padding: 35px 40px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      transform: scale(0.9);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: center;
+      position: relative;
+    }
+    #welcome-overlay.active #welcome-card {
+      transform: scale(1);
+    }
+    #welcome-card .icon { font-size: 4rem; display: block; margin-bottom: 10px; }
+    #welcome-card h2 {
+      font-family: 'Georgia', serif;
+      color: #3e2e1f;
+      font-size: 1.8rem;
+      margin: 0 0 12px 0;
+    }
+    #welcome-card p {
+      color: #4a3a2a;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0 0 16px 0;
+    }
+    #welcome-card .welcome-btn {
+      background: #b45f2a;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      border-radius: 40px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(180, 95, 42, 0.3);
+    }
+    #welcome-card .welcome-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      .map-header { padding: 8px 14px; }
+      .map-header .site-title { font-size: 0.9rem; }
+      .map-header .logo-img { height: 24px; }
+      .menu-btn { padding: 6px 14px; font-size: 0.8rem; }
+
+      .hotspot .dot { width: 16px; height: 16px; border-width: 2px; }
+      .hotspot .label { font-size: 0.5rem; padding: 2px 8px; top: -22px; }
+
+      /* CHANGE: Bennu responsive size increased */
+      #bennu { font-size: 42px; }
+      #bennu .trail {
+        width: 70px;
+        height: 70px;
+      }
+
+      #content-overlay { padding: 15px; }
+      #content-card {
+        padding: 15px 18px 18px 18px;
+        max-width: 98%;
+        border-radius: 16px;
+        max-height: 92vh;
+      }
+      #content-card .content-header .icon { font-size: 1.4rem; }
+      #content-card .content-header .title-group h2 { font-size: 1rem; }
+      #content-card .content-header .title-group .type { font-size: 0.5rem; }
+      #content-iframe { 
+        min-height: 300px; 
+        max-height: calc(92vh - 180px);
+      }
+      #content-card .bennu-quip { font-size: 0.7rem; padding: 6px 12px; }
+      .content-btn { font-size: 0.8rem; padding: 7px 16px; min-width: 100px; }
+      #content-card .close-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.4rem;
+        top: 8px;
+        right: 10px;
+      }
+
+      #menu-card { padding: 20px; }
+      .menu-grid { grid-template-columns: 1fr; }
+
+      #welcome-card { padding: 25px; }
+      #welcome-card h2 { font-size: 1.4rem; }
+      #welcome-card .icon { font-size: 3rem; }
+
+      .compass-rose { bottom: 15px; left: 15px; font-size: 1.5rem; }
+      .legend { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 0.6rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hotspot .dot { width: 14px; height: 14px; border-width: 1.5px; }
+      .hotspot .label { display: none; }
+
+      /* CHANGE: Bennu responsive size increased */
+      #bennu { font-size: 32px; }
+      #bennu .trail {
+        width: 50px;
+        height: 50px;
+      }
+
+      #content-overlay { padding: 10px; }
+      #content-card {
+        padding: 12px 14px 14px 14px;
+        max-width: 100%;
+        border-radius: 12px;
+        border-width: 3px;
+        max-height: 95vh;
+      }
+      #content-card .content-header { 
+        gap: 8px; 
+        padding-bottom: 6px;
+        padding-right: 35px;
+      }
+      #content-card .content-header .icon { font-size: 1.2rem; }
+      #content-card .content-header .title-group h2 { font-size: 0.85rem; }
+      #content-card .content-header .title-group .type { font-size: 0.45rem; }
+      #content-iframe { 
+        min-height: 200px; 
+        max-height: calc(95vh - 170px);
+        border-radius: 8px;
+      }
+      #content-card .bennu-quip { 
+        font-size: 0.65rem; 
+        padding: 5px 10px;
+        margin: 0 0 6px 0;
+        border-left-width: 3px;
+      }
+      .content-btn { 
+        font-size: 0.7rem; 
+        padding: 6px 12px; 
+        min-width: 80px;
+      }
+      #content-card .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 1.2rem;
+        top: 6px;
+        right: 8px;
+      }
+
+      #welcome-card { padding: 20px; }
+      #welcome-card h2 { font-size: 1.2rem; }
+      #welcome-card p { font-size: 0.9rem; }
+
+      .compass-rose { display: none; }
+      .legend { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="map-header">
+    <div class="logo">
+      <img src="images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <button class="menu-btn" id="menuBtn">📜 Explore</button>
+  </header>
+
+  <!-- ===== MAP CONTAINER ===== -->
+  <div id="map-container">
+    
+    <!-- Map Wrapper -->
+    <div id="map-wrapper">
+      <img id="map-image" src="images/3Ankaa Website Map.png" alt="Map of Egypt - The Imaginarium" />
+      
+      <!-- Map Overlays -->
+      <div id="map-overlays">
+        <div class="compass-rose">
+          <span class="n">N</span>
+          <span class="rose">🧭</span>
+        </div>
+        <div class="legend">
+          <div class="legend-item">
+            <span class="legend-dot"></span>
+            <span class="legend-label">Real Location</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot fictional"></span>
+            <span class="legend-label">Fictional Location</span>
+          </div>
+          <div class="legend-item" style="margin-top:6px; border-top:1px solid rgba(212,197,160,0.2); padding-top:6px;">
+            <span style="font-size:1rem;">🐦</span>
+            <span class="legend-label">Bennu (flying across Egypt)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotspots Container -->
+      <div id="hotspots-container"></div>
+
+      <!-- CHANGE: Bennu image size increased from 40px to 64px -->
+      <div id="bennu-container">
+        <div id="bennu" style="left: 15%; top: 20%;">
+          <span class="trail"></span>
+          <span class="wing">
+            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;">
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FULL-SCREEN CONTENT OVERLAY WITH IFRAME ===== -->
+  <div id="content-overlay">
+    <div id="content-card">
+      <button class="close-btn" id="contentClose">✕</button>
+      
+      <div class="content-header">
+        <span class="icon" id="contentIcon">🔺</span>
+        <div class="title-group">
+          <h2 id="contentTitle">Great Sphinx of Giza</h2>
+          <span class="type" id="contentType">📍 Real Location</span>
+        </div>
+      </div>
+      
+      <!-- IFRAME LOADS THE FULL HTML PAGE -->
+      <iframe id="content-iframe" src="about:blank"></iframe>
+      
+      <div class="bennu-quip" id="contentQuip">🐦 Bennu says: "..."</div>
+      
+      <div class="content-actions">
+        <a href="#" class="content-btn" id="contentLink" target="_blank">📖 Open in New Tab</a>
+        <button class="content-btn secondary" id="contentBack">🗺️ Back to Map</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MENU POPUP ===== -->
+  <div id="menu-overlay">
+    <div id="menu-card">
+      <button class="close-btn" id="menuClose">✕</button>
+      <h2>🏛️ Explore the Imaginarium</h2>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </div>
+
+  <!-- ===== WELCOME OVERLAY ===== -->
+  <div id="welcome-overlay">
+    <div id="welcome-card">
+      <span class="icon">🐦</span>
+      <h2>Welcome to The Imaginarium</h2>
+      <p>Click any location on the map or explore the menu to begin your journey through Egypt's most magical places. Bennu is your guide!</p>
+      <button class="welcome-btn" id="welcomeBtn">Begin Adventure →</button>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    (function() {
+      // --- 1. WAIT FOR IMAGE TO LOAD ---
+      const mapImage = document.getElementById('map-image');
+      const mapWrapper = document.getElementById('map-wrapper');
+      const hotspotsContainer = document.getElementById('hotspots-container');
+      const bennuContainer = document.getElementById('bennu-container');
+      const mapOverlays = document.getElementById('map-overlays');
+      const contentOverlay = document.getElementById('content-overlay');
+      const contentIframe = document.getElementById('content-iframe');
+
+      // --- 2. LOCATION DATA ---
+    // --- 2. LOCATION DATA ---
+const locations = [
+  { 
+    id: 'books',
+    x: 12, y: 14, 
+    icon: '📚', 
+    name: 'Quest Packs & Adventures', 
+    type: '📍 Page',
+    quip: 'Bennu says: "The library burned down. But we\'ve rebuilt it. With more snacks."',
+    page: 'books.html'
+  },
+  { 
+    id: 'home',
+    x: 22, y: 30, 
+    icon: '🏠', 
+    name: 'The Imaginarium', 
+    type: '📍 Home',
+    quip: 'Bennu says: "I\'ve been sitting here for 4,500 years. You\'re the one who looks tired."',
+    page: 'index.html'
+  },
+  { 
+    id: 'about',
+    x: 24, y: 36, 
+    icon: '📖', 
+    name: 'The Storykeeper', 
+    type: '📍 About',
+    quip: 'Bennu says: "They built it step by step. Like a good story. One layer at a time."',
+    page: 'about.html'
+  },
+  { 
+    id: 'latest',
+    x: 16, y: 40, 
+    icon: '📰', 
+    name: 'Bennu\'s Bulletin', 
+    type: '📍 Latest',
+    quip: 'Bennu says: "The best mangoes come from here. Don\'t tell the Mango Committee."',
+    page: 'latest.html'
+  },
+  { 
+    id: 'merchandise',
+    x: 58, y: 18, 
+    icon: '🎁', 
+    name: 'Gift Closet', 
+    type: '📍 Store',
+    quip: 'Bennu says: "Moses got the tablets here. I got a sunburn. We are not the same."',
+    page: 'merchandise.html'
+  },
+  { 
+    id: 'connect',
+    x: 50, y: 28, 
+    icon: '🐦', 
+    name: 'Caw, Caw', 
+    type: '📍 Contact',
+    quip: 'Bennu says: "I tried to visit once. Too hot. Even for me."',
+    page: 'connect.html'
+  },
+  { 
+    id: 'characters',
+    x: 40, y: 52, 
+    icon: '👥', 
+    name: 'Who\'s Who', 
+    type: '📍 Characters',
+    quip: 'Bennu says: "I\'ve never seen a giant. But I\'ve seen a very large mango. Close enough."',
+    page: 'characters.html'
+  },
+  { 
+    id: 'educators',
+    x: 32, y: 55, 
+    icon: '🍎', 
+    name: 'For Educators', 
+    type: '📍 Educators',
+    quip: 'Bennu says: "The temple has more columns than I have feathers. That\'s saying something."',
+    page: 'educators.html'
+  },
+  { 
+    id: 'map',
+    x: 12, y: 78, 
+    icon: '🗺️', 
+    name: 'Explore the Map', 
+    type: '📍 Map',
+    quip: 'Bennu says: "Ramesses had 200 wives. I have 200 feathers. Who\'s really winning?"',
+    page: 'map.html'
+  },
+  { 
+    id: 'contact',
+    x: 4, y: 10, 
+    icon: '📞', 
+    name: 'Contact', 
+    type: '📍 Contact',
+    quip: 'Bennu says: "I\'ve been underground once. Too dark. No snacks. Would not recommend."',
+    page: 'contact.html'
+  }
+];
+
+      // --- 3. BENNU QUIPS ---
+      const bennuQuips = [
+        'Bennu says: "The Nile is just a really long snack delivery system. Prove me wrong."',
+        'Bennu says: "If you\'re not eating mangoes while reading, are you even living?"',
+        'Bennu says: "I\'m not a therapist. I\'m a bird. Stop asking me for life advice."',
+        'Bennu says: "Dark chocolate is basically a vegetable. This is scientifically proven (by me)."',
+        'Bennu says: "Jimba\'s backpack is a portal to another dimension. It\'s called \'snack space\'."',
+        'Bennu says: "The pyramids were built by aliens. Just kidding. They were built by Egyptians with very strong backs."'
+      ];
+
+      // --- 4. FLIGHT PATH ---
+      const flightPath = [
+        { x: 12, y: 14 }, { x: 58, y: 18 }, { x: 50, y: 28 }, { x: 22, y: 30 },
+        { x: 24, y: 36 }, { x: 16, y: 40 }, { x: 40, y: 52 }, { x: 32, y: 55 }, { x: 12, y: 78 }
+      ];
+
+      let flightIndex = 0;
+      let isFlying = false;
+
+      function flyBennuToNextPoint() {
+        if (isFlying) return;
+        isFlying = true;
+        
+        const target = flightPath[flightIndex % flightPath.length];
+        const bennu = document.getElementById('bennu');
+        const offsetX = -2;
+        const offsetY = -4;
+        
+        bennu.style.left = (target.x + offsetX) + '%';
+        bennu.style.top = (target.y + offsetY) + '%';
+        
+        setTimeout(() => {
+          bennu.style.transform = 'translate(-50%, -50%) scale(1.2)';
+          setTimeout(() => { bennu.style.transform = 'translate(-50%, -50%) scale(1)'; }, 300);
+        }, 1200);
+        
+        flightIndex++;
+        isFlying = false;
+        
+        const nextDelay = 3000 + Math.random() * 5000;
+        setTimeout(flyBennuToNextPoint, nextDelay);
+      }
+
+      function flyBennuRandom() {
+        const bennu = document.getElementById('bennu');
+        const randomPoint = flightPath[Math.floor(Math.random() * flightPath.length)];
+        const offsetX = -2;
+        const offsetY = -4;
+        
+        bennu.style.left = (randomPoint.x + offsetX) + '%';
+        bennu.style.top = (randomPoint.y + offsetY) + '%';
+        
+        setTimeout(() => {
+          bennu.style.transform = 'translate(-50%, -50%) scale(1.2)';
+          setTimeout(() => { bennu.style.transform = 'translate(-50%, -50%) scale(1)'; }, 300);
+        }, 1200);
+      }
+
+      // --- 5. CREATE HOTSPOTS ---
+      function createHotspots() {
+        const container = document.getElementById('hotspots-container');
+        
+        locations.forEach((loc, index) => {
+          const hotspot = document.createElement('div');
+          hotspot.className = 'hotspot' + (loc.type.includes('Fictional') ? ' fictional' : '');
+          hotspot.dataset.index = index;
+          hotspot.style.left = loc.x + '%';
+          hotspot.style.top = loc.y + '%';
+          
+          const dot = document.createElement('div');
+          dot.className = 'dot';
+          hotspot.appendChild(dot);
+          
+          const label = document.createElement('div');
+          label.className = 'label';
+          label.textContent = loc.icon + ' ' + loc.name;
+          hotspot.appendChild(label);
+          
+          hotspot.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const idx = parseInt(this.dataset.index);
+            openContent(idx);
+            flyBennuRandom();
+          });
+          
+          container.appendChild(hotspot);
+        });
+      }
+
+      // --- 6. CREATE MENU ---
+      function createMenuItems() {
+        const grid = document.getElementById('menuGrid');
+        grid.innerHTML = '';
+        
+        locations.forEach((loc, index) => {
+          const item = document.createElement('div');
+          item.className = 'menu-item';
+          item.innerHTML = `<span class="icon">${loc.icon}</span> ${loc.name}`;
+          item.addEventListener('click', function() {
+            openContent(index);
+            document.getElementById('menu-overlay').classList.remove('active');
+          });
+          grid.appendChild(item);
+        });
+      }
+
+      // --- 7. CONTENT OVERLAY WITH IFRAME ---
+      const contentClose = document.getElementById('contentClose');
+      const contentBack = document.getElementById('contentBack');
+      const contentIcon = document.getElementById('contentIcon');
+      const contentTitle = document.getElementById('contentTitle');
+      const contentType = document.getElementById('contentType');
+      const contentQuip = document.getElementById('contentQuip');
+      const contentLink = document.getElementById('contentLink');
+
+      function openContent(index) {
+        const loc = locations[index];
+        if (!loc) return;
+        
+        contentIcon.textContent = loc.icon;
+        contentTitle.textContent = loc.name;
+        contentType.textContent = loc.type;
+        
+        const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
+        contentQuip.textContent = '🐦 ' + quip;
+        
+        // Load the full HTML page in the iframe
+        contentIframe.src = loc.page || 'about:blank';
+        contentLink.href = loc.page || '#';
+        contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
+        
+        // Dim the map
+        mapWrapper.classList.add('content-open');
+        hotspotsContainer.classList.add('content-open');
+        bennuContainer.classList.add('content-open');
+        mapOverlays.classList.add('hidden');
+        
+        // Show full-screen overlay
+        contentOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeContent() {
+        contentOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        mapWrapper.classList.remove('content-open');
+        hotspotsContainer.classList.remove('content-open');
+        bennuContainer.classList.remove('content-open');
+        mapOverlays.classList.remove('hidden');
+        // Clear iframe after closing
+        setTimeout(() => {
+          contentIframe.src = 'about:blank';
+        }, 300);
+      }
+
+      contentClose.addEventListener('click', closeContent);
+      contentBack.addEventListener('click', closeContent);
+      contentOverlay.addEventListener('click', function(e) {
+        if (e.target === this) closeContent();
+      });
+
+      // --- 8. MENU ---
+      const menuBtn = document.getElementById('menuBtn');
+      const menuOverlay = document.getElementById('menu-overlay');
+      const menuClose = document.getElementById('menuClose');
+
+      menuBtn.addEventListener('click', () => menuOverlay.classList.add('active'));
+      menuClose.addEventListener('click', () => menuOverlay.classList.remove('active'));
+      menuOverlay.addEventListener('click', (e) => {
+        if (e.target === menuOverlay) menuOverlay.classList.remove('active');
+      });
+
+      // --- 9. WELCOME ---
+      const welcomeOverlay = document.getElementById('welcome-overlay');
+      const welcomeBtn = document.getElementById('welcomeBtn');
+
+      if (!localStorage.getItem('imaginarium_visited')) {
+        setTimeout(() => {
+          welcomeOverlay.classList.add('active');
+        }, 800);
+      }
+
+      welcomeBtn.addEventListener('click', () => {
+        welcomeOverlay.classList.remove('active');
+        localStorage.setItem('imaginarium_visited', 'true');
+      });
+      welcomeOverlay.addEventListener('click', (e) => {
+        if (e.target === welcomeOverlay) {
+          welcomeOverlay.classList.remove('active');
+          localStorage.setItem('imaginarium_visited', 'true');
+        }
+      });
+
+      // --- 10. KEYBOARD ---
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (contentOverlay.classList.contains('active')) closeContent();
+          if (menuOverlay.classList.contains('active')) menuOverlay.classList.remove('active');
+          if (welcomeOverlay.classList.contains('active')) {
+            welcomeOverlay.classList.remove('active');
+            localStorage.setItem('imaginarium_visited', 'true');
+          }
+        }
+      });
+
+      // --- 11. INIT ---
+      function initMap() {
+        createHotspots();
+        createMenuItems();
+        setTimeout(flyBennuToNextPoint, 1000);
+        console.log('🐦 The Imaginarium Map loaded!');
+        console.log(`📍 ${locations.length} locations ready.`);
+        console.log('🕊️ Bennu is flying across Egypt!');
+      }
+
+      if (mapImage.complete) {
+        initMap();
+      } else {
+        mapImage.addEventListener('load', initMap);
+      }
+
+    })();
+  </script>
+</body>
+</html>

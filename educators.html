@@ -4,7 +4,226 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Educators – The Imaginarium</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section h2 {
+      font-size: 1.6rem;
+      color: #b45f2a;
+      border-left: 4px solid #c9a84c;
+      padding-left: 14px;
+      margin: 32px 0 16px 0;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section a {
+      color: #b45f2a;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+      transition: 0.3s;
+    }
+    .welcome-section a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    /* --- LIST STYLES --- */
+    .welcome-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 20px 0;
+    }
+    .welcome-section ul li {
+      padding: 8px 16px;
+      margin-bottom: 6px;
+      background: #f5ede3;
+      border-left: 3px solid #c9a84c;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #3e2e1f;
+      transition: 0.3s;
+    }
+    .welcome-section ul li:hover {
+      background: #fdf6e3;
+      border-left-color: #b45f2a;
+      transform: translateX(4px);
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      .welcome-section h2 {
+        font-size: 1.3rem;
+      }
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+      .welcome-section ul li {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.4rem;
+        padding-left: 12px;
+      }
+      .welcome-section h2 {
+        font-size: 1.1rem;
+        padding-left: 10px;
+        margin: 24px 0 12px 0;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+      .welcome-section ul li {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,7 +232,8 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+      <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
@@ -24,52 +244,76 @@
 
   <main>
     <div class="welcome-section">
-      <h1>For Educators: Bring the Imaginarium to Your Classroom</h1>
-      <p>You teach. You care. You also want to keep your sanity. 
-      <br>These Quest Packs are designed to make serious topics feel like adventures, without the standard “worksheet fatigue”.</p>
+      <h1 class="reveal">🍎 For Educators: Bring the Imaginarium to Your Classroom</h1>
+      <p class="reveal">You teach. You care. You also want to keep your sanity. 
+      <br>These Quest Packs are designed to make serious topics feel like adventures, without the standard "worksheet fatigue".</p>
 
-      <h2>📖 How to use a Quest Pack</h2>
-      <p>Each Quest Pack includes:<br>
+      <h2 class="reveal">📖 How to use a Quest Pack</h2>
+      <p class="reveal">Each Quest Pack includes:<br>
       - A complete story (no abridgement)<br>
-      - “Imaginarium Kit”: hands‑on activities using simple materials<br>
-      - “Bennu’s Field Log”: portfolio prompts (draw, write, debate)<br>
+      - "Imaginarium Kit": hands‑on activities using simple materials<br>
+      - "Bennu's Field Log": portfolio prompts (draw, write, debate)<br>
       - Cross‑curricular links (history, science, ethics, art)<br>
-      - “Glorious Failures” section – because trying and falling is learning</p>
+      - "Glorious Failures" section – because trying and falling is learning</p>
 
-      <h2>🧠 Sample Discussion Questions</h2>
-      <ul>
-        <li>Why does Jimba’s backpack become a portal when snacks are inside? (Metaphor for hidden potential?)</li>
-        <li>In “Silence of the Hive”, who was right: The Farmer or the teacher? Can both be right?</li>
+      <h2 class="reveal">🧠 Sample Discussion Questions</h2>
+      <ul class="reveal">
+        <li>Why does Jimba's backpack become a portal when snacks are inside? (Metaphor for hidden potential?)</li>
+        <li>In "Silence of the Hive", who was right: The Farmer or the teacher? Can both be right?</li>
         <li>Bennu never gives direct answers. Is that teaching or just annoying?</li>
       </ul>
 
-      <h2>🎓 Curriculum Alignment (General)</h2>
-      <p>Quest Packs touch on:<br>
+      <h2 class="reveal">🎓 Curriculum Alignment (General)</h2>
+      <p class="reveal">Quest Packs touch on:<br>
       - Social‑emotional learning (empathy, fairness)<br>
       - Critical thinking (multiple perspectives)<br>
       - Ethical reasoning (Zakat, freedom of speech, animal testing)<br>
       - Creative writing and visual storytelling</p>
 
-      <h2>📥 Free Sample Pack</h2>
-      <p>Download a complete Quest Pack to test in your class. <a href="pdfs/sample_questpack.html" download>Click here for “The Floating Classroom”</a>.</p>
+      <h2 class="reveal">📥 Free Sample Pack</h2>
+      <p class="reveal">Download a complete Quest Pack to test in your class. <a href="pdfs/sample_questpack.html" download>Click here for "The Floating Classroom"</a>.</p>
 
-      <h2>🏷️ Bulk / School Licenses</h2>
-      <p>If you want to use Quest Packs with your entire grade or school, email me via <a href="connect.html">Caw, Caw</a>. We can work out a fair, affordable rate (or a chocolate bar donation).</p>
+      <h2 class="reveal">🏷️ Bulk / School Licenses</h2>
+      <p class="reveal">If you want to use Quest Packs with your entire grade or school, email me via <a href="connect.html">Caw, Caw</a>. We can work out a fair, affordable rate (or a chocolate bar donation).</p>
 
-      <p><em>Bennu approves of teachers. He taps twice, which means “keep going, you’re doing fine”.</em></p>
+      <p class="reveal"><em>Bennu approves of teachers. He taps twice, which means "keep going, you're doing fine".</em></p>
     </div>
   </main>
 
- <footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
+  <!-- Scroll Reveal Script -->
+  <script>
+    (function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveals);
+      } else {
+        initReveals();
+      }
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

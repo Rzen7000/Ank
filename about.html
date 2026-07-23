@@ -4,9 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Storykeeper</title>
-  <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Small addition for resource links (keeps black/white theme) */
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section h2 {
+      font-size: 1.6rem;
+      color: #b45f2a;
+      border-left: 4px solid #c9a84c;
+      padding-left: 14px;
+      margin: 32px 0 16px 0;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section a {
+      color: #b45f2a;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+      transition: 0.3s;
+    }
+    .welcome-section a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    /* --- RESOURCE LINKS --- */
     .resource-links {
       display: flex;
       flex-wrap: wrap;
@@ -14,28 +128,115 @@
       margin: 2rem 0 1.5rem;
     }
     .resource-card {
-      background: #fafafa;
-      border: 1px solid #ddd;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
       border-radius: 12px;
       padding: 1.2rem 1.5rem;
       flex: 1 1 200px;
       text-decoration: none;
-      color: black;
-      transition: transform 0.2s, box-shadow 0.2s;
+      color: #3e2e1f;
+      transition: 0.3s;
     }
     .resource-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
-      background: #fff;
+      box-shadow: 0 6px 20px rgba(180, 95, 42, 0.12);
+      border-color: #b45f2a;
+      background: #fdf6e3;
     }
     .resource-card h3 {
       margin: 0 0 0.5rem;
       font-size: 1.2rem;
+      color: #b45f2a;
     }
     .resource-card p {
       margin: 0;
       font-size: 0.9rem;
-      color: #333;
+      color: #5c4530;
+      line-height: 1.5;
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      .welcome-section h2 {
+        font-size: 1.3rem;
+      }
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+      .resource-card {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.4rem;
+        padding-left: 12px;
+      }
+      .welcome-section h2 {
+        font-size: 1.1rem;
+        padding-left: 10px;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+      .resource-card {
+        padding: 1rem 1.2rem;
+      }
+      .resource-card h3 {
+        font-size: 1rem;
+      }
+      .resource-card p {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
@@ -46,7 +247,8 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+      <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
@@ -57,63 +259,86 @@
 
   <main>
     <div class="welcome-section">
-      <h1>The Storykeeper</h1>
-      <p>Former teacher. Current dreamer. Taurus (yes, stubborn). Truth‑seeker who keeps finding more questions.<br>
-      Creative when the dark chocolate levels are optimal (80% cocoa minimum; don’t @ me).</p>
+      <h1 class="reveal">📖 The Storykeeper</h1>
+      <p class="reveal">Former teacher. Current dreamer. Stubborn? Maybe a little. Truth‑seeker who keeps finding more questions instead of answers.<br>
+      Creative when the dark chocolate levels are just right (80% cocoa minimum; don't @ me).</p>
 
-      <p>I love reading, writing, and traveling to places where exotic fruits grow.<br>
+      <p class="reveal">I love reading in weird places, writing stories that argue with themselves, and traveling to places where exotic fruits grow, preferably where fruit tastes like candy.<br>
       I also love Bennu; a hoopoe who may or may not be magic.<br>
-      He lives in my imagination (and occasionally in my classroom, pecking at lesson plans).</p>
+      He lives in my imagination, and sometimes in my classroom, pecking at lesson plans.</p>
 
-      <p>This digital library exists because sharing is caring, and caring is free.<br>
-      No ads, no tracking, no algorithms trying to sell you things.<br>
+      <p class="reveal">This digital library exists because sharing is caring, and caring is free.<br>
+      No ads, no tracking, no creepy algorithms trying to sell you things.<br>
       Just a weird little corner of the internet for fellow weirdos who like serious stuff wrapped in funny words.</p>
 
-      <p>Warning: I am addicted to dark chocolate and exotic fruits from around the world.<br>
-      If you ever send me a unique mango or a fruit I haven’t tried, you will become my favourite person.<br>
-      (But please don’t actually send fruit; customs is a nightmare. Send a photo instead.)</p>
+      <p class="reveal">Warning: I am addicted to dark chocolate and exotic fruits from faraway places.<br>
+      If you ever send me a unique mango or a fruit I haven't tried, you will become my favourite person.<br>
+      But please don't actually send fruit; customs is a nightmare. Send a photo instead.</p>
 
-      <p>Questions? Want to say hi? Check Caw, Caw: Send a Message. But don’t expect instant gratification;<br>
+      <p class="reveal">Questions? Want to say hi? Check Caw, Caw: Send a Message. But don't expect an instant reply;<br>
       I might be eating chocolate, staring at fruit, or arguing with a fictional hoopoe about the best way to enter a magical Imaginarium.</p>
 
-      <p><strong>The Quiet Philosophy</strong><br>
-      I don’t publish the full blueprint online, that’s for the printed books.<br>
-      But here’s the heart of it:<br>
+      <p class="reveal"><strong>The Quiet Philosophy</strong><br>
+      (It's not loud. But it's important.)<br>
+      I don't publish the full blueprint online, that's for the printed books.<br>
+      But here's the heart of it:<br>
       #Learn by living, not by memorising.<br>
       #Laugh hard, think harder.<br>
-      #Discomfort is not danger, it’s growth.<br>
-      #Egypt isn’t a backdrop; it’s a root.<br>
+      #Discomfort is not danger, it's growth.<br>
+      #Egypt isn't a backdrop; it's a root.<br>
       #Small actions matter. A tap. A seed. A shared snack.</p>
+      <p class="reveal">If that speaks to you, the books will speak louder.<br>
+      Grab a Quest Pack. Join the flock.</p>
 
-      <!-- NEW: Resource links to Educators & Who's Who -->
-      <h2>🧭 Explore the Imaginarium</h2>
-      <div class="resource-links">
+      <!-- Resource links -->
+      <h2 class="reveal">🧭 Explore the Imaginarium</h2>
+      <div class="resource-links reveal">
         <a href="characters.html" class="resource-card">
-          <h3>📖 Who’s Who</h3>
+          <h3>📖 Who's Who</h3>
           <p>Meet Bennu, Jimba, Ali, and the rest of the flock.</p>
         </a>
         <a href="educators.html" class="resource-card">
-          <h3>🍎 Educators’ Corner</h3>
+          <h3>🍎 Educators' Corner</h3>
           <p>Bring Quest Packs to your classroom – guides, prompts & free sample.</p>
         </a>
       </div>
-
-      <p>If that speaks to you, the books will speak louder.<br>
-      Grab a Quest Pack. Join the flock.</p>
     </div>
   </main>
 
- <footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
-  <!-- Netlify Identity Widget (same as other pages) -->
+  <!-- Scroll Reveal Script -->
+  <script>
+    (function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveals);
+      } else {
+        initReveals();
+      }
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

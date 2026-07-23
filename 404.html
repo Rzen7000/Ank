@@ -4,7 +4,178 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lost? – The Imaginarium</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.8rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section a {
+      color: #b45f2a;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+      transition: 0.3s;
+    }
+    .welcome-section a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 2rem;
+      }
+      .welcome-section p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.6rem;
+        padding-left: 12px;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,39 +184,63 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+      <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
-      <a href="connect.html">Caw, Caw</a>
-    </nav>
+      <a href="connect.html">Caw, Caw</a>    </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1>404 – The Hoopoe Flew Away</h1>
-      <p>Either Bennu hid this page as a test, or you followed a broken link. Either way, you’ve landed in the wrong part of the Imaginarium.</p>
-      <p>Don’t worry. This happens to the best of us. Even Jimba gets lost inside his own backpack.</p>
-      <p><strong>What you can do now:</strong><br>
+      <h1 class="reveal">🕊️ 404 – The Hoopoe Flew Away</h1>
+      <p class="reveal">Either Bennu hid this page as a test, or you followed a broken link. Either way, you've landed in the wrong part of the Imaginarium.</p>
+      <p class="reveal">Don't worry. This happens to the best of us. Even Jimba gets lost inside his own backpack.</p>
+      <p class="reveal"><strong>What you can do now:</strong><br>
       - Tap your heels (or just click) to go back to <a href="index.html">The Imaginarium</a>.<br>
       - Visit the <a href="latest.html">Bennu's Bulletin</a> for the latest news.<br>
       - Send me an angry (or amused) email via <a href="connect.html">Caw, Caw</a>.<br>
       - Or accept that this page never existed and eat some chocolate.</p>
-      <p><em>Bennu taps once. That means: “Try again. Or don’t. I’m a bird.”</em></p>
+      <p class="reveal"><em>Bennu taps once. That means: "Try again. Or don't. I'm a bird."</em></p>
     </div>
   </main>
 
-<footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
+  <!-- Scroll Reveal Script -->
+  <script>
+    (function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveals);
+      } else {
+        initReveals();
+      }
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

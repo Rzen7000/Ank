@@ -4,7 +4,196 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bennu's Bulletin</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0;
+    }
+    .welcome-section ul li {
+      padding: 10px 16px;
+      margin-bottom: 6px;
+      background: #f5ede3;
+      border-left: 3px solid #c9a84c;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #3e2e1f;
+      transition: 0.3s;
+    }
+    .welcome-section ul li:hover {
+      background: #fdf6e3;
+      border-left-color: #b45f2a;
+      transform: translateX(4px);
+    }
+    .welcome-section ul li strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+      .welcome-section ul li {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.4rem;
+        padding-left: 12px;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      .welcome-section ul li {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,7 +202,8 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+       <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
@@ -24,58 +214,73 @@
 
   <main>
     <div class="welcome-section">
-      <h1>Bennu's Bulletin</h1>
-      <p>This page is where I dump whatever crosses my mind when I should be sleeping.<br>
-      New Quest Packs, half‑baked concepts, angry rants about pineapple on pizza and Tameya vs Falafel,<br>
-      and occasional announcements like “I finally figured out how to unlock the Imaginarium without Bennu’s permission (you don’t).”</p>
+      <h1 class="reveal">Bennu's Bulletin</h1>
+      <p class="reveal">This page is where I dump whatever crosses my mind when I should be sleeping.<br>
+      New Quest Packs, half‑baked ideas (literally; no baking, just chaos), angry rants about pineapple on pizza, The great Tameya vs Falafel debate,<br>
+      and occasional announcements like "I finally figured out how to unlock the Imaginarium without Bennu's permission (You don't. He's the Boss)."</p>
 
-      <p>Update frequency: Whenever the mood strikes. Could be daily, could be never. Don’t hold your breath. I certainly won’t.<br>
+      <p class="reveal">Update frequency: Whenever the mood strikes. Could be daily, could be never. Don't hold your breath. I certainly won't.<br>
       (Bennu sometimes dictates. His opinions are his own.)</p>
 
-      <p>Check back never. Or sometimes. I don’t control time. The hoopoe does, and he’s not telling.</p>
+      <p class="reveal">Check back never. Or sometimes. I don't control time. The hoopoe does, and he's not telling.</p>
 
-      <ul>
-
- <li><strong>June 8, 2026</strong> – Discovered that Jimba’s backpack now contains a small portal to a parallel universe where all snacks are healthy. He’s refusing to go back. Can’t blame him.</li>
- <li><strong>June 5, 2026</strong> – Spent three hours trying to explain to a mango why it’s called “exotic.” The mango didn’t care. It just sat there. Being exotic.</li>
- <li><strong>June 2, 2026</strong> – A student asked me: “If Bennu is magic, why does he need to tap?” I said: “Why do you need to blink?” They blinked. Bennu tapped. Everyone was confused.</li>
-
- <li><strong>May 30, 2026</strong> – Attempted to unlock the Imaginarium without Bennu. Ended up in my own kitchen, staring at an empty chocolate wrapper. Bennu tapped once. That meant: “I told you so.”</li>
-
- <li><strong>May 22, 2026</strong> – Added "The Accidental Messenger" Quest Pack is live. Ali is taking center stage, and learning about responsibility in the process.</li>
- <li><strong>May 11, 2026</strong> – Added "The Month That Changed Everything" Quest Pack. Jimba learns about food, just not the 'eating' part.</li>
- <li><strong>May 8, 2026</strong> – Random thought: Exotic fruits should have their own reality TV show. “Keeping Up with the Durians.” I’d watch.</li>
-
- <li><strong>May 27, 2026</strong> – New Quest Pack idea: “Jimba vs. The Evil Salad.” It’s a horror story. No happy ending. Will probably not pass revision stage.</li>
- <li><strong>May 21, 2026</strong> – Realised that my to-do list has a sub‑list called “things I will probably never do.” At the top: “learn how to stop talking to fictional hoopoe.”</li>
- <li><strong>May 6, 2026</strong> – The “Buy me a chocolate” button now works. In theory. In practice, no one has bought me chocolate yet. I’m not crying. You’re crying.</li>
- <li><strong>May 5, 2026</strong> – Website launched. Took me three days to pick a font. Worth it. Bennu approved by tapping once.</li>
-
-<li><strong>April 30, 2026</strong> – The hoopoe footprint now appears in the footer. Bennu approved it by tapping once. Then he tapped again to make sure I knew it was his idea.</li>
-<li><strong>April 27, 2026</strong> – I have officially eaten dark chocolate every day for two weeks. My blood type is now 80% cocoa. No regrets.</li>
-<li><strong>April 21, 2026</strong> – Tried to explain the Imaginarium to my neighbour. She now thinks I’m in a cult. I told her the only ritual is eating mangoes while reading. She hasn’t called back.</li>
-<li><strong>April 15, 2026</strong> – My fruit budget now exceeds my book budget. This is either a problem or a sign of enlightenment.</li>
-
-<li><strong>April 9, 2026</strong> – The Mango Committee has issued a statement: “Mangoes are not responsible for any emotional breakthroughs you have while eating them.”</li>
-
-
+      <ul class="reveal">
+        <li><strong>June 8, 2026</strong> – Discovered that Jimba's backpack now contains a small portal to a parallel universe where all snacks are healthy. He's refusing to go back. Can't blame him.</li>
+        <li><strong>June 5, 2026</strong> – Spent three hours trying to explain to a mango why it's called "exotic." The mango didn't care. It just sat there. Being exotic.</li>
+        <li><strong>June 2, 2026</strong> – A student asked me: "If Bennu is magic, why does he need to tap?" I said: "Why do you need to blink?" They blinked. Bennu tapped. Everyone was confused.</li>
+        <li><strong>May 30, 2026</strong> – Attempted to unlock the Imaginarium without Bennu. Ended up in my own kitchen, staring at an empty chocolate wrapper. Bennu tapped once. That meant: "I told you so."</li>
+        <li><strong>May 22, 2026</strong> – Added "The Accidental Messenger" Quest Pack is live. Ali is taking center stage, and learning about responsibility in the process.</li>
+        <li><strong>May 11, 2026</strong> – Added "The Month That Changed Everything" Quest Pack. Jimba learns about food, just not the 'eating' part.</li>
+        <li><strong>May 8, 2026</strong> – Random thought: Exotic fruits should have their own reality TV show. "Keeping Up with the Durians." I'd watch.</li>
+        <li><strong>May 27, 2026</strong> – New Quest Pack idea: "Jimba vs. The Evil Salad." It's a horror story. No happy ending. Will probably not pass revision stage.</li>
+        <li><strong>May 21, 2026</strong> – Realised that my to-do list has a sub‑list called "things I will probably never do." At the top: "learn how to stop talking to fictional hoopoe."</li>
+        <li><strong>May 6, 2026</strong> – The "Buy me a chocolate" button now works. In theory. In practice, no one has bought me chocolate yet. I'm not crying. You're crying.</li>
+        <li><strong>May 5, 2026</strong> – Website launched. Took me three days to pick a font. Worth it. Bennu approved by tapping once.</li>
+        <li><strong>April 30, 2026</strong> – The hoopoe footprint now appears in the footer. Bennu approved it by tapping once. Then he tapped again to make sure I knew it was his idea.</li>
+        <li><strong>April 27, 2026</strong> – I have officially eaten dark chocolate every day for two weeks. My blood type is now 80% cocoa. No regrets.</li>
+        <li><strong>April 21, 2026</strong> – Tried to explain the Imaginarium to my neighbour. She now thinks I'm in a cult. I told her the only ritual is eating mangoes while reading. She hasn't called back.</li>
+        <li><strong>April 15, 2026</strong> – My fruit budget now exceeds my book budget. This is either a problem or a sign of enlightenment.</li>
+        <li><strong>April 9, 2026</strong> – The Mango Committee has issued a statement: "Mangoes are not responsible for any emotional breakthroughs you have while eating them."</li>
       </ul>
 
-      <p><em>Check back never. Or sometimes. I don't control time.</em></p>
+      <p class="reveal"><em>Check back never. Or sometimes. I don't control time.</em></p>
     </div>
   </main>
 
- <footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
-  <!-- Netlify Identity Widget (same as other pages) -->
+  <!-- Scroll Reveal Script -->
+  <script>
+    (function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveals);
+      } else {
+        initReveals();
+      }
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

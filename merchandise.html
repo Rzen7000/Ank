@@ -4,7 +4,231 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gift Closet</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section a {
+      color: #b45f2a;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+      transition: 0.3s;
+    }
+    .welcome-section a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    /* --- KO-FI BUTTON --- */
+    .ko-fi-btn {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .ko-fi-btn a {
+      background: #3e2e1f;
+      color: #fdf6e3;
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      border-radius: 40px;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      border: 2px solid #3e2e1f;
+    }
+    .ko-fi-btn a:hover {
+      background: #b45f2a;
+      border-color: #b45f2a;
+      transform: scale(1.02);
+    }
+    .ko-fi-btn p {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      color: #5c4530;
+    }
+
+    /* --- BOOK GRID --- */
+    .book-grid {
+      background: #f5ede3;
+      padding: 20px 24px;
+      border-radius: 12px;
+      border: 1px solid #d4c5a0;
+      margin-top: 16px;
+    }
+    .book-grid p {
+      margin-bottom: 0;
+      font-style: italic;
+      color: #5c4530;
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+      .ko-fi-btn a {
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.4rem;
+        padding-left: 12px;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+      .ko-fi-btn a {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+      }
+      .book-grid {
+        padding: 14px 16px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,58 +237,77 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+      <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
-      <a href="connect.html">Caw, Caw</a>
-    </nav>
+      <a href="connect.html">Caw, Caw</a>    </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1>Gift Closet</h1>
-      <p>Check out our bookstore for the entire range of Adventure & Quest Packs! <a href="#">(Link to store – coming soon)</a></p>
+      <h1 class="reveal">🎁 Gift Closet</h1>
+      <p class="reveal">Check out our bookstore for the entire range of Adventure & Quest Packs! <a href="#">(Link to store – coming soon, I promise it's not a prank)</a></p>
 
-      <p>Now let’s talk about hoodies.<br>
+      <p class="reveal">Now let's talk about hoodies.<br>
       I love them. You love them. The world needs more hoodies with weird prints; like a hoopoe wearing a graduation cap, or a diagram of a snack‑powered machine.</p>
 
-      <p>So I’m enthusiastically selling hoodies. Well, I will be. Eventually.</p>
+      <p class="reveal">So I'm enthusiastically selling hoodies. Well, I will be. Eventually.</p>
 
-      <p>Sometimes I’d rather give them away, because capitalism is exhausting, and I just want to buy dark chocolate and exotic fruits.<br>
-      But chocolate money doesn’t grow on trees (except cocoa trees, but that’s farming, and I respect farmers).</p>
+      <p class="reveal">Sometimes I'd rather give them away, because money stuff is exhausting, and I just want to buy dark chocolate and weird fruits.<br>
+      But chocolate money doesn't grow on trees (except cocoa trees, but that's farming, and I respect farmers, they are awesome).</p>
 
-<div style="text-align: center; margin: 2rem 0;">
-  <a href="https://ko-fi.com/3ankaa" target="_blank" 
-     style="background: black; color: white; padding: 0.8rem 1.8rem; text-decoration: none; border-radius: 40px; display: inline-block; font-weight: bold; transition: background 0.2s;">
-     🍫 Buy me a chocolate 🍫
-  </a>
-  <p style="font-size: 0.8rem; margin-top: 0.5rem;">(Your chocolate supports my dark chocolate addiction and exotic fruit research)</p>
-</div>
+      <div class="ko-fi-btn reveal">
+        <a href="https://ko-fi.com/3ankaa" target="_blank">🍫 Buy me a chocolate 🍫</a>
+        <p>Your chocolate supports my dark chocolate addiction and my exotic fruit research (very important science)</p>
+      </div>
 
-      <p><strong>Capitalism disclaimer:</strong><br>
-      Yes, this is a joke about capitalism. If you get it, we're friends.<br>
+      <p class="reveal"><strong>Capitalism disclaimer:</strong><br>
+      This whole hoodie-selling thing is half a joke. Yes, a joke about capitalism. If you get it, we're friends.<br>
       If you don't, buy a hoodie anyway. Or a drawing of Bennu. He likes portraits.</p>
 
-      <div class="book-grid">
-        <!-- merchandise items go here later -->
+      <div class="book-grid reveal">
         <p><em>Hoodies coming soon. In the meantime, send chocolate.</em></p>
       </div>
     </div>
   </main>
 
- <footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
-  <!-- Netlify Identity Widget (same as other pages) -->
+  <!-- Scroll Reveal Script -->
+  <script>
+    (function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveals);
+      } else {
+        initReveals();
+      }
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

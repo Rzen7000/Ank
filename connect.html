@@ -4,7 +4,274 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caw, Caw – Send a Message</title>
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.4rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-family: 'Georgia', serif;
+    }
+
+    .welcome-section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3e2e1f;
+      margin-bottom: 16px;
+    }
+
+    .welcome-section a {
+      color: #b45f2a;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+      transition: 0.3s;
+    }
+    .welcome-section a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section em {
+      color: #5c4530;
+    }
+
+    /* --- FORM --- */
+    form {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin: 24px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    form label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 500;
+      color: #3e2e1f;
+      font-size: 0.95rem;
+      gap: 4px;
+    }
+    form input,
+    form textarea {
+      padding: 10px 14px;
+      border: 2px solid #d4c5a0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Georgia', serif;
+      background: #fdf6e3;
+      color: #3e2e1f;
+      transition: 0.3s;
+      width: 100%;
+    }
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: #b45f2a;
+      box-shadow: 0 0 0 3px rgba(180, 95, 42, 0.15);
+    }
+    form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    form button {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Georgia', serif;
+      align-self: flex-start;
+    }
+    form button:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+
+    /* --- SCROLL REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      .welcome-section p {
+        font-size: 0.95rem;
+      }
+      form {
+        padding: 18px 20px;
+      }
+      form label {
+        font-size: 0.9rem;
+      }
+      form input,
+      form textarea {
+        font-size: 0.95rem;
+        padding: 8px 12px;
+      }
+      form button {
+        font-size: 0.95rem;
+        padding: 10px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 24px 16px;
+      }
+      .welcome-section h1 {
+        font-size: 1.4rem;
+        padding-left: 12px;
+      }
+      .welcome-section p {
+        font-size: 0.9rem;
+      }
+      header nav a {
+        font-size: 0.7rem;
+      }
+      form {
+        padding: 14px 16px;
+        border-radius: 12px;
+      }
+      form label {
+        font-size: 0.85rem;
+      }
+      form input,
+      form textarea {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+        border-radius: 8px;
+      }
+      form textarea {
+        min-height: 100px;
+      }
+      form button {
+        font-size: 0.85rem;
+        padding: 8px 20px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,7 +280,8 @@
       <span class="site-title">3ANKAA</span>
     </div>
     <nav>
-      <a href="index.html">The Imaginarium</a>
+      <a href="index.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">The Storykeeper</a>
       <a href="latest.html">Bennu's Bulletin</a>
@@ -24,50 +292,79 @@
 
   <main>
     <div class="welcome-section">
-      <h1>Caw, Caw: Send a Message</h1>
-      <p>I don’t do social media. I have enough existential dread without watching people argue about whether you should peel a banana from the stem or the bottom.<br>
-      Bennu agrees; he’s a bird of few taps.</p>
+      <h1 class="reveal">🐦 Caw, Caw: Send a Message</h1>
+      <p class="reveal">I don't do social media. I have enough existential dread without watching people argue about whether you should peel a banana from the stem or the bottom.<br>
+      Bennu agrees; he's a bird of few taps.</p>
 
-      <p>If you need to reach me; to ask a question, share an exotic fruit recommendation, or tell me my dark chocolate take was wrong, email is the only way.</p>
+      <p class="reveal">If you need to reach me; to ask a question, share an exotic fruit recommendation, or tell me my dark chocolate take was wrong, email is the only way.</p>
 
-      <p><strong>Email:</strong> <a href="mailto:3ankaa@proton.me">3ankaa@proton.me</a></p>
+      <p class="reveal"><strong>Email:</strong> <a href="mailto:3ankaa@proton.me">3ankaa@proton.me</a></p>
 
-      <p><strong>Response time:</strong> Don’t expect an immediate response. If you’re lucky, within a week.<br>
-      If I’m deep in a rabbit hole or traveling for mangoes, maybe a month. I’ll get to you. Probably.</p>
+      <p class="reveal"><strong>Response time:</strong> Don't expect an immediate response. If you're lucky, within a week.<br>
+      If I'm deep in a rabbit hole or traveling for mangoes, maybe a month. I'll get to you. Probably.</p>
 
-      <p><strong>Sarcastic warning (because you’ve made it this far):</strong><br>
+      <p class="reveal"><strong>Sarcastic warning (because you've made it this far):</strong><br>
       - No, I will not help you name your houseplant.<br>
-      - No, I will not translate Bennu’s taps for you. He’s cryptic on purpose.<br>
+      - No, I will not translate Bennu's taps for you. He's cryptic on purpose.<br>
       - No, I will not tell you where the Imaginarium is. You have to get lost first.<br>
       - No, I will not fix your snack machine. Call Adam and Hani, they will build you a better one.<br>
-      - No, I will not explain why Jimba’s backpack is a portal to another dimension (it’s snacks).<br>
-      - Yes, you can send me dark chocolate. I will not share my address, but the thought counts.<br>
+      - No, I will not explain why Jimba's backpack is a portal to another dimension (it's snacks).<br>
+      - Yes, you can think about sending me dark chocolate. I will not share my address, but the thought counts.<br>
       - Yes, you can name a character after yourself in a future Quest Pack. For a small donation to my mango fund.<br>
-      (Kidding. Or am I? Honestly, I’d probably do it for free, I’m easy.)</p>
+      (Kidding. Or am I? Honestly, I'd probably do it for free, I'm easy.)</p>
 
-      <p>If you made it through all that and still want to email me, you’re my kind of weirdo. Hit me up.<br>
-      Bennu might even tap a greeting, or he might ignore you. He’s a bird of mystery.</p>
+      <p class="reveal">If you made it through all that and still want to email me, you're my kind of weirdo. Hit me up.<br>
+      Bennu might even tap a greeting, or he might ignore you. He's a bird of mystery.</p>
 
       <!-- Simple contact form (no backend) – uses mailto -->
-      <form action="mailto:3ankaa@proton.me" method="post" enctype="text/plain">
-        <label>Name: <input type="text" name="name"></label>
-        <label>Message: <textarea name="message"></textarea></label>
-        <button type="submit">Send (opens your email app)</button>
+      <form class="reveal" action="mailto:3ankaa@proton.me" method="post" enctype="text/plain">
+        <label>
+          Name:
+          <input type="text" name="name" placeholder="Your name here">
+        </label>
+        <label>
+          Message:
+          <textarea name="message" placeholder="What's on your mind? (Bennu might read this)"></textarea>
+        </label>
+        <button type="submit">📨 Send (opens your email app)</button>
       </form>
     </div>
   </main>
 
- <footer>
-  <p>
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    © 2026 3ANKAA
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-    <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" style="height: 1.2em; vertical-align: middle; margin-right: 4px;">
-  </p>
-</footer>
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
 
-  <!-- Netlify Identity Widget (same as other pages) -->
+  <!-- Scroll Reveal Script -->
+  <script>
+    (function() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initReveals);
+      } else {
+        initReveals();
+      }
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
+    })();
+  </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
