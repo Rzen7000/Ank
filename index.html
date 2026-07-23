@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>The Imaginarium – Interactive Map</title>
   
-  <!-- Preconnect for faster resource loading -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  
-  <!-- === FIX 1: Load style.css for consistency === -->
+  <!-- Load main CSS -->
   <link rel="stylesheet" href="css/style.css">
   
-  <!-- === FIX 2: Load icon CSS === -->
+  <!-- Load icon CSS -->
   <link rel="stylesheet" href="css/icons.css">
   
   <style>
-    /* --- CRITICAL STYLES (loads immediately, overrides if needed) --- */
+    /* --- RESET --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
@@ -25,41 +22,6 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-    }
-
-    /* --- LOADING SCREEN --- */
-    #loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1a1410;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      transition: opacity 0.8s ease;
-    }
-    #loading-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    #loading-screen .loader {
-      font-size: 2rem;
-      color: #fdf6e3;
-      animation: pulse 1.5s infinite alternate;
-    }
-    #loading-screen .sub {
-      color: #d4c5a0;
-      font-size: 0.9rem;
-      margin-top: 12px;
-      opacity: 0.6;
-    }
-    @keyframes pulse {
-      0% { opacity: 0.4; transform: scale(0.98); }
-      100% { opacity: 1; transform: scale(1.02); }
     }
 
     /* --- HEADER --- */
@@ -108,6 +70,41 @@
       transform: scale(1.02);
     }
 
+    /* --- LOADING SCREEN --- */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a1410;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.8s ease;
+    }
+    #loading-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loading-screen .loader {
+      font-size: 2rem;
+      color: #fdf6e3;
+      animation: pulse 1.5s infinite alternate;
+    }
+    #loading-screen .sub {
+      color: #d4c5a0;
+      font-size: 0.9rem;
+      margin-top: 12px;
+      opacity: 0.6;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.4; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1.02); }
+    }
+
     /* --- MAP CONTAINER --- */
     #map-container {
       flex: 1;
@@ -135,14 +132,12 @@
       pointer-events: none;
     }
 
-    /* === FIX 3: Optimized Map Image Loading === */
     #map-image {
       display: block;
       width: 100%;
       height: auto;
       pointer-events: none;
       user-select: none;
-      /* Start with a low quality blur for fast loading */
       filter: blur(6px);
       transition: filter 0.6s ease;
     }
@@ -779,13 +774,10 @@
     
     <!-- Map Wrapper -->
     <div id="map-wrapper">
-      <!-- === FIX 4: Use a smaller mobile-friendly image === -->
+      <!-- Responsive image with mobile-friendly versions -->
       <picture>
-        <!-- Mobile: smaller image -->
         <source media="(max-width: 480px)" srcset="images/3Ankaa-website-map-small.webp">
-        <!-- Tablet: medium image -->
         <source media="(max-width: 1024px)" srcset="images/3Ankaa-website-map-medium.webp">
-        <!-- Desktop: full image -->
         <img id="map-image" 
              src="images/3Ankaa-website-map.webp" 
              alt="Map of Egypt - The Imaginarium" />
@@ -874,7 +866,7 @@
   <!-- ===== JAVASCRIPT ===== -->
   <script>
     (function() {
-      // --- 1. DOM REFERENCES (GLOBAL) ---
+      // --- 1. DOM REFERENCES ---
       const loadingScreen = document.getElementById('loading-screen');
       const mapContainer = document.getElementById('map-container');
       const mapImage = document.getElementById('map-image');
@@ -888,7 +880,7 @@
       // --- 2. LOCATION DATA ---
       const locations = [
         { 
-          id: 'books',
+          id: 'alexandria',
           x: 12, y: 14, 
           icon: '📚', 
           name: 'Quest Packs & Adventures', 
@@ -897,16 +889,16 @@
           page: 'books.html'
         },
         { 
-          id: 'home',
+          id: 'giza',
           x: 22, y: 30, 
           icon: '🏠', 
           name: 'The Imaginarium', 
           type: '📍 Home',
           quip: 'Bennu says: "I\'ve been sitting here for 4,500 years. You\'re the one who looks tired."',
-          page: 'index.html'
+          page: 'home.html'
         },
         { 
-          id: 'about',
+          id: 'saqqara',
           x: 24, y: 36, 
           icon: '📖', 
           name: 'The Storykeeper', 
@@ -915,7 +907,7 @@
           page: 'about.html'
         },
         { 
-          id: 'latest',
+          id: 'fayoum',
           x: 16, y: 40, 
           icon: '📰', 
           name: 'Bennu\'s Bulletin', 
@@ -924,7 +916,7 @@
           page: 'latest.html'
         },
         { 
-          id: 'merchandise',
+          id: 'sinai',
           x: 58, y: 18, 
           icon: '🎁', 
           name: 'Gift Closet', 
@@ -933,7 +925,7 @@
           page: 'merchandise.html'
         },
         { 
-          id: 'connect',
+          id: 'monastery',
           x: 50, y: 28, 
           icon: '🐦', 
           name: 'Caw, Caw', 
@@ -942,7 +934,7 @@
           page: 'connect.html'
         },
         { 
-          id: 'characters',
+          id: 'giants',
           x: 40, y: 52, 
           icon: '👥', 
           name: 'Who\'s Who', 
@@ -951,7 +943,7 @@
           page: 'characters.html'
         },
         { 
-          id: 'educators',
+          id: 'luxor',
           x: 32, y: 55, 
           icon: '🍎', 
           name: 'For Educators', 
@@ -960,12 +952,12 @@
           page: 'educators.html'
         },
         { 
-          id: 'contact',
-          x: 4, y: 10, 
+          id: 'abusimbel',
+          x: 12, y: 78, 
           icon: '📞', 
           name: 'Contact', 
           type: '📍 Contact',
-          quip: 'Bennu says: "I\'ve been underground once. Too dark. No snacks. Would not recommend."',
+          quip: 'Bennu says: "Ramesses had 200 wives. I have 200 feathers. Who\'s really winning?"',
           page: 'contact.html'
         }
       ];
@@ -1075,6 +1067,7 @@
           grid.appendChild(item);
         });
 
+        // Activities Hub item
         const activitiesItem = document.createElement('div');
         activitiesItem.className = 'menu-item';
         activitiesItem.style.borderColor = '#c9a84c';
@@ -1112,59 +1105,8 @@
         const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
         contentQuip.textContent = '🐦 ' + quip;
         
-        // Fix for local file protocol: use a relative path with a workaround
-        const pagePath = loc.page || 'about:blank';
-        
-        // Check if we're in a file:// protocol
-        if (window.location.protocol === 'file:') {
-          contentIframe.srcdoc = `
-            <html>
-              <head>
-                <style>
-                  body { 
-                    font-family: 'Georgia', serif; 
-                    background: #fdf6e3; 
-                    color: #3e2e1f; 
-                    display: flex; 
-                    align-items: center; 
-                    justify-content: center; 
-                    height: 100vh; 
-                    margin: 0; 
-                    text-align: center;
-                    padding: 20px;
-                  }
-                  .message {
-                    max-width: 400px;
-                  }
-                  .icon { font-size: 3rem; }
-                  h2 { color: #b45f2a; }
-                  .tip { 
-                    font-size: 0.9rem; 
-                    color: #5c4530; 
-                    margin-top: 12px;
-                    background: #f5ede3;
-                    padding: 12px 16px;
-                    border-radius: 8px;
-                    border-left: 4px solid #c9a84c;
-                  }
-                </style>
-              </head>
-              <body>
-                <div class="message">
-                  <div class="icon">📖</div>
-                  <h2>${loc.name}</h2>
-                  <p>This content is available when hosted on a server.</p>
-                  <div class="tip">
-                    💡 <strong>Tip:</strong> Use "Open in New Tab" to view this page, or upload to Netlify to see it here!
-                  </div>
-                </div>
-              </body>
-            </html>
-          `;
-        } else {
-          contentIframe.src = pagePath;
-        }
-        
+        // Load the full HTML page in the iframe
+        contentIframe.src = loc.page || 'about:blank';
         contentLink.href = loc.page || '#';
         contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
         
@@ -1186,7 +1128,6 @@
         mapOverlays.classList.remove('hidden');
         setTimeout(() => {
           contentIframe.src = 'about:blank';
-          contentIframe.srcdoc = '';
         }, 300);
       }
 
@@ -1247,13 +1188,12 @@
         createHotspots();
         createMenuItems();
         setTimeout(flyBennuToNextPoint, 1000);
-        console.log('🐦 The Imaginarium Map loaded!');
+        console.log(' The Imaginarium Map loaded!');
         console.log(`📍 ${locations.length} locations ready.`);
-        console.log(`🎮 Activities Hub linked in menu!`);
-        console.log('🕊️ Bennu is flying across Egypt!');
+        console.log(' Bennu is flying across Egypt!');
       }
 
-      // --- 12. LOAD MAP WITH FIXES ---
+      // --- 12. LOAD MAP ---
       function loadMap() {
         // Check if image is already loaded
         if (mapImage.complete && mapImage.naturalHeight > 0) {
@@ -1275,19 +1215,14 @@
         // Set up error event (fallback)
         mapImage.addEventListener('error', function() {
           console.warn('Map image failed to load, showing page anyway');
-          // Try loading a smaller version if available
-          if (this.src.includes('.webp') && !this.src.includes('-small')) {
-            this.src = 'images/3Ankaa-website-map-small.webp';
-          } else {
-            setTimeout(() => {
-              loadingScreen.classList.add('hidden');
-              mapContainer.classList.add('visible');
-              initMap();
-            }, 1000);
-          }
+          setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            mapContainer.classList.add('visible');
+            initMap();
+          }, 1000);
         });
 
-        // Safety timeout (if image takes too long)
+        // Safety timeout
         setTimeout(() => {
           if (!loadingScreen.classList.contains('hidden')) {
             console.warn('Image load timeout, showing page anyway');
@@ -1295,14 +1230,14 @@
             mapContainer.classList.add('visible');
             initMap();
           }
-        }, 6000); // Reduced from 8000ms to 6000ms
+        }, 6000);
       }
 
       // --- 13. START LOADING ---
       loadMap();
 
-      console.log('🕊️ Bennu says: "Welcome to the Imaginarium!"');
-      console.log('📱 Mobile users: Using responsive images for faster loading.');
+      console.log(' Bennu says: "Welcome to the Imaginarium!"');
+      console.log('📱 Using responsive images for faster loading.');
 
     })();
   </script>

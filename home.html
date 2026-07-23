@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Imaginarium – Home</title>
+  
+  <!-- Load main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Load icon CSS -->
+  <link rel="stylesheet" href="css/icons.css">
+  
+  <style>
+    /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #fdf6e3;
+      color: #3e2e1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #f5ede3;
+      border-bottom: 2px solid #d4c5a0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo-img {
+      height: 32px;
+      width: auto;
+    }
+    header .site-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    header nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #3e2e1f;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+    header nav a.active {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- MAIN --- */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome-section {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .welcome-image {
+      max-width: 180px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 16px;
+      border: 3px solid #d4c5a0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .welcome-section h1 {
+      font-size: 2.8rem;
+      color: #b45f2a;
+      font-family: 'Georgia', serif;
+      margin-bottom: 6px;
+    }
+
+    .welcome-section .subtitle {
+      font-size: 1.1rem;
+      color: #5c4530;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .welcome-section p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #3e2e1f;
+      max-width: 750px;
+      margin: 0 auto 16px;
+      text-align: left;
+    }
+
+    .welcome-section p:first-of-type {
+      text-align: center;
+    }
+
+    .welcome-section strong {
+      color: #b45f2a;
+    }
+
+    .welcome-section .bennu-quote {
+      font-style: italic;
+      color: #5c4530;
+      background: #f5ede3;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border-left: 4px solid #c9a84c;
+      display: inline-block;
+      margin: 8px 0 20px;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .welcome-section ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .welcome-section ul li {
+      padding: 6px 0 6px 20px;
+      border-bottom: 1px solid #f5ede3;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #3e2e1f;
+      position: relative;
+    }
+
+    .welcome-section ul li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: #c9a84c;
+    }
+
+    .welcome-section .footer-note {
+      text-align: center;
+      font-style: italic;
+      color: #5c4530;
+      margin-top: 16px;
+      border-top: 1px solid #d4c5a0;
+      padding-top: 16px;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img {
+      height: 1.2em;
+      vertical-align: middle;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+      }
+      header nav {
+        gap: 10px;
+      }
+      header nav a {
+        font-size: 0.8rem;
+      }
+      main { padding: 24px 16px; }
+      .welcome-section h1 { font-size: 2rem; }
+      .welcome-section p { font-size: 0.95rem; }
+      .welcome-image { max-width: 140px; }
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 16px 12px; }
+      .welcome-section h1 { font-size: 1.6rem; }
+      .welcome-section p { font-size: 0.9rem; }
+      .welcome-section .bennu-quote { font-size: 0.9rem; padding: 10px 14px; }
+      .welcome-image { max-width: 120px; }
+      header nav a { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="logo">
+      <img src="images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
+      <span class="site-title">3ANKAA</span>
+    </div>
+    <nav>
+      <a href="home.html" class="active">The Imaginarium</a>
+      <a href="map.html">Explore the Map</a>
+      <a href="books.html">Quest Packs & Adventures</a>
+      <a href="about.html">The Storykeeper</a>
+      <a href="latest.html">Bennu's Bulletin</a>
+      <a href="merchandise.html">Gift Closet</a>
+      <a href="connect.html">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <div class="welcome-section">
+      <h1>The Imaginarium</h1>
+      <p class="subtitle">(Hey, that's a fancy word for 'Imagination place'. You're in the right spot.)</p>
+
+      <p>Welcome, adventurer.</p>
+
+      <p>Stories can start anywhere.<br>
+      Maybe in a quiet classroom with a bird in a cage.<br>
+      Or when you ask a question nobody can answer, and then find it in a talking forest,<br>
+      a desert road trip, or a song you thought you forgot.</p>
+
+      <p><strong>This is not a place of comfort. Comfort is for bedtime. This is a place of stirring.</strong></p>
+
+      <p>Here, a sad poem might rhyme with a joke about pigeons. A story about invisible stuff might share a page with a talking loaf of bread.<br>
+      And somewhere in the middle, a class of Year 6 kids, and their weird hoopoe bird, Bennu, will remind you:<br>
+      <em>"Imagination is not running away from reality. It is how we remake and reshape reality."</em></p>
+
+      <div class="bennu-quote">🐦 <em>"I've been flying across Egypt for 4,500 years. You're the one who looks tired." — Bennu</em></div>
+
+      <p><strong>What you'll find inside:</strong></p>
+      <ul>
+        <li><strong>Quest Packs</strong> that turn a simple adventure into a full‑brain workout. No tests, only bad drawings and cool stuff you make.</li>
+        <li><strong>Longer Adventures</strong> that will make you miss your bus stop (or your mom calling you for dinner).</li>
+        <li><strong>Philosophical rants</strong> disguised as funny footnotes.</li>
+        <li><strong>Arguments between ghosts</strong>, love letters to dying stars, and footnotes that argue with the main text.</li>
+        <li>And yes — <strong>laughter</strong>. Sometimes sharp, sometimes silly.<br>
+        Because thinking too hard without joy is just another kind of prison. (Too dramatic? Maybe. Also true.)</li>
+      </ul>
+
+      <p>So browse, download, share with friends. If something makes you laugh, tell someone. If something makes you angry, tell me.<br>
+      (Bonus points if you bring dark chocolate.)<br>
+      All of this exists because I believe that reading should never be like homework — it should be a small act of rebellion against the boring.</p>
+
+      <p><strong>Welcome. Let's think, laugh, and argue together.</strong><br>
+      (Bennu taps thrice. That means: "I'm watching you. In a nice way. Probably.")</p>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 3ANKAA
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+    </p>
+  </footer>
+
+</body>
+</html>
