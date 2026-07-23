@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "The Floating Classroom",
+    "category": "quest",
+    "description": "When Jimba's snack goes missing, the class discovers a time‑traveling portal inside the supply closet.",
+    "image": "images/floatclassrm.png",
+    "status": "coming-soon",
+    "pdfLink": "",
+    "order": 1
+  },
+  {
+    "id": 2,
+    "title": "Bennu's Riddle",
+    "category": "adventure",
+    "description": "A philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers.",
+    "image": "images/sketch.png",
+    "status": "coming-soon",
+    "pdfLink": "",
+    "order": 2
+  },
+  {
+    "id": 3,
+    "title": "The Accidental Messenger",
+    "category": "adventure",
+    "description": "Ali stumbles upon a secret that could change everything. But delivering the message might be harder than receiving it.",
+    "image": "images/floatclassrm.png",
+    "status": "coming-soon",
+    "pdfLink": "",
+    "order": 3
+  },
+  {
+    "id": 4,
+    "title": "Silence of the Hive",
+    "category": "quest",
+    "description": "A colony of bees, a farmer with a dilemma, and a classroom that must decide who is right.",
+    "image": "images/sketch.png",
+    "status": "coming-soon",
+    "pdfLink": "",
+    "order": 4
+  },
+  {
+    "id": 5,
+    "title": "Teacher's Guide: The Floating Classroom",
+    "category": "study-guide",
+    "description": "Lesson plans, discussion questions, and cross-curricular activities for The Floating Classroom.",
+    "image": "images/sketch.png",
+    "status": "coming-soon",
+    "pdfLink": "",
+    "order": 5
+  },
+  {
+    "id": 6,
+    "title": "Study Guide: Bennu's Riddle",
+    "category": "study-guide",
+    "description": "Explore the philosophical themes of truth, ethics, and critical thinking with this comprehensive guide.",
+    "image": "images/floatclassrm.png",
+    "status": "coming-soon",
+    "pdfLink": "",
+    "order": 6
+  }
+]
