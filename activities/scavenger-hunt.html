@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imaginarium Scavenger Hunt</title>
+  <title>Scavenger Hunt - Bennu's Universe</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -674,19 +674,19 @@
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
-      <span class="site-title">3ANKAA</span>
+      <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-      <a href="../home.html">The Imaginarium</a>
+      <a href="../index.html">Bennu's Universe</a>
       <a href="../map.html">Explore the Map</a>
       <a href="../books.html">Quest Packs</a>
-      <a href="../about.html">The Storykeeper</a>
+      <a href="../about.html">About Sha</a>
       <a href="../latest.html">Bennu's Bulletin</a>
     </nav>
   </header>
 
   <main>
-    <h1>🔍 Imaginarium Scavenger Hunt</h1>
+    <h1>🔍 Bennu's Universe - Scavenger Hunt</h1>
     <p class="subtitle">Follow the clues, find the locations. Bennu is your guide. (He's not very helpful.)</p>
 
     <div class="hunt-container" id="huntContainer">
@@ -719,7 +719,7 @@
     <p>
       <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
       <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      © 2026 3ANKAA
+      © 2026 Bennu's Tales
       <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
       <img src="../images/hoopoe-footprint.png" alt="Hoopoe footprint">
     </p>
@@ -911,11 +911,11 @@
         <div class="hunt-complete">
           <span class="big-icon">🏆</span>
           <h2>You Found Everything!</h2>
-          <p>You've discovered all 7 locations of the Imaginarium! Bennu is impressed (and slightly annoyed that you're so good at this).</p>
+          <p>You've discovered all 7 locations of Bennu\'s Universe! Bennu is impressed (and slightly annoyed that you\'re so good at this).</p>
 
           <div class="secret-message">
             <strong>📜 Secret Message from the Mango Committee:</strong><br>
-            "You have proven yourself worthy. The Imaginarium holds many more secrets, but for now, enjoy this exclusive preview: The next Quest Pack will feature a journey through time, where Jimba discovers the ancient origins of snacks. 🥭"
+            "You have proven yourself worthy. Bennu\'s Universe holds many more secrets, but for now, enjoy this exclusive preview: The next Quest Pack will feature a journey through time, where Jimba discovers the ancient origins of snacks. 🥭"
           </div>
 
           <div class="cert-buttons">
@@ -953,12 +953,12 @@
         <img src="${bennuIconPath}" alt="Bennu" class="cert-bennu">
 
         <div class="cert-title">Certificate of Achievement</div>
-        <div class="cert-subtitle">Imaginarium Scavenger Hunt</div>
+        <div class="cert-subtitle">Bennu\'s Universe Scavenger Hunt</div>
         <div class="cert-divider"></div>
 
         <div class="cert-recipient">${name}</div>
         <div class="cert-body">
-          has successfully completed the Imaginarium Scavenger Hunt,
+          has successfully completed Bennu\'s Universe Scavenger Hunt,
           discovering all 7 sacred locations across Egypt.
         </div>
 
@@ -973,7 +973,7 @@
             <span class="signature-icon"><img src="${bennuIconPath}" alt="Bennu"></span>
             <div class="signature-name">Bennu</div>
             <div class="signature-line"></div>
-            <div class="signature-title">The Hoopoe • Guardian of the Imaginarium</div>
+            <div class="signature-title">The Hoopoe • Guardian of Bennu\'s Universe</div>
           </div>
           <div class="signature-block">
             <span style="font-size:1.8rem;">🥭</span>
@@ -988,7 +988,7 @@
         <div class="hoopoe-row">
           <img src="${footprintPath}" alt="Hoopoe footprint">
           <img src="${footprintPath}" alt="Hoopoe footprint">
-          <span class="footprint-label">✦ Friend of the Imaginarium ✦</span>
+          <span class="footprint-label">✦ Friend of Bennu\'s Universe ✦</span>
           <img src="${footprintPath}" alt="Hoopoe footprint">
           <img src="${footprintPath}" alt="Hoopoe footprint">
         </div>
@@ -1070,7 +1070,7 @@
         const yOffset = (pdfHeight - finalHeight) / 2;
 
         pdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight);
-        pdf.save('Imaginarium_Certificate.pdf');
+        pdf.save(''Bennu\'s Universe_Certificate.pdf');
 
       } catch (error) {
         console.error('Error:', error);
@@ -1398,7 +1398,7 @@
 
     // ===== INIT =====
     renderHunt();
-    console.log('🔍 Imaginarium Scavenger Hunt loaded!');
+    console.log('🔍 Bennu\'s Universe Scavenger Hunt loaded!');
     console.log('💡 Use "Print / Save as PDF" for the best results');
   </script>
 </body>
