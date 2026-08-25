@@ -281,6 +281,7 @@
       font-weight: 600;
     }
 
+    /* --- IFRAME WITH LAZY LOADING --- */
     #content-iframe {
       flex: 1;
       width: 100%;
@@ -291,6 +292,56 @@
       background: white;
       margin-bottom: 8px;
       overflow-y: auto;
+    }
+
+    /* --- MOBILE FALLBACK (shown instead of iframe) --- */
+    #mobile-fallback {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      min-height: 300px;
+      background: #fdf6e3;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    #mobile-fallback.show {
+      display: flex;
+    }
+    #mobile-fallback .fallback-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    #mobile-fallback .fallback-title {
+      font-size: 1.2rem;
+      color: #b45f2a;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    #mobile-fallback .fallback-text {
+      font-size: 0.95rem;
+      color: #5c4530;
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 12px;
+    }
+    #mobile-fallback .fallback-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: 0.3s;
+    }
+    #mobile-fallback .fallback-btn:hover {
+      background: #8f4a1f;
     }
 
     #content-card .bennu-quip {
@@ -500,7 +551,6 @@
     #welcome-overlay.active #welcome-card {
       transform: scale(1);
     }
-    #welcome-card .icon { font-size: 4rem; display: block; margin-bottom: 10px; }
     #welcome-card h2 {
       font-family: 'Georgia', serif;
       color: #3e2e1f;
@@ -541,12 +591,6 @@
       font-size: 0.85rem;
       margin-top: auto;
     }
-    footer img {
-      height: 1.2em;
-      vertical-align: middle;
-      margin: 0 4px;
-      opacity: 0.6;
-    }
     footer a {
       color: #d4c5a0;
       text-decoration: none;
@@ -574,9 +618,14 @@
       #content-card .content-header .title-group h2 { font-size: 1rem; }
       #content-card .content-header .title-group .type { font-size: 0.5rem; }
       #content-iframe { 
-        min-height: 300px; 
+        min-height: 250px; 
         max-height: calc(92vh - 180px);
       }
+      #mobile-fallback { min-height: 200px; }
+      #mobile-fallback .fallback-icon { font-size: 2.5rem; }
+      #mobile-fallback .fallback-title { font-size: 1rem; }
+      #mobile-fallback .fallback-text { font-size: 0.85rem; }
+
       #content-card .bennu-quip { font-size: 0.7rem; padding: 6px 12px; }
       .content-btn { font-size: 0.8rem; padding: 7px 16px; min-width: 100px; }
       #content-card .close-btn {
@@ -595,7 +644,6 @@
 
       #welcome-card { padding: 25px; }
       #welcome-card h2 { font-size: 1.4rem; }
-      #welcome-card .icon { font-size: 3rem; }
 
       #hero-section h1 { font-size: 2rem; }
       #hero-section .subtitle { font-size: 1rem; }
@@ -620,10 +668,16 @@
       #content-card .content-header .title-group h2 { font-size: 0.85rem; }
       #content-card .content-header .title-group .type { font-size: 0.45rem; }
       #content-iframe { 
-        min-height: 200px; 
+        min-height: 150px; 
         max-height: calc(95vh - 170px);
         border-radius: 8px;
       }
+      #mobile-fallback { min-height: 150px; padding: 14px; }
+      #mobile-fallback .fallback-icon { font-size: 2rem; }
+      #mobile-fallback .fallback-title { font-size: 0.9rem; }
+      #mobile-fallback .fallback-text { font-size: 0.8rem; }
+      #mobile-fallback .fallback-btn { font-size: 0.8rem; padding: 8px 18px; }
+
       #content-card .bennu-quip { 
         font-size: 0.65rem; 
         padding: 5px 10px;
@@ -667,7 +721,7 @@
 
   <!-- ===== LOADING SCREEN ===== -->
   <div id="loading-screen">
-    <div class="loader"> Loading Bennu's Universe...</div>
+    <div class="loader">🐦 Loading Bennu's Universe...</div>
     <div class="sub">Bennu is flying across Egypt</div>
   </div>
 
@@ -687,9 +741,9 @@
     </div>
     <h1>Bennu's <span class="highlight">Universe</span></h1>
     <p class="subtitle">A place where stories come alive, and a sarcastic hoopoe named Bennu is your guide.</p>
-    <div class="bennu-quote">  <em>"I've been flying across Egypt for 4,500 years. You're the one who looks tired." — Bennu</em></div>
+    <div class="bennu-quote">"I've been flying across Egypt for 4,500 years. You're the one who looks tired." — Bennu</div>
     <div class="explore-cta">
-      <button id="heroExploreBtn">📜 Explore Bennu's Universe </button>
+      <button id="heroExploreBtn">📜 Explore Bennu's Universe</button>
     </div>
     <div class="hero-footer">
       <p>🎮 Games • 🧩 Puzzles • 📖 Stories • 🗺️ Map</p>
@@ -709,9 +763,21 @@
         </div>
       </div>
       
-      <iframe id="content-iframe" src="about:blank"></iframe>
+      <!-- ===== IFRAME WITH LAZY LOADING ===== -->
+      <iframe id="content-iframe" src="about:blank" loading="lazy"></iframe>
       
-      <div class="bennu-quip" id="contentQuip"> Bennu says: "..."</div>
+      <!-- ===== MOBILE FALLBACK ===== -->
+      <div id="mobile-fallback">
+        <div class="fallback-icon">📱</div>
+        <div class="fallback-title">Optimized for Desktop</div>
+        <div class="fallback-text">
+          This content works best on a larger screen.<br>
+          Click the button below to open it in a new tab.
+        </div>
+        <button class="fallback-btn" id="fallbackOpenBtn">📖 Open in New Tab</button>
+      </div>
+      
+      <div class="bennu-quip" id="contentQuip">Bennu says: "..."</div>
       
       <div class="content-actions">
         <a href="#" class="content-btn" id="contentLink" target="_blank">📖 Open in New Tab</a>
@@ -726,6 +792,7 @@
       <button class="close-btn" id="menuClose">✕</button>
       
       <div class="menu-cta">
+        <p class="cta-headline">✨ Your Adventure Awaits</p>
         <p class="cta-text">You've read the stories. Now step into the world behind it.</p>
         <p class="cta-text">Explore the map, play games, solve puzzles, and meet the characters. This is where the journey of Bennu continues.</p>
         <div class="cta-divider"></div>
@@ -738,8 +805,7 @@
 
   <!-- ===== WELCOME OVERLAY ===== -->
   <div id="welcome-overlay">
-    <div id="welcome-card" 
-      <span class="icon"> </span>
+    <div id="welcome-card">
       <h2>Welcome to Bennu's Universe</h2>
       <p>Click any location on the map or explore the menu to begin your journey through Egypt's most magical places. Bennu is your guide!</p>
       <button class="welcome-btn" id="welcomeBtn">Begin Adventure →</button>
@@ -749,11 +815,7 @@
   <!-- ===== FOOTER ===== -->
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      © 2026 Bennu's Tales • All rights reserved
     </p>
     <p style="font-size:0.8rem; margin-top:8px;">
       <a href="sitemap.html" style="color:#d4c5a0; text-decoration:none;">🗺️ Sitemap</a>
@@ -767,19 +829,25 @@
       const loadingScreen = document.getElementById('loading-screen');
       const contentOverlay = document.getElementById('content-overlay');
       const contentIframe = document.getElementById('content-iframe');
+      const mobileFallback = document.getElementById('mobile-fallback');
+      const fallbackOpenBtn = document.getElementById('fallbackOpenBtn');
       const menuBtn = document.getElementById('menuBtn');
       const heroExploreBtn = document.getElementById('heroExploreBtn');
       const menuOverlay = document.getElementById('menu-overlay');
+      const contentLink = document.getElementById('contentLink');
 
-      // --- 2. LOCATION DATA ---
-      // Note: "Who's Who" (characters.html) has been removed from the menu.
-      // It's still accessible via the Imaginarium page (home.html) or direct link.
+      // --- 2. CHECK IF MOBILE ---
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
+
+      // --- 3. LOCATION DATA ---
       const locations = [
         { 
           id: 'home',
           x: 22, y: 30, 
           icon: '🏠', 
-          name: 'Bennus Universe', 
+          name: 'Bennu\'s Universe', 
           type: '📍 Home',
           quip: 'Bennu says: "I\'ve been sitting here for 4,500 years. You\'re the one who looks tired."',
           page: 'home.html'
@@ -804,7 +872,7 @@
         }
       ];
 
-      // --- 3. BENNU QUIPS ---
+      // --- 4. BENNU QUIPS ---
       const bennuQuips = [
         'Bennu says: "The Nile is just a really long snack delivery system. Prove me wrong."',
         'Bennu says: "If you\'re not eating mangoes while reading, are you even living?"',
@@ -814,7 +882,7 @@
         'Bennu says: "The pyramids were built by aliens. Just kidding. They were built by Egyptians with very strong backs."'
       ];
 
-      // --- 4. CREATE MENU ---
+      // --- 5. CREATE MENU ---
       function createMenuItems() {
         const grid = document.getElementById('menuGrid');
         grid.innerHTML = '';
@@ -848,37 +916,59 @@
         grid.appendChild(activitiesItem);
       }
 
-      // --- 5. CONTENT OVERLAY ---
+      // --- 6. CONTENT OVERLAY ---
       const contentClose = document.getElementById('contentClose');
       const contentBack = document.getElementById('contentBack');
       const contentIcon = document.getElementById('contentIcon');
       const contentTitle = document.getElementById('contentTitle');
       const contentType = document.getElementById('contentType');
       const contentQuip = document.getElementById('contentQuip');
-      const contentLink = document.getElementById('contentLink');
 
       function openContent(index) {
-        const loc = locations[index];
-        if (!loc) return;
-        
-        contentIcon.textContent = loc.icon;
-        contentTitle.textContent = loc.name;
-        contentType.textContent = loc.type;
-        
-        const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
-        contentQuip.textContent = '🐦 ' + quip;
-        
-        contentIframe.src = loc.page || 'about:blank';
-        contentLink.href = loc.page || '#';
-        contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
-        
-        contentOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        try {
+          const loc = locations[index];
+          if (!loc) return;
+          
+          contentIcon.textContent = loc.icon;
+          contentTitle.textContent = loc.name;
+          contentType.textContent = loc.type;
+          
+          const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
+          contentQuip.textContent = '🐦 ' + quip;
+          
+          // --- CHECK IF MOBILE ---
+          if (isMobile()) {
+            // Show mobile fallback
+            mobileFallback.classList.add('show');
+            contentIframe.style.display = 'none';
+            // Store the URL for the fallback button
+            fallbackOpenBtn.dataset.url = loc.page || '#';
+            contentLink.href = loc.page || '#';
+            contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
+          } else {
+            // Desktop: load iframe
+            mobileFallback.classList.remove('show');
+            contentIframe.style.display = 'block';
+            contentIframe.src = loc.page || 'about:blank';
+            contentLink.href = loc.page || '#';
+            contentLink.textContent = '📖 Open in New Tab — ' + loc.name;
+          }
+          
+          contentOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        } catch (error) {
+          console.warn('Error loading content:', error);
+          // Fallback: show mobile fallback
+          mobileFallback.classList.add('show');
+          contentIframe.style.display = 'none';
+        }
       }
 
       function closeContent() {
         contentOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        mobileFallback.classList.remove('show');
+        contentIframe.style.display = 'block';
         setTimeout(() => {
           contentIframe.src = 'about:blank';
         }, 300);
@@ -890,7 +980,13 @@
         if (e.target === this) closeContent();
       });
 
-      // --- 6. MENU ---
+      // --- 7. FALLBACK BUTTON ---
+      fallbackOpenBtn.addEventListener('click', function() {
+        const url = this.dataset.url || '#';
+        window.open(url, '_blank');
+      });
+
+      // --- 8. MENU ---
       const menuClose = document.getElementById('menuClose');
 
       function openMenu() {
@@ -904,11 +1000,11 @@
         if (e.target === menuOverlay) menuOverlay.classList.remove('active');
       });
 
-      // --- 7. WELCOME ---
+      // --- 9. WELCOME ---
       const welcomeOverlay = document.getElementById('welcome-overlay');
       const welcomeBtn = document.getElementById('welcomeBtn');
 
-      if (!localStorage.getItem('imaginarium_visited')) {
+      if (!localStorage.getItem('bennus_universe_visited')) {
         setTimeout(() => {
           welcomeOverlay.classList.add('active');
         }, 600);
@@ -916,28 +1012,41 @@
 
       welcomeBtn.addEventListener('click', () => {
         welcomeOverlay.classList.remove('active');
-        localStorage.setItem('imaginarium_visited', 'true');
+        localStorage.setItem('bennus_universe_visited', 'true');
       });
       welcomeOverlay.addEventListener('click', (e) => {
         if (e.target === welcomeOverlay) {
           welcomeOverlay.classList.remove('active');
-          localStorage.setItem('imaginarium_visited', 'true');
+          localStorage.setItem('bennus_universe_visited', 'true');
         }
       });
 
-      // --- 8. KEYBOARD ---
+      // --- 10. KEYBOARD ---
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (contentOverlay.classList.contains('active')) closeContent();
           if (menuOverlay.classList.contains('active')) menuOverlay.classList.remove('active');
           if (welcomeOverlay.classList.contains('active')) {
             welcomeOverlay.classList.remove('active');
-            localStorage.setItem('imaginarium_visited', 'true');
+            localStorage.setItem('bennus_universe_visited', 'true');
           }
         }
       });
 
-      // --- 9. INIT ---
+      // --- 11. WINDOW RESIZE HANDLER ---
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          // If content is open and we switched between mobile/desktop
+          if (contentOverlay.classList.contains('active')) {
+            // Re-check mobile status
+            // Simple approach: close and let user re-open
+          }
+        }, 500);
+      });
+
+      // --- 12. INIT ---
       function init() {
         // Hide loading screen after a moment
         setTimeout(() => {
@@ -946,8 +1055,8 @@
         
         createMenuItems();
         
-        // Auto-open menu on first visit (if welcome overlay isn't active)
-        if (!localStorage.getItem('imaginarium_visited')) {
+        // Auto-open menu on first visit
+        if (!localStorage.getItem('bennus_universe_visited')) {
           setTimeout(() => {
             if (!welcomeOverlay.classList.contains('active')) {
               menuOverlay.classList.add('active');
@@ -955,12 +1064,13 @@
           }, 1200);
         }
         
-        console.log('🐦 The Imaginarium loaded!');
+        console.log('🐦 Bennu\'s Universe loaded!');
         console.log(`📍 ${locations.length} destinations available.`);
+        console.log(`📱 Mobile: ${isMobile() ? 'Yes' : 'No'}`);
         console.log('🕊️ Bennu says: "Welcome!"');
       }
 
-      // --- 10. START ---
+      // --- 13. START ---
       init();
 
     })();
