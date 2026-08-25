@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>The Imaginarium – Explore</title>
+  <title>Bennu's Universe – Explore</title>
   
   <!-- Load CSS -->
   <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
@@ -667,7 +667,7 @@
 
   <!-- ===== LOADING SCREEN ===== -->
   <div id="loading-screen">
-    <div class="loader">🐦 Loading the Imaginarium...</div>
+    <div class="loader"> Loading Bennu's Universe...</div>
     <div class="sub">Bennu is flying across Egypt</div>
   </div>
 
@@ -675,7 +675,7 @@
   <header class="map-header">
     <div class="logo">
       <img src="images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
-      <span class="site-title">3ANKAA</span>
+      <span class="site-title">Bennu's Tales</span>
     </div>
     <button class="menu-btn" id="menuBtn">📜 Explore</button>
   </header>
@@ -685,11 +685,11 @@
     <div class="hero-icon">
       <img src="images/bennu-icon.png" alt="Bennu">
     </div>
-    <h1>The <span class="highlight">Imaginarium</span></h1>
+    <h1>Bennu's <span class="highlight">Universe</span></h1>
     <p class="subtitle">A place where stories come alive, and a sarcastic hoopoe named Bennu is your guide.</p>
-    <div class="bennu-quote">🐦 <em>"I've been flying across Egypt for 4,500 years. You're the one who looks tired." — Bennu</em></div>
+    <div class="bennu-quote">  <em>"I've been flying across Egypt for 4,500 years. You're the one who looks tired." — Bennu</em></div>
     <div class="explore-cta">
-      <button id="heroExploreBtn">📜 Explore the Imaginarium</button>
+      <button id="heroExploreBtn">📜 Explore Bennu's Universe </button>
     </div>
     <div class="hero-footer">
       <p>🎮 Games • 🧩 Puzzles • 📖 Stories • 🗺️ Map</p>
@@ -711,7 +711,7 @@
       
       <iframe id="content-iframe" src="about:blank"></iframe>
       
-      <div class="bennu-quip" id="contentQuip">🐦 Bennu says: "..."</div>
+      <div class="bennu-quip" id="contentQuip"> Bennu says: "..."</div>
       
       <div class="content-actions">
         <a href="#" class="content-btn" id="contentLink" target="_blank">📖 Open in New Tab</a>
@@ -726,22 +726,21 @@
       <button class="close-btn" id="menuClose">✕</button>
       
       <div class="menu-cta">
-        <p class="cta-headline">✨ Your Adventure Awaits</p>
         <p class="cta-text">You've read the stories. Now step into the world behind it.</p>
-        <p class="cta-text">Explore the map, play games, solve puzzles, and meet the characters. The Imaginarium is where the journey of Bennu's Universe continues.</p>
+        <p class="cta-text">Explore the map, play games, solve puzzles, and meet the characters. This is where the journey of Bennu continues.</p>
         <div class="cta-divider"></div>
       </div>
 
-      <h2 id="menuTitle">🏛️ Explore the Imaginarium</h2>
+      <h2 id="menuTitle">🏛️ Explore Bennu's Universe</h2>
       <div class="menu-grid" id="menuGrid"></div>
     </div>
   </div>
 
   <!-- ===== WELCOME OVERLAY ===== -->
   <div id="welcome-overlay">
-    <div id="welcome-card">
-      <span class="icon">🐦</span>
-      <h2>Welcome to The Imaginarium</h2>
+    <div id="welcome-card" 
+      <span class="icon"> </span>
+      <h2>Welcome to Bennu's Universe</h2>
       <p>Click any location on the map or explore the menu to begin your journey through Egypt's most magical places. Bennu is your guide!</p>
       <button class="welcome-btn" id="welcomeBtn">Begin Adventure →</button>
     </div>
@@ -752,7 +751,7 @@
     <p>
       <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
       <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      © 2026 3ANKAA
+      © 2026 Bennu's Tales
       <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
       <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
     </p>
@@ -780,57 +779,11 @@
           id: 'home',
           x: 22, y: 30, 
           icon: '🏠', 
-          name: 'The Imaginarium', 
+          name: 'Bennus Universe', 
           type: '📍 Home',
           quip: 'Bennu says: "I\'ve been sitting here for 4,500 years. You\'re the one who looks tired."',
           page: 'home.html'
         },
-        { 
-          id: 'books',
-          x: 12, y: 14, 
-          icon: '📚', 
-          name: 'Quest Packs & Adventures', 
-          type: '📍 Page',
-          quip: 'Bennu says: "The library burned down. But we\'ve rebuilt it. With more snacks."',
-          page: 'books.html'
-        },
-        { 
-          id: 'about',
-          x: 24, y: 36, 
-          icon: '📖', 
-          name: 'The Storykeeper', 
-          type: '📍 About',
-          quip: 'Bennu says: "They built it step by step. Like a good story. One layer at a time."',
-          page: 'about.html'
-        },
-        { 
-          id: 'latest',
-          x: 16, y: 40, 
-          icon: '📰', 
-          name: 'Bennu\'s Bulletin', 
-          type: '📍 Latest',
-          quip: 'Bennu says: "The best mangoes come from here. Don\'t tell the Mango Committee."',
-          page: 'latest.html'
-        },
-        { 
-          id: 'merchandise',
-          x: 58, y: 18, 
-          icon: '🎁', 
-          name: 'Gift Closet', 
-          type: '📍 Store',
-          quip: 'Bennu says: "Moses got the tablets here. I got a sunburn. We are not the same."',
-          page: 'merchandise.html'
-        },
-        { 
-          id: 'connect',
-          x: 50, y: 28, 
-          icon: '🐦', 
-          name: 'Caw, Caw', 
-          type: '📍 Contact',
-          quip: 'Bennu says: "I tried to visit once. Too hot. Even for me."',
-          page: 'connect.html'
-        },
-        // --- NEW: "Explore the Map" replaces "Who's Who" ---
         { 
           id: 'map',
           x: 40, y: 52, 
@@ -839,15 +792,6 @@
           type: '📍 Map',
           quip: 'Bennu says: "Every great adventure starts with a map. Click to explore!"',
           page: 'map.html'
-        },
-        { 
-          id: 'educators',
-          x: 32, y: 55, 
-          icon: '🍎', 
-          name: 'For Educators', 
-          type: '📍 Educators',
-          quip: 'Bennu says: "The temple has more columns than I have feathers. That\'s saying something."',
-          page: 'educators.html'
         },
         { 
           id: 'contact',
