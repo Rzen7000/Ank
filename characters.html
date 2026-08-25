@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Who's Who – Bennu's Tales</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
@@ -65,6 +65,22 @@
     header nav a:hover {
       border-bottom-color: #b45f2a;
       color: #b45f2a;
+    }
+
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-small {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+      margin: 0 4px;
     }
 
     /* --- MAIN --- */
@@ -262,24 +278,33 @@
       <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-      <a href="home.html" class="active">Bennu's Universe</a>
+      <a href="home.html">Bennu's Universe</a>
       <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">About Sha</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
       <a href="connect.html">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
     </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1 class="reveal">Who's Who in Bennu's Universe</h1>
-      <p class="reveal">Meet the weirdos, the snack‑lovers, the hoopoe, and the ones who accidentally save the world.</p>
+      <h1 class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:28px; height:28px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Who's Who in Bennu's Universe
+      </h1>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Meet the weirdos, the snack‑lovers, the hoopoe, and the ones who accidentally save the world.
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
 
       <div class="character-grid">
         <div class="character-card reveal">
-          <h3> Bennu (the Hoopoe)</h3>
+          <h3>🕊️ Bennu (the Hoopoe)</h3>
           <p><span class="character-tap">Tap language:</span> 1 tap = yes, 2 taps = no, 3 taps = snack time, 4 taps = you're being ridiculous.</p>
           <p>Bennu is ancient, sarcastic, and may or may not control the Imaginarium. He appears when least expected, taps his beak, and leaves more questions than answers. Favourite food: sunflower seeds (but he'll never admit it).</p>
         </div>
@@ -290,12 +315,12 @@
         </div>
 
         <div class="character-card reveal">
-          <h3>Can you guess who's who?</h3>
+          <h3>❓ Can you guess who's who?</h3>
           <p>The prankster, the gamer, a martial artist, a leader, nature's ambassador, inquisitive researcher, empathic observer, engineer duo, a bold adventurer, a tall observer, an artist and one who is connected to water.</p>
         </div>
 
         <div class="character-card reveal">
-          <h3>🎒 Sha </h3>
+          <h3>🎒 Sha</h3>
           <p>Former teacher, current dreamer. Addicted to dark chocolate and exotic fruits. Writes things down so you don't have to. Also the only human Bennu tolerates (mostly).</p>
         </div>
 
@@ -304,17 +329,22 @@
           <p>A running joke that appears in footnotes. No one knows who they are, but they approve all exotic fruit‑related decisions.</p>
         </div>
       </div>
-      <p class="reveal"><em>More characters appear as the Quest Packs unfold. Bennu refuses to give spoilers.</em></p>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        <em>More characters appear as the Quest Packs unfold. Bennu refuses to give spoilers.</em>
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
     </div>
   </main>
 
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
       © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
     </p>
   </footer>
 

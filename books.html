@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Quest Packs & Adventures</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
@@ -65,6 +65,26 @@
     header nav a:hover {
       border-bottom-color: #b45f2a;
       color: #b45f2a;
+    }
+    header nav a.active {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-small {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+      margin: 0 4px;
     }
 
     /* --- MAIN --- */
@@ -371,28 +391,38 @@
       <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-      <a href="home.html" class="active">Bennu's Universe</a>
+      <a href="home.html">Bennu's Universe</a>
       <a href="map.html">Explore the Map</a>
-      <a href="books.html">Quest Packs & Adventures</a>
+      <a href="books.html" class="active">Quest Packs & Adventures</a>
       <a href="about.html">About Sha</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
-      <a href="connect.html">Caw, Caw</a>    </nav>
+      <a href="connect.html">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
+    </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1 class="reveal">📚 Quest Packs & Adventures</h1>
+      <h1 class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:28px; height:28px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        📚 Quest Packs & Adventures
+      </h1>
+      
       <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
         Here's the deal: I write about serious stuff; philosophy, society, why we are here and why bananas are curved, <br>
         but I wrap it in stories that involve a sarcastic hoopoe, a snack‑obsessed student named Jimba, his classmates,<br>
         and a classroom that accidentally travels through time and space.
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
       </p>
+      
       <p class="reveal">
         Fair warning: Some of these dives go very deep. Like, past the bottom of the rabbit hole deep.<br>
         You might finish one and start questioning your existence, your grocery list, and whether Die Hard is a Christmas movie (it is).<br>
         That's normal. Or not. I'm not a therapist.
       </p>
+      
       <p class="reveal">
         <strong>What's inside an Adventure or a Quest Pack?</strong><br>
         #A full story: no abridgement; you get the whole thing.<br>
@@ -401,6 +431,7 @@
         #Cross‑curricular connections for the nerds (It's okay, we love you)<br>
         #An "Ibn Firnas Flight Festival" corner to celebrate glorious failures. Because crashing is learning
       </p>
+      
       <p class="reveal">
         Download a sample of free Quest Packs here.<br>
         Like them and want more? Head to the store! (also called the Gift Closet)<br>
@@ -455,11 +486,11 @@
 
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
       © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
     </p>
   </footer>
 
@@ -528,7 +559,7 @@
           cardsHTML += `
             <div class="book-card reveal">
               ${badgeHTML}
-              <img src="${book.image}" alt="${book.title} cover" class="book-cover">
+              <img src="${book.image}" alt="${book.title} cover" class="book-cover" onerror="this.style.display='none'">
               <h3>${book.title}</h3>
               <p>${book.description}</p>
               ${buttonHTML}

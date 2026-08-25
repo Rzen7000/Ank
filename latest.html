@@ -66,6 +66,26 @@
       border-bottom-color: #b45f2a;
       color: #b45f2a;
     }
+    header nav a.active {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-small {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+      margin: 0 4px;
+    }
 
     /* --- MAIN --- */
     main {
@@ -202,25 +222,34 @@
       <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-       <a href="home.html" class="active">Bennu's Universe</a>
+      <a href="home.html">Bennu's Universe</a>
       <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">About Sha</a>
-      <a href="latest.html">Bennu's Bulletin</a>
+      <a href="latest.html" class="active">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
       <a href="connect.html">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
     </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1 class="reveal">Bennu's Bulletin</h1>
+      <h1 class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:28px; height:28px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Bennu's Bulletin
+      </h1>
+      
       <p class="reveal">This page is where I dump whatever crosses my mind when I should be sleeping.<br>
       New Quest Packs, half‑baked ideas (literally; no baking, just chaos), angry rants about pineapple on pizza, The great Tameya vs Falafel debate,<br>
       and occasional announcements like "I finally figured out how to unlock the Imaginarium without Bennu's permission (You don't. He's the Boss)."</p>
 
-      <p class="reveal">Update frequency: Whenever the mood strikes. Could be daily, could be never. Don't hold your breath. I certainly won't.<br>
-      (Bennu sometimes dictates. His opinions are his own.)</p>
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Update frequency: Whenever the mood strikes. Could be daily, could be never. Don't hold your breath. I certainly won't.<br>
+        (Bennu sometimes dictates. His opinions are his own.)
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
 
       <p class="reveal">Check back never. Or sometimes. I don't control time. The hoopoe does, and he's not telling.</p>
 
@@ -243,17 +272,21 @@
         <li><strong>April 9, 2026</strong> – The Mango Committee has issued a statement: "Mangoes are not responsible for any emotional breakthroughs you have while eating them."</li>
       </ul>
 
-      <p class="reveal"><em>Check back never. Or sometimes. I don't control time.</em></p>
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        <em>Check back never. Or sometimes. I don't control time.</em>
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
     </div>
   </main>
 
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
       © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
     </p>
   </footer>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Lost? – Bennu's Tales</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
@@ -67,6 +67,22 @@
       color: #b45f2a;
     }
 
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-small {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+      margin: 0 4px;
+    }
+
     /* --- MAIN --- */
     main {
       flex: 1;
@@ -76,6 +92,16 @@
       width: 100%;
     }
 
+    .welcome-section {
+      text-align: center;
+    }
+
+    .welcome-section .big-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
     .welcome-section h1 {
       font-size: 2.8rem;
       color: #b45f2a;
@@ -83,6 +109,7 @@
       padding-left: 18px;
       margin-bottom: 24px;
       font-family: 'Georgia', serif;
+      text-align: left;
     }
 
     .welcome-section p {
@@ -90,6 +117,7 @@
       line-height: 1.8;
       color: #3e2e1f;
       margin-bottom: 16px;
+      text-align: left;
     }
 
     .welcome-section a {
@@ -158,6 +186,9 @@
       .welcome-section p {
         font-size: 1rem;
       }
+      .welcome-section .big-icon {
+        font-size: 3rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -174,6 +205,9 @@
       header nav a {
         font-size: 0.7rem;
       }
+      .welcome-section .big-icon {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
@@ -184,36 +218,55 @@
       <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-      <a href="home.html" class="active">Bennu's Universe</a>
+      <a href="home.html">Bennu's Universe</a>
       <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
-      <a href="about.html">Sha Sesh</a>
+      <a href="about.html">About Sha</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
-      <a href="connect.html">Caw, Caw</a>    </nav>
+      <a href="connect.html">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
+    </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1 class="reveal">🕊️ 404 – The Hoopoe Flew Away</h1>
+      <span class="big-icon reveal">🕊️</span>
+      
+      <h1 class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:32px; height:32px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        404 – The Hoopoe Flew Away
+      </h1>
+      
       <p class="reveal">Either Bennu hid this page as a test, or you followed a broken link. Either way, you've landed in the wrong part of Bennu's Universe.</p>
-      <p class="reveal">Don't worry. This happens to the best of us. Even Jimba gets lost inside his own backpack.</p>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Don't worry. This happens to the best of us. Even Jimba gets lost inside his own backpack.
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
+      
       <p class="reveal"><strong>What you can do now:</strong><br>
       - Tap your heels (or just click) to go back to <a href="index.html">Bennu's Universe</a>.<br>
       - Visit the <a href="latest.html">Bennu's Bulletin</a> for the latest news.<br>
       - Send me an angry (or amused) email via <a href="connect.html">Caw, Caw</a>.<br>
       - Or accept that this page never existed and eat some chocolate.</p>
-      <p class="reveal"><em>Bennu taps once. That means: "Try again. Or don't. I'm a bird."</em></p>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        <em>Bennu taps once. That means: "Try again. Or don't. I'm a bird."</em>
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
     </div>
   </main>
 
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
       © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
     </p>
   </footer>
 

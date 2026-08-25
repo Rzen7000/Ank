@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Caw, Caw – Send a Message</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
@@ -65,6 +65,26 @@
     header nav a:hover {
       border-bottom-color: #b45f2a;
       color: #b45f2a;
+    }
+    header nav a.active {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-small {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+      margin: 0 4px;
     }
 
     /* --- MAIN --- */
@@ -280,25 +300,34 @@
       <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-      <a href="home.html" class="active">Bennu's Universe</a>
+      <a href="home.html">Bennu's Universe</a>
       <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
       <a href="about.html">About Sha</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
-      <a href="connect.html">Caw, Caw</a>
+      <a href="connect.html" class="active">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
     </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1 class="reveal"> Caw, Caw: Send a Message</h1>
-      <p class="reveal">I don't do social media. I have enough existential dread without watching people argue about whether you should peel a banana from the stem or the bottom.<br>
-      Bennu agrees; he's a bird of few taps.</p>
+      <h1 class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:28px; height:28px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Caw, Caw: Send a Message
+      </h1>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        I don't do social media. I have enough existential dread without watching people argue about whether you should peel a banana from the stem or the bottom.<br>
+        Bennu agrees; he's a bird of few taps.
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
 
       <p class="reveal">If you need to reach me; to ask a question, share an exotic fruit recommendation, or tell me my dark chocolate take was wrong, email is the only way.</p>
 
-      <p class="reveal"><strong>Email:</strong> <a href="mailto:3ankaa@proton.me">3ankaa@proton.me</a></p>
+      <p class="reveal"><strong>Email:</strong> <a href="mailto:ankaa@proton.me">ankaa@proton.me</a></p>
 
       <p class="reveal"><strong>Response time:</strong> Don't expect an immediate response. If you're lucky, within a week.<br>
       If I'm deep in a rabbit hole or traveling for mangoes, maybe a month. I'll get to you. Probably.</p>
@@ -313,11 +342,15 @@
       - Yes, you can name a character after yourself in a future Quest Pack. For a small donation to my mango fund.<br>
       (Kidding. Or am I? Honestly, I'd probably do it for free, I'm easy.)</p>
 
-      <p class="reveal">If you made it through all that and still want to email me, you're my kind of weirdo. Hit me up.<br>
-      Bennu might even tap a greeting, or he might ignore you. He's a bird of mystery.</p>
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        If you made it through all that and still want to email me, you're my kind of weirdo. Hit me up.<br>
+        Bennu might even tap a greeting, or he might ignore you. He's a bird of mystery.
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
 
       <!-- Simple contact form (no backend) – uses mailto -->
-      <form class="reveal" action="mailto:3ankaa@proton.me" method="post" enctype="text/plain">
+      <form class="reveal" action="mailto:ankaa@proton.me" method="post" enctype="text/plain">
         <label>
           Name:
           <input type="text" name="name" placeholder="Your name here">
@@ -333,11 +366,11 @@
 
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
       © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
     </p>
   </footer>
 

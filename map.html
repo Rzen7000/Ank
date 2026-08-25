@@ -63,6 +63,20 @@
       transform: scale(1.02);
     }
 
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-large {
+      width: 64px;
+      height: 64px;
+      display: inline-block;
+    }
+
     /* --- MAP CONTAINER --- */
     #map-container {
       flex: 1;
@@ -735,7 +749,9 @@
             <span class="legend-label">Fictional Location</span>
           </div>
           <div class="legend-item" style="margin-top:6px; border-top:1px solid rgba(212,197,160,0.2); padding-top:6px;">
-            <span style="font-size:1rem;">🐦</span>
+            <span style="font-size:1rem;">
+              <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            </span>
             <span class="legend-label">Bennu (flying across Egypt)</span>
           </div>
         </div>
@@ -749,7 +765,7 @@
         <div id="bennu" style="left: 15%; top: 20%;">
           <span class="trail"></span>
           <span class="wing">
-            <img src="images/bennu-icon.png" alt="Bennu" style="width:64px; height:64px; display:inline-block;">
+            <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-large" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
           </span>
         </div>
       </div>
@@ -772,7 +788,7 @@
       <!-- IFRAME LOADS THE FULL HTML PAGE -->
       <iframe id="content-iframe" src="about:blank"></iframe>
       
-      <div class="bennu-quip" id="contentQuip">🐦 Bennu says: "..."</div>
+      <div class="bennu-quip" id="contentQuip">🕊️ Bennu says: "..."</div>
       
       <div class="content-actions">
         <a href="#" class="content-btn" id="contentLink" target="_blank">📖 Open in New Tab</a>
@@ -795,7 +811,7 @@
   <!-- ===== WELCOME OVERLAY ===== -->
   <div id="welcome-overlay">
     <div id="welcome-card">
-      <span class="icon"> </span>
+      <span class="icon">🕊️</span>
       <h2>Welcome to Bennu's Universe</h2>
       <p>Click any location on the map or explore the menu to begin your journey through Egypt's most magical places. Bennu is your guide!</p>
       <button class="welcome-btn" id="welcomeBtn">Begin Adventure →</button>
@@ -988,7 +1004,7 @@
         contentType.textContent = loc.type;
         
         const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
-        contentQuip.textContent = '🐦 ' + quip;
+        contentQuip.textContent = '🕊️ ' + quip;
         
         contentIframe.src = loc.page || 'about:blank';
         contentLink.href = loc.page || '#';
@@ -1072,7 +1088,7 @@
         createHotspots();
         createMenuItems();
         setTimeout(flyBennuToNextPoint, 1000);
-        console.log('🐦 Bennu\'s Universe Map loaded!');
+        console.log('🕊️ Bennu\'s Universe Map loaded!');
         console.log(`📍 ${locations.length} locations ready.`);
         console.log(`🎮 Activities Hub linked in menu!`);
         console.log('🕊️ Bennu is flying across Egypt!');

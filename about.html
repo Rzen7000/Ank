@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>About Sha</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
@@ -65,6 +65,26 @@
     header nav a:hover {
       border-bottom-color: #b45f2a;
       color: #b45f2a;
+    }
+    header nav a.active {
+      border-bottom-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* --- BENNU ICON STYLES --- */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .icon-bennu-small {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      display: inline-block;
+      margin: 0 4px;
     }
 
     /* --- MAIN --- */
@@ -247,21 +267,30 @@
       <span class="site-title">Bennu's Tales</span>
     </div>
     <nav>
-      <a href="home.html" class="active">Bennu's Universe</a>
+      <a href="home.html">Bennu's Universe</a>
       <a href="map.html">Explore the Map</a>
       <a href="books.html">Quest Packs & Adventures</a>
-      <a href="about.html">About Sha</a>
+      <a href="about.html" class="active">About Sha</a>
       <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
       <a href="connect.html">Caw, Caw</a>
+      <a href="activities/index.html">🎮 Activities</a>
     </nav>
   </header>
 
   <main>
     <div class="welcome-section">
-      <h1 class="reveal">About Sha</h1>
-      <p class="reveal">Former teacher. Current dreamer. Stubborn? Maybe a little. Truth‑seeker who keeps finding more questions instead of answers.<br>
-      Creative when the dark chocolate levels are just right (80% cocoa minimum; don't @ me).</p>
+      <h1 class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:28px; height:28px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        About Sha
+      </h1>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Former teacher. Current dreamer. Stubborn? Maybe a little. Truth‑seeker who keeps finding more questions instead of answers.<br>
+        Creative when the dark chocolate levels are just right (80% cocoa minimum; don't @ me).
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
 
       <p class="reveal">I love reading in weird places, writing stories that argue with themselves, and traveling to places where exotic fruits grow, preferably where fruit tastes like candy.<br>
       I also love Bennu; a hoopoe who may or may not be magic.<br>
@@ -288,8 +317,13 @@
       #Discomfort is not danger, it's growth.<br>
       #Egypt isn't a backdrop; it's a root.<br>
       #Small actions matter. A tap. A seed. A shared snack.</p>
-      <p class="reveal">If that speaks to you, the books will speak louder.<br>
-      Grab a Quest Pack. Join the flock.</p>
+      
+      <p class="reveal">
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        If that speaks to you, the books will speak louder.<br>
+        Grab a Quest Pack. Join the flock.
+        <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu-small" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </p>
 
       <!-- Resource links -->
       <h2 class="reveal">🧭 Explore Bennu's Universe</h2>
@@ -308,11 +342,11 @@
 
   <footer>
     <p>
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
       © 2026 Bennu's Tales
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
-      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
+      <img src="images/hoopoe-footprint.png" alt="Hoopoe footprint" onerror="this.style.display='none'">
     </p>
   </footer>
 

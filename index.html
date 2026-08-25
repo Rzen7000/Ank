@@ -721,7 +721,9 @@
 
   <!-- ===== LOADING SCREEN ===== -->
   <div id="loading-screen">
-    <div class="loader">🐦 Loading Bennu's Universe...</div>
+    <div class="loader">
+      <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:24px; height:24px; vertical-align:middle;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"> Loading Bennu's Universe...
+    </div>
     <div class="sub">Bennu is flying across Egypt</div>
   </div>
 
@@ -737,7 +739,7 @@
   <!-- ===== HERO SECTION ===== -->
   <section id="hero-section">
     <div class="hero-icon">
-      <img src="images/bennu-icon.png" alt="Bennu">
+      <img src="images/bennu-icon.ico" alt="Bennu" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
     </div>
     <h1>Bennu's <span class="highlight">Universe</span></h1>
     <p class="subtitle">A place where stories come alive, and a sarcastic hoopoe named Bennu is your guide.</p>
@@ -934,7 +936,7 @@
           contentType.textContent = loc.type;
           
           const quip = loc.quip || bennuQuips[Math.floor(Math.random() * bennuQuips.length)];
-          contentQuip.textContent = '🐦 ' + quip;
+          contentQuip.textContent = '🕊️ ' + quip;
           
           // --- CHECK IF MOBILE ---
           if (isMobile()) {
@@ -1064,7 +1066,7 @@
           }, 1200);
         }
         
-        console.log('🐦 Bennu\'s Universe loaded!');
+        console.log('🕊️ Bennu\'s Universe loaded!');
         console.log(`📍 ${locations.length} destinations available.`);
         console.log(`📱 Mobile: ${isMobile() ? 'Yes' : 'No'}`);
         console.log('🕊️ Bennu says: "Welcome!"');
