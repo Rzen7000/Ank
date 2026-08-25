@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bennu's Word Puzzle - Bennu's Universe</title>
+  <title>Bennu's Word Puzzle – Classroom Edition</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,26 +59,162 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 4px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
       margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .puzzle-container {
@@ -89,39 +225,16 @@
       text-align: center;
     }
 
-    .level-selector {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .level-btn {
-      background: #fdf6e3;
-      border: 2px solid #d4c5a0;
-      padding: 8px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-family: 'Georgia', serif;
-      font-size: 0.9rem;
-      transition: 0.3s;
-    }
-    .level-btn:hover {
-      border-color: #b45f2a;
-    }
-    .level-btn.active {
-      background: #b45f2a;
-      color: #fdf6e3;
-      border-color: #b45f2a;
-    }
-
+    /* ===== LEVEL & TYPE SELECTORS ===== */
+    .level-selector,
     .puzzle-type-selector {
       display: flex;
       gap: 10px;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
+    .level-btn,
     .type-btn {
       background: #fdf6e3;
       border: 2px solid #d4c5a0;
@@ -132,28 +245,31 @@
       font-size: 0.9rem;
       transition: 0.3s;
     }
+    .level-btn:hover,
     .type-btn:hover {
       border-color: #b45f2a;
     }
+    .level-btn.active,
     .type-btn.active {
       background: #b45f2a;
       color: #fdf6e3;
       border-color: #b45f2a;
     }
 
+    /* ===== PUZZLE AREA ===== */
     .puzzle-area {
-      margin: 20px 0;
+      margin: 16px 0;
       display: none;
     }
     .puzzle-area.active {
       display: block;
     }
 
-    /* Word Search */
+    /* ===== WORD SEARCH ===== */
     .wordsearch-grid {
       display: grid;
       gap: 3px;
-      max-width: 500px;
+      max-width: 550px;
       margin: 0 auto;
     }
     .wordsearch-grid.easy { grid-template-columns: repeat(10, 1fr); }
@@ -163,32 +279,49 @@
     .ws-cell {
       aspect-ratio: 1;
       background: #fdf6e3;
-      border: 1px solid #d4c5a0;
-      border-radius: 4px;
+      border: 2px solid #d4c5a0;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: 0.2s;
       user-select: none;
       font-family: 'Courier New', monospace;
+      min-width: 30px;
+      min-height: 30px;
     }
     .ws-cell:hover {
       background: #f5ede3;
+      transform: scale(1.05);
     }
     .ws-cell.found {
       background: #e8f5e9;
       border-color: #4caf50;
       color: #2e7d32;
+      transform: scale(0.95);
     }
     .ws-cell.selected {
       background: #c9a84c;
       border-color: #b45f2a;
       color: #fdf6e3;
+      transform: scale(1.1);
+      box-shadow: 0 0 16px rgba(180, 95, 42, 0.3);
+    }
+    .ws-cell.hint-highlight {
+      background: #fff3e0;
+      border-color: #ff9800;
+      animation: hintPulse 0.6s ease 3;
     }
 
+    @keyframes hintPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* ===== WORD LIST ===== */
     .word-list {
       display: flex;
       flex-wrap: wrap;
@@ -198,7 +331,7 @@
     }
     .word-item {
       background: #fdf6e3;
-      padding: 4px 14px;
+      padding: 4px 16px;
       border-radius: 20px;
       border: 2px solid #d4c5a0;
       font-size: 0.9rem;
@@ -210,12 +343,18 @@
       text-decoration: line-through;
       opacity: 0.6;
     }
+    .word-item .word-hint {
+      font-size: 0.7rem;
+      color: #5c4530;
+      display: block;
+      font-style: italic;
+    }
 
-    /* Crossword */
+    /* ===== CROSSWORD ===== */
     .crossword-grid {
       display: grid;
-      gap: 3px;
-      max-width: 500px;
+      gap: 2px;
+      max-width: 550px;
       margin: 0 auto;
     }
     .crossword-grid { grid-template-columns: repeat(10, 1fr); }
@@ -223,7 +362,7 @@
     .cw-cell {
       aspect-ratio: 1;
       background: #fdf6e3;
-      border: 1px solid #d4c5a0;
+      border: 2px solid #d4c5a0;
       border-radius: 4px;
       display: flex;
       align-items: center;
@@ -231,10 +370,22 @@
       font-size: 1.2rem;
       font-weight: 500;
       font-family: 'Courier New', monospace;
+      min-width: 30px;
+      min-height: 30px;
+      position: relative;
     }
     .cw-cell.black {
       background: #3e2e1f;
       border-color: #3e2e1f;
+    }
+    .cw-cell .cell-number {
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      font-size: 0.55rem;
+      font-weight: bold;
+      color: #5c4530;
+      pointer-events: none;
     }
     .cw-cell input {
       width: 100%;
@@ -243,19 +394,27 @@
       background: transparent;
       text-align: center;
       font-size: 1.2rem;
-      font-weight: 500;
+      font-weight: 600;
       font-family: 'Courier New', monospace;
       color: #3e2e1f;
       outline: none;
     }
     .cw-cell input:focus {
       background: #f5ede3;
+      border-radius: 4px;
     }
     .cw-cell.correct {
       background: #e8f5e9;
     }
     .cw-cell.wrong {
       background: #ffebee;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
     }
 
     .crossword-clues {
@@ -263,33 +422,54 @@
       margin: 16px 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px 24px;
+      gap: 6px 24px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .crossword-clues .clue-item {
-      font-size: 0.9rem;
-      padding: 4px 0;
+      font-size: 0.85rem;
+      padding: 3px 0;
       border-bottom: 1px dotted #d4c5a0;
     }
     .crossword-clues .clue-item .num {
       font-weight: bold;
       color: #b45f2a;
     }
+    .crossword-clues .clue-item .clue-answer {
+      color: #4caf50;
+      font-weight: bold;
+      display: none;
+    }
+    .crossword-clues .clue-item.solved .clue-answer {
+      display: inline;
+    }
+    .crossword-clues .clue-item.solved {
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
 
+    /* ===== GAME STATS ===== */
     .game-stats {
       display: flex;
       justify-content: center;
       gap: 24px;
-      margin: 16px 0;
+      margin: 12px 0;
       flex-wrap: wrap;
     }
     .game-stats .stat {
       font-size: 0.95rem;
       color: #5c4530;
+      background: #fdf6e3;
+      padding: 4px 16px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
     }
     .game-stats .stat strong {
       color: #b45f2a;
     }
 
+    /* ===== CONTROLS ===== */
     .puzzle-controls {
       display: flex;
       gap: 12px;
@@ -320,13 +500,119 @@
     .puzzle-btn.secondary:hover {
       background: #c9b89a;
     }
+    .puzzle-btn.green {
+      background: #4caf50;
+    }
+    .puzzle-btn.green:hover {
+      background: #388e3c;
+    }
+    .puzzle-btn.orange {
+      background: #ff9800;
+      color: #2c1810;
+    }
+    .puzzle-btn.orange:hover {
+      background: #e68900;
+    }
 
+    /* ===== FEEDBACK ===== */
     .feedback {
       font-size: 1rem;
       font-style: italic;
       color: #5c4530;
       min-height: 30px;
       margin: 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* ===== HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 5px 12px;
+      margin: 3px 0;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .history-entry .score {
+      color: #b45f2a;
+      font-weight: 500;
+    }
+    .history-entry .date {
+      color: #5c4530;
+      font-size: 0.7rem;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
     }
 
     footer {
@@ -340,29 +626,54 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .puzzle-container { padding: 20px; }
-      .ws-cell { font-size: 1rem; }
+      .ws-cell { font-size: 1rem; min-width: 25px; min-height: 25px; }
       .cw-cell input { font-size: 1rem; }
       .crossword-clues { grid-template-columns: 1fr; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
+      .game-stats { gap: 12px; font-size: 0.85rem; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; }
-      .wordsearch-grid.easy { grid-template-columns: repeat(8, 1fr); }
-      .wordsearch-grid.medium { grid-template-columns: repeat(10, 1fr); }
-      .wordsearch-grid.hard { grid-template-columns: repeat(12, 1fr); }
-      .ws-cell { font-size: 0.8rem; }
-      .cw-cell input { font-size: 0.9rem; }
-      .puzzle-container { padding: 16px; }
+      main { padding: 16px 10px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
+      .puzzle-container { padding: 14px; }
+      .wordsearch-grid.easy { grid-template-columns: repeat(8, 1fr); gap: 2px; }
+      .wordsearch-grid.medium { grid-template-columns: repeat(10, 1fr); gap: 2px; }
+      .wordsearch-grid.hard { grid-template-columns: repeat(12, 1fr); gap: 2px; }
+      .ws-cell { font-size: 0.8rem; min-width: 20px; min-height: 20px; border-width: 1px; }
+      .cw-cell input { font-size: 0.85rem; }
+      .cw-cell { min-width: 20px; min-height: 20px; }
+      .crossword-grid { gap: 1px; }
+      .level-btn, .type-btn { font-size: 0.75rem; padding: 4px 12px; }
+      .puzzle-btn { font-size: 0.8rem; padding: 6px 16px; }
+      .icon-bennu { width: 18px; height: 18px; }
+      .icon-bennu-large { width: 24px; height: 24px; }
+      .game-stats { gap: 6px; font-size: 0.7rem; }
+      .game-stats .stat { padding: 2px 8px; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 15–30 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Vocabulary & Spelling</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -378,49 +689,111 @@
   </header>
 
   <main>
-    <h1>🧩 Bennu's Word Puzzle</h1>
-    <p class="subtitle">Word Search • Crossword • 15 Bennu's Universe Words</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🧩 Bennu's Word Puzzle</h1>
+      <div class="meta">
+        <span class="tag">🎯 Vocabulary</span>
+        <span class="tag">✍️ Spelling</span>
+        <span class="tag">⭐ Level 1-3</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Word Search • Crossword • <strong>20 Bennu's Universe Words</strong></p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Build vocabulary, improve spelling, and develop pattern recognition skills through engaging word puzzles.</span>
+      <span class="time-estimate">⏱️ 15–30 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="puzzle-container">
+      <!-- ===== LEVEL SELECTOR ===== -->
       <div class="level-selector">
-        <button class="level-btn active" data-level="easy">🟢 Easy</button>
-        <button class="level-btn" data-level="medium">🟡 Medium</button>
-        <button class="level-btn" data-level="hard">🔴 Hard</button>
+        <button class="level-btn active" data-level="easy">🟢 Easy (10x10)</button>
+        <button class="level-btn" data-level="medium">🟡 Medium (12x12)</button>
+        <button class="level-btn" data-level="hard">🔴 Hard (14x14)</button>
       </div>
 
+      <!-- ===== TYPE SELECTOR ===== -->
       <div class="puzzle-type-selector">
         <button class="type-btn active" data-type="wordsearch">🔍 Word Search</button>
         <button class="type-btn" data-type="crossword">📝 Crossword</button>
       </div>
 
+      <!-- ===== WORD SEARCH AREA ===== -->
       <div id="wordsearchArea" class="puzzle-area active">
         <div class="game-stats">
-          <span class="stat">🔢 Words Found: <strong id="wsFound">0</strong>/15</span>
+          <span class="stat">🔢 Words Found: <strong id="wsFound">0</strong>/<span id="wsTotal">20</span></span>
           <span class="stat">⏱️ Time: <strong id="wsTimer">00:00</strong></span>
+          <span class="stat">🎯 Accuracy: <strong id="wsAccuracy">0%</strong></span>
         </div>
         <div id="wsGrid"></div>
         <div class="word-list" id="wsWordList"></div>
-        <div class="feedback" id="wsFeedback">🔍 Click and drag across letters to find words!</div>
+        <div class="feedback" id="wsFeedback">
+          <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+          Click and drag across letters to find words!
+        </div>
         <div class="puzzle-controls">
+          <button class="puzzle-btn green" id="wsHint">💡 Hint</button>
           <button class="puzzle-btn" id="wsCheck">✅ Check Answers</button>
           <button class="puzzle-btn secondary" id="wsReset">🔄 New Puzzle</button>
         </div>
       </div>
 
+      <!-- ===== CROSSWORD AREA ===== -->
       <div id="crosswordArea" class="puzzle-area">
         <div class="game-stats">
-          <span class="stat">📝 Solved: <strong id="cwSolved">0</strong>/15</span>
+          <span class="stat">📝 Solved: <strong id="cwSolved">0</strong>/<span id="cwTotal">20</span></span>
           <span class="stat">⏱️ Time: <strong id="cwTimer">00:00</strong></span>
+          <span class="stat">🎯 Accuracy: <strong id="cwAccuracy">0%</strong></span>
         </div>
         <div id="cwGrid"></div>
         <div class="crossword-clues" id="cwClues"></div>
-        <div class="feedback" id="cwFeedback">📝 Type letters into the grid!</div>
+        <div class="feedback" id="cwFeedback">
+          <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+          Type letters into the grid!
+        </div>
         <div class="puzzle-controls">
           <button class="puzzle-btn" id="cwCheck">✅ Check Answers</button>
           <button class="puzzle-btn secondary" id="cwReset">🔄 New Puzzle</button>
         </div>
       </div>
+
+      <!-- ===== HISTORY ===== -->
+      <div class="history-area" id="historyArea">
+        <div class="history-header">
+          <h3>📜 Puzzle History</h3>
+          <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+        </div>
+        <div id="historyList"></div>
+      </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Warm-Up:</strong> Use as a 5-minute vocabulary warm-up.</li>
+        <li><strong>Spelling Practice:</strong> Have students write each word they find.</li>
+        <li><strong>Definitions:</strong> Students define each word after finding it.</li>
+        <li><strong>Sentence Writing:</strong> Students write sentences using the words.</li>
+        <li><strong>Partner Work:</strong> Students work in pairs to solve puzzles.</li>
+        <li><strong>Reflection:</strong> Ask: "Which words were new to you? What do they mean?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>write a story</strong> using all the words from the puzzle!
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -434,14 +807,44 @@
   </footer>
 
   <script>
-    // ===== WORD LIST (15 words) =====
+    // ============================================================
+    // ===== WORD LIST - EXPANDED TO 20 WORDS =====
+    // ============================================================
+
     const WORDS = [
       'HOOPOE', 'MANGO', 'PYRAMID', 'SPHINX', 'BENNU',
       'JIMBA', 'ALI', 'SNACK', 'PORTAL', 'MAGIC',
-      'EGYPT', 'DESERT', 'NILE', 'TEMPLE', 'SCARAB'
+      'EGYPT', 'DESERT', 'NILE', 'TEMPLE', 'SCARAB',
+      'PHARAOH', 'OASIS', 'MUMMY', 'HIEROGLYPH', 'SAND'
     ];
 
-    // ===== CROSSWORD DATA =====
+    const WORD_HINTS = {
+      'HOOPOE': 'The sarcastic bird himself',
+      'MANGO': 'The fruit of the committee',
+      'PYRAMID': 'Ancient triangular tomb',
+      'SPHINX': 'Statue with a lion\'s body',
+      'BENNU': 'The main character',
+      'JIMBA': 'The snack enthusiast',
+      'ALI': 'The quiet thinker',
+      'SNACK': 'What Jimba loves most',
+      'PORTAL': 'A magical doorway',
+      'MAGIC': 'The essence of the universe',
+      'EGYPT': 'The land of the Nile',
+      'DESERT': 'Where pyramids stand',
+      'NILE': 'The great river',
+      'TEMPLE': 'A sacred place',
+      'SCARAB': 'The sacred beetle',
+      'PHARAOH': 'The ancient ruler',
+      'OASIS': 'A green haven in the desert',
+      'MUMMY': 'Preserved for eternity',
+      'HIEROGLYPH': 'Ancient Egyptian writing',
+      'SAND': 'What the desert is made of'
+    };
+
+    // ============================================================
+    // ===== CROSSWORD DATA - EXPANDED =====
+    // ============================================================
+
     const CLUES = [
       { num: 1, across: 'The sarcastic bird (6 letters)', answer: 'HOOPOE' },
       { num: 2, across: 'Exotic fruit loved by the committee (5 letters)', answer: 'MANGO' },
@@ -449,62 +852,96 @@
       { num: 4, across: 'Statue with a nose (6 letters)', answer: 'SPHINX' },
       { num: 5, across: 'Jimba\'s favourite thing (5 letters)', answer: 'SNACK' },
       { num: 6, across: 'A magical doorway (6 letters)', answer: 'PORTAL' },
-      { num: 7, across: 'The river of Egypt (4 letters)', answer: 'NILE' }
+      { num: 7, across: 'The river of Egypt (4 letters)', answer: 'NILE' },
+      { num: 8, across: 'The land of the Nile (5 letters)', answer: 'EGYPT' },
+      { num: 9, across: 'The sacred beetle (6 letters)', answer: 'SCARAB' },
+      { num: 10, across: 'A green desert haven (5 letters)', answer: 'OASIS' }
     ];
 
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const HISTORY_STORAGE_KEY = 'word_puzzle_history';
+
+    // ============================================================
     // ===== DOM ELEMENTS =====
+    // ============================================================
+
     let currentLevel = 'easy';
     let currentType = 'wordsearch';
     let wordSearchGrid = [];
     let foundWords = [];
+    let wordSearchAttempts = 0;
     let wsTimerInterval = null;
     let wsSeconds = 0;
     let selectedCells = [];
     let isDragging = false;
+    let cwTimerInterval = null;
+    let cwSeconds = 0;
+    let crosswordSolved = 0;
+    let crosswordAttempts = 0;
+    let gameHistory = [];
+    let currentMode = 'solo';
 
-    // ===== INIT =====
-    document.querySelectorAll('.level-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentLevel = this.dataset.level;
-        resetPuzzle();
+    // ============================================================
+    // ===== HISTORY FUNCTIONS =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      gameHistory = stored ? JSON.parse(stored) : [];
+      renderHistory();
+    }
+
+    function saveHistory(entry) {
+      gameHistory.unshift(entry);
+      if (gameHistory.length > 20) gameHistory.pop();
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${gameHistory.length} entries`;
+
+      if (gameHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No puzzles solved yet. Start finding words!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      gameHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        div.innerHTML = `
+          <span class="score">🧩 ${entry.found}/${entry.total} words</span>
+          <span>⏱️ ${entry.time}s</span>
+          <span>🎯 ${entry.accuracy}% accuracy</span>
+          <span class="date">📅 ${entry.date}</span>
+        `;
+        container.appendChild(div);
       });
-    });
+    }
 
-    document.querySelectorAll('.type-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentType = this.dataset.type;
-        document.querySelectorAll('.puzzle-area').forEach(el => el.classList.remove('active'));
-        document.getElementById(currentType + 'Area').classList.add('active');
-        resetPuzzle();
-      });
-    });
-
-    document.getElementById('wsReset').addEventListener('click', resetPuzzle);
-    document.getElementById('wsCheck').addEventListener('click', checkWordSearch);
-    document.getElementById('cwReset').addEventListener('click', resetPuzzle);
-    document.getElementById('cwCheck').addEventListener('click', checkCrossword);
-
+    // ============================================================
     // ===== WORD SEARCH =====
+    // ============================================================
+
     function generateWordSearch() {
       const sizeMap = { easy: 10, medium: 12, hard: 14 };
       const size = sizeMap[currentLevel];
       const grid = Array(size).fill(null).map(() => Array(size).fill(''));
       const placedWords = [];
       const usedCells = new Set();
-
-      // Shuffle words
-      const shuffled = [...WORDS].sort(() => Math.random() - 0.5);
-      const wordsToPlace = shuffled.slice(0, Math.min(15, shuffled.length));
+      const wordsToPlace = [...WORDS];
 
       wordsToPlace.forEach(word => {
         const len = word.length;
         let placed = false;
         let attempts = 0;
-        const maxAttempts = 100;
+        const maxAttempts = 200;
 
         while (!placed && attempts < maxAttempts) {
           attempts++;
@@ -565,19 +1002,26 @@
       wordSearchGrid = data.grid;
       foundWords = [];
       selectedCells = [];
+      wordSearchAttempts = 0;
       
       const grid = document.getElementById('wsGrid');
       grid.className = 'wordsearch-grid ' + currentLevel;
       grid.innerHTML = '';
 
+      document.getElementById('wsTotal').textContent = data.words.length;
+
+      // Build word list
+      const wordListEl = document.getElementById('wsWordList');
+      wordListEl.innerHTML = '';
       data.words.forEach(word => {
         const span = document.createElement('span');
         span.className = 'word-item';
-        span.textContent = word;
+        span.innerHTML = `${word} <span class="word-hint">${WORD_HINTS[word] || ''}</span>`;
         span.dataset.word = word;
-        document.getElementById('wsWordList').appendChild(span);
+        wordListEl.appendChild(span);
       });
 
+      // Build grid
       wordSearchGrid.forEach((row, r) => {
         row.forEach((letter, c) => {
           const cell = document.createElement('div');
@@ -594,10 +1038,12 @@
             if (isDragging) continueSelection(r, c);
           });
           cell.addEventListener('mouseup', endSelection);
+          cell.addEventListener('mouseleave', () => {
+            if (isDragging) endSelection();
+          });
           cell.addEventListener('touchstart', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
-            const rect = cell.getBoundingClientRect();
             startSelection(r, c);
           });
           cell.addEventListener('touchmove', (e) => {
@@ -618,7 +1064,10 @@
 
       updateWSStats();
       startWSTimer();
-      document.getElementById('wsFeedback').textContent = '🔍 Click and drag across letters to find words!';
+      document.getElementById('wsFeedback').innerHTML = `
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Click and drag across letters to find words!
+      `;
     }
 
     function startSelection(row, col) {
@@ -691,20 +1140,42 @@
           const el = document.querySelectorAll('.ws-cell')[idx];
           if (el) el.classList.add('found');
         });
-        document.getElementById('wsFeedback').textContent = `✅ Found "${foundWord}"! Bennu taps in approval!`;
+        document.getElementById('wsFeedback').innerHTML = `
+          ✅ Found "${foundWord}"! Bennu taps in approval!
+        `;
+        document.getElementById('wsFeedback').style.color = '#4caf50';
         updateWSStats();
         
         if (foundWords.length === WORDS.length) {
-          document.getElementById('wsFeedback').textContent = '🎉 TAP TAP TAP! You found ALL the words! Bennu is impressed!';
+          document.getElementById('wsFeedback').innerHTML = `
+            🎉 TAP TAP TAP! You found ALL the words! Bennu is impressed!
+          `;
+          document.getElementById('wsFeedback').style.color = '#b45f2a';
+          clearInterval(wsTimerInterval);
+          saveHistory({
+            found: foundWords.length,
+            total: WORDS.length,
+            time: wsSeconds,
+            accuracy: wordSearchAttempts > 0 ? Math.round((foundWords.length / wordSearchAttempts) * 100) : 0,
+            date: new Date().toLocaleString()
+          });
         }
       } else if (foundWord && foundWords.includes(foundWord)) {
-        document.getElementById('wsFeedback').textContent = `🔁 You already found "${foundWord}"! Keep going!`;
+        document.getElementById('wsFeedback').innerHTML = `
+          🔁 You already found "${foundWord}"! Keep going!
+        `;
+        document.getElementById('wsFeedback').style.color = '#ff9800';
       } else {
-        document.getElementById('wsFeedback').textContent = `❌ Not a word in the list. Try again!`;
+        wordSearchAttempts++;
+        document.getElementById('wsFeedback').innerHTML = `
+          ❌ Not a word in the list. Try again!
+        `;
+        document.getElementById('wsFeedback').style.color = '#f44336';
       }
       
       selectedCells = [];
       highlightCells();
+      updateWSStats();
     }
 
     function highlightCells() {
@@ -718,6 +1189,9 @@
 
     function updateWSStats() {
       document.getElementById('wsFound').textContent = foundWords.length;
+      const total = document.querySelectorAll('.word-item').length || WORDS.length;
+      const accuracy = wordSearchAttempts > 0 ? Math.round((foundWords.length / (wordSearchAttempts || 1)) * 100) : 0;
+      document.getElementById('wsAccuracy').textContent = accuracy + '%';
     }
 
     function startWSTimer() {
@@ -732,32 +1206,93 @@
     }
 
     function checkWordSearch() {
-      const total = WORDS.length;
+      const total = document.querySelectorAll('.word-item').length || WORDS.length;
       const found = foundWords.length;
       if (found === total) {
-        document.getElementById('wsFeedback').textContent = '🎉 Perfect! You found everything!';
+        document.getElementById('wsFeedback').innerHTML = '🎉 Perfect! You found everything!';
+        document.getElementById('wsFeedback').style.color = '#4caf50';
       } else {
-        document.getElementById('wsFeedback').textContent = `📊 You found ${found}/${total} words. Keep going!`;
+        document.getElementById('wsFeedback').innerHTML = `📊 You found ${found}/${total} words. Keep going!`;
+        document.getElementById('wsFeedback').style.color = '#5c4530';
       }
     }
 
+    function hintWordSearch() {
+      // Find an unfound word
+      const total = document.querySelectorAll('.word-item').length || WORDS.length;
+      const unfound = WORDS.filter(w => !foundWords.includes(w));
+      if (unfound.length === 0) {
+        document.getElementById('wsFeedback').innerHTML = '🎉 You found all the words already!';
+        document.getElementById('wsFeedback').style.color = '#4caf50';
+        return;
+      }
+
+      const target = unfound[Math.floor(Math.random() * unfound.length)];
+      // Highlight the word in the grid
+      const allCells = document.querySelectorAll('.ws-cell');
+      // Find the word by searching the grid
+      for (let r = 0; r < wordSearchGrid.length; r++) {
+        for (let c = 0; c < wordSearchGrid[0].length; c++) {
+          // Check all directions
+          const dirs = [[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
+          for (const [dr, dc] of dirs) {
+            let word = '';
+            let positions = [];
+            for (let i = 0; i < target.length; i++) {
+              const nr = r + dr * i;
+              const nc = c + dc * i;
+              if (nr < 0 || nr >= wordSearchGrid.length || nc < 0 || nc >= wordSearchGrid[0].length) break;
+              word += wordSearchGrid[nr][nc];
+              positions.push({ r: nr, c: nc });
+            }
+            if (word === target) {
+              // Highlight these cells
+              positions.forEach(pos => {
+                const idx = pos.r * wordSearchGrid[0].length + pos.c;
+                const el = allCells[idx];
+                if (el) {
+                  el.classList.add('hint-highlight');
+                  setTimeout(() => el.classList.remove('hint-highlight'), 2000);
+                }
+              });
+              document.getElementById('wsFeedback').innerHTML = `💡 Hint: Look for "${target}"! (${WORD_HINTS[target] || ''})`;
+              document.getElementById('wsFeedback').style.color = '#ff9800';
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    // ============================================================
     // ===== CROSSWORD =====
+    // ============================================================
+
     function renderCrossword() {
-      const size = 10;
+      const size = 12;
       const grid = Array(size).fill(null).map(() => Array(size).fill(''));
       const cellData = Array(size).fill(null).map(() => Array(size).fill(null));
+      const clueMap = {};
       
-      // Place words in crossword
       const answers = CLUES.map(c => c.answer);
-      // Place horizontally
+      
+      // Place words horizontally starting from row 1
       answers.forEach((word, idx) => {
         const row = idx + 1;
         const col = 2;
         for (let i = 0; i < word.length && col + i < size; i++) {
           grid[row][col + i] = word[i];
-          cellData[row][col + i] = { num: idx + 1, letter: word[i], wordIndex: idx };
+          cellData[row][col + i] = { 
+            num: idx + 1, 
+            letter: word[i], 
+            wordIndex: idx,
+            isStart: i === 0
+          };
         }
       });
+
+      crosswordSolved = 0;
+      crosswordAttempts = 0;
 
       // Render grid
       const gridEl = document.getElementById('cwGrid');
@@ -771,6 +1306,13 @@
           if (!letter) {
             cell.classList.add('black');
           } else {
+            const data = cellData[r][c];
+            if (data && data.isStart) {
+              const numSpan = document.createElement('span');
+              numSpan.className = 'cell-number';
+              numSpan.textContent = data.num;
+              cell.appendChild(numSpan);
+            }
             const input = document.createElement('input');
             input.maxLength = 1;
             input.dataset.row = r;
@@ -782,12 +1324,16 @@
               if (this.value === this.dataset.answer) {
                 this.dataset.filled = 'true';
                 this.parentElement.classList.add('correct');
+                crosswordSolved++;
                 updateCWStats();
+                checkCrosswordComplete();
               } else if (this.value) {
+                crosswordAttempts++;
                 this.parentElement.classList.add('wrong');
                 setTimeout(() => {
                   this.parentElement.classList.remove('wrong');
-                }, 800);
+                }, 600);
+                updateCWStats();
               }
             });
             cell.appendChild(input);
@@ -802,22 +1348,48 @@
       CLUES.forEach(clue => {
         const div = document.createElement('div');
         div.className = 'clue-item';
-        div.innerHTML = `<span class="num">${clue.num}.</span> ${clue.across}`;
+        div.dataset.num = clue.num;
+        div.innerHTML = `
+          <span class="num">${clue.num}.</span> ${clue.across}
+          <span class="clue-answer">✓ ${clue.answer}</span>
+        `;
         cluesEl.appendChild(div);
       });
 
+      document.getElementById('cwTotal').textContent = CLUES.length;
       updateCWStats();
       startCWTimer();
-      document.getElementById('cwFeedback').textContent = '📝 Type letters into the grid!';
+      document.getElementById('cwFeedback').innerHTML = `
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Type letters into the grid!
+      `;
     }
 
     function updateCWStats() {
-      const inputs = document.querySelectorAll('#cwGrid input');
-      let filled = 0;
-      inputs.forEach(inp => {
-        if (inp.dataset.filled === 'true') filled++;
-      });
-      document.getElementById('cwSolved').textContent = filled;
+      document.getElementById('cwSolved').textContent = crosswordSolved;
+      const total = CLUES.length;
+      const accuracy = crosswordAttempts > 0 ? Math.round((crosswordSolved / (crosswordAttempts || 1)) * 100) : 0;
+      document.getElementById('cwAccuracy').textContent = accuracy + '%';
+    }
+
+    function checkCrosswordComplete() {
+      const total = CLUES.length;
+      if (crosswordSolved === total) {
+        clearInterval(cwTimerInterval);
+        document.getElementById('cwFeedback').innerHTML = `
+          🎉 TAP TAP TAP! You solved the crossword! Bennu is amazed!
+        `;
+        document.getElementById('cwFeedback').style.color = '#b45f2a';
+        saveHistory({
+          found: crosswordSolved,
+          total: total,
+          time: cwSeconds,
+          accuracy: crosswordAttempts > 0 ? Math.round((crosswordSolved / (crosswordAttempts || 1)) * 100) : 0,
+          date: new Date().toLocaleString()
+        });
+        // Mark all clues as solved
+        document.querySelectorAll('.clue-item').forEach(el => el.classList.add('solved'));
+      }
     }
 
     function startCWTimer() {
@@ -832,17 +1404,21 @@
     }
 
     function checkCrossword() {
-      const inputs = document.querySelectorAll('#cwGrid input');
-      let correct = 0;
-      let total = 0;
-      inputs.forEach(inp => {
-        total++;
-        if (inp.dataset.filled === 'true') correct++;
-      });
-      document.getElementById('cwFeedback').textContent = `📊 You solved ${correct}/${total} letters. ${correct === total ? '🎉 Perfect!' : 'Keep going!'}`;
+      const total = CLUES.length;
+      const solved = crosswordSolved;
+      if (solved === total) {
+        document.getElementById('cwFeedback').innerHTML = '🎉 Perfect! You solved everything!';
+        document.getElementById('cwFeedback').style.color = '#4caf50';
+      } else {
+        document.getElementById('cwFeedback').innerHTML = `📊 You solved ${solved}/${total} letters. Keep going!`;
+        document.getElementById('cwFeedback').style.color = '#5c4530';
+      }
     }
 
+    // ============================================================
     // ===== RESET =====
+    // ============================================================
+
     function resetPuzzle() {
       if (wsTimerInterval) clearInterval(wsTimerInterval);
       if (cwTimerInterval) clearInterval(cwTimerInterval);
@@ -858,9 +1434,92 @@
       }
     }
 
+    // ============================================================
+    // ===== EVENT LISTENERS =====
+    // ============================================================
+
+    document.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentLevel = this.dataset.level;
+        resetPuzzle();
+      });
+    });
+
+    document.querySelectorAll('.type-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentType = this.dataset.type;
+        document.querySelectorAll('.puzzle-area').forEach(el => el.classList.remove('active'));
+        document.getElementById(currentType + 'Area').classList.add('active');
+        resetPuzzle();
+      });
+    });
+
+    document.getElementById('wsReset').addEventListener('click', resetPuzzle);
+    document.getElementById('wsCheck').addEventListener('click', checkWordSearch);
+    document.getElementById('wsHint').addEventListener('click', hintWordSearch);
+    document.getElementById('cwReset').addEventListener('click', resetPuzzle);
+    document.getElementById('cwCheck').addEventListener('click', checkCrossword);
+
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        const feedback = document.getElementById('wsFeedback');
+        if (feedback) {
+          feedback.innerHTML = `
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            Mode switched to: ${modeNames[currentMode] || currentMode}
+          `;
+          setTimeout(() => {
+            if (currentType === 'wordsearch') {
+              feedback.innerHTML = `
+                <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+                Click and drag across letters to find words!
+              `;
+            }
+          }, 1500);
+        }
+      });
+    });
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        resetPuzzle();
+      }
+      if (e.key === 'h' || e.key === 'H') {
+        if (currentType === 'wordsearch') hintWordSearch();
+      }
+      if (e.key === 'c' || e.key === 'C') {
+        if (currentType === 'wordsearch') checkWordSearch();
+        else checkCrossword();
+      }
+    });
+
+    // ============================================================
     // ===== INIT =====
-    resetPuzzle();
-    console.log('🧩 Bennu\'s Word Puzzle loaded!');
+    // ============================================================
+
+    loadHistory();
+    renderWordSearch();
+
+    console.log('🧩 Bennu\'s Word Puzzle (Classroom Edition) loaded!');
+    console.log(`📋 ${WORDS.length} words available`);
+    console.log(`📜 ${gameHistory.length} puzzles in history`);
+    console.log('💡 Tip: Use R to reset, H for hint, C to check answers');
   </script>
 </body>
 </html>

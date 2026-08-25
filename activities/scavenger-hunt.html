@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scavenger Hunt - Bennu's Universe</title>
+  <title>Bennu's Scavenger Hunt – Classroom Edition</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,26 +59,162 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
       max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 4px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
       margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .hunt-container {
@@ -88,6 +224,7 @@
       padding: 30px;
     }
 
+    /* ===== HUNT PROGRESS ===== */
     .hunt-progress {
       display: flex;
       gap: 8px;
@@ -135,6 +272,7 @@
       color: #fdf6e3;
     }
 
+    /* ===== CLUE CONTAINER ===== */
     .clue-container {
       text-align: center;
       padding: 10px 0;
@@ -167,6 +305,7 @@
       color: #b45f2a;
     }
 
+    /* ===== LOCATION BUTTONS ===== */
     .clue-locations {
       display: flex;
       flex-wrap: wrap;
@@ -285,7 +424,106 @@
       background: #c9b89a;
     }
 
-    /* ===== CERTIFICATE PREVIEW ===== */
+    /* ===== HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 5px 12px;
+      margin: 3px 0;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .history-entry .score {
+      color: #b45f2a;
+      font-weight: 500;
+    }
+    .history-entry .date {
+      color: #5c4530;
+      font-size: 0.7rem;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f5ede3;
+      border-top: 2px solid #d4c5a0;
+      color: #5c4530;
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
+
+    /* ===== CERTIFICATE PREVIEW MODAL ===== */
     #certificatePreview {
       display: none;
       position: fixed;
@@ -332,7 +570,7 @@
       transform: rotate(90deg);
     }
 
-    /* ===== CERTIFICATE DESIGN - FIXED FOR PRINT ===== */
+    /* ===== CERTIFICATE DESIGN ===== */
     #certificate {
       background: #fdf6e3;
       padding: 40px 35px 35px;
@@ -367,7 +605,6 @@
     #certificate .corner-bl { bottom: 18px; left: 22px; }
     #certificate .corner-br { bottom: 18px; right: 22px; }
 
-    /* Bennu Image */
     #certificate .cert-bennu {
       display: block;
       margin: 0 auto 10px;
@@ -420,7 +657,6 @@
       margin: 6px auto;
     }
 
-    /* Location Badges */
     #certificate .cert-locations {
       display: flex;
       flex-wrap: wrap;
@@ -440,7 +676,6 @@
       gap: 5px;
     }
 
-    /* Footer with Signatures */
     #certificate .cert-footer {
       display: flex;
       justify-content: space-between;
@@ -483,7 +718,6 @@
       object-fit: contain;
     }
 
-    /* Hoopoe Footprints */
     #certificate .hoopoe-row {
       display: flex;
       justify-content: center;
@@ -526,129 +760,29 @@
       font-weight: bold;
     }
 
-    /* ===== PRINT STYLES - FIXED ===== */
-    @media print {
-      /* Hide everything except the certificate */
-      header, footer, .hunt-container, .cert-buttons, .download-btn, 
-      .close-btn, #closeCertBtn, #downloadPdfBtn, #printPdfBtn {
-        display: none !important;
-      }
-      
-      /* Show the certificate preview */
-      #certificatePreview {
-        position: static !important;
-        background: none !important;
-        backdrop-filter: none !important;
-        padding: 0 !important;
-        display: block !important;
-        width: 100% !important;
-        height: auto !important;
-        overflow: visible !important;
-        margin: 0 !important;
-        border: none !important;
-      }
-      .cert-preview-card {
-        max-width: 100% !important;
-        padding: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        background: none !important;
-      }
-      
-      /* Certificate itself */
-      #certificate {
-        border: 4px solid #b45f2a !important;
-        box-shadow: none !important;
-        page-break-inside: avoid;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        padding: 30px 25px 25px !important;
-        background: #fdf6e3 !important;
-        border-radius: 12px !important;
-        width: 100% !important;
-        position: relative !important;
-      }
-      
-      /* Ensure all content fits on one page */
-      @page {
-        size: A4 portrait;
-        margin: 15mm 10mm;
-      }
-      
-      /* Adjust sizes for print */
-      .cert-bennu {
-        width: 60px !important;
-        height: 60px !important;
-      }
-      .hoopoe-row img {
-        width: 20px !important;
-        height: 20px !important;
-      }
-      #certificate .cert-title {
-        font-size: 1.6rem !important;
-        letter-spacing: 2px !important;
-      }
-      #certificate .cert-recipient {
-        font-size: 1.5rem !important;
-      }
-      #certificate .cert-body {
-        font-size: 0.85rem !important;
-      }
-      #certificate .cert-locations span {
-        font-size: 0.7rem !important;
-        padding: 3px 10px !important;
-      }
-      #certificate .cert-footer .signature-name {
-        font-size: 1.1rem !important;
-      }
-      #certificate .cert-footer .signature-line {
-        width: 100px !important;
-      }
-      #certificate .corner {
-        font-size: 1.5rem !important;
-      }
-      #certificate .border-decoration {
-        top: 8px !important;
-        left: 8px !important;
-        right: 8px !important;
-        bottom: 8px !important;
-      }
-      #certificate .cert-footer .signature-icon img {
-        width: 24px !important;
-        height: 24px !important;
-      }
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #f5ede3;
-      border-top: 2px solid #d4c5a0;
-      color: #5c4530;
-      font-size: 0.85rem;
-      margin-top: auto;
-    }
-    footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
-
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .hunt-container { padding: 20px; }
       .clue-text { font-size: 1.1rem; }
       .clue-locations { gap: 6px; }
       .loc-btn { font-size: 0.85rem; padding: 8px 14px; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
       #certificate { padding: 25px 20px 20px; }
       #certificate .cert-title { font-size: 1.6rem; }
       #certificate .cert-recipient { font-size: 1.4rem; }
       #certificate .cert-bennu { width: 55px; height: 55px; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; padding-left: 12px; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .hunt-container { padding: 16px; }
       .clue-text { font-size: 1rem; }
       .loc-btn { font-size: 0.8rem; padding: 6px 10px; }
@@ -667,10 +801,22 @@
       .cert-preview-card { padding: 12px; }
       .download-btn { font-size: 0.8rem; padding: 8px 16px; }
       #certificate .corner { font-size: 1.2rem; }
+      .icon-bennu { width: 18px; height: 18px; }
+      .icon-bennu-large { width: 24px; height: 24px; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 20–35 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Geography & Discovery</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -686,15 +832,64 @@
   </header>
 
   <main>
-    <h1>🔍 Bennu's Universe - Scavenger Hunt</h1>
-    <p class="subtitle">Follow the clues, find the locations. Bennu is your guide. (He's not very helpful.)</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🔍 Bennu's Scavenger Hunt</h1>
+      <div class="meta">
+        <span class="tag">🎯 Geography</span>
+        <span class="tag">🧠 Discovery</span>
+        <span class="tag">⭐ Level 2</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Follow the clues, find the locations. Bennu is your guide. <strong>(He's not very helpful.)</strong></p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Develop geographic knowledge and critical thinking skills by solving riddles about famous Egyptian locations and earning a certificate.</span>
+      <span class="time-estimate">⏱️ 20–35 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="hunt-container" id="huntContainer">
       <div class="hunt-progress" id="huntProgress"></div>
       <div id="huntContent">
         <!-- Rendered by JavaScript -->
       </div>
+
+      <!-- ===== HISTORY ===== -->
+      <div class="history-area" id="historyArea">
+        <div class="history-header">
+          <h3>📜 Game History</h3>
+          <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+        </div>
+        <div id="historyList"></div>
+      </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Geography Connection:</strong> Use as an introduction to Egyptian landmarks.</li>
+        <li><strong>Research Extension:</strong> Students research one location in depth.</li>
+        <li><strong>Map Skills:</strong> Have students plot the locations on a map.</li>
+        <li><strong>Creative Writing:</strong> Students write their own clues for a location.</li>
+        <li><strong>Partner Work:</strong> Students discuss clues in pairs before answering.</li>
+        <li><strong>Reflection:</strong> Ask: "Which location would you most like to visit? Why?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>create their own scavenger hunt</strong> with 5 clues about local landmarks!
+      </div>
+    </div>
+
   </main>
 
   <!-- ===== CERTIFICATE PREVIEW MODAL ===== -->
@@ -730,7 +925,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
-    // ===== HUNT DATA =====
+    // ============================================================
+    // ===== HUNT DATA - EXPANDED TO 8 LOCATIONS =====
+    // ============================================================
+
     const huntClues = [
       {
         id: 1,
@@ -745,7 +943,7 @@
         clue: "I'm a city of learning. My library burned down, but we rebuilt it with more snacks. Where am I?",
         hint: "🐦 Bennu says: 'Lots of books. Even more snacks.'",
         location: "alexandria",
-        locationName: "Alexandria",
+        locationName: "Alexandria Library",
         emoji: "📚"
       },
       {
@@ -761,7 +959,7 @@
         clue: "I'm an oasis where the best mangoes come from. The Mango Committee approves. Where am I?",
         hint: "🐦 Bennu says: 'You'll find me in the green place.'",
         location: "fayoum",
-        locationName: "Tunis Village, Fayoum",
+        locationName: "Fayoum Oasis",
         emoji: "🌿"
       },
       {
@@ -769,7 +967,7 @@
         clue: "I'm the city of columns. I have more pillars than Bennu has feathers. Where am I?",
         hint: "🐦 Bennu says: 'Lots of pillars. Even more puzzles.'",
         location: "luxor",
-        locationName: "Luxor",
+        locationName: "Luxor Temple",
         emoji: "🏛️"
       },
       {
@@ -777,7 +975,7 @@
         clue: "I'm a mountain where a prophet got tablets. I got a sunburn. We are not the same. What am I?",
         hint: "🐦 Bennu says: 'It's the mountain. The one with the tablets.'",
         location: "sinai",
-        locationName: "Sinai",
+        locationName: "Mount Sinai",
         emoji: "🏔️"
       },
       {
@@ -787,22 +985,102 @@
         location: "abusimbel",
         locationName: "Abu Simbel",
         emoji: "🏝️"
+      },
+      {
+        id: 8,
+        clue: "I'm the longest river in the world. I flow through Egypt and give life to the land. What am I?",
+        hint: "🐦 Bennu says: 'It's the river that made Egypt possible.'",
+        location: "nile",
+        locationName: "The Nile River",
+        emoji: "🌊"
       }
     ];
 
+    // ============================================================
+    // ===== SECRET MESSAGES =====
+    // ============================================================
+
+    const SECRET_MESSAGES = [
+      "You have proven yourself worthy. Bennu's Universe holds many more secrets, but for now, enjoy this exclusive preview: The next Quest Pack will feature a journey through time, where Jimba discovers the ancient origins of snacks. 🥭",
+      "Congratulations, explorer! You've mapped the heart of Egypt. The Mango Committee has noted your achievement. Next stop: the hidden temples of Nubia! 🏛️",
+      "TAP TAP TAP! You've completed the Scavenger Hunt! Bennu is impressed (and slightly annoyed that you're so good at this). The story continues in 'The Floating Classroom'... 📚",
+      "You've discovered all 8 locations of Bennu's Universe! The ancient secrets of Egypt are yours to keep. But remember: the greatest treasure is the knowledge you've gained. 🌟"
+    ];
+
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const HISTORY_STORAGE_KEY = 'bennu_scavenger_history';
+
+    // ============================================================
     // ===== GAME STATE =====
+    // ============================================================
+
     let currentClueIndex = 0;
     let foundLocations = [];
     let isHuntComplete = false;
     let userName = 'Adventurer';
+    let attempts = 0;
+    let correctAttempts = 0;
+    let gameHistory = [];
+    let currentMode = 'solo';
 
+    // ============================================================
     // ===== DOM ELEMENTS =====
+    // ============================================================
+
     const huntContainer = document.getElementById('huntContainer');
     const huntProgress = document.getElementById('huntProgress');
     const huntContent = document.getElementById('huntContent');
     const certificatePreview = document.getElementById('certificatePreview');
 
+    // ============================================================
+    // ===== HISTORY FUNCTIONS =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      gameHistory = stored ? JSON.parse(stored) : [];
+      renderHistory();
+    }
+
+    function saveHistory(entry) {
+      gameHistory.unshift(entry);
+      if (gameHistory.length > 20) gameHistory.pop();
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${gameHistory.length} entries`;
+
+      if (gameHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No hunts completed yet. Start exploring!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      gameHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        const accuracy = entry.attempts > 0 ? Math.round((entry.correct / entry.attempts) * 100) : 0;
+        div.innerHTML = `
+          <span class="score">🔍 ${entry.found}/${entry.total} locations</span>
+          <span>🎯 ${accuracy}% accuracy</span>
+          <span>${entry.completed ? '✅ Completed' : '❌ Not completed'}</span>
+          <span class="date">📅 ${entry.date}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================================
     // ===== RENDER FUNCTIONS =====
+    // ============================================================
+
     function renderHunt() {
       let progressHTML = '';
       huntClues.forEach((clue, index) => {
@@ -855,7 +1133,10 @@
           <div class="clue-locations" id="locationOptions">
             ${optionsHTML}
           </div>
-          <div class="clue-feedback" id="clueFeedback">🐦 Click a location to guess!</div>
+          <div class="clue-feedback" id="clueFeedback">
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            Click a location to guess!
+          </div>
         </div>
       `;
 
@@ -870,11 +1151,13 @@
     function handleGuess(location, button) {
       const clue = huntClues[currentClueIndex];
       const feedback = document.getElementById('clueFeedback');
+      attempts++;
 
       if (location === clue.location) {
+        correctAttempts++;
         button.classList.add('correct');
         foundLocations.push(location);
-        feedback.textContent = `✅ Correct! That's the ${clue.locationName}! Bennu taps once in approval.`;
+        feedback.innerHTML = `✅ Correct! That's the ${clue.locationName}! Bennu taps once in approval.`;
         feedback.style.color = '#4caf50';
 
         document.querySelectorAll('.loc-btn').forEach(b => b.disabled = true);
@@ -890,7 +1173,7 @@
         }, 1200);
       } else {
         button.classList.add('wrong');
-        feedback.textContent = `❌ Not quite. That's not the right spot. Bennu taps twice. Try again!`;
+        feedback.innerHTML = `❌ Not quite. That's not the right spot. Bennu taps twice. Try again!`;
         feedback.style.color = '#f44336';
         setTimeout(() => {
           button.classList.remove('wrong');
@@ -898,7 +1181,10 @@
       }
     }
 
+    // ============================================================
     // ===== COMPLETE =====
+    // ============================================================
+
     function renderComplete() {
       if (userName === 'Adventurer') {
         const nameInput = prompt('🎉 Congratulations! Enter your name for the certificate:', 'Adventurer');
@@ -907,15 +1193,28 @@
         }
       }
 
+      const secretMessage = SECRET_MESSAGES[Math.floor(Math.random() * SECRET_MESSAGES.length)];
+      const accuracy = attempts > 0 ? Math.round((correctAttempts / attempts) * 100) : 0;
+
+      // Save to history
+      saveHistory({
+        found: foundLocations.length,
+        total: huntClues.length,
+        attempts: attempts,
+        correct: correctAttempts,
+        completed: true,
+        date: new Date().toLocaleString()
+      });
+
       huntContent.innerHTML = `
         <div class="hunt-complete">
           <span class="big-icon">🏆</span>
           <h2>You Found Everything!</h2>
-          <p>You've discovered all 7 locations of Bennu\'s Universe! Bennu is impressed (and slightly annoyed that you\'re so good at this).</p>
+          <p>You've discovered all ${huntClues.length} locations of Bennu's Universe! Bennu is impressed (and slightly annoyed that you're so good at this).</p>
 
           <div class="secret-message">
             <strong>📜 Secret Message from the Mango Committee:</strong><br>
-            "You have proven yourself worthy. Bennu\'s Universe holds many more secrets, but for now, enjoy this exclusive preview: The next Quest Pack will feature a journey through time, where Jimba discovers the ancient origins of snacks. 🥭"
+            "${secretMessage}"
           </div>
 
           <div class="cert-buttons">
@@ -926,7 +1225,10 @@
       `;
     }
 
+    // ============================================================
     // ===== CERTIFICATE =====
+    // ============================================================
+
     function showCertificate(name) {
       const certContainer = document.getElementById('certificate');
       const today = new Date();
@@ -940,7 +1242,7 @@
         `<span>${c.emoji} ${c.locationName}</span>`
       ).join('');
 
-      const bennuIconPath = '../images/bennu-icon.png';
+      const bennuIconPath = '../images/bennu-icon.ico';
       const footprintPath = '../images/hoopoe-footprint.png';
 
       certContainer.innerHTML = `
@@ -950,16 +1252,16 @@
         <span class="corner corner-bl">✦</span>
         <span class="corner corner-br">✦</span>
 
-        <img src="${bennuIconPath}" alt="Bennu" class="cert-bennu">
+        <img src="${bennuIconPath}" alt="Bennu" class="cert-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
 
         <div class="cert-title">Certificate of Achievement</div>
-        <div class="cert-subtitle">Bennu\'s Universe Scavenger Hunt</div>
+        <div class="cert-subtitle">Bennu's Universe Scavenger Hunt</div>
         <div class="cert-divider"></div>
 
         <div class="cert-recipient">${name}</div>
         <div class="cert-body">
-          has successfully completed Bennu\'s Universe Scavenger Hunt,
-          discovering all 7 sacred locations across Egypt.
+          has successfully completed Bennu's Universe Scavenger Hunt,
+          discovering all ${huntClues.length} sacred locations across Egypt.
         </div>
 
         <div class="cert-locations">
@@ -970,10 +1272,10 @@
 
         <div class="cert-footer">
           <div class="signature-block">
-            <span class="signature-icon"><img src="${bennuIconPath}" alt="Bennu"></span>
+            <span class="signature-icon"><img src="${bennuIconPath}" alt="Bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"></span>
             <div class="signature-name">Bennu</div>
             <div class="signature-line"></div>
-            <div class="signature-title">The Hoopoe • Guardian of Bennu\'s Universe</div>
+            <div class="signature-title">The Hoopoe • Guardian of Bennu's Universe</div>
           </div>
           <div class="signature-block">
             <span style="font-size:1.8rem;">🥭</span>
@@ -988,7 +1290,7 @@
         <div class="hoopoe-row">
           <img src="${footprintPath}" alt="Hoopoe footprint">
           <img src="${footprintPath}" alt="Hoopoe footprint">
-          <span class="footprint-label">✦ Friend of Bennu\'s Universe ✦</span>
+          <span class="footprint-label">✦ Friend of Bennu's Universe ✦</span>
           <img src="${footprintPath}" alt="Hoopoe footprint">
           <img src="${footprintPath}" alt="Hoopoe footprint">
         </div>
@@ -1003,7 +1305,10 @@
       certificatePreview.classList.remove('active');
     }
 
-    // ===== DOWNLOAD PDF - FIXED =====
+    // ============================================================
+    // ===== PDF FUNCTIONS =====
+    // ============================================================
+
     async function downloadPDF() {
       const element = document.getElementById('certificate');
       const btn = document.getElementById('downloadPdfBtn');
@@ -1012,7 +1317,6 @@
       btn.disabled = true;
 
       try {
-        // Wait for images
         const images = element.querySelectorAll('img');
         await Promise.all(Array.from(images).map(img => {
           return new Promise((resolve) => {
@@ -1021,7 +1325,6 @@
             } else {
               img.onload = resolve;
               img.onerror = resolve;
-              // Force reload
               img.src = img.src;
             }
           });
@@ -1029,7 +1332,6 @@
 
         btn.textContent = '⏳ Generating PDF...';
 
-        // Capture with proper dimensions
         const canvas = await html2canvas(element, {
           scale: 2.5,
           backgroundColor: '#fdf6e3',
@@ -1052,7 +1354,6 @@
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = pdf.internal.pageSize.getHeight();
 
-        // Calculate proper scaling to fit the full certificate on one page
         const imgAspect = canvas.width / canvas.height;
         const pageAspect = pdfWidth / pdfHeight;
 
@@ -1065,12 +1366,11 @@
           finalWidth = pdfHeight * imgAspect;
         }
 
-        // Center the certificate on the page
         const xOffset = (pdfWidth - finalWidth) / 2;
         const yOffset = (pdfHeight - finalHeight) / 2;
 
         pdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight);
-        pdf.save(''Bennu\'s Universe_Certificate.pdf');
+        pdf.save('Bennus_Universe_Certificate.pdf');
 
       } catch (error) {
         console.error('Error:', error);
@@ -1085,15 +1385,11 @@
       btn.disabled = false;
     }
 
-    // ===== PRINT TO PDF - FIXED =====
     function printToPDF() {
-      // Close the modal
       certificatePreview.classList.remove('active');
       
-      // Create a clean print version
       const certElement = document.getElementById('certificate');
       
-      // Open print dialog
       const printWindow = window.open('', '_blank', 'width=800,height=600');
       
       if (!printWindow) {
@@ -1105,11 +1401,9 @@
         <!DOCTYPE html>
         <html>
         <head>
-          <title>Imaginarium Certificate</title>
+          <title>Bennu's Universe Certificate</title>
           <style>
-            /* Reset styles for print */
             * { margin: 0; padding: 0; box-sizing: border-box; }
-            
             body {
               margin: 0;
               padding: 20px;
@@ -1120,7 +1414,6 @@
               align-items: center;
               min-height: 100vh;
             }
-            
             #certificate-print {
               background: #fdf6e3;
               padding: 40px 35px 35px;
@@ -1134,7 +1427,6 @@
               position: relative;
               box-shadow: 0 8px 40px rgba(0,0,0,0.1);
             }
-            
             #certificate-print .border-decoration {
               position: absolute;
               top: 12px;
@@ -1145,7 +1437,6 @@
               border-radius: 16px;
               pointer-events: none;
             }
-            
             #certificate-print .corner {
               position: absolute;
               font-size: 2rem;
@@ -1156,7 +1447,6 @@
             #certificate-print .corner-tr { top: 18px; right: 22px; }
             #certificate-print .corner-bl { bottom: 18px; left: 22px; }
             #certificate-print .corner-br { bottom: 18px; right: 22px; }
-            
             #certificate-print .cert-bennu {
               display: block;
               margin: 0 auto 10px;
@@ -1164,7 +1454,6 @@
               height: 70px;
               object-fit: contain;
             }
-            
             #certificate-print .cert-title {
               font-size: 2rem;
               color: #b45f2a;
@@ -1191,7 +1480,6 @@
               height: 2px;
               background: #d4c5a0;
             }
-            
             #certificate-print .cert-recipient {
               font-size: 1.8rem;
               color: #3e2e1f;
@@ -1199,7 +1487,6 @@
               font-family: 'Georgia', serif;
               font-style: italic;
             }
-            
             #certificate-print .cert-body {
               font-size: 0.95rem;
               line-height: 1.7;
@@ -1207,7 +1494,6 @@
               max-width: 500px;
               margin: 6px auto;
             }
-            
             #certificate-print .cert-locations {
               display: flex;
               flex-wrap: wrap;
@@ -1226,7 +1512,6 @@
               align-items: center;
               gap: 5px;
             }
-            
             #certificate-print .cert-footer {
               display: flex;
               justify-content: space-between;
@@ -1268,7 +1553,6 @@
               height: 28px;
               object-fit: contain;
             }
-            
             #certificate-print .hoopoe-row {
               display: flex;
               justify-content: center;
@@ -1293,7 +1577,6 @@
               align-items: center;
               padding: 0 4px;
             }
-            
             #certificate-print .cert-date {
               text-align: center;
               font-size: 0.8rem;
@@ -1301,7 +1584,6 @@
               margin-top: 10px;
               font-style: italic;
             }
-            
             #certificate-print .cert-seal {
               text-align: center;
               margin-top: 6px;
@@ -1310,12 +1592,10 @@
               letter-spacing: 3px;
               font-weight: bold;
             }
-            
             @page {
               size: A4 portrait;
               margin: 15mm 10mm;
             }
-            
             @media print {
               body {
                 margin: 0;
@@ -1352,7 +1632,10 @@
       printWindow.document.close();
     }
 
-    // ===== SHUFFLE =====
+    // ============================================================
+    // ===== UTILITY FUNCTIONS =====
+    // ============================================================
+
     function shuffle(array) {
       const arr = [...array];
       for (let i = arr.length - 1; i > 0; i--) {
@@ -1362,20 +1645,26 @@
       return arr;
     }
 
-    // ===== RESTART =====
     function restartHunt() {
-      currentClueIndex = 0;
-      foundLocations = [];
-      isHuntComplete = false;
-      renderHunt();
+      if (confirm('Start over? Your current progress will be lost.')) {
+        currentClueIndex = 0;
+        foundLocations = [];
+        isHuntComplete = false;
+        userName = 'Adventurer';
+        attempts = 0;
+        correctAttempts = 0;
+        renderHunt();
+      }
     }
 
+    // ============================================================
     // ===== EVENT LISTENERS =====
+    // ============================================================
+
     document.getElementById('certClose').addEventListener('click', closeCertificate);
     document.getElementById('closeCertBtn').addEventListener('click', closeCertificate);
     document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
     document.getElementById('printPdfBtn').addEventListener('click', function() {
-      // Close modal and open print
       certificatePreview.classList.remove('active');
       setTimeout(printToPDF, 300);
     });
@@ -1384,7 +1673,6 @@
       if (e.target === this) closeCertificate();
     });
 
-    // ===== KEYBOARD SHORTCUTS =====
     document.addEventListener('keydown', function(e) {
       if ((e.ctrlKey || e.metaKey) && e.key === 'p' && certificatePreview.classList.contains('active')) {
         e.preventDefault();
@@ -1396,10 +1684,55 @@
       }
     });
 
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        const feedback = document.getElementById('clueFeedback');
+        if (feedback) {
+          feedback.innerHTML = `
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            Mode switched to: ${modeNames[currentMode] || currentMode}
+          `;
+          setTimeout(() => {
+            if (!isHuntComplete) {
+              feedback.innerHTML = `
+                <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+                Click a location to guess!
+              `;
+            }
+          }, 1500);
+        }
+      });
+    });
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        if (confirm('Start over?')) restartHunt();
+      }
+    });
+
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
+    loadHistory();
     renderHunt();
-    console.log('🔍 Bennu\'s Universe Scavenger Hunt loaded!');
-    console.log('💡 Use "Print / Save as PDF" for the best results');
+
+    console.log('🔍 Bennu\'s Scavenger Hunt (Classroom Edition) loaded!');
+    console.log(`📋 ${huntClues.length} locations to discover`);
+    console.log(`📜 ${gameHistory.length} hunts in history`);
+    console.log('💡 Use "Print / Save as PDF" for the best certificate results');
   </script>
 </body>
 </html>

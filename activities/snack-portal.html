@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jimba's Snack Portal Adventure - Bennu's Universe</title>
+  <title>Jimba's Snack Portal – Classroom Edition</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,26 +59,162 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
       max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 8px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
       margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .adventure-container {
@@ -90,19 +226,39 @@
       position: relative;
     }
 
+    /* ===== SCENE STYLES ===== */
     .scene-image {
       text-align: center;
-      font-size: 4rem;
-      margin-bottom: 16px;
+      font-size: 4.5rem;
+      margin-bottom: 12px;
       min-height: 80px;
+    }
+    .scene-image .scene-emoji {
+      display: inline-block;
+      animation: sceneFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes sceneFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     .scene-title {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: #b45f2a;
       text-align: center;
       margin-bottom: 8px;
       font-family: 'Georgia', serif;
+    }
+    .scene-title .badge-ending {
+      font-size: 0.7rem;
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 12px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-left: 8px;
+      font-weight: normal;
     }
 
     .scene-text {
@@ -125,11 +281,16 @@
       font-size: 0.95rem;
       color: #5c4530;
       font-style: italic;
+      text-align: left;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .scene-learning strong {
       color: #b45f2a;
     }
 
+    /* ===== CHOICES ===== */
     .choices {
       display: flex;
       flex-direction: column;
@@ -171,7 +332,15 @@
       border-color: #d32f2f;
       background: #ffebee;
     }
+    .choice-btn.ending-choice {
+      border-color: #c9a84c;
+    }
+    .choice-btn.ending-choice:hover {
+      border-color: #b45f2a;
+      background: #f5ede3;
+    }
 
+    /* ===== ENDING ===== */
     .ending {
       text-align: center;
       padding: 20px 0;
@@ -180,11 +349,25 @@
       font-size: 5rem;
       display: block;
       margin-bottom: 12px;
+      animation: endingReveal 0.8s ease;
     }
+
+    @keyframes endingReveal {
+      0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+      50% { transform: scale(1.2) rotate(5deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
     .ending h2 {
       color: #b45f2a;
       font-size: 1.8rem;
       margin-bottom: 8px;
+    }
+    .ending .ending-subtitle {
+      font-size: 1.1rem;
+      color: #c9a84c;
+      margin-bottom: 12px;
+      font-weight: 600;
     }
     .ending p {
       font-size: 1.05rem;
@@ -193,6 +376,44 @@
       max-width: 600px;
       margin: 0 auto 16px;
     }
+    .ending .ending-moral {
+      background: #fdf6e3;
+      border-left: 4px solid #b45f2a;
+      padding: 12px 18px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 12px auto;
+      font-style: italic;
+      color: #5c4530;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-bar {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .progress-step {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d4c5a0;
+      transition: 0.3s;
+    }
+    .progress-step.active {
+      background: #b45f2a;
+      transform: scale(1.3);
+      box-shadow: 0 0 8px rgba(180, 95, 42, 0.3);
+    }
+    .progress-step.visited {
+      background: #c9a84c;
+    }
+    .progress-step.ending-step {
+      background: #4caf50;
+    }
+
     .restart-btn {
       background: #b45f2a;
       color: #fdf6e3;
@@ -209,26 +430,100 @@
       background: #8f4a1f;
       transform: scale(1.02);
     }
-
-    .progress-bar {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .progress-step {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
+    .restart-btn.secondary {
       background: #d4c5a0;
-      transition: 0.3s;
+      color: #3e2e1f;
     }
-    .progress-step.active {
-      background: #b45f2a;
-      transform: scale(1.2);
+    .restart-btn.secondary:hover {
+      background: #c9b89a;
     }
-    .progress-step.visited {
-      background: #c9a84c;
+
+    /* ===== HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 5px 12px;
+      margin: 3px 0;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .history-entry .score {
+      color: #b45f2a;
+      font-weight: 500;
+    }
+    .history-entry .date {
+      color: #5c4530;
+      font-size: 0.7rem;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
     }
 
     footer {
@@ -242,26 +537,44 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .adventure-container { padding: 20px; }
-      .scene-image { font-size: 3rem; }
+      .scene-image { font-size: 3.5rem; }
       .scene-title { font-size: 1.2rem; }
       .scene-text { font-size: 0.95rem; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; padding-left: 12px; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .adventure-container { padding: 16px; }
       .choice-btn { font-size: 0.9rem; padding: 10px 14px; }
-      .scene-image { font-size: 2.5rem; min-height: 60px; }
+      .scene-image { font-size: 2.8rem; min-height: 60px; }
+      .icon-bennu { width: 18px; height: 18px; }
+      .icon-bennu-large { width: 24px; height: 24px; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 15–25 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Decision-Making & Storytelling</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -277,15 +590,64 @@
   </header>
 
   <main>
-    <h1>🎒 Jimba's Snack Portal Adventure</h1>
-    <p class="subtitle">Jimba's backpack is a portal to another dimension. Today, you're going inside. Bring snacks.</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🎒 Jimba's Snack Portal</h1>
+      <div class="meta">
+        <span class="tag">🎯 Decision-Making</span>
+        <span class="tag">📖 Storytelling</span>
+        <span class="tag">⭐ Level 2</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Jimba's backpack is a portal to another dimension. Today, you're going inside. <strong>Bring snacks.</strong></p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Develop decision-making skills, explore consequences of choices, and engage in creative storytelling through an interactive adventure.</span>
+      <span class="time-estimate">⏱️ 15–25 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="adventure-container" id="adventureContainer">
       <div class="progress-bar" id="progressBar"></div>
       <div id="sceneContent">
         <!-- Rendered by JavaScript -->
       </div>
+
+      <!-- ===== HISTORY ===== -->
+      <div class="history-area" id="historyArea">
+        <div class="history-header">
+          <h3>📜 Adventure History</h3>
+          <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+        </div>
+        <div id="historyList"></div>
+      </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Decision-Making:</strong> Discuss the consequences of each choice.</li>
+        <li><strong>Creative Writing:</strong> Students write an alternate ending.</li>
+        <li><strong>Character Study:</strong> Discuss Jimba, Bennu, and the Mango Committee.</li>
+        <li><strong>Vocabulary:</strong> Introduce words like "consequence," "alternate," and "perspective."</li>
+        <li><strong>Partner Work:</strong> Students discuss choices before clicking.</li>
+        <li><strong>Reflection:</strong> Ask: "What would you have done differently? Why?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>write their own adventure path</strong> with 3-4 choices and trade with a partner!
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -299,8 +661,12 @@
   </footer>
 
   <script>
-    // ===== ADVENTURE DATA =====
+    // ============================================================
+    // ===== ADVENTURE DATA - EXPANDED =====
+    // ============================================================
+
     const adventure = {
+      // ===== START =====
       start: {
         id: 'start',
         image: '🎒',
@@ -310,9 +676,26 @@
         choices: [
           { id: 'chocolate', emoji: '🍫', label: 'Grab the dark chocolate', next: 'chocolate_path' },
           { id: 'mango', emoji: '🥭', label: 'Take the magical mango', next: 'mango_path' },
-          { id: 'seeds', emoji: '🌻', label: 'Snatch the sunflower seeds', next: 'seeds_path' }
+          { id: 'seeds', emoji: '🌻', label: 'Snatch the sunflower seeds', next: 'seeds_path' },
+          { id: 'bennu', emoji: '🐦', label: 'Ask Bennu for advice', next: 'bennu_advice' }
         ]
       },
+
+      // ===== BENNU ADVICE PATH =====
+      bennu_advice: {
+        id: 'bennu_advice',
+        image: '🐦',
+        title: 'Bennu\'s Wisdom',
+        text: 'You turn to Bennu. He taps his beak three times. "Chocolate is the safest bet," he says. "Mango is the most adventurous. Seeds are the most practical. But I\'m a bird. What do I know?" He flies away, leaving you to decide.',
+        learning: '💡 Bennu is secretly wise. He just doesn\'t want to admit it.',
+        choices: [
+          { id: 'chocolate', emoji: '🍫', label: 'Trust Bennu: Take the chocolate', next: 'chocolate_path' },
+          { id: 'mango', emoji: '🥭', label: 'Ignore Bennu: Take the mango', next: 'mango_path' },
+          { id: 'seeds', emoji: '🌻', label: 'Be practical: Take the seeds', next: 'seeds_path' }
+        ]
+      },
+
+      // ===== CHOCOLATE PATH =====
       chocolate_path: {
         id: 'chocolate_path',
         image: '🍫',
@@ -321,10 +704,13 @@
         learning: '💡 Dark chocolate contains flavonoids that can help improve blood flow and brain function. Jimba is basically a genius. (He\'ll never admit it.)',
         choices: [
           { id: 'choc_eat', emoji: '😋', label: 'Eat the chocolate river', next: 'choc_eat_ending' },
-          { id: 'choc_explore', emoji: '🔍', label: 'Explore the cocoa mountains', next: 'choc_explore_ending' },
-          { id: 'choc_share', emoji: '🐦', label: 'Share with Bennu', next: 'choc_share_ending' }
+          { id: 'choc_explore', emoji: '⛰️', label: 'Explore the cocoa mountains', next: 'choc_explore_ending' },
+          { id: 'choc_share', emoji: '🐦', label: 'Share with Bennu', next: 'choc_share_ending' },
+          { id: 'choc_build', emoji: '🏰', label: 'Build a chocolate castle', next: 'choc_castle_ending' }
         ]
       },
+
+      // ===== MANGO PATH =====
       mango_path: {
         id: 'mango_path',
         image: '🥭',
@@ -334,9 +720,12 @@
         choices: [
           { id: 'mango_test', emoji: '📝', label: 'Take the Mango Test', next: 'mango_test_ending' },
           { id: 'mango_escape', emoji: '🏃', label: 'Run away with the mango', next: 'mango_escape_ending' },
-          { id: 'mango_talk', emoji: '🗣️', label: 'Negotiate with the Committee', next: 'mango_committee_ending' }
+          { id: 'mango_talk', emoji: '🗣️', label: 'Negotiate with the Committee', next: 'mango_committee_ending' },
+          { id: 'mango_plant', emoji: '🌱', label: 'Plant the mango seed', next: 'mango_plant_ending' }
         ]
       },
+
+      // ===== SEEDS PATH =====
       seeds_path: {
         id: 'seeds_path',
         image: '🌻',
@@ -346,81 +735,195 @@
         choices: [
           { id: 'seed_garden', emoji: '🌿', label: 'Explore the garden', next: 'seed_garden_ending' },
           { id: 'seed_salad', emoji: '🥗', label: 'Confront the Evil Salad', next: 'seed_salad_ending' },
-          { id: 'seed_share', emoji: '🫂', label: 'Share seeds with the garden creatures', next: 'seed_share_ending' }
+          { id: 'seed_share', emoji: '🫂', label: 'Share seeds with the garden creatures', next: 'seed_share_ending' },
+          { id: 'seed_climb', emoji: '🌳', label: 'Climb the giant sunflower', next: 'seed_climb_ending' }
         ]
       },
-      // ===== ENDINGS =====
+
+      // ============================================================
+      // ===== ENDINGS - EXPANDED =====
+      // ============================================================
+
       choc_eat_ending: {
         id: 'choc_eat_ending',
         image: '😋',
-        title: '🏆 Ending: The Chocolate Coma',
+        title: '🏆 The Chocolate Coma',
+        endingSubtitle: 'You made a delicious choice!',
         text: 'You eat the entire chocolate river. It\'s delicious. You\'re happy. You\'re also completely covered in chocolate and unable to move. Bennu taps four times. That means: "You\'re being ridiculous." But was it worth it? Absolutely. You wake up back in the classroom with a chocolate stain on your shirt and a smile on your face.',
+        moral: 'Sometimes the best choices are the ones that make you happy, even if they\'re messy.',
         ending: true
       },
       choc_explore_ending: {
         id: 'choc_explore_ending',
         image: '⛰️',
-        title: '🏆 Ending: The Cocoa King',
+        title: '🏆 The Cocoa King',
+        endingSubtitle: 'You made an adventurous choice!',
         text: 'You climb the cocoa mountains and discover the legendary Cocoa King — a wise old chocolate bar who shares the secret of the universe: "Life is like dark chocolate. It\'s bitter, sweet, and best enjoyed with good company." You return with newfound wisdom and a pocket full of cocoa beans. The classroom smells amazing.',
+        moral: 'Adventure leads to discovery and wisdom.',
         ending: true
       },
       choc_share_ending: {
         id: 'choc_share_ending',
         image: '🐦',
-        title: '🏆 Ending: Bennu\'s Best Friend',
+        title: '🏆 Bennu\'s Best Friend',
+        endingSubtitle: 'You made a generous choice!',
         text: 'You share the chocolate with Bennu. He taps once — that means "Yes." He taps three times — that means "Snack time." You\'ve officially become Bennu\'s favourite human. He gives you a feather as a token of friendship. You frame it. You\'ve never been prouder.',
+        moral: 'Generosity builds the strongest friendships.',
         ending: true
       },
+      choc_castle_ending: {
+        id: 'choc_castle_ending',
+        image: '🏰',
+        title: '🏆 The Chocolate Architect',
+        endingSubtitle: 'You made a creative choice!',
+        text: 'You build a magnificent castle out of chocolate. It has towers, battlements, and a moat of caramel. The chocolate kingdom declares you their official architect. You return to the classroom with blueprints and a newfound love for creative construction.',
+        moral: 'Creativity can build amazing things.',
+        ending: true
+      },
+
       mango_test_ending: {
         id: 'mango_test_ending',
         image: '📝',
-        title: '🏆 Ending: The Mango Scholar',
+        title: '🏆 The Mango Scholar',
+        endingSubtitle: 'You made a studious choice!',
         text: 'You pass the Mango Test with flying colours. The Mango Committee grants you the title of "Mango Scholar" and sends you back with a magical mango that never runs out. You become famous throughout the Imaginarium. Jimba is jealous. You share your mango with him anyway.',
+        moral: 'Knowledge and generosity go hand in hand.',
         ending: true
       },
       mango_escape_ending: {
         id: 'mango_escape_ending',
         image: '🏃',
-        title: '🏆 Ending: The Great Mango Escape',
+        title: '🏆 The Great Mango Escape',
+        endingSubtitle: 'You made a daring choice!',
         text: 'You run away with the magical mango. The Mango Committee is furious. They chase you through the portal, but you\'re too fast. You return to the classroom and eat the mango in one glorious bite. It tastes like victory. And also like victory.',
+        moral: 'Sometimes taking a risk pays off.',
         ending: true
       },
       mango_committee_ending: {
         id: 'mango_committee_ending',
         image: '🥭✨',
-        title: '🏆 Secret Ending: The Mango Committee Member',
+        title: '🏆 The Mango Committee Member',
+        endingSubtitle: 'You made a diplomatic choice!',
         text: 'You impress the Mango Committee with your negotiation skills. They offer you a position as an honorary member. Your first task: tasting mangoes from around the world. You accept. You now spend your days eating mangoes and making important decisions about fruit. Life is good.',
+        moral: 'Diplomacy and wisdom open doors.',
         ending: true
       },
+      mango_plant_ending: {
+        id: 'mango_plant_ending',
+        image: '🌱',
+        title: '🏆 The Mango Gardener',
+        endingSubtitle: 'You made a nurturing choice!',
+        text: 'You plant the mango seed in the classroom garden. Within weeks, a magnificent mango tree grows, producing fruit for everyone. The whole school enjoys mangoes. You\'ve become a legend. The Mango Committee sends you a thank-you note.',
+        moral: 'Nurturing others creates lasting rewards.',
+        ending: true
+      },
+
       seed_garden_ending: {
         id: 'seed_garden_ending',
         image: '🌿',
-        title: '🏆 Ending: The Garden Keeper',
+        title: '🏆 The Garden Keeper',
+        endingSubtitle: 'You made a peaceful choice!',
         text: 'You explore the Garden of Infinite Snacks and discover the secret to eternal snack happiness: sharing. The garden creatures teach you that snacks are best enjoyed in company. You return to the classroom with a basket of snacks and a heart full of joy. Jimba cries. It\'s beautiful.',
+        moral: 'Happiness grows when it\'s shared.',
         ending: true
       },
       seed_salad_ending: {
         id: 'seed_salad_ending',
         image: '🥗⚔️',
-        title: '🏆 Ending: The Salad Slayer',
+        title: '🏆 The Salad Slayer',
+        endingSubtitle: 'You made a brave choice!',
         text: 'You confront the Evil Salad. It\'s a terrifying battle of wills. You throw sunflower seeds at it, and it starts to wilt. You\'re victorious. The garden celebrates. You\'ve defeated the greatest enemy of snack lovers everywhere. Bennu taps twice: "No, but also yes."',
+        moral: 'Courage can overcome even the most fearsome opponents.',
         ending: true
       },
       seed_share_ending: {
         id: 'seed_share_ending',
         image: '🫂',
-        title: '🏆 Ending: The Seed Ambassador',
+        title: '🏆 The Seed Ambassador',
+        endingSubtitle: 'You made a generous choice!',
         text: 'You share the seeds with all the garden creatures. They love you. They give you a magical seed that grows into a plant that produces any snack you want. You\'ve become the Seed Ambassador. Jimba asks for chocolate. You grow him some. This is paradise.',
+        moral: 'Sharing creates abundance for everyone.',
+        ending: true
+      },
+      seed_climb_ending: {
+        id: 'seed_climb_ending',
+        image: '🌳',
+        title: '🏆 The Sunflower Summit',
+        endingSubtitle: 'You made an ambitious choice!',
+        text: 'You climb the giant sunflower, reaching heights no one has ever reached. From the top, you can see the entire Garden of Infinite Snacks. You spot a hidden valley filled with chocolate waterfalls. You return with a map and a new purpose: to explore every corner of the Snack Portal.',
+        moral: 'Ambitious goals lead to new discoveries.',
         ending: true
       }
     };
 
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const HISTORY_STORAGE_KEY = 'jimba_portal_history';
+
+    // ============================================================
     // ===== GAME STATE =====
+    // ============================================================
+
     let currentScene = 'start';
     let visitedScenes = ['start'];
     let totalScenes = 0;
+    let gameHistory = [];
+    let currentMode = 'solo';
+    let pathHistory = [];
 
+    // ============================================================
+    // ===== DOM ELEMENTS =====
+    // ============================================================
+
+    const sceneContent = document.getElementById('sceneContent');
+    const progressBar = document.getElementById('progressBar');
+
+    // ============================================================
+    // ===== HISTORY FUNCTIONS =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      gameHistory = stored ? JSON.parse(stored) : [];
+      renderHistory();
+    }
+
+    function saveHistory(entry) {
+      gameHistory.unshift(entry);
+      if (gameHistory.length > 20) gameHistory.pop();
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${gameHistory.length} entries`;
+
+      if (gameHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No adventures yet. Enter the portal!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      gameHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        div.innerHTML = `
+          <span class="score">🎒 ${entry.endingTitle}</span>
+          <span>${entry.completed ? '✅ Completed' : '❌ Incomplete'}</span>
+          <span class="date">📅 ${entry.date}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================================
     // ===== RENDER FUNCTION =====
+    // ============================================================
+
     function renderScene(sceneId) {
       const scene = adventure[sceneId];
       if (!scene) return;
@@ -429,18 +932,29 @@
       if (!visitedScenes.includes(sceneId)) {
         visitedScenes.push(sceneId);
       }
+      if (!pathHistory.includes(sceneId)) {
+        pathHistory.push(sceneId);
+      }
 
-      const container = document.getElementById('sceneContent');
       let html = '';
 
       // Progress bar
       updateProgress();
 
-      // Scene image
-      html += `<div class="scene-image">${scene.image || '🎒'}</div>`;
+      // Scene image with animation
+      html += `<div class="scene-image"><span class="scene-emoji">${scene.image || '🎒'}</span></div>`;
 
       // Title
-      html += `<div class="scene-title">${scene.title || ''}</div>`;
+      html += `<div class="scene-title">${scene.title || ''}`;
+      if (scene.ending) {
+        html += ` <span class="badge-ending">🎉 Ending</span>`;
+      }
+      html += `</div>`;
+
+      // Ending subtitle
+      if (scene.endingSubtitle) {
+        html += `<div style="text-align:center; color:#c9a84c; font-weight:600; margin-bottom:8px;">${scene.endingSubtitle}</div>`;
+      }
 
       // Text
       html += `<div class="scene-text">${scene.text || ''}</div>`;
@@ -455,22 +969,45 @@
         html += `<div class="ending">
           <span class="big-emoji">${scene.image || '🎉'}</span>
           <h2>${scene.title || 'The End'}</h2>
+          ${scene.endingSubtitle ? `<div class="ending-subtitle">${scene.endingSubtitle}</div>` : ''}
           <p>${scene.text || ''}</p>
-          <button class="restart-btn" onclick="restartAdventure()">🔄 Start Again</button>
+          ${scene.moral ? `<div class="ending-moral">💡 ${scene.moral}</div>` : ''}
+          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button class="restart-btn" onclick="restartAdventure()">🔄 Start Again</button>
+            <button class="restart-btn secondary" onclick="shareEnding()">📤 Share Ending</button>
+          </div>
         </div>`;
+
+        // Save to history when ending is reached
+        const endingTitle = scene.title.replace('🏆 ', '');
+        saveHistory({
+          endingTitle: endingTitle,
+          completed: true,
+          date: new Date().toLocaleString()
+        });
+
       } else if (scene.choices) {
         html += `<div class="choices">`;
         scene.choices.forEach(choice => {
           const isTrap = choice.id.includes('salad') || choice.id.includes('escape');
-          html += `<button class="choice-btn${isTrap ? ' trap' : ''}" onclick="makeChoice('${choice.next}')">
-            <span class="emoji">${choice.emoji || '➡️'}</span>
+          const isEnding = choice.next.includes('ending');
+          let btnClass = 'choice-btn';
+          if (isTrap) btnClass += ' trap';
+          if (isEnding) btnClass += ' ending-choice';
+          // Check if the emoji is Bennu (🐦) and replace with icon if needed
+          let emojiDisplay = choice.emoji || '➡️';
+          if (choice.emoji === '🐦') {
+            emojiDisplay = `<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">`;
+          }
+          html += `<button class="${btnClass}" onclick="makeChoice('${choice.next}')">
+            <span class="emoji">${emojiDisplay}</span>
             <span class="label">${choice.label || 'Continue'}</span>
           </button>`;
         });
         html += `</div>`;
       }
 
-      container.innerHTML = html;
+      sceneContent.innerHTML = html;
     }
 
     function makeChoice(nextId) {
@@ -480,30 +1017,107 @@
     }
 
     function updateProgress() {
-      const bar = document.getElementById('progressBar');
-      // Count all scenes (including endings)
       const allSceneIds = Object.keys(adventure);
       totalScenes = allSceneIds.length;
-      const progress = Math.round((visitedScenes.length / totalScenes) * 100);
       let html = '';
-      // Simple dots
       allSceneIds.forEach(id => {
         let className = 'progress-step';
         if (id === currentScene) className += ' active';
-        else if (visitedScenes.includes(id)) className += ' visited';
+        else if (visitedScenes.includes(id)) {
+          className += ' visited';
+          if (adventure[id] && adventure[id].ending) className += ' ending-step';
+        }
         html += `<div class="${className}"></div>`;
       });
-      bar.innerHTML = html;
+      progressBar.innerHTML = html;
     }
 
+    // ============================================================
+    // ===== SHARE ENDING =====
+    // ============================================================
+
+    function shareEnding() {
+      const scene = adventure[currentScene];
+      if (!scene || !scene.ending) return;
+
+      const text = `🎒 Just completed "Jimba's Snack Portal Adventure"!\n🏆 Ending: ${scene.title.replace('🏆 ', '')}\n💡 Moral: ${scene.moral || 'A fun adventure!'}\n🐦 Bennu says: "TAP TAP!"\n\nTry it yourself! #BennusTales`;
+
+      // Copy to clipboard
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          const feedback = document.createElement('div');
+          feedback.style.cssText = 'text-align:center; color:#4caf50; font-weight:500; padding:8px;';
+          feedback.textContent = '📋 Copied to clipboard! Share with your friends!';
+          document.getElementById('sceneContent').appendChild(feedback);
+          setTimeout(() => feedback.remove(), 3000);
+        }).catch(() => {
+          // Fallback: show in alert
+          alert(text);
+        });
+      } else {
+        alert(text);
+      }
+    }
+
+    // ============================================================
+    // ===== RESTART =====
+    // ============================================================
+
     function restartAdventure() {
+      if (pathHistory.length > 1) {
+        if (!confirm('Start a new adventure? Your current path will be lost.')) return;
+      }
       visitedScenes = ['start'];
+      pathHistory = [];
       renderScene('start');
     }
 
-    // ===== START =====
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        // Show feedback in the scene
+        const feedback = document.createElement('div');
+        feedback.style.cssText = 'text-align:center; color:#5c4530; font-style:italic; padding:8px;';
+        feedback.textContent = `👥 Mode switched to: ${modeNames[currentMode] || currentMode}`;
+        document.getElementById('sceneContent').prepend(feedback);
+        setTimeout(() => feedback.remove(), 1500);
+      });
+    });
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        restartAdventure();
+      }
+      // Number keys 1-4 for quick choices
+      if (e.key >= '1' && e.key <= '4') {
+        const btns = document.querySelectorAll('.choice-btn:not([disabled])');
+        const idx = parseInt(e.key) - 1;
+        if (btns[idx]) btns[idx].click();
+      }
+    });
+
+    // ============================================================
+    // ===== INIT =====
+    // ============================================================
+
+    loadHistory();
     renderScene('start');
-    console.log('🎒 Jimba\'s Snack Portal Adventure loaded!');
+
+    console.log('🎒 Jimba\'s Snack Portal Adventure (Classroom Edition) loaded!');
+    console.log(`📋 ${Object.keys(adventure).length} scenes available`);
+    console.log(`🎯 ${Object.values(adventure).filter(s => s.ending).length} possible endings`);
+    console.log(`📜 ${gameHistory.length} adventures in history`);
   </script>
 </body>
 </html>

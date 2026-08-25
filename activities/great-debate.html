@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Great Debate – Bennu's Tales</title>
+  <title>The Great Debate – Classroom Edition</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -58,26 +58,162 @@
       color: #b45f2a;
     }
 
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
     main {
       flex: 1;
       max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 4px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
       margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .debate-container {
@@ -87,12 +223,13 @@
       padding: 30px;
     }
 
+    /* ===== TOPIC SELECTOR ===== */
     .topic-selector {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .topic-btn {
       background: #fdf6e3;
@@ -103,6 +240,7 @@
       font-family: 'Georgia', serif;
       font-size: 0.9rem;
       transition: 0.3s;
+      position: relative;
     }
     .topic-btn:hover {
       border-color: #b45f2a;
@@ -112,18 +250,170 @@
       color: #fdf6e3;
       border-color: #b45f2a;
     }
+    .topic-btn .vote-indicator {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #4caf50;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .topic-btn.custom-topic {
+      border-color: #c9a84c;
+      background: #fdf6e3;
+    }
+    .topic-btn.custom-topic.active {
+      background: #c9a84c;
+      color: #2c1810;
+      border-color: #c9a84c;
+    }
+
+    /* ===== CREATE TOPIC BUTTON ===== */
+    .create-topic-toggle {
+      background: transparent;
+      border: 2px dashed #d4c5a0;
+      padding: 8px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      color: #5c4530;
+    }
+    .create-topic-toggle:hover {
+      border-color: #b45f2a;
+      color: #b45f2a;
+    }
+
+    /* ===== CREATE TOPIC FORM ===== */
+    .create-topic-form {
+      background: #fdf6e3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 12px 0 16px;
+      display: none;
+      text-align: left;
+    }
+    .create-topic-form.show {
+      display: block;
+    }
+    .create-topic-form label {
+      display: block;
+      font-weight: 500;
+      color: #3e2e1f;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+    .create-topic-form label:first-child {
+      margin-top: 0;
+    }
+    .create-topic-form input,
+    .create-topic-form textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid #d4c5a0;
+      border-radius: 8px;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      background: #fdf6e3;
+      margin-top: 4px;
+      transition: 0.3s;
+    }
+    .create-topic-form input:focus,
+    .create-topic-form textarea:focus {
+      outline: none;
+      border-color: #b45f2a;
+    }
+    .create-topic-form textarea {
+      resize: vertical;
+      min-height: 50px;
+    }
+    .create-topic-form .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .create-topic-form .form-row > div {
+      flex: 1;
+      min-width: 150px;
+    }
+    .create-topic-form .submit-btn {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: 0.3s;
+    }
+    .create-topic-form .submit-btn:hover {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .create-topic-form .cancel-btn {
+      background: #d4c5a0;
+      color: #3e2e1f;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 12px;
+      margin-left: 8px;
+      transition: 0.3s;
+    }
+    .create-topic-form .cancel-btn:hover {
+      background: #c9b89a;
+    }
+    .create-topic-form .helper-text {
+      font-size: 0.8rem;
+      color: #5c4530;
+      margin-top: 4px;
+      font-style: italic;
+    }
 
     .debate-area {
       text-align: center;
       padding: 10px 0;
     }
     .debate-question {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: #3e2e1f;
       margin-bottom: 16px;
-      font-weight: 500;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .debate-question .topic-number {
+      font-size: 1rem;
+      color: #b45f2a;
+      font-weight: normal;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .debate-question .custom-badge {
+      font-size: 0.7rem;
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 4px;
+      font-weight: normal;
     }
 
+    /* ===== VOTE OPTIONS ===== */
     .vote-options {
       display: flex;
       gap: 20px;
@@ -140,7 +430,10 @@
       font-family: 'Georgia', serif;
       font-size: 1.1rem;
       transition: 0.3s;
-      min-width: 120px;
+      min-width: 140px;
+      position: relative;
+      flex: 1;
+      max-width: 280px;
     }
     .vote-btn:hover:not(:disabled) {
       border-color: #b45f2a;
@@ -148,23 +441,45 @@
       box-shadow: 0 4px 16px rgba(180, 95, 42, 0.15);
     }
     .vote-btn:disabled {
-      opacity: 0.6;
+      opacity: 0.7;
       cursor: not-allowed;
+      transform: none !important;
+    }
+    .vote-btn.voted-for {
+      border-color: #4caf50;
+      background: #e8f5e9;
+    }
+    .vote-btn.voted-against {
+      border-color: #f44336;
+      background: #ffebee;
     }
     .vote-btn .vote-emoji {
       display: block;
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 4px;
     }
     .vote-btn .vote-label {
       font-weight: 500;
+      font-size: 0.95rem;
     }
     .vote-btn .vote-count {
       font-size: 0.85rem;
       color: #5c4530;
       margin-top: 4px;
     }
+    .vote-btn .vote-check {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 1.5rem;
+      display: none;
+    }
+    .vote-btn.voted-for .vote-check,
+    .vote-btn.voted-against .vote-check {
+      display: block;
+    }
 
+    /* ===== RESULTS BAR ===== */
     .results-bar {
       max-width: 500px;
       margin: 16px auto;
@@ -183,42 +498,117 @@
     }
     .result-row .bar-track {
       flex: 1;
-      height: 20px;
+      height: 24px;
       background: #fdf6e3;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       border: 1px solid #d4c5a0;
     }
     .result-row .bar-fill {
       height: 100%;
-      border-radius: 10px;
-      transition: width 0.6s ease;
+      border-radius: 12px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       width: 0%;
     }
     .result-row .bar-fill.for {
-      background: #4caf50;
+      background: linear-gradient(90deg, #66bb6a, #4caf50);
     }
     .result-row .bar-fill.against {
-      background: #f44336;
+      background: linear-gradient(90deg, #ef5350, #f44336);
     }
     .result-row .percentage {
       min-width: 50px;
       font-size: 0.9rem;
       color: #5c4530;
+      font-weight: 500;
     }
 
+    .total-votes {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #5c4530;
+      margin-top: 6px;
+    }
+
+    /* ===== BENNU'S VERDICT ===== */
     .bennu-verdict {
       background: #fdf6e3;
       border-left: 4px solid #c9a84c;
-      padding: 12px 20px;
+      padding: 14px 20px;
       border-radius: 8px;
       margin: 16px 0;
       font-style: italic;
       font-size: 1rem;
       color: #5c4530;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .bennu-verdict .verdict-emoji {
+      flex-shrink: 0;
     }
     .bennu-verdict strong {
       color: #b45f2a;
+    }
+
+    /* ===== REASONING SECTION ===== */
+    .reasoning-section {
+      background: #fdf6e3;
+      border: 2px solid #d4c5a0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      text-align: left;
+      display: none;
+    }
+    .reasoning-section.show {
+      display: block;
+    }
+    .reasoning-section h4 {
+      color: #b45f2a;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .reasoning-section textarea {
+      width: 100%;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      background: #fdf6e3;
+      resize: vertical;
+      min-height: 60px;
+    }
+    .reasoning-section textarea:focus {
+      outline: none;
+      border-color: #b45f2a;
+    }
+    .reasoning-section .save-reason-btn {
+      background: #c9a84c;
+      color: #2c1810;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-family: 'Georgia', serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: 0.3s;
+    }
+    .reasoning-section .save-reason-btn:hover {
+      background: #b89a3a;
+    }
+    .reasoning-section .save-reason-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
     .feedback {
@@ -254,6 +644,124 @@
       background: #c9b89a;
     }
 
+    /* ===== DISCUSSION HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 4px 0;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .history-entry .q {
+      color: #3e2e1f;
+      flex: 1;
+      text-align: left;
+      min-width: 120px;
+    }
+    .history-entry .vote-result {
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+    .history-entry .vote-result.for {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .history-entry .vote-result.against {
+      background: #ffebee;
+      color: #c62828;
+    }
+    .history-entry .custom-tag {
+      font-size: 0.6rem;
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 1px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .history-entry .reason-preview {
+      font-size: 0.75rem;
+      color: #5c4530;
+      font-style: italic;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -265,27 +773,51 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .debate-container { padding: 20px; }
       .debate-question { font-size: 1.2rem; }
       .vote-btn { padding: 10px 20px; font-size: 1rem; min-width: 100px; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
+      .create-topic-form .form-row { flex-direction: column; }
+      .create-topic-form .form-row > div { min-width: auto; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .debate-container { padding: 16px; }
-      .vote-btn { padding: 8px 14px; font-size: 0.9rem; min-width: 80px; }
+      .debate-question { font-size: 1.1rem; }
+      .vote-btn { padding: 8px 14px; font-size: 0.9rem; min-width: 80px; max-width: 100%; }
       .vote-btn .vote-emoji { font-size: 1.5rem; }
       .result-row .label { min-width: 60px; font-size: 0.8rem; }
-      .bennu-verdict { font-size: 0.9rem; padding: 10px 14px; }
+      .bennu-verdict { font-size: 0.9rem; padding: 10px 14px; flex-direction: column; text-align: center; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
+      .history-entry .reason-preview { max-width: 100%; }
+      .topic-btn { padding: 6px 14px; font-size: 0.8rem; }
+      .create-topic-toggle { font-size: 0.8rem; padding: 6px 14px; }
+      .icon-bennu { width: 20px; height: 20px; }
+      .icon-bennu-large { width: 26px; height: 26px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 15–30 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Persuasion & Debate</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -301,28 +833,120 @@
   </header>
 
   <main>
-    <h1>⚖️ The Great Debate</h1>
-    <p class="subtitle">Vote on the important questions. Bennu will judge you. (In a nice way.)</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>⚖️ The Great Debate</h1>
+      <div class="meta">
+        <span class="tag">🎯 Persuasion</span>
+        <span class="tag">💬 Debate</span>
+        <span class="tag">✍️ Writing</span>
+        <span class="tag">⭐ Level 2</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Vote on important questions, <strong>justify your position</strong>, and see what Bennu thinks. <strong>Create your own debate topics</strong> to challenge your classmates!</p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Develop persuasive arguments, practice respectful disagreement, and reflect on your own reasoning through structured debate.</span>
+      <span class="time-estimate">⏱️ 15–30 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="debate-container">
       <div class="topic-selector" id="topicSelector"></div>
 
+      <!-- ===== CREATE TOPIC BUTTON & FORM ===== -->
+      <div style="text-align:center; margin-bottom: 12px;">
+        <button class="create-topic-toggle" id="createTopicToggle">✍️ + Create Your Own Debate</button>
+      </div>
+
+      <div class="create-topic-form" id="createTopicForm">
+        <div class="form-row">
+          <div>
+            <label for="newQuestion">📝 Your Debate Question</label>
+            <input type="text" id="newQuestion" placeholder="e.g., Is cereal a soup?" maxlength="120">
+            <div class="helper-text">Make it a yes/no question for best results!</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="newFor">👍 For Argument Label</label>
+            <input type="text" id="newFor" placeholder="e.g., Yes! Cereal is a soup!" maxlength="60">
+          </div>
+          <div>
+            <label for="newAgainst">👎 Against Argument Label</label>
+            <input type="text" id="newAgainst" placeholder="e.g., No! It's a breakfast food!" maxlength="60">
+          </div>
+        </div>
+        <button class="submit-btn" id="submitTopicBtn">🚀 Add Topic</button>
+        <button class="cancel-btn" id="cancelTopicBtn">Cancel</button>
+      </div>
+
       <div class="debate-area">
-        <div class="debate-question" id="debateQuestion"></div>
+        <div class="debate-question" id="debateQuestion">
+          <span class="topic-number" id="topicNumber">Topic 1 of 5</span>
+          <span id="questionText">Loading...</span>
+        </div>
 
         <div class="vote-options" id="voteOptions"></div>
 
         <div class="results-bar" id="resultsBar"></div>
 
-        <div class="bennu-verdict" id="bennuVerdict"> Bennu is waiting for your vote...</div>
+        <div class="bennu-verdict" id="bennuVerdict">
+          <span class="verdict-emoji"><img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu-large" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none'; this.parentElement.textContent='🐦';}"></span>
+          <span>Bennu is waiting for your vote...</span>
+        </div>
+
+        <!-- ===== REASONING SECTION ===== -->
+        <div class="reasoning-section" id="reasoningSection">
+          <h4>✍️ Justify Your Position</h4>
+          <textarea id="reasonInput" placeholder="Why did you vote this way? What's your best argument? Write a persuasive paragraph..." maxlength="500"></textarea>
+          <button class="save-reason-btn" id="saveReasonBtn">💾 Save Argument</button>
+        </div>
 
         <div class="feedback" id="feedback"></div>
 
         <div>
           <button class="debate-btn secondary" id="resetVotesBtn">🔄 Reset All Votes</button>
+          <button class="debate-btn secondary" id="resetCustomBtn">🗑️ Remove Custom Topics</button>
+          <button class="debate-btn secondary" id="exportBtn">📤 Export Discussion</button>
+        </div>
+
+        <!-- ===== DISCUSSION HISTORY ===== -->
+        <div class="history-area" id="historyArea">
+          <div class="history-header">
+            <h3>📜 Debate History</h3>
+            <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+          </div>
+          <div id="historyList"></div>
         </div>
       </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Student Voice:</strong> Let students create and debate their own topics!</li>
+        <li><strong>Persuasive Writing:</strong> Have students write a full paragraph defending their vote.</li>
+        <li><strong>Class Debate:</strong> Split the class into "For" and "Against" teams for each topic.</li>
+        <li><strong>Counterargument:</strong> Challenge students to argue the opposite of their vote.</li>
+        <li><strong>Vocabulary:</strong> Teach "claim," "evidence," "warrant," "rebuttal," and "fallacy."</li>
+        <li><strong>Reflection:</strong> Ask: "What made you choose your side? Did Bennu's verdict change your mind?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>write a counterargument</strong> to their own position, then share both with a partner.
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -336,17 +960,21 @@
   </footer>
 
   <script>
+    // ============================================================
     // ===== DEBATE TOPICS =====
-    const TOPICS = [
+    // ============================================================
+
+    const DEFAULT_TOPICS = [
       {
         id: 1,
         question: 'Is Die Hard a Christmas movie?',
         for: '🎄 Yes, it\'s a Christmas classic!',
         against: '🎬 No, it\'s just an action movie!',
         bennuVerdict: {
-          for: '🐦 Bennu taps once. "Of course it is. It has snow. And Christmas music. And Bruce Willis. Case closed."',
-          against: '🐦 Bennu taps twice. "You\'re entitled to your wrong opinion. But it\'s a Christmas movie."'
-        }
+          for: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps once. "Of course it is. It has snow, Christmas music, and Bruce Willis. Case closed."',
+          against: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps twice. "You\'re entitled to your wrong opinion. But it\'s a Christmas movie."'
+        },
+        isCustom: false
       },
       {
         id: 2,
@@ -354,9 +982,10 @@
         for: '🥙 Tameya (Egyptian style)!',
         against: '🧆 Falafel (Levantine style)!',
         bennuVerdict: {
-          for: '🐦 Bennu taps three times. "Tameya is clearly superior. The herbs make it magical."',
-          against: '🐦 Bennu taps twice. "I respect your choice. Even if it\'s wrong. Enjoy your chickpeas."'
-        }
+          for: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps three times. "Tameya is clearly superior. The herbs make it magical."',
+          against: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps twice. "I respect your choice. Even if it\'s wrong. Enjoy your chickpeas."'
+        },
+        isCustom: false
       },
       {
         id: 3,
@@ -364,9 +993,10 @@
         for: '🥭 Alone! Pure mango bliss!',
         against: '🍫 With chocolate! The ultimate combo!',
         bennuVerdict: {
-          for: '🐦 Bennu taps once. "Pure mango is the way. The Mango Committee agrees."',
-          against: '🐦 Bennu taps thrice. "Snack time! Chocolate mango is genius. You\'re a visionary."'
-        }
+          for: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps once. "Pure mango is the way. The Mango Committee agrees."',
+          against: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps thrice. "Snack time! Chocolate mango is genius. You\'re a visionary."'
+        },
+        isCustom: false
       },
       {
         id: 4,
@@ -374,9 +1004,10 @@
         for: '📚 Useful! It helps you learn!',
         against: '😈 Evil! It steals your free time!',
         bennuVerdict: {
-          for: '🐦 Bennu taps once. "Homework builds character. Also, I need something to peck at."',
-          against: '🐦 Bennu taps four times. "You\'re being ridiculous. But also... I understand."'
-        }
+          for: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps once. "Homework builds character. Also, I need something to peck at."',
+          against: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps four times. "You\'re being ridiculous. But also... I understand."'
+        },
+        isCustom: false
       },
       {
         id: 5,
@@ -384,26 +1015,72 @@
         for: '🍍 Yes! Sweet and savoury!',
         against: '🍕 No! It\'s an abomination!',
         bennuVerdict: {
-          for: '🐦 Bennu taps twice. "You\'re being ridiculous. But I respect your chaos."',
-          against: '🐦 Bennu taps once. "Finally! Someone with taste. The Mango Committee approves."'
-        }
+          for: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps twice. "You\'re being ridiculous. But I respect your chaos."',
+          against: '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps once. "Finally! Someone with taste. The Mango Committee approves."'
+        },
+        isCustom: false
       }
     ];
 
-    // ===== STORAGE KEY =====
-    const STORAGE_KEY = 'imaginarium_debate_votes';
+    // ============================================================
+    // ===== STORAGE KEYS =====
+    // ============================================================
 
+    const TOPICS_STORAGE_KEY = 'great_debate_topics_v2';
+    const VOTE_STORAGE_KEY = 'great_debate_votes_v2';
+    const HISTORY_STORAGE_KEY = 'great_debate_history_v2';
+
+    // ============================================================
     // ===== DOM ELEMENTS =====
+    // ============================================================
+
     let currentTopic = 0;
+    let currentMode = 'solo';
+    let topics = [];
     let votes = {};
+    let debateHistory = [];
+
+    // ============================================================
+    // ===== LOAD / SAVE TOPICS =====
+    // ============================================================
+
+    function loadTopics() {
+      const stored = localStorage.getItem(TOPICS_STORAGE_KEY);
+      if (stored) {
+        topics = JSON.parse(stored);
+      } else {
+        topics = JSON.parse(JSON.stringify(DEFAULT_TOPICS));
+        saveTopics();
+      }
+    }
+
+    function saveTopics() {
+      localStorage.setItem(TOPICS_STORAGE_KEY, JSON.stringify(topics));
+    }
+
+    function resetCustomTopics() {
+      if (confirm('Remove all custom topics and restore defaults? Your votes and history will be preserved.')) {
+        topics = JSON.parse(JSON.stringify(DEFAULT_TOPICS));
+        saveTopics();
+        if (currentTopic >= topics.length) currentTopic = 0;
+        renderTopics();
+        renderDebate();
+        document.getElementById('feedback').textContent = '🗑️ Custom topics removed, defaults restored.';
+        document.getElementById('feedback').style.color = '#5c4530';
+      }
+    }
+
+    // ============================================================
+    // ===== LOAD / SAVE VOTES =====
+    // ============================================================
 
     function loadVotes() {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(VOTE_STORAGE_KEY);
       if (stored) {
         votes = JSON.parse(stored);
       } else {
         votes = {};
-        TOPICS.forEach(t => {
+        topics.forEach(t => {
           votes[t.id] = { for: 0, against: 0 };
         });
         saveVotes();
@@ -411,17 +1088,110 @@
     }
 
     function saveVotes() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+      localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(votes));
     }
+
+    function syncVotes() {
+      topics.forEach(t => {
+        if (!votes[t.id]) {
+          votes[t.id] = { for: 0, against: 0 };
+        }
+      });
+      saveVotes();
+    }
+
+    // ============================================================
+    // ===== LOAD / SAVE HISTORY =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      debateHistory = stored ? JSON.parse(stored) : [];
+    }
+
+    function saveHistory() {
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(debateHistory));
+    }
+
+    // ============================================================
+    // ===== CREATE NEW TOPIC =====
+    // ============================================================
+
+    function createNewTopic() {
+      const questionInput = document.getElementById('newQuestion');
+      const forInput = document.getElementById('newFor');
+      const againstInput = document.getElementById('newAgainst');
+
+      const question = questionInput.value.trim();
+      const forLabel = forInput.value.trim();
+      const againstLabel = againstInput.value.trim();
+
+      if (!question) {
+        document.getElementById('feedback').textContent = '❓ Please write a debate question!';
+        document.getElementById('feedback').style.color = '#f44336';
+        return;
+      }
+
+      if (!forLabel || !againstLabel) {
+        document.getElementById('feedback').textContent = '✍️ Please fill in both "For" and "Against" labels!';
+        document.getElementById('feedback').style.color = '#f44336';
+        return;
+      }
+
+      const maxId = topics.reduce((max, t) => Math.max(max, t.id), 0);
+      const newId = maxId + 1;
+
+      const newTopic = {
+        id: newId,
+        question: question,
+        for: forLabel,
+        against: againstLabel,
+        bennuVerdict: {
+          for: `<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"> Bennu taps thoughtfully. "An interesting debate! The Mango Committee leans toward ${forLabel.split('!')[0] || 'yes'}."`,
+          against: `<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"> Bennu taps thoughtfully. "A bold stance! The Mango Committee respects ${againstLabel.split('!')[0] || 'no'}."`
+        },
+        isCustom: true
+      };
+
+      topics.push(newTopic);
+      votes[newId] = { for: 0, against: 0 };
+      saveTopics();
+      saveVotes();
+
+      questionInput.value = '';
+      forInput.value = '';
+      againstInput.value = '';
+      document.getElementById('createTopicForm').classList.remove('show');
+
+      currentTopic = topics.length - 1;
+      renderTopics();
+      renderDebate();
+
+      document.getElementById('feedback').textContent = '🎉 New debate topic created! Vote on it now.';
+      document.getElementById('feedback').style.color = '#4caf50';
+    }
+
+    // ============================================================
+    // ===== RENDER FUNCTIONS =====
+    // ============================================================
 
     function renderTopics() {
       const container = document.getElementById('topicSelector');
       container.innerHTML = '';
-      TOPICS.forEach((topic, index) => {
+      
+      topics.forEach((topic, index) => {
         const btn = document.createElement('button');
-        btn.className = 'topic-btn' + (index === currentTopic ? ' active' : '');
-        btn.textContent = `#${index + 1}`;
-        btn.title = topic.question;
+        const className = 'topic-btn' + (index === currentTopic ? ' active' : '') + (topic.isCustom ? ' custom-topic' : '');
+        btn.className = className;
+        
+        const voteData = votes[topic.id] || { for: 0, against: 0 };
+        const total = voteData.for + voteData.against;
+        
+        btn.innerHTML = `
+          ${topic.isCustom ? '✍️ ' : ''}#${index + 1}
+          ${total > 0 ? `<span class="vote-indicator">${total}</span>` : ''}
+        `;
+        btn.title = topic.question + (topic.isCustom ? ' (Custom)' : '');
         btn.addEventListener('click', () => {
           currentTopic = index;
           renderTopics();
@@ -432,31 +1202,43 @@
     }
 
     function renderDebate() {
-      const topic = TOPICS[currentTopic];
+      if (topics.length === 0) {
+        document.getElementById('questionText').textContent = 'No topics available. Create one above!';
+        document.getElementById('voteOptions').innerHTML = '';
+        document.getElementById('resultsBar').innerHTML = '';
+        document.getElementById('bennuVerdict').innerHTML = '<span class="verdict-emoji"><img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu-large" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"></span> Bennu is waiting for a topic...';
+        return;
+      }
+
+      const topic = topics[currentTopic];
       const voteData = votes[topic.id] || { for: 0, against: 0 };
       const total = voteData.for + voteData.against;
       const forPercent = total > 0 ? (voteData.for / total) * 100 : 0;
       const againstPercent = total > 0 ? (voteData.against / total) * 100 : 0;
+      const userVoted = localStorage.getItem(`debate_voted_${topic.id}`) || null;
 
-      // Question
-      document.getElementById('debateQuestion').textContent = topic.question;
+      document.getElementById('topicNumber').textContent = `Topic ${currentTopic + 1} of ${topics.length}`;
+      document.getElementById('questionText').innerHTML = `
+        ${topic.question}
+        ${topic.isCustom ? '<span class="custom-badge">✍️ Custom</span>' : ''}
+      `;
 
-      // Vote buttons
       const optionsContainer = document.getElementById('voteOptions');
       optionsContainer.innerHTML = `
-        <button class="vote-btn" data-vote="for" ${total > 0 ? 'disabled' : ''}>
+        <button class="vote-btn ${userVoted === 'for' ? 'voted-for' : ''}" data-vote="for" ${userVoted ? 'disabled' : ''}>
           <span class="vote-emoji">👍</span>
           <span class="vote-label">${topic.for}</span>
           <span class="vote-count">${voteData.for} votes</span>
+          <span class="vote-check">✅</span>
         </button>
-        <button class="vote-btn" data-vote="against" ${total > 0 ? 'disabled' : ''}>
+        <button class="vote-btn ${userVoted === 'against' ? 'voted-against' : ''}" data-vote="against" ${userVoted ? 'disabled' : ''}>
           <span class="vote-emoji">👎</span>
           <span class="vote-label">${topic.against}</span>
           <span class="vote-count">${voteData.against} votes</span>
+          <span class="vote-check">✅</span>
         </button>
       `;
 
-      // Add vote listeners
       optionsContainer.querySelectorAll('.vote-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const vote = this.dataset.vote;
@@ -464,7 +1246,6 @@
         });
       });
 
-      // Results bar
       const resultsContainer = document.getElementById('resultsBar');
       resultsContainer.innerHTML = `
         <div class="result-row">
@@ -481,55 +1262,290 @@
           </div>
           <span class="percentage">${Math.round(againstPercent)}%</span>
         </div>
-        <div style="text-align:center; font-size:0.85rem; color:#5c4530; margin-top:6px;">
-          ${total} total votes
-        </div>
+        <div class="total-votes">${total} total votes</div>
       `;
 
-      // Bennu's verdict
       const verdictEl = document.getElementById('bennuVerdict');
       if (total > 0) {
-        const winner = voteData.for > voteData.against ? 'for' : 'against';
-        const verdict = topic.bennuVerdict[winner] || '🐦 Bennu says: "Interesting. Very interesting."';
-        verdictEl.innerHTML = verdict;
+        const winner = voteData.for >= voteData.against ? 'for' : 'against';
+        const verdict = topic.bennuVerdict[winner] || 'Bennu says: "Interesting. Very interesting."';
+        verdictEl.innerHTML = `<span class="verdict-emoji"><img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu-large" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"></span><span>${verdict}</span>`;
       } else {
-        verdictEl.innerHTML = '🐦 Bennu is waiting for your vote...';
+        verdictEl.innerHTML = `<span class="verdict-emoji"><img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu-large" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"></span><span>Bennu is waiting for your vote...</span>`;
       }
 
-      // Feedback
-      document.getElementById('feedback').textContent = total > 0 ? `🗳️ ${total} people have voted!` : '🗳️ Be the first to vote!';
+      const reasoningSection = document.getElementById('reasoningSection');
+      if (userVoted) {
+        reasoningSection.classList.add('show');
+        const existingEntry = debateHistory.find(e => e.topicId === topic.id && e.userVote === userVoted);
+        if (existingEntry && existingEntry.reason) {
+          document.getElementById('reasonInput').value = existingEntry.reason;
+          document.getElementById('reasonInput').disabled = true;
+          document.querySelector('.save-reason-btn').textContent = '✅ Saved';
+          document.querySelector('.save-reason-btn').disabled = true;
+        } else {
+          document.getElementById('reasonInput').value = '';
+          document.getElementById('reasonInput').disabled = false;
+          document.querySelector('.save-reason-btn').textContent = '💾 Save Argument';
+          document.querySelector('.save-reason-btn').disabled = false;
+        }
+      } else {
+        reasoningSection.classList.remove('show');
+      }
+
+      const feedbackEl = document.getElementById('feedback');
+      if (userVoted) {
+        feedbackEl.textContent = `🗳️ You voted! ${total > 1 ? `${total} people have voted.` : 'Be the first to vote!'}`;
+      } else {
+        feedbackEl.textContent = `🗳️ ${total > 0 ? `${total} people have voted.` : 'Be the first to vote!'}`;
+      }
+
+      renderHistory();
     }
 
+    // ============================================================
+    // ===== VOTE LOGIC =====
+    // ============================================================
+
     function castVote(vote) {
-      const topic = TOPICS[currentTopic];
-      const voteData = votes[topic.id];
+      const topic = topics[currentTopic];
+      if (!topic) return;
       
+      const voteData = votes[topic.id];
       if (!voteData) return;
-      if (voteData.for + voteData.against > 0) return; // Already voted
+      
+      if (localStorage.getItem(`debate_voted_${topic.id}`)) {
+        document.getElementById('feedback').textContent = '⚠️ You already voted on this topic!';
+        document.getElementById('feedback').style.color = '#f44336';
+        return;
+      }
 
       voteData[vote] = (voteData[vote] || 0) + 1;
       saveVotes();
+      localStorage.setItem(`debate_voted_${topic.id}`, vote);
+
+      debateHistory.unshift({
+        topicId: topic.id,
+        topicQuestion: topic.question,
+        userVote: vote,
+        voteLabel: vote === 'for' ? topic.for : topic.against,
+        isCustom: topic.isCustom || false,
+        reason: '',
+        timestamp: new Date().toLocaleString()
+      });
+      saveHistory();
+
       renderDebate();
+      document.getElementById('feedback').textContent = '🗳️ Vote recorded! Now justify your position below.';
+      document.getElementById('feedback').style.color = '#4caf50';
     }
 
-    function resetVotes() {
-      if (confirm('Reset all votes for all topics?')) {
-        TOPICS.forEach(t => {
-          votes[t.id] = { for: 0, against: 0 };
-        });
-        saveVotes();
+    // ============================================================
+    // ===== REASONING =====
+    // ============================================================
+
+    document.getElementById('saveReasonBtn').addEventListener('click', function() {
+      const topic = topics[currentTopic];
+      if (!topic) return;
+      
+      const reason = document.getElementById('reasonInput').value.trim();
+      
+      if (!reason) {
+        document.getElementById('feedback').textContent = '✍️ Please write your argument before saving!';
+        document.getElementById('feedback').style.color = '#f44336';
+        return;
+      }
+
+      const entry = debateHistory.find(e => e.topicId === topic.id);
+      if (entry) {
+        entry.reason = reason;
+        saveHistory();
         renderDebate();
-        document.getElementById('feedback').textContent = '🗳️ All votes have been reset!';
+        document.getElementById('feedback').textContent = '✅ Argument saved! Great persuasive writing.';
+        document.getElementById('feedback').style.color = '#4caf50';
+      }
+    });
+
+    // ============================================================
+    // ===== HISTORY =====
+    // ============================================================
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${debateHistory.length} entries`;
+
+      if (debateHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No debates yet. Vote on a topic!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      debateHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        const reasonPreview = entry.reason 
+          ? `<span class="reason-preview">💭 "${entry.reason.substring(0, 50)}${entry.reason.length > 50 ? '...' : ''}"</span>` 
+          : '';
+        const voteClass = entry.userVote === 'for' ? 'for' : 'against';
+        const voteLabel = entry.userVote === 'for' ? '✅ Voted For' : '❌ Voted Against';
+        const customTag = entry.isCustom ? '<span class="custom-tag">✍️ Custom</span>' : '';
+        div.innerHTML = `
+          <span class="q">${entry.topicQuestion} ${customTag}</span>
+          <span class="vote-result ${voteClass}">${voteLabel}</span>
+          ${reasonPreview}
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================================
+    // ===== RESET =====
+    // ============================================================
+
+    function resetAll() {
+      if (confirm('Reset ALL votes, history, and progress? This cannot be undone.')) {
+        topics.forEach(t => {
+          votes[t.id] = { for: 0, against: 0 };
+          localStorage.removeItem(`debate_voted_${t.id}`);
+        });
+        debateHistory = [];
+        saveVotes();
+        saveHistory();
+        renderTopics();
+        renderDebate();
+        document.getElementById('feedback').textContent = '🗳️ All data has been reset!';
+        document.getElementById('feedback').style.color = '#5c4530';
       }
     }
 
+    document.getElementById('resetVotesBtn').addEventListener('click', resetAll);
+    document.getElementById('resetCustomBtn').addEventListener('click', resetCustomTopics);
+
+    // ============================================================
+    // ===== EXPORT =====
+    // ============================================================
+
+    document.getElementById('exportBtn').addEventListener('click', function() {
+      if (debateHistory.length === 0) {
+        document.getElementById('feedback').textContent = '📭 No debates to export. Vote on something!';
+        document.getElementById('feedback').style.color = '#f44336';
+        return;
+      }
+
+      let text = '⚖️ THE GREAT DEBATE – DISCUSSION EXPORT\n';
+      text += '===========================================\n';
+      text += `Exported: ${new Date().toLocaleString()}\n`;
+      text += `Total Debates: ${debateHistory.length}\n`;
+      text += `Total Topics: ${topics.length} (${topics.filter(t => t.isCustom).length} custom)\n`;
+      text += '===========================================\n\n';
+
+      debateHistory.forEach((entry, i) => {
+        text += `${i+1}. ${entry.topicQuestion}${entry.isCustom ? ' [CUSTOM]' : ''}\n`;
+        text += `   → Voted: ${entry.userVote === 'for' ? 'FOR' : 'AGAINST'}\n`;
+        if (entry.reason) {
+          text += `   💭 Argument: ${entry.reason}\n`;
+        }
+        text += `   ⏱️ ${entry.timestamp}\n\n`;
+      });
+
+      text += '===========================================\n';
+      text += `📊 Topic Breakdown:\n`;
+      topics.forEach(t => {
+        const v = votes[t.id] || { for: 0, against: 0 };
+        text += `   • ${t.question}${t.isCustom ? ' (Custom)' : ''}: ${v.for} for, ${v.against} against\n`;
+      });
+
+      text += '\n===========================================\n';
+      text += ' "The Great Debate thanks you for your thoughtful arguments."\n';
+
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `great-debate-export-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      document.getElementById('feedback').textContent = '📤 Discussion exported successfully!';
+      document.getElementById('feedback').style.color = '#4caf50';
+    });
+
+    // ============================================================
+    // ===== CREATE TOPIC UI =====
+    // ============================================================
+
+    document.getElementById('createTopicToggle').addEventListener('click', function() {
+      const form = document.getElementById('createTopicForm');
+      form.classList.toggle('show');
+      if (form.classList.contains('show')) {
+        document.getElementById('newQuestion').focus();
+      }
+    });
+
+    document.getElementById('cancelTopicBtn').addEventListener('click', function() {
+      document.getElementById('createTopicForm').classList.remove('show');
+      document.getElementById('newQuestion').value = '';
+      document.getElementById('newFor').value = '';
+      document.getElementById('newAgainst').value = '';
+    });
+
+    document.getElementById('submitTopicBtn').addEventListener('click', createNewTopic);
+
+    document.getElementById('newQuestion').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('newFor').focus();
+      }
+    });
+
+    document.getElementById('newFor').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('newAgainst').focus();
+      }
+    });
+
+    document.getElementById('newAgainst').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        createNewTopic();
+      }
+    });
+
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        document.getElementById('feedback').textContent = `👥 Mode switched to: ${this.textContent.trim()}`;
+        document.getElementById('feedback').style.color = '#5c4530';
+        setTimeout(() => { 
+          document.getElementById('feedback').textContent = ''; 
+        }, 2000);
+      });
+    });
+
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
+    loadTopics();
     loadVotes();
+    loadHistory();
+    syncVotes();
     renderTopics();
     renderDebate();
-    document.getElementById('resetVotesBtn').addEventListener('click', resetVotes);
 
-    console.log('⚖️ The Great Debate loaded!');
+    console.log('⚖️ The Great Debate (Classroom Edition) loaded!');
+    console.log(`📜 ${debateHistory.length} debates in history`);
+    console.log(`📋 ${topics.length} topics (${topics.filter(t => t.isCustom).length} custom)`);
   </script>
 </body>
 </html>

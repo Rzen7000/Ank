@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bennu's Tap Code – Learn Morse - Bennu's Universe</title>
+  <title>Bennu's Tap Code – Classroom Edition</title>
   <style>
     /* ===== WARM EGYPTIAN COLOR PALETTE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,7 +17,6 @@
       flex-direction: column;
     }
 
-    /* --- HEADER --- */
     header {
       display: flex;
       justify-content: space-between;
@@ -60,30 +59,165 @@
       color: #b45f2a;
     }
 
-    /* --- MAIN --- */
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 8px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
+    }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
     }
 
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
+    }
+
+    /* ===== TAP DEMO ===== */
     .tap-demo {
       display: flex;
       align-items: center;
@@ -110,9 +244,19 @@
     .tap-demo .tap-info p {
       color: #5c4530;
       font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .tap-demo .tap-info .bennu-taps {
+      background: #fdf6e3;
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin-top: 6px;
+      border: 1px solid #d4c5a0;
+      font-size: 0.85rem;
+      display: inline-block;
     }
 
-    /* --- MORSE CHART --- */
+    /* ===== MORSE CHART ===== */
     .morse-chart {
       background: #f5ede3;
       border: 2px solid #d4c5a0;
@@ -120,18 +264,55 @@
       padding: 20px 24px;
       margin-bottom: 24px;
     }
-    .morse-chart h2 {
+    .morse-chart .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .morse-chart .chart-header h2 {
       color: #b45f2a;
       font-size: 1.2rem;
-      margin-bottom: 12px;
       border-left: 3px solid #c9a84c;
       padding-left: 12px;
+      margin: 0;
     }
+    .morse-chart .chart-header .toggle-btn {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      padding: 4px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+    .morse-chart .chart-header .toggle-btn:hover {
+      border-color: #b45f2a;
+    }
+
     .morse-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
       gap: 6px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 4px;
     }
+    .morse-grid::-webkit-scrollbar {
+      width: 6px;
+    }
+    .morse-grid::-webkit-scrollbar-track {
+      background: #f5ede3;
+      border-radius: 3px;
+    }
+    .morse-grid::-webkit-scrollbar-thumb {
+      background: #d4c5a0;
+      border-radius: 3px;
+    }
+
     .morse-item {
       background: #fdf6e3;
       border: 1px solid #d4c5a0;
@@ -145,6 +326,8 @@
     .morse-item:hover {
       border-color: #b45f2a;
       background: #fdf6e3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
     .morse-item .letter {
       font-weight: bold;
@@ -162,7 +345,7 @@
       color: #5c4530;
     }
 
-    /* --- ACTIVITY --- */
+    /* ===== ACTIVITY SECTION ===== */
     .activity-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -185,14 +368,18 @@
       margin-bottom: 12px;
       border-left: 3px solid #c9a84c;
       padding-left: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* --- TAP INPUT --- */
+    /* ===== TAP INPUT ===== */
     .tap-input-area {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
       margin: 12px 0;
+      justify-content: center;
     }
     .tap-btn {
       background: #b45f2a;
@@ -200,20 +387,43 @@
       border: none;
       padding: 10px 20px;
       border-radius: 30px;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
       font-family: 'Georgia', serif;
-      min-width: 60px;
+      min-width: 50px;
     }
-    .tap-btn:hover { background: #8f4a1f; transform: scale(1.02); }
-    .tap-btn:active { transform: scale(0.95); }
+    .tap-btn:hover:not(:disabled) {
+      background: #8f4a1f;
+      transform: scale(1.02);
+    }
+    .tap-btn:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+    .tap-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
     .tap-btn.secondary {
       background: #d4c5a0;
       color: #3e2e1f;
     }
-    .tap-btn.secondary:hover { background: #c9b89a; }
+    .tap-btn.secondary:hover:not(:disabled) {
+      background: #c9b89a;
+    }
+    .tap-btn.green {
+      background: #4caf50;
+    }
+    .tap-btn.green:hover:not(:disabled) {
+      background: #388e3c;
+    }
+    .tap-btn.red {
+      background: #f44336;
+    }
+    .tap-btn.red:hover:not(:disabled) {
+      background: #d32f2f;
+    }
 
     .tap-display {
       font-size: 2.5rem;
@@ -226,9 +436,17 @@
       border: 2px dashed #d4c5a0;
       text-align: center;
       margin: 8px 0;
+      word-break: break-all;
     }
     .tap-display .tap-dot { color: #b45f2a; }
     .tap-display .tap-dash { color: #c9a84c; }
+    .tap-display .tap-space { color: #d4c5a0; }
+    .tap-display .tap-cursor {
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
 
     .tap-result {
       font-size: 1.2rem;
@@ -238,42 +456,53 @@
       text-align: center;
       margin: 8px 0;
     }
+    .tap-result .bennu-response {
+      font-weight: normal;
+      font-style: italic;
+      color: #5c4530;
+    }
 
-    /* --- QUIZ MODE --- */
+    /* ===== QUIZ MODE ===== */
     .quiz-area {
       margin: 12px 0;
     }
     .quiz-pattern {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-family: 'Courier New', monospace;
-      letter-spacing: 8px;
-      padding: 12px;
+      letter-spacing: 10px;
+      padding: 16px;
       background: #fdf6e3;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 2px solid #d4c5a0;
       text-align: center;
-      min-height: 50px;
+      min-height: 60px;
     }
     .quiz-options {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 10px 0;
+      margin: 12px 0;
       justify-content: center;
     }
     .quiz-options button {
       background: #fdf6e3;
       border: 2px solid #d4c5a0;
-      padding: 6px 16px;
+      padding: 8px 20px;
       border-radius: 20px;
       cursor: pointer;
       font-family: 'Georgia', serif;
       transition: 0.3s;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      min-width: 50px;
     }
-    .quiz-options button:hover {
+    .quiz-options button:hover:not(:disabled) {
       border-color: #b45f2a;
       background: #f5ede3;
+      transform: scale(1.05);
+    }
+    .quiz-options button:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
     }
     .quiz-options button.correct {
       border-color: #4caf50;
@@ -283,16 +512,120 @@
       border-color: #f44336;
       background: #ffebee;
     }
+
     .quiz-feedback {
       text-align: center;
       font-size: 1rem;
-      min-height: 30px;
+      min-height: 35px;
       margin: 6px 0;
       font-style: italic;
       color: #5c4530;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    /* --- FOOTER --- */
+    .quiz-stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 8px 0;
+      font-size: 0.85rem;
+      color: #5c4530;
+    }
+    .quiz-stats strong {
+      color: #b45f2a;
+    }
+
+    /* ===== HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 5px 12px;
+      margin: 3px 0;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .history-entry .score {
+      color: #b45f2a;
+      font-weight: 500;
+    }
+    .history-entry .date {
+      color: #5c4530;
+      font-size: 0.7rem;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -304,26 +637,46 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
-    /* --- RESPONSIVE --- */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .tap-demo { flex-direction: column; text-align: center; }
       .tap-demo .bennu-icon { font-size: 3rem; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
+      .morse-grid { max-height: 200px; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; padding-left: 12px; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .morse-grid { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); }
       .morse-item { font-size: 0.7rem; padding: 4px 6px; }
-      .tap-display { font-size: 1.8rem; min-height: 40px; }
-      .quiz-pattern { font-size: 1.5rem; }
+      .tap-display { font-size: 1.8rem; min-height: 45px; }
+      .quiz-pattern { font-size: 1.8rem; }
+      .activity-box { padding: 14px 16px; }
+      .tap-btn { font-size: 0.85rem; padding: 8px 14px; min-width: 40px; }
+      .icon-bennu { width: 18px; height: 18px; }
+      .icon-bennu-large { width: 24px; height: 24px; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 15–25 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Communication & Coding</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -339,66 +692,143 @@
   </header>
 
   <main>
-    <h1>🐦 Bennu's Tap Code</h1>
-    <p class="subtitle">Learn Morse code with Egypt's most sarcastic hoopoe. Tap. Tap. TAP.</p>
-
-    <!-- Bennu Demo -->
-    <div class="tap-demo">
-      <div class="bennu-icon">🐦</div>
-      <div class="tap-info">
-        <h3>How to tap like Bennu</h3>
-        <p><strong>• TAP</strong> = dot (.)<br>
-        <strong>• TAP... TAP</strong> = dash (-)<br>
-        <strong>• Bennu's secret language:</strong> 1 tap = Yes, 2 taps = No, 3 taps = Snack time, 4 taps = You're being ridiculous.</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🐦 Bennu's Tap Code</h1>
+      <div class="meta">
+        <span class="tag">🎯 Communication</span>
+        <span class="tag">🧠 Coding</span>
+        <span class="tag">⭐ Level 2</span>
       </div>
     </div>
 
-    <!-- Morse Reference Chart -->
+    <p class="subtitle">Learn Morse code with Egypt's most sarcastic hoopoe. <strong>Tap. Tap. TAP.</strong></p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Learn the fundamentals of Morse code, practice pattern recognition, and develop communication skills through an interactive tapping activity.</span>
+      <span class="time-estimate">⏱️ 15–25 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
+
+    <!-- ===== TAP DEMO ===== -->
+    <div class="tap-demo">
+      <div class="bennu-icon">
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu-large" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+      </div>
+      <div class="tap-info">
+        <h3>How to tap like Bennu</h3>
+        <p>
+          <strong>• TAP</strong> = dot (•)<br>
+          <strong>• TAP... TAP</strong> = dash (—)<br>
+          <strong>• Space</strong> = between letters
+        </p>
+        <div class="bennu-taps">
+          <strong>🐦 Bennu's secret language:</strong><br>
+          1 tap = Yes &nbsp;|&nbsp; 2 taps = No &nbsp;|&nbsp; 3 taps = Snack time &nbsp;|&nbsp; 4 taps = "You're being ridiculous"
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MORSE CHART ===== -->
     <div class="morse-chart">
-      <h2>📖 Morse Code Reference</h2>
-      <p style="font-size:0.9rem; color:#5c4530; margin-bottom:10px;">Tap = dot (•), Tap-hold = dash (—)</p>
+      <div class="chart-header">
+        <h2>📖 Morse Code Reference</h2>
+        <button class="toggle-btn" id="toggleChart">🔽 Expand</button>
+      </div>
+      <p style="font-size:0.85rem; color:#5c4530; margin-bottom:10px;">
+        Tap = dot (•), Tap-hold = dash (—) • <span id="chartCount">36 characters</span>
+      </p>
       <div class="morse-grid" id="morseGrid">
         <!-- Populated by JavaScript -->
       </div>
     </div>
 
-    <!-- Activity Section -->
+    <!-- ===== ACTIVITY SECTION ===== -->
     <div class="activity-section">
       <!-- Mode B: Tap → Translate -->
       <div class="activity-box">
         <h3>🔨 Tap → Translate</h3>
-        <p style="font-size:0.9rem; color:#5c4530; margin-bottom:8px;">Tap the button to build Morse code. Bennu will translate!</p>
+        <p style="font-size:0.85rem; color:#5c4530; margin-bottom:8px;">
+          Tap the buttons to build Morse code. Bennu will translate!
+        </p>
         <div class="tap-input-area">
           <button class="tap-btn" id="tapDot">• Tap</button>
-          <button class="tap-btn" id="tapDash">— Tap-hold</button>
+          <button class="tap-btn" id="tapDash">— Hold</button>
           <button class="tap-btn secondary" id="tapSpace">␣ Space</button>
           <button class="tap-btn secondary" id="tapClear">✕ Clear</button>
-          <button class="tap-btn" id="tapTranslate">⬤ Translate</button>
+          <button class="tap-btn green" id="tapTranslate">⬤ Translate</button>
         </div>
-        <div class="tap-display" id="tapDisplay"><span style="color:#d4c5a0;">Start tapping...</span></div>
-        <div class="tap-result" id="tapResult">🐦 Bennu is listening...</div>
-        <p style="font-size:0.8rem; color:#5c4530; margin-top:8px; text-align:center;">
-          💡 Tip: Use • for dot, — for dash, and space between letters
+        <div class="tap-display" id="tapDisplay">
+          <span style="color:#d4c5a0;">Start tapping...</span>
+          <span class="tap-cursor">|</span>
+        </div>
+        <div class="tap-result" id="tapResult">
+          <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+          Bennu is listening...
+        </div>
+        <p style="font-size:0.75rem; color:#5c4530; text-align:center; margin-top:6px;">
+          💡 Keyboard: <kbd>.</kbd> dot, <kbd>-</kbd> dash, <kbd>Space</kbd> space, <kbd>Enter</kbd> translate, <kbd>C</kbd> clear
         </p>
       </div>
 
       <!-- Mode C: Quiz -->
       <div class="activity-box">
         <h3>🧠 Guess the Tap!</h3>
-        <p style="font-size:0.9rem; color:#5c4530; margin-bottom:8px;">Can you read Bennu's taps? Choose the right letter!</p>
+        <p style="font-size:0.85rem; color:#5c4530; margin-bottom:8px;">
+          Can you read Bennu's taps? Choose the right letter!
+        </p>
         <div class="quiz-area">
           <div class="quiz-pattern" id="quizPattern">• • •</div>
           <div class="quiz-options" id="quizOptions">
             <!-- Populated by JavaScript -->
           </div>
-          <div class="quiz-feedback" id="quizFeedback">🐦 Tap a letter to guess!</div>
-          <button class="tap-btn secondary" id="quizNew" style="width:100%; margin-top:6px;">New Tap Challenge</button>
-          <p style="font-size:0.8rem; color:#5c4530; margin-top:8px; text-align:center;">
-            Score: <span id="quizScore">0</span> correct | <span id="quizAttempts">0</span> attempts
-          </p>
+          <div class="quiz-feedback" id="quizFeedback">
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            Tap a letter to guess!
+          </div>
+          <div class="quiz-stats">
+            <span>✅ Correct: <strong id="quizScore">0</strong></span>
+            <span>🔄 Attempts: <strong id="quizAttempts">0</strong></span>
+            <span>⭐ Accuracy: <strong id="quizAccuracy">0%</strong></span>
+          </div>
+          <button class="tap-btn secondary" id="quizNew" style="width:100%; margin-top:6px;">🔄 New Tap Challenge</button>
         </div>
       </div>
     </div>
+
+    <!-- ===== HISTORY ===== -->
+    <div class="history-area" id="historyArea">
+      <div class="history-header">
+        <h3>📜 Tap History</h3>
+        <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+      </div>
+      <div id="historyList"></div>
+    </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Warm-Up:</strong> Use as a 5-minute introduction to Morse code.</li>
+        <li><strong>Pattern Recognition:</strong> Discuss how dots and dashes form patterns.</li>
+        <li><strong>History Connection:</strong> Talk about the history of Morse code.</li>
+        <li><strong>Partner Work:</strong> Students tap messages to each other.</li>
+        <li><strong>Vocabulary:</strong> Introduce "encoding," "decoding," "pattern," and "signal."</li>
+        <li><strong>Reflection:</strong> Ask: "What strategies helped you remember the codes?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>tap a secret message</strong> using Morse code and have a partner decode it!
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -412,7 +842,10 @@
   </footer>
 
   <script>
-    // ===== MORSE CODE DATA =====
+    // ============================================================
+    // ===== MORSE CODE DATA - EXPANDED =====
+    // ============================================================
+
     const morseCode = {
       'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
       'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
@@ -420,26 +853,107 @@
       'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
       'Y': '-.--', 'Z': '--..',
       '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
-      '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----'
+      '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
+      // Punctuation
+      '.': '.-.-.-', ',': '--..--', '?': '..--..', "'": '.----.', '!': '-.-.--',
+      '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...',
+      ';': '-.-.-.', '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-',
+      '"': '.-..-.', '$': '...-..-', '@': '.--.-.'
     };
 
-    // Bennu's special tap language
+    // ===== BENNU'S SPECIAL TAPS =====
     const bennuTaps = {
-      '1 tap': 'Yes',
-      '2 taps': 'No',
-      '3 taps': 'Snack time',
-      '4 taps': "You're being ridiculous"
+      '1': 'Yes',
+      '2': 'No',
+      '3': 'Snack time',
+      '4': "You're being ridiculous"
     };
 
     const letters = Object.keys(morseCode);
     const morseToLetter = Object.fromEntries(Object.entries(morseCode).map(([k, v]) => [v, k]));
 
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const HISTORY_STORAGE_KEY = 'tap_code_history';
+
+    // ============================================================
+    // ===== DOM ELEMENTS =====
+    // ============================================================
+
+    let currentMorse = '';
+    let currentWord = '';
+    let currentMode = 'solo';
+    let gameHistory = [];
+
+    // Quiz state
+    let quizScore = 0;
+    let quizAttempts = 0;
+    let currentQuizLetter = '';
+    let quizAnswered = false;
+    let chartExpanded = false;
+
+    // ============================================================
+    // ===== HISTORY FUNCTIONS =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      gameHistory = stored ? JSON.parse(stored) : [];
+      renderHistory();
+    }
+
+    function saveHistory(entry) {
+      gameHistory.unshift(entry);
+      if (gameHistory.length > 20) gameHistory.pop();
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${gameHistory.length} entries`;
+
+      if (gameHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No tap history yet. Start tapping!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      gameHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        div.innerHTML = `
+          <span class="score">🔤 ${entry.letters || '0'} letters learned</span>
+          <span>🎯 ${entry.accuracy || 0}% accuracy</span>
+          <span class="date">📅 ${entry.date}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================================
     // ===== BUILD MORSE CHART =====
+    // ============================================================
+
     function buildMorseChart() {
       const grid = document.getElementById('morseGrid');
       grid.innerHTML = '';
-      // Sort letters alphabetically
-      const sortedLetters = [...letters].sort();
+      // Sort letters: letters first, then numbers, then punctuation
+      const sortedLetters = [...letters].sort((a, b) => {
+        const isLetterA = /[A-Z]/.test(a);
+        const isLetterB = /[A-Z]/.test(b);
+        if (isLetterA && !isLetterB) return -1;
+        if (!isLetterA && isLetterB) return 1;
+        const isNumberA = /[0-9]/.test(a);
+        const isNumberB = /[0-9]/.test(b);
+        if (isNumberA && !isNumberB) return -1;
+        if (!isNumberA && isNumberB) return 1;
+        return a.localeCompare(b);
+      });
+
       sortedLetters.forEach(letter => {
         const code = morseCode[letter];
         const tapPattern = code.replace(/\./g, '•').replace(/\-/g, '—');
@@ -452,16 +966,25 @@
         `;
         grid.appendChild(div);
       });
+
+      document.getElementById('chartCount').textContent = `${sortedLetters.length} characters`;
     }
 
-    // ===== TAP → TRANSLATE (Mode B) =====
-    let currentMorse = '';
-    let currentWord = '';
+    // ============================================================
+    // ===== TAP → TRANSLATE =====
+    // ============================================================
 
     function updateTapDisplay() {
       const display = document.getElementById('tapDisplay');
-      const displayText = currentMorse || '<span style="color:#d4c5a0;">Start tapping...</span>';
-      display.innerHTML = displayText;
+      let displayText = '';
+      if (currentMorse) {
+        displayText = currentMorse
+          .replace(/\./g, '<span class="tap-dot">•</span>')
+          .replace(/\-/g, '<span class="tap-dash">—</span>');
+      } else {
+        displayText = '<span style="color:#d4c5a0;">Start tapping...</span>';
+      }
+      display.innerHTML = displayText + '<span class="tap-cursor">|</span>';
     }
 
     function addDot() {
@@ -480,7 +1003,11 @@
         currentWord += letter;
         currentMorse = '';
         updateTapDisplay();
-        document.getElementById('tapResult').textContent = `📝 Current: ${currentWord}`;
+        const resultEl = document.getElementById('tapResult');
+        resultEl.innerHTML = `
+          📝 Current: <strong>${currentWord}</strong>
+          <span class="bennu-response">| Bennu is watching...</span>
+        `;
       }
     }
 
@@ -488,51 +1015,83 @@
       currentMorse = '';
       currentWord = '';
       updateTapDisplay();
-      document.getElementById('tapResult').textContent = '🐦 Bennu is listening...';
+      document.getElementById('tapResult').innerHTML = `
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Bennu is listening...
+      `;
     }
 
     function translateTap() {
       if (!currentMorse) {
-        document.getElementById('tapResult').textContent = '🐦 Tap something first!';
+        document.getElementById('tapResult').innerHTML = `
+          <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+          Tap something first!
+        `;
         return;
       }
+
       const letter = morseToLetter[currentMorse] || '❓';
-      const isBennuTap = Object.keys(bennuTaps).find(key => {
-        const count = key.split(' ')[0];
-        return parseInt(count) === currentMorse.length && currentMorse.split('').every(c => c === '.');
-      });
-      let result = `🔤 Letter: ${letter}`;
-      if (isBennuTap) {
-        result += ` | 🐦 Bennu says: "${bennuTaps[isBennuTap]}"`;
+      const resultEl = document.getElementById('tapResult');
+
+      // Check if it's a Bennu tap pattern (all dots)
+      const isAllDots = currentMorse.split('').every(c => c === '.');
+      let bennuMessage = '';
+      if (isAllDots && currentMorse.length >= 1 && currentMorse.length <= 4) {
+        bennuMessage = ` | 🐦 Bennu says: "${bennuTaps[currentMorse.length]}"`;
       }
-      document.getElementById('tapResult').textContent = result;
-      currentWord += letter;
-      currentMorse = '';
-      updateTapDisplay();
+
+      if (letter !== '❓') {
+        currentWord += letter;
+        resultEl.innerHTML = `
+          🔤 Letter: <strong>${letter}</strong>
+          ${bennuMessage}
+          <br><span style="font-size:0.9rem; color:#5c4530;">📝 Current: ${currentWord}</span>
+        `;
+        currentMorse = '';
+        updateTapDisplay();
+
+        // Save to history if we have a complete word (at least 3 letters)
+        if (currentWord.length >= 3 && currentWord.length % 3 === 0) {
+          const accuracy = Math.round((currentWord.length / (currentWord.length + 1)) * 100);
+          saveHistory({
+            letters: currentWord.length,
+            accuracy: accuracy,
+            date: new Date().toLocaleString()
+          });
+        }
+      } else {
+        resultEl.innerHTML = `
+          ❓ Unknown pattern: <strong>${currentMorse}</strong>
+          <span class="bennu-response">| Bennu is confused. Try again!</span>
+        `;
+      }
     }
 
-    // ===== QUIZ MODE (Mode C) =====
-    let quizScore = 0;
-    let quizAttempts = 0;
-    let currentQuizLetter = '';
-    let quizAnswered = false;
+    // ============================================================
+    // ===== QUIZ MODE =====
+    // ============================================================
 
     function generateQuiz() {
-      const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+      // Only use letters A-Z for the quiz (simpler for learning)
+      const quizLetters = letters.filter(l => /[A-Z]/.test(l));
+      const randomLetter = quizLetters[Math.floor(Math.random() * quizLetters.length)];
       currentQuizLetter = randomLetter;
       const pattern = morseCode[randomLetter].replace(/\./g, '•').replace(/\-/g, '—');
       document.getElementById('quizPattern').textContent = pattern;
-      document.getElementById('quizFeedback').textContent = '🐦 Tap a letter to guess!';
+      document.getElementById('quizFeedback').innerHTML = `
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        Tap a letter to guess!
+      `;
       document.getElementById('quizFeedback').style.color = '#5c4530';
       quizAnswered = false;
 
       // Generate 4 options
       const options = [randomLetter];
+      const pool = quizLetters.filter(l => l !== randomLetter);
       while (options.length < 4) {
-        const other = letters[Math.floor(Math.random() * letters.length)];
+        const other = pool[Math.floor(Math.random() * pool.length)];
         if (!options.includes(other)) options.push(other);
       }
-      // Shuffle
       const shuffled = options.sort(() => Math.random() - 0.5);
       const container = document.getElementById('quizOptions');
       container.innerHTML = '';
@@ -542,7 +1101,7 @@
         btn.addEventListener('click', () => handleQuizAnswer(btn, letter));
         container.appendChild(btn);
       });
-      updateQuizScore();
+      updateQuizStats();
     }
 
     function handleQuizAnswer(btn, selected) {
@@ -557,9 +1116,8 @@
       if (isCorrect) {
         btn.classList.add('correct');
         quizScore++;
-        feedback.textContent = `✅ Correct! ${currentQuizLetter} = ${morseCode[currentQuizLetter].replace(/\./g, '•').replace(/\-/g, '—')}`;
+        feedback.innerHTML = `✅ Correct! ${currentQuizLetter} = ${morseCode[currentQuizLetter].replace(/\./g, '•').replace(/\-/g, '—')}`;
         feedback.style.color = '#4caf50';
-        // Bennu reaction
         const reactions = [
           'TAP! Well done! Bennu approves.',
           'TAP TAP. Not bad for a human.',
@@ -567,31 +1125,46 @@
           'TAP TAP TAP. Snack time for you!'
         ];
         setTimeout(() => {
-          feedback.textContent = `🐦 ${reactions[Math.floor(Math.random() * reactions.length)]}`;
-        }, 800);
+          feedback.innerHTML = `
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            ${reactions[Math.floor(Math.random() * reactions.length)]}
+          `;
+          feedback.style.color = '#4caf50';
+        }, 600);
       } else {
         btn.classList.add('wrong');
         const correctBtn = [...allBtns].find(b => b.textContent === currentQuizLetter);
         if (correctBtn) correctBtn.classList.add('correct');
-        feedback.textContent = `❌ Oops! That was ${morseCode[currentQuizLetter].replace(/\./g, '•').replace(/\-/g, '—')}`;
+        feedback.innerHTML = `❌ Oops! That was ${morseCode[currentQuizLetter].replace(/\./g, '•').replace(/\-/g, '—')}`;
         feedback.style.color = '#f44336';
         setTimeout(() => {
-          feedback.textContent = `🐦 Bennu says: Try again! It was ${currentQuizLetter}`;
-        }, 1200);
+          feedback.innerHTML = `
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            Bennu says: Try again! It was ${currentQuizLetter}
+          `;
+          feedback.style.color = '#5c4530';
+        }, 1000);
       }
-      updateQuizScore();
+      updateQuizStats();
+
+      // Auto-advance after delay
       setTimeout(() => {
         allBtns.forEach(b => b.disabled = false);
         generateQuiz();
-      }, 2500);
+      }, 2000);
     }
 
-    function updateQuizScore() {
+    function updateQuizStats() {
       document.getElementById('quizScore').textContent = quizScore;
       document.getElementById('quizAttempts').textContent = quizAttempts;
+      const accuracy = quizAttempts > 0 ? Math.round((quizScore / quizAttempts) * 100) : 0;
+      document.getElementById('quizAccuracy').textContent = accuracy + '%';
     }
 
+    // ============================================================
     // ===== EVENT LISTENERS =====
+    // ============================================================
+
     document.getElementById('tapDot').addEventListener('click', addDot);
     document.getElementById('tapDash').addEventListener('click', addDash);
     document.getElementById('tapSpace').addEventListener('click', addSpace);
@@ -599,20 +1172,67 @@
     document.getElementById('tapTranslate').addEventListener('click', translateTap);
     document.getElementById('quizNew').addEventListener('click', generateQuiz);
 
-    // Keyboard support
+    // Toggle chart
+    document.getElementById('toggleChart').addEventListener('click', function() {
+      const grid = document.getElementById('morseGrid');
+      chartExpanded = !chartExpanded;
+      grid.style.maxHeight = chartExpanded ? '600px' : '300px';
+      this.textContent = chartExpanded ? '🔼 Collapse' : '🔽 Expand';
+    });
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
     document.addEventListener('keydown', (e) => {
+      // Only if not focused on an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
       if (e.key === '.') { e.preventDefault(); addDot(); }
       if (e.key === '-') { e.preventDefault(); addDash(); }
       if (e.key === ' ' || e.key === 'Space') { e.preventDefault(); addSpace(); }
       if (e.key === 'Enter') { e.preventDefault(); translateTap(); }
       if (e.key === 'c' || e.key === 'C') { clearTap(); }
+      if (e.key === 'q' || e.key === 'Q') { generateQuiz(); }
     });
 
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        const feedback = document.getElementById('tapResult');
+        feedback.innerHTML = `
+          <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+          Mode switched to: ${modeNames[currentMode] || currentMode}
+        `;
+        setTimeout(() => {
+          feedback.innerHTML = `
+            <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+            Bennu is listening...
+          `;
+        }, 1500);
+      });
+    });
+
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
+    loadHistory();
     buildMorseChart();
     generateQuiz();
+    clearTap();
 
-    console.log('🐦 Bennu\'s Tap Code loaded!');
+    console.log('🐦 Bennu\'s Tap Code (Classroom Edition) loaded!');
+    console.log(`📋 ${Object.keys(morseCode).length} characters available`);
+    console.log(`📜 ${gameHistory.length} tap sessions in history`);
+    console.log('💡 Tip: Use . - Space Enter for quick tapping!');
   </script>
 </body>
 </html>

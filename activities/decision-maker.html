@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Mango Committee – Decision Maker</title>
+  <title>The Mango Committee – Classroom Decision Maker</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -58,26 +58,162 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 4px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
       margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .decision-container {
@@ -94,6 +230,7 @@
       margin-bottom: 8px;
     }
 
+    /* ===== QUESTION AREA ===== */
     .question-area {
       margin: 16px 0;
     }
@@ -131,7 +268,13 @@
       background: #8f4a1f;
       transform: scale(1.02);
     }
+    .question-area button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
 
+    /* ===== ANSWER DISPLAY ===== */
     .answer-display {
       background: #fdf6e3;
       border: 2px solid #c9a84c;
@@ -143,21 +286,91 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      transition: border-color 0.5s ease, box-shadow 0.5s ease;
     }
+
+    .answer-display.type-yes {
+      border-color: #4caf50;
+      box-shadow: 0 0 20px rgba(76, 175, 80, 0.15);
+    }
+    .answer-display.type-no {
+      border-color: #f44336;
+      box-shadow: 0 0 20px rgba(244, 67, 54, 0.15);
+    }
+    .answer-display.type-maybe {
+      border-color: #ff9800;
+      box-shadow: 0 0 20px rgba(255, 152, 0, 0.15);
+    }
+
+    @keyframes committeePulse {
+      0% { transform: scale(1) rotate(0deg); }
+      30% { transform: scale(1.3) rotate(-5deg); }
+      60% { transform: scale(0.95) rotate(3deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .answer-emoji.animate {
+      animation: committeePulse 0.7s ease;
+    }
+
     .answer-display .answer-emoji {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin-bottom: 8px;
+      display: inline-block;
+      transition: transform 0.3s;
     }
     .answer-display .answer-text {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #3e2e1f;
       line-height: 1.6;
+      font-weight: 600;
     }
     .answer-display .answer-sub {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #5c4530;
       font-style: italic;
       margin-top: 8px;
+    }
+    .answer-display .answer-reason {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #f5ede3;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+      width: 100%;
+      text-align: left;
+      border-left: 3px solid #c9a84c;
+    }
+    .answer-display .answer-reason textarea {
+      width: 100%;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      background: #fdf6e3;
+      resize: vertical;
+      min-height: 60px;
+      margin-top: 6px;
+    }
+    .answer-display .answer-reason textarea:focus {
+      outline: none;
+      border-color: #b45f2a;
+    }
+    .answer-display .answer-reason .save-reason-btn {
+      background: #c9a84c;
+      color: #2c1810;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-family: 'Georgia', serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: 0.3s;
+    }
+    .answer-display .answer-reason .save-reason-btn:hover {
+      background: #b89a3a;
     }
 
     .bennu-interruption {
@@ -182,15 +395,42 @@
       margin: 8px 0;
     }
 
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .stats-row .stat {
+      background: #fdf6e3;
+      padding: 4px 16px;
+      border-radius: 30px;
+      border: 1px solid #d4c5a0;
+      font-size: 0.85rem;
+      color: #5c4530;
+    }
+    .stats-row .stat strong {
+      color: #b45f2a;
+    }
+
     .history-area {
       margin-top: 20px;
       padding-top: 16px;
       border-top: 2px solid #d4c5a0;
     }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
     .history-area h3 {
       color: #b45f2a;
       font-size: 1rem;
-      margin-bottom: 8px;
+      margin: 0;
     }
     .history-entry {
       background: #fdf6e3;
@@ -212,6 +452,15 @@
     .history-entry .a {
       color: #b45f2a;
       font-weight: 500;
+    }
+    .history-entry .reason-preview {
+      font-size: 0.75rem;
+      color: #5c4530;
+      font-style: italic;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .decision-btn {
@@ -239,6 +488,52 @@
       background: #c9b89a;
     }
 
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -254,24 +549,42 @@
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .decision-container { padding: 20px; }
       .question-area input { width: 60%; }
       .answer-display .answer-text { font-size: 1.1rem; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .decision-container { padding: 16px; }
       .question-area input { width: 100%; margin-bottom: 10px; }
       .question-area button { margin-left: 0; width: 100%; }
       .answer-display { padding: 16px; }
       .answer-display .answer-text { font-size: 1rem; }
       .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
+      .history-entry .reason-preview { max-width: 100%; }
+      .stats-row { gap: 12px; }
+      .stats-row .stat { font-size: 0.75rem; padding: 2px 12px; }
+      .icon-bennu { width: 20px; height: 20px; }
+      .icon-bennu-large { width: 26px; height: 26px; }
     }
   </style>
 </head>
 <body>
+
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 15–25 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Critical Thinking</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -287,14 +600,35 @@
   </header>
 
   <main>
-    <h1>🥭 The Mango Committee's Decision Maker</h1>
-    <p class="subtitle">Ask a yes/no question. The Mango Committee will decide. (Bennu might interrupt.)</p>
+    <div class="activity-header">
+      <h1>🥭 The Mango Committee's Decision Maker</h1>
+      <div class="meta">
+        <span class="tag">🎯 Critical Thinking</span>
+        <span class="tag">💬 Debate</span>
+        <span class="tag">✍️ Writing</span>
+        <span class="tag">⭐ Level 2</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Ask a yes/no question. The Mango Committee will decide. Then <strong>explain your reasoning</strong> and <strong>debate the answer</strong>!</p>
+
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Practice critical thinking, persuasive writing, and respectful debate by analyzing and responding to the Committee's decisions.</span>
+      <span class="time-estimate">⏱️ 15–25 min</span>
+    </div>
+
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="decision-container">
       <span class="committee-icon">🥭</span>
 
       <div class="question-area">
-        <input type="text" id="questionInput" placeholder="Ask a yes/no question..." maxlength="100">
+        <input type="text" id="questionInput" placeholder="Ask a yes/no question..." maxlength="150">
         <button id="askBtn">🔮 Ask the Committee</button>
       </div>
 
@@ -302,23 +636,55 @@
         <span class="answer-emoji" id="answerEmoji">🤔</span>
         <span class="answer-text" id="answerText">The Mango Committee is pondering...</span>
         <span class="answer-sub" id="answerSub">Ask a question to receive guidance</span>
+        <div class="answer-reason" id="answerReason" style="display:none;">
+          <div style="font-weight:bold; font-size:0.85rem; color:#b45f2a;">✍️ Your Reasoning:</div>
+          <textarea id="reasonInput" placeholder="Why do you agree or disagree with the Committee's decision? Explain your thinking..." maxlength="500"></textarea>
+          <button class="save-reason-btn" id="saveReasonBtn">💾 Save Reasoning</button>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <span class="stat">📜 Asked: <strong id="totalQuestions">0</strong></span>
+        <span class="stat">✅ Yes: <strong id="yesCount">0</strong></span>
+        <span class="stat">❌ No: <strong id="noCount">0</strong></span>
+        <span class="stat">🤷 Maybe: <strong id="maybeCount">0</strong></span>
       </div>
 
       <div class="bennu-interruption" id="bennuInterruption">
-        🐦 Bennu interrupts: "The Mango Committee is distracted by snacks. I'll give you an answer instead."
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}"> Bennu interrupts: "The Mango Committee is distracted by snacks. I'll give you an answer instead."
       </div>
 
       <div class="feedback" id="feedback"></div>
 
       <div>
         <button class="decision-btn secondary" id="clearHistoryBtn">🗑️ Clear History</button>
+        <button class="decision-btn secondary" id="exportBtn">📤 Export Discussion</button>
       </div>
 
       <div class="history-area" id="historyArea">
-        <h3>📜 Previous Questions</h3>
+        <div class="history-header">
+          <h3>📜 Previous Questions & Decisions</h3>
+          <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+        </div>
         <div id="historyList"></div>
       </div>
     </div>
+
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Warm-Up:</strong> Use as a 5-minute hook to introduce a debate topic.</li>
+        <li><strong>Persuasive Writing:</strong> Have students write a paragraph arguing for or against the Committee's decision.</li>
+        <li><strong>Class Debate:</strong> Split the class into "Pro-Committee" and "Anti-Committee" teams.</li>
+        <li><strong>Creative Extension:</strong> Students write a short story about why the Committee made that decision.</li>
+        <li><strong>Vocabulary Builder:</strong> Introduce words like "justify," "evidence," "perspective," and "counterargument."</li>
+        <li><strong>Reflection:</strong> Ask: "How did you decide whether to agree or disagree? What influenced your thinking?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>argue the opposite</strong> of their true opinion, practicing perspective-taking and empathy.
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -332,65 +698,134 @@
   </footer>
 
   <script>
-    // ===== ANSWERS =====
+    // ============================================================
+    // ===== DATA =====
+    // ============================================================
+
     const ANSWERS = [
-      { emoji: '✅', text: 'The Mango Committee says: YES.', sub: 'But only if you share the snack.' },
-      { emoji: '❌', text: 'The Mango Committee says: NO.', sub: 'Try asking after a mango.' },
-      { emoji: '🤷', text: 'The Mango Committee says: MAYBE.', sub: 'Ask again when the stars align.' },
-      { emoji: '🥭', text: 'The Mango Committee says: ABSOLUTELY.', sub: 'Mangoes have spoken!' },
-      { emoji: '😤', text: 'The Mango Committee says: NOT A CHANCE.', sub: 'Bennu says: "I told you so."' },
-      { emoji: '🌟', text: 'The Mango Committee says: THE STARS ALIGN.', sub: 'The universe says yes!' },
-      { emoji: '🌙', text: 'The Mango Committee says: UNDER THE MOON.', sub: 'The answer is yes, but wait.' },
-      { emoji: '🍫', text: 'The Mango Committee says: SNACK TIME.', sub: 'Yes! But only after chocolate.' },
-      { emoji: '🤨', text: 'The Mango Committee says: WHY WOULD YOU ASK THAT?', sub: 'Bennu is confused.' },
-      { emoji: '🎉', text: 'The Mango Committee says: CELEBRATE!', sub: 'The answer is yes!' },
-      { emoji: '😈', text: 'The Mango Committee says: EVIL SALAD APPROVES.', sub: 'Bennu says: "Wait, what?"' },
-      { emoji: '🐦', text: 'The Mango Committee says: ASK BENNU.', sub: 'He\'s tapped out.' },
-      { emoji: '📚', text: 'The Mango Committee says: READ A BOOK.', sub: 'The answer is in there somewhere.' },
-      { emoji: '✨', text: 'The Mango Committee says: MAGICAL YES.', sub: 'The Imaginarium approves.' },
-      { emoji: '🌊', text: 'The Mango Committee says: FLOW WITH IT.', sub: 'Yes, go with the flow.' },
-      { emoji: '🏜️', text: 'The Mango Committee says: DESERT NO.', sub: 'The answer is no. Stay hydrated.' },
-      { emoji: '🔥', text: 'The Mango Committee says: FIRE YES!', sub: 'Bennu is excited.' },
-      { emoji: '💀', text: 'The Mango Committee says: ABSOLUTELY NOT.', sub: 'Bennu taps: "I warned you."' },
-      { emoji: '🎭', text: 'The Mango Committee says: MAYBE, BUT DRAMATICALLY.', sub: 'The answer is yes with flair.' },
-      { emoji: '🌱', text: 'The Mango Committee says: GROW WITH IT.', sub: 'The answer is yes, nurture it.' },
-      { emoji: '🎪', text: 'The Mango Committee says: CIRCUS YES!', sub: 'It\'s going to be a ride.' },
-      { emoji: '🧠', text: 'The Mango Committee says: THINK ABOUT IT.', sub: 'The answer is no. Ponder.' },
-      { emoji: '🎨', text: 'The Mango Committee says: CREATE!', sub: 'Yes! Make something beautiful.' },
-      { emoji: '🎵', text: 'The Mango Committee says: SING YES!', sub: 'Bennu is humming.' },
-      { emoji: '📖', text: 'The Mango Committee says: IT\'S A STORY.', sub: 'The answer is yes! Write it down.' },
-      { emoji: '⏰', text: 'The Mango Committee says: TIME WILL TELL.', sub: 'The answer is maybe, wait and see.' },
-      { emoji: '🌈', text: 'The Mango Committee says: RAINBOW YES!', sub: 'Everything is going to be okay.' },
-      { emoji: '🦋', text: 'The Mango Committee says: BUTTERFLY EFFECT.', sub: 'Yes, but it will change everything.' },
-      { emoji: '🌍', text: 'The Mango Committee says: THE WORLD SAYS YES.', sub: 'The universe has spoken.' },
-      { emoji: '🔮', text: 'The Mango Committee says: CRYSTAL BALL NO.', sub: 'The answer is no. It\'s cloudy.' }
+      { emoji: '✅', text: 'The Mango Committee says: YES.', sub: 'But only if you share the snack.', type: 'yes' },
+      { emoji: '❌', text: 'The Mango Committee says: NO.', sub: 'Try asking after a mango.', type: 'no' },
+      { emoji: '🤷', text: 'The Mango Committee says: MAYBE.', sub: 'Ask again when the stars align.', type: 'maybe' },
+      { emoji: '🥭', text: 'The Mango Committee says: ABSOLUTELY.', sub: 'Mangoes have spoken!', type: 'yes' },
+      { emoji: '😤', text: 'The Mango Committee says: NOT A CHANCE.', sub: 'Bennu says: "I told you so."', type: 'no' },
+      { emoji: '🌟', text: 'The Mango Committee says: THE STARS ALIGN.', sub: 'The universe says yes!', type: 'yes' },
+      { emoji: '🌙', text: 'The Mango Committee says: UNDER THE MOON.', sub: 'The answer is yes, but wait.', type: 'yes' },
+      { emoji: '🍫', text: 'The Mango Committee says: SNACK TIME.', sub: 'Yes! But only after chocolate.', type: 'yes' },
+      { emoji: '🤨', text: 'The Mango Committee says: WHY WOULD YOU ASK THAT?', sub: 'Bennu is confused.', type: 'maybe' },
+      { emoji: '🎉', text: 'The Mango Committee says: CELEBRATE!', sub: 'The answer is yes!', type: 'yes' },
+      { emoji: '😈', text: 'The Mango Committee says: EVIL SALAD APPROVES.', sub: 'Bennu says: "Wait, what?"', type: 'maybe' },
+      { emoji: '🐦', text: 'The Mango Committee says: ASK BENNU.', sub: 'He\'s tapped out.', type: 'maybe' },
+      { emoji: '📚', text: 'The Mango Committee says: READ A BOOK.', sub: 'The answer is in there somewhere.', type: 'maybe' },
+      { emoji: '✨', text: 'The Mango Committee says: MAGICAL YES.', sub: 'The Imaginarium approves.', type: 'yes' },
+      { emoji: '🌊', text: 'The Mango Committee says: FLOW WITH IT.', sub: 'Yes, go with the flow.', type: 'yes' },
+      { emoji: '🏜️', text: 'The Mango Committee says: DESERT NO.', sub: 'The answer is no. Stay hydrated.', type: 'no' },
+      { emoji: '🔥', text: 'The Mango Committee says: FIRE YES!', sub: 'Bennu is excited.', type: 'yes' },
+      { emoji: '💀', text: 'The Mango Committee says: ABSOLUTELY NOT.', sub: 'Bennu taps: "I warned you."', type: 'no' },
+      { emoji: '🎭', text: 'The Mango Committee says: MAYBE, BUT DRAMATICALLY.', sub: 'The answer is yes with flair.', type: 'maybe' },
+      { emoji: '🌱', text: 'The Mango Committee says: GROW WITH IT.', sub: 'The answer is yes, nurture it.', type: 'yes' },
+      { emoji: '🎪', text: 'The Mango Committee says: CIRCUS YES!', sub: 'It\'s going to be a ride.', type: 'yes' },
+      { emoji: '🧠', text: 'The Mango Committee says: THINK ABOUT IT.', sub: 'The answer is no. Ponder.', type: 'no' },
+      { emoji: '🎨', text: 'The Mango Committee says: CREATE!', sub: 'Yes! Make something beautiful.', type: 'yes' },
+      { emoji: '🎵', text: 'The Mango Committee says: SING YES!', sub: 'Bennu is humming.', type: 'yes' },
+      { emoji: '📖', text: 'The Mango Committee says: IT\'S A STORY.', sub: 'The answer is yes! Write it down.', type: 'yes' },
+      { emoji: '⏰', text: 'The Mango Committee says: TIME WILL TELL.', sub: 'The answer is maybe, wait and see.', type: 'maybe' },
+      { emoji: '🌈', text: 'The Mango Committee says: RAINBOW YES!', sub: 'Everything is going to be okay.', type: 'yes' },
+      { emoji: '🦋', text: 'The Mango Committee says: BUTTERFLY EFFECT.', sub: 'Yes, but it will change everything.', type: 'yes' },
+      { emoji: '🌍', text: 'The Mango Committee says: THE WORLD SAYS YES.', sub: 'The universe has spoken.', type: 'yes' },
+      { emoji: '🔮', text: 'The Mango Committee says: CRYSTAL BALL NO.', sub: 'The answer is no. It\'s cloudy.', type: 'no' }
     ];
 
-    // ===== BENNU INTERRUPTIONS =====
     const INTERRUPTIONS = [
-      '🐦 Bennu interrupts: "The Mango Committee is distracted by snacks. I\'ll give you an answer instead."',
-      '🐦 Bennu taps: "The Committee is arguing about mangoes. Let me help. The answer is..."',
-      '🐦 Bennu says: "The Mango Committee is on a break. Ask me. I\'m always here. The answer is..."',
-      '🐦 Bennu interrupts: "They\'re busy taste-testing. I\'ll take over."',
-      '🐦 Bennu taps impatiently: "The Committee is slow. I have feathers. The answer is..."'
+      '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu interrupts: "The Mango Committee is distracted by snacks. I\'ll give you an answer instead."',
+      '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps: "The Committee is arguing about mangoes. Let me help. The answer is..."',
+      '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu says: "The Mango Committee is on a break. Ask me. I\'m always here. The answer is..."',
+      '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu interrupts: "They\'re busy taste-testing. I\'ll take over."',
+      '<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src=\'../images/bennu-icon.png\'; this.onerror=function(){this.style.display=\'none\';}"> Bennu taps impatiently: "The Committee is slow. I have feathers. The answer is..."'
     ];
 
-    // ===== STORAGE =====
-    const STORAGE_KEY = 'mango_committee_history';
+    const STORAGE_KEY = 'mango_committee_history_v2';
 
+    // ============================================================
     // ===== DOM ELEMENTS =====
+    // ============================================================
+
     const questionInput = document.getElementById('questionInput');
+    const askBtn = document.getElementById('askBtn');
+    const answerDisplay = document.getElementById('answerDisplay');
     const answerEmoji = document.getElementById('answerEmoji');
     const answerText = document.getElementById('answerText');
     const answerSub = document.getElementById('answerSub');
+    const answerReason = document.getElementById('answerReason');
+    const reasonInput = document.getElementById('reasonInput');
+    const saveReasonBtn = document.getElementById('saveReasonBtn');
     const bennuInterruption = document.getElementById('bennuInterruption');
     const feedback = document.getElementById('feedback');
     const historyList = document.getElementById('historyList');
+    const historyCount = document.getElementById('historyCount');
+    const totalQuestions = document.getElementById('totalQuestions');
+    const yesCount = document.getElementById('yesCount');
+    const noCount = document.getElementById('noCount');
+    const maybeCount = document.getElementById('maybeCount');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    const exportBtn = document.getElementById('exportBtn');
 
-    // ===== GET ANSWER =====
+    let currentAnswer = null;
+    let currentQuestion = '';
+    let currentMode = 'solo';
+
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        feedback.textContent = `👥 Mode switched to: ${this.textContent.trim()}`;
+        feedback.style.color = '#5c4530';
+        setTimeout(() => { feedback.textContent = ''; }, 2000);
+      });
+    });
+
+    // ============================================================
+    // ===== ANSWER LOGIC =====
+    // ============================================================
+
     function getAnswer() {
       const randomIndex = Math.floor(Math.random() * ANSWERS.length);
       return ANSWERS[randomIndex];
+    }
+
+    function updateStats(answer) {
+      const history = getHistory();
+      totalQuestions.textContent = history.length;
+
+      let yes = 0, no = 0, maybe = 0;
+      history.forEach(entry => {
+        if (entry.type === 'yes') yes++;
+        else if (entry.type === 'no') no++;
+        else if (entry.type === 'maybe') maybe++;
+      });
+      yesCount.textContent = yes;
+      noCount.textContent = no;
+      maybeCount.textContent = maybe;
+    }
+
+    function applyAnswerStyling(type) {
+      answerDisplay.classList.remove('type-yes', 'type-no', 'type-maybe');
+      
+      if (type === 'yes') {
+        answerDisplay.classList.add('type-yes');
+      } else if (type === 'no') {
+        answerDisplay.classList.add('type-no');
+      } else if (type === 'maybe') {
+        answerDisplay.classList.add('type-maybe');
+      }
+
+      answerEmoji.classList.remove('animate');
+      void answerEmoji.offsetWidth;
+      answerEmoji.classList.add('animate');
     }
 
     function askQuestion() {
@@ -401,7 +836,6 @@
         return;
       }
 
-      // Check if it's a yes/no question
       const isYesNo = /^(can|will|is|are|do|does|did|have|has|should|could|would|may|might|shall|am|was|were|couldn't|wouldn't|shouldn't|can't|don't|doesn't|didn't|haven't|hasn't|isn't|aren't|wasn't|weren't)/i.test(question) || question.endsWith('?');
       
       if (!isYesNo) {
@@ -410,83 +844,177 @@
         return;
       }
 
-      // Random chance of Bennu interruption (30%)
-      const isInterrupted = Math.random() < 0.3;
+      const isInterrupted = Math.random() < 0.25;
       
       if (isInterrupted) {
         const interrupt = INTERRUPTIONS[Math.floor(Math.random() * INTERRUPTIONS.length)];
-        bennuInterruption.textContent = interrupt;
+        bennuInterruption.innerHTML = interrupt;
         bennuInterruption.classList.add('show');
       } else {
         bennuInterruption.classList.remove('show');
       }
 
-      // Get answer
       const answer = getAnswer();
+      currentAnswer = answer;
+      currentQuestion = question;
+
       answerEmoji.textContent = answer.emoji;
       answerText.textContent = answer.text;
       answerSub.textContent = answer.sub;
 
-      feedback.textContent = '🔮 The Committee has spoken!';
+      applyAnswerStyling(answer.type);
+
+      answerReason.style.display = 'block';
+      reasonInput.value = '';
+      reasonInput.placeholder = currentMode === 'solo' 
+        ? 'Why do you agree or disagree? Explain your thinking...' 
+        : currentMode === 'partner' 
+          ? 'Discuss with your partner. What do you both think?' 
+          : 'Discuss as a group. What does everyone think?';
+
+      feedback.textContent = '🔮 The Committee has spoken! Now explain your reasoning.';
       feedback.style.color = '#4caf50';
 
-      // Save to history
-      saveHistory(question, answer);
-
-      // Clear input
+      saveHistory(question, answer, '');
       questionInput.value = '';
+      questionInput.focus();
     }
 
+    // ============================================================
+    // ===== REASONING =====
+    // ============================================================
+
+    saveReasonBtn.addEventListener('click', function() {
+      const reason = reasonInput.value.trim();
+      if (!reason) {
+        feedback.textContent = '✍️ Please write your reasoning before saving!';
+        feedback.style.color = '#f44336';
+        return;
+      }
+
+      const history = getHistory();
+      if (history.length > 0) {
+        history[0].reason = reason;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+        renderHistory();
+        feedback.textContent = '✅ Reasoning saved! Great critical thinking.';
+        feedback.style.color = '#4caf50';
+        answerReason.style.display = 'none';
+      }
+    });
+
+    // ============================================================
     // ===== HISTORY =====
+    // ============================================================
+
     function getHistory() {
       const stored = localStorage.getItem(STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
     }
 
-    function saveHistory(question, answer) {
+    function saveHistory(question, answer, reason) {
       const history = getHistory();
       history.unshift({
         question: question,
         answer: answer.text,
         emoji: answer.emoji,
+        type: answer.type,
+        sub: answer.sub,
+        reason: reason,
         timestamp: new Date().toLocaleString()
       });
-      // Keep last 20
-      if (history.length > 20) history.pop();
+      if (history.length > 30) history.pop();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
       renderHistory();
+      updateStats(answer);
     }
 
     function clearHistory() {
-      if (confirm('Clear all previous questions?')) {
+      if (confirm('Clear all previous questions and discussions?')) {
         localStorage.removeItem(STORAGE_KEY);
         renderHistory();
+        updateStats(null);
         feedback.textContent = '🗑️ History cleared!';
         feedback.style.color = '#5c4530';
+        answerReason.style.display = 'none';
+        answerDisplay.classList.remove('type-yes', 'type-no', 'type-maybe');
       }
     }
 
     function renderHistory() {
       const history = getHistory();
+      historyCount.textContent = `${history.length} entries`;
+      
       if (history.length === 0) {
         historyList.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No questions yet. Ask something!</div>';
         return;
       }
+
       historyList.innerHTML = '';
-      history.forEach(entry => {
+      history.forEach((entry, index) => {
         const div = document.createElement('div');
         div.className = 'history-entry';
+        const reasonPreview = entry.reason 
+          ? `<span class="reason-preview">💭 "${entry.reason.substring(0, 60)}${entry.reason.length > 60 ? '...' : ''}"</span>` 
+          : '';
         div.innerHTML = `
           <span class="q">${entry.emoji} ${entry.question}</span>
-          <span class="a">${entry.answer}</span>
+          <span class="a">${entry.answer} ${reasonPreview}</span>
         `;
         historyList.appendChild(div);
       });
     }
 
+    // ============================================================
+    // ===== EXPORT =====
+    // ============================================================
+
+    exportBtn.addEventListener('click', function() {
+      const history = getHistory();
+      if (history.length === 0) {
+        feedback.textContent = '📭 Nothing to export. Ask some questions first!';
+        feedback.style.color = '#f44336';
+        return;
+      }
+
+      let text = '🥭 THE MANGO COMMITTEE – DISCUSSION EXPORT\n';
+      text += '===========================================\n';
+      text += `Exported: ${new Date().toLocaleString()}\n`;
+      text += `Total Questions: ${history.length}\n`;
+      text += '===========================================\n\n';
+
+      history.forEach((entry, i) => {
+        text += `${i+1}. ${entry.emoji} ${entry.question}\n`;
+        text += `   → ${entry.answer}\n`;
+        if (entry.reason) {
+          text += `   💭 Reasoning: ${entry.reason}\n`;
+        }
+        text += `   ⏱️ ${entry.timestamp}\n\n`;
+      });
+
+      text += '===========================================\n';
+      text += '🐦 "The Mango Committee thanks you for your questions."\n';
+
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `mango-committee-discussion-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      feedback.textContent = '📤 Discussion exported successfully!';
+      feedback.style.color = '#4caf50';
+    });
+
+    // ============================================================
     // ===== EVENT LISTENERS =====
-    document.getElementById('askBtn').addEventListener('click', askQuestion);
-    document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
+    // ============================================================
+
+    askBtn.addEventListener('click', askQuestion);
+    clearHistoryBtn.addEventListener('click', clearHistory);
 
     questionInput.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') {
@@ -494,9 +1022,13 @@
       }
     });
 
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
     renderHistory();
-    console.log('🥭 The Mango Committee\'s Decision Maker loaded!');
+    updateStats(null);
+    console.log('🥭 The Mango Committee\'s Classroom Decision Maker loaded!');
     console.log(`📜 ${getHistory().length} questions in history`);
   </script>
 </body>

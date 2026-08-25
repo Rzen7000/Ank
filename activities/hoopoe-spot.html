@@ -58,26 +58,140 @@
       color: #b45f2a;
     }
 
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 4px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
       margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .game-container {
@@ -88,6 +202,7 @@
       text-align: center;
     }
 
+    /* ===== STATS ===== */
     .game-stats {
       display: flex;
       justify-content: center;
@@ -98,50 +213,16 @@
     .game-stats .stat {
       font-size: 0.95rem;
       color: #5c4530;
+      background: #fdf6e3;
+      padding: 4px 16px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
     }
     .game-stats .stat strong {
       color: #b45f2a;
     }
 
-    .scene-area {
-      position: relative;
-      margin: 16px auto;
-      max-width: 600px;
-      border: 3px solid #d4c5a0;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fdf6e3;
-      cursor: pointer;
-      aspect-ratio: 16/10;
-    }
-    .scene-area .scene-content {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8rem;
-      user-select: none;
-      position: relative;
-    }
-    .scene-area .bennu-hidden {
-      position: absolute;
-      font-size: 3rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .scene-area .bennu-hidden.found {
-      opacity: 1;
-    }
-    .scene-area .bennu-hidden .bennu-img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-      display: block;
-    }
-
+    /* ===== LEVEL DOTS ===== */
     .level-indicator {
       margin: 12px 0;
       font-size: 0.95rem;
@@ -149,13 +230,13 @@
     }
     .level-indicator .level-dots {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       justify-content: center;
-      margin-top: 4px;
+      margin-top: 6px;
     }
     .level-indicator .level-dots .dot {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       background: #d4c5a0;
       transition: 0.3s;
@@ -163,11 +244,165 @@
     }
     .level-indicator .level-dots .dot.completed {
       background: #4caf50;
+      border-color: #4caf50;
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
     }
     .level-indicator .level-dots .dot.active {
       border-color: #b45f2a;
       background: #b45f2a;
-      transform: scale(1.2);
+      transform: scale(1.3);
+      box-shadow: 0 0 12px rgba(180, 95, 42, 0.4);
+    }
+    .level-indicator .level-dots .dot.found {
+      background: #ffd700;
+      border-color: #ffd700;
+      animation: dotPulse 0.6s ease;
+    }
+
+    @keyframes dotPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.8); }
+      100% { transform: scale(1); }
+    }
+
+    /* ===== SCENE AREA - CHAOTIC OVERLAY ===== */
+    .scene-area {
+      position: relative;
+      margin: 16px auto;
+      max-width: 700px;
+      min-height: 420px;
+      border: 4px solid #d4c5a0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fdf6e3;
+      cursor: crosshair;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .scene-area.found-bennu {
+      border-color: #4caf50;
+      box-shadow: 0 0 40px rgba(76, 175, 80, 0.25);
+    }
+
+    .scene-content {
+      width: 100%;
+      min-height: 420px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 6px;
+      position: relative;
+      background: linear-gradient(135deg, #fdf6e3 0%, #f5ede3 100%);
+      user-select: none;
+    }
+
+    /* ===== CHAOTIC EMOJI STYLES ===== */
+    .scene-emoji {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, filter 0.2s;
+      position: relative;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .scene-emoji:hover {
+      transform: scale(1.1);
+      filter: brightness(1.1);
+      z-index: 2;
+    }
+
+    /* ===== BENNU HIDDEN - OPACITY 25% ===== */
+    .bennu-hidden {
+      position: absolute;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0.5);
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bennu-hidden.showing {
+      opacity: 0.25 !important;
+      transform: scale(0.8);
+      pointer-events: auto;
+    }
+    .bennu-hidden:hover {
+      opacity: 0.7 !important;
+      transform: scale(1.2) !important;
+      z-index: 20;
+      filter: drop-shadow(0 0 20px rgba(180, 95, 42, 0.4));
+    }
+    .bennu-hidden.found {
+      opacity: 1 !important;
+      transform: scale(1.5) !important;
+      animation: bennuFound 0.8s ease;
+      pointer-events: none;
+      z-index: 30;
+      filter: drop-shadow(0 0 30px rgba(76, 175, 80, 0.6));
+    }
+
+    @keyframes bennuFound {
+      0% { transform: scale(0.5) rotate(0deg); }
+      30% { transform: scale(2) rotate(-15deg); }
+      60% { transform: scale(0.9) rotate(8deg); }
+      100% { transform: scale(1.5) rotate(0deg); }
+    }
+
+    .bennu-hidden .bennu-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      display: block;
+      border-radius: 50%;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      background: rgba(253, 246, 227, 0.9);
+      padding: 4px;
+      border: 2px solid rgba(180, 95, 42, 0.15);
+    }
+
+    /* ===== BENNU PULSE ===== */
+    .bennu-pulse {
+      animation: bennuPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bennuPulse {
+      0%, 100% { opacity: 0.25; transform: scale(0.8); }
+      50% { opacity: 0.5; transform: scale(0.95); }
+    }
+
+    /* ===== GLOW EFFECT ===== */
+    .find-glow {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.5) 0%, transparent 70%);
+      animation: glowFade 0.8s ease forwards;
+      z-index: 5;
+    }
+
+    @keyframes glowFade {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(4); opacity: 0; }
+    }
+
+    /* ===== PARTICLES ===== */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.2rem;
+      animation: particleFloat 1.5s ease forwards;
+      z-index: 25;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.5) rotate(720deg); opacity: 0; }
     }
 
     .feedback {
@@ -176,6 +411,30 @@
       color: #5c4530;
       min-height: 30px;
       margin: 12px 0;
+      transition: 0.3s;
+    }
+
+    /* ===== HINT AREA ===== */
+    .hint-area {
+      background: #fdf6e3;
+      border-left: 4px solid #c9a84c;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #5c4530;
+      margin: 8px auto;
+      max-width: 500px;
+      display: none;
+      transition: 0.3s;
+    }
+    .hint-area.show {
+      display: block;
+      animation: hintSlide 0.3s ease;
+    }
+
+    @keyframes hintSlide {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .game-btn {
@@ -202,20 +461,99 @@
     .game-btn.secondary:hover {
       background: #c9b89a;
     }
-
-    .hint-area {
-      background: #fdf6e3;
-      border-left: 4px solid #c9a84c;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: #5c4530;
-      margin: 8px auto;
-      max-width: 500px;
-      display: none;
+    .game-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
     }
-    .hint-area.show {
-      display: block;
+
+    /* ===== HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 6px 14px;
+      margin: 3px 0;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .history-entry .level-name {
+      color: #3e2e1f;
+      flex: 1;
+      text-align: left;
+    }
+    .history-entry .time-taken {
+      color: #5c4530;
+      font-size: 0.75rem;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
     }
 
     footer {
@@ -229,28 +567,45 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .game-container { padding: 20px; }
-      .scene-area .scene-content { font-size: 5rem; }
-      .scene-area .bennu-hidden { font-size: 2.5rem; }
-      .scene-area .bennu-hidden .bennu-img { width: 40px; height: 40px; }
+      .scene-content { padding: 12px; gap: 4px; min-height: 320px; }
+      .bennu-hidden .bennu-img { width: 40px; height: 40px; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
+      .game-stats { gap: 12px; font-size: 0.85rem; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .game-container { padding: 16px; }
-      .scene-area .scene-content { font-size: 3.5rem; }
-      .scene-area .bennu-hidden { font-size: 2rem; }
-      .scene-area .bennu-hidden .bennu-img { width: 30px; height: 30px; }
-      .game-stats { gap: 12px; font-size: 0.85rem; }
+      .scene-content { padding: 8px; gap: 3px; min-height: 250px; }
+      .bennu-hidden .bennu-img { width: 32px; height: 32px; }
+      .game-stats { gap: 6px; font-size: 0.7rem; }
+      .game-stats .stat { padding: 2px 8px; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
+      .level-indicator .level-dots .dot { width: 10px; height: 10px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 10–20 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Observation & Focus</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -266,12 +621,35 @@
   </header>
 
   <main>
-    <h1>🔍 Hoopoe Spot</h1>
-    <p class="subtitle">Find Bennu hidden in the scenes! He's getting harder to spot...</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🔍 Hoopoe Spot</h1>
+      <div class="meta">
+        <span class="tag">🎯 Observation</span>
+        <span class="tag">🧠 Focus</span>
+        <span class="tag">⭐ Level 2</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Find Bennu hidden in each chaotic scene! <strong>Look carefully</strong> – he's getting harder to spot!</p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Develop visual observation skills, attention to detail, and patience through a fun "Where's Waldo?" style search game.</span>
+      <span class="time-estimate">⏱️ 10–20 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="game-container">
       <div class="game-stats">
-        <span class="stat">🎯 Found: <strong id="foundCount">0</strong>/5</span>
+        <span class="stat">🎯 Found: <strong id="foundCount">0</strong>/<span id="totalLevels">6</span></span>
         <span class="stat">⏱️ Time: <strong id="timerDisplay">00:00</strong></span>
         <span class="stat">💡 Hints: <strong id="hintCount">3</strong></span>
       </div>
@@ -283,10 +661,7 @@
 
       <div class="scene-area" id="sceneArea">
         <div class="scene-content" id="sceneContent">
-          <span style="font-size:6rem;">🏛️</span>
-          <div class="bennu-hidden" id="bennuHidden" style="top:30%; left:60%;">
-            <img src="../images/bennu-icon.png" alt="Bennu" class="bennu-img">
-          </div>
+          <!-- Dynamic content rendered by JS -->
         </div>
       </div>
 
@@ -298,7 +673,33 @@
         <button class="game-btn secondary" id="hintBtn">💡 Give Hint</button>
         <button class="game-btn" id="resetBtn">🔄 New Game</button>
       </div>
+
+      <!-- ===== HISTORY ===== -->
+      <div class="history-area" id="historyArea">
+        <div class="history-header">
+          <h3>📜 Game History</h3>
+          <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+        </div>
+        <div id="historyList"></div>
+      </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Warm-Up:</strong> Use as a 5-minute focus exercise.</li>
+        <li><strong>Observation Skills:</strong> Discuss strategies for finding hidden objects in chaotic scenes.</li>
+        <li><strong>Pattern Recognition:</strong> Talk about how Bennu blends into each scene.</li>
+        <li><strong>Descriptive Language:</strong> Have students describe where Bennu was hiding.</li>
+        <li><strong>Patience & Persistence:</strong> Great for developing "stick-with-it-ness."</li>
+        <li><strong>Reflection:</strong> Ask: "What strategies helped you find Bennu faster?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>describe Bennu's location</strong> using positional language (e.g., "He's in the top-right corner, near the palm tree").
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -312,16 +713,65 @@
   </footer>
 
   <script>
-    // ===== SCENES =====
+    // ============================================================
+    // ===== SCENES - with chaotic emoji pools =====
+    // ============================================================
+
     const SCENES = [
-      { emoji: '🏛️', name: 'The Pyramids', hint: 'Look near the biggest pyramid...', bennuPos: { top: '30%', left: '60%' } },
-      { emoji: '🌊', name: 'The Nile', hint: 'Check by the riverbank...', bennuPos: { top: '50%', left: '70%' } },
-      { emoji: '🌿', name: 'The Oasis', hint: 'Bennu loves palm trees...', bennuPos: { top: '20%', left: '40%' } },
-      { emoji: '📚', name: 'The Library', hint: 'He\'s hiding among the books...', bennuPos: { top: '60%', left: '30%' } },
-      { emoji: '🏜️', name: 'The Desert', hint: 'Look at the dunes...', bennuPos: { top: '40%', left: '80%' } }
+      {
+        id: 1,
+        name: 'The Pyramids',
+        emojiPool: ['🏛️', '🌅', '🌴', '🐪', '🐫', '☀️', '🏜️', '⛺', '🪨', '🌾', '🦅', '🌵'],
+        hint: 'Bennu is near the biggest pyramid...',
+        bennuSize: 50
+      },
+      {
+        id: 2,
+        name: 'The Nile River',
+        emojiPool: ['🌊', '🐊', '🐟', '🌴', '☀️', '⛵', '🏜️', '🪷', '🐦', '🦆', '🌾', '🪨'],
+        hint: 'Check by the riverbank...',
+        bennuSize: 48
+      },
+      {
+        id: 3,
+        name: 'The Oasis',
+        emojiPool: ['🌴', '🌿', '🌺', '💧', '🐪', '☀️', '🏜️', '🦜', '🌸', '🌾', '🪨', '🌵'],
+        hint: 'Bennu loves palm trees...',
+        bennuSize: 45
+      },
+      {
+        id: 4,
+        name: 'The Great Library',
+        emojiPool: ['📚', '📖', '📜', '🕯️', '🏛️', '📝', '☀️', '🪔', '🗿', '📓', '🔮', '📿'],
+        hint: 'He\'s hiding among the books...',
+        bennuSize: 42
+      },
+      {
+        id: 5,
+        name: 'The Desert Dunes',
+        emojiPool: ['🏜️', '🌵', '🐫', '🐪', '☀️', '⛺', '🪨', '🌾', '🦂', '🦅', '🌅', '🏜️'],
+        hint: 'Look at the dunes...',
+        bennuSize: 45
+      },
+      {
+        id: 6,
+        name: 'The Market',
+        emojiPool: ['🛍️', '🛒', '🍎', '🍊', '🧺', '🧣', '🪔', '🏺', '🪙', '☀️', '🌴', '🍋', '🍇', '🧄', '🫘', '🍞'],
+        hint: 'He\'s checking out the spices...',
+        bennuSize: 48
+      }
     ];
 
-    // ===== GAME STATE =====
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const HISTORY_STORAGE_KEY = 'hoopoe_spot_history';
+
+    // ============================================================
+    // ===== DOM ELEMENTS =====
+    // ============================================================
+
     let currentLevel = 0;
     let found = [];
     let hintsRemaining = 3;
@@ -329,10 +779,10 @@
     let timerInterval = null;
     let isGameComplete = false;
     let bennuFound = false;
+    let gameHistory = [];
 
-    // ===== DOM ELEMENTS =====
     const sceneContent = document.getElementById('sceneContent');
-    const bennuHidden = document.getElementById('bennuHidden');
+    const sceneArea = document.getElementById('sceneArea');
     const feedback = document.getElementById('feedback');
     const hintArea = document.getElementById('hintArea');
     const foundDisplay = document.getElementById('foundCount');
@@ -340,8 +790,48 @@
     const hintDisplay = document.getElementById('hintCount');
     const levelLabel = document.getElementById('levelLabel');
     const levelDots = document.getElementById('levelDots');
+    const totalLevels = document.getElementById('totalLevels');
 
-    // ===== INIT =====
+    // ============================================================
+    // ===== LOAD HISTORY =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      gameHistory = stored ? JSON.parse(stored) : [];
+      renderHistory();
+    }
+
+    function saveHistory() {
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${gameHistory.length} entries`;
+
+      if (gameHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No games played yet. Find Bennu!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      gameHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        div.innerHTML = `
+          <span class="level-name">🎯 Found ${entry.found}/${entry.total} in ${entry.time}s</span>
+          <span class="time-taken">📅 ${entry.date}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================================
+    // ===== GAME FUNCTIONS =====
+    // ============================================================
+
     function initGame() {
       currentLevel = 0;
       found = [];
@@ -358,55 +848,142 @@
         timerDisplay.textContent = `${mins}:${secs}`;
       }, 1000);
 
+      totalLevels.textContent = SCENES.length;
       updateStats();
       renderDots();
       renderScene();
       feedback.textContent = '🔍 Click on Bennu when you spot him!';
+      feedback.style.color = '#5c4530';
       hintArea.classList.remove('show');
+      sceneArea.classList.remove('found-bennu');
     }
 
     function renderScene() {
       const scene = SCENES[currentLevel];
       levelLabel.textContent = `Level ${currentLevel + 1}: ${scene.name}`;
       
-      // Set scene emoji
-      const emojiSpan = sceneContent.querySelector('span') || document.createElement('span');
-      emojiSpan.textContent = scene.emoji;
-      emojiSpan.style.fontSize = '6rem';
+      // Clear the scene
       sceneContent.innerHTML = '';
-      sceneContent.appendChild(emojiSpan);
       
-      // Position Bennu
-      bennuHidden.style.top = scene.bennuPos.top;
-      bennuHidden.style.left = scene.bennuPos.left;
-      bennuHidden.classList.remove('found');
-      bennuHidden.style.opacity = '0';
-      bennuFound = false;
+      // Determine how many emojis to place (40-60 for chaos!)
+      const numEmojis = 45 + Math.floor(Math.random() * 30);
       
-      sceneContent.appendChild(bennuHidden);
+      // Place emojis randomly
+      for (let i = 0; i < numEmojis; i++) {
+        const emoji = document.createElement('span');
+        emoji.className = 'scene-emoji';
+        
+        // Random emoji from pool
+        const emojiChar = scene.emojiPool[Math.floor(Math.random() * scene.emojiPool.length)];
+        emoji.textContent = emojiChar;
+        
+        // Random size: 1.2rem to 3.5rem
+        const size = 1.2 + Math.random() * 2.5;
+        emoji.style.fontSize = size + 'rem';
+        
+        // Random rotation for chaos
+        const rotation = (Math.random() - 0.5) * 30;
+        emoji.style.transform = `rotate(${rotation}deg)`;
+        
+        // Random opacity variation
+        emoji.style.opacity = 0.7 + Math.random() * 0.3;
+        
+        // Random margin for spacing chaos
+        const margin = 1 + Math.random() * 8;
+        emoji.style.margin = `${margin}px`;
+        
+        sceneContent.appendChild(emoji);
+      }
       
-      // Bennu click listener
-      bennuHidden.onclick = function(e) {
+      // ============================================================
+      // ===== BENNU ICON - UPDATED WITH .ICO AND PNG FALLBACK =====
+      // ============================================================
+      
+      // Now place Bennu at a random position within the scene
+      const bennuDiv = document.createElement('div');
+      bennuDiv.className = 'bennu-hidden showing bennu-pulse';
+      bennuDiv.id = 'bennuHidden';
+      
+      // Random position within the scene (10% to 90%)
+      const topPos = 8 + Math.random() * 74;
+      const leftPos = 5 + Math.random() * 80;
+      bennuDiv.style.top = topPos + '%';
+      bennuDiv.style.left = leftPos + '%';
+      bennuDiv.style.transform = 'translate(-50%, -50%)';
+      bennuDiv.style.opacity = '0.25';
+      
+      // Bennu size varies by level
+      const size = scene.bennuSize || 48;
+      
+      // Use the .ico file with .png fallback
+      bennuDiv.innerHTML = `
+        <img src="../images/bennu-icon.ico" 
+             alt="Bennu" 
+             class="bennu-img" 
+             style="width:${size}px; height:${size}px;"
+             onerror="this.onerror=null; this.src='../images/bennu-icon.png';"
+             loading="lazy">
+      `;
+      
+      // If both .ico and .png fail, show a text fallback
+      // We handle this with a second onerror check via a wrapper
+      const img = bennuDiv.querySelector('img');
+      img.onerror = function() {
+        // If .ico fails, try .png
+        if (this.src.indexOf('.png') === -1) {
+          this.src = '../images/bennu-icon.png';
+        } else {
+          // If both fail, show text emoji
+          this.style.display = 'none';
+          const fallback = document.createElement('span');
+          fallback.textContent = '🐦';
+          fallback.style.fontSize = (size / 1.5) + 'px';
+          fallback.style.opacity = '0.25';
+          bennuDiv.appendChild(fallback);
+        }
+      };
+      
+      bennuDiv.onclick = function(e) {
         e.stopPropagation();
         if (bennuFound || isGameComplete) return;
         findBennu();
       };
       
-      // Click on scene to check if user missed Bennu
-      sceneContent.onclick = function(e) {
-        if (e.target === this && !bennuFound && !isGameComplete) {
-          feedback.textContent = '❌ Bennu is hiding! Keep looking!';
-          feedback.style.color = '#f44336';
-        }
-      };
+      sceneContent.appendChild(bennuDiv);
+      
+      bennuFound = false;
+      sceneArea.classList.remove('found-bennu');
     }
 
     function findBennu() {
       if (bennuFound) return;
       bennuFound = true;
-      bennuHidden.classList.add('found');
-      bennuHidden.style.opacity = '1';
-      found.push(currentLevel);
+      
+      // Find the Bennu element
+      const bennuEl = document.getElementById('bennuHidden');
+      if (bennuEl) {
+        bennuEl.classList.remove('bennu-pulse');
+        bennuEl.classList.add('found');
+        bennuEl.classList.remove('showing');
+        bennuEl.style.opacity = '1';
+        bennuEl.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        bennuEl.style.pointerEvents = 'none';
+      }
+      
+      // Add glow effect
+      sceneArea.classList.add('found-bennu');
+      
+      // Add particles
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          createParticle();
+        }, i * 50);
+      }
+      
+      // Add to found list
+      if (!found.includes(currentLevel)) {
+        found.push(currentLevel);
+      }
       
       feedback.textContent = `🎉 Found Bennu at ${SCENES[currentLevel].name}! TAP!`;
       feedback.style.color = '#4caf50';
@@ -416,8 +993,19 @@
         // Game complete!
         isGameComplete = true;
         if (timerInterval) clearInterval(timerInterval);
-        feedback.textContent = `🏆 TAP TAP TAP! You found Bennu in all 5 scenes! You're a true Hoopoe Spotter!`;
+        feedback.innerHTML = `🏆 <strong>TAP TAP TAP!</strong> You found Bennu in all ${SCENES.length} scenes! You're a true Hoopoe Spotter! 🎊`;
         feedback.style.color = '#b45f2a';
+        
+        // Save to history
+        gameHistory.unshift({
+          found: found.length,
+          total: SCENES.length,
+          time: timerSeconds,
+          date: new Date().toLocaleString()
+        });
+        if (gameHistory.length > 20) gameHistory.pop();
+        saveHistory();
+        renderHistory();
         return;
       }
 
@@ -429,16 +1017,39 @@
         feedback.textContent = `🔍 Find Bennu in ${SCENES[currentLevel].name}!`;
         feedback.style.color = '#5c4530';
         hintArea.classList.remove('show');
+        sceneArea.classList.remove('found-bennu');
       }, 1500);
+    }
+
+    function createParticle() {
+      const particles = ['✨', '⭐', '🌟', '🎉', '💫', '🎊', '🌈', '🪄', '💥'];
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+      
+      const rect = sceneArea.getBoundingClientRect();
+      
+      const x = 5 + Math.random() * 90;
+      const y = 5 + Math.random() * 90;
+      
+      particle.style.left = x + '%';
+      particle.style.top = y + '%';
+      particle.style.fontSize = (0.8 + Math.random() * 2) + 'rem';
+      particle.style.animationDuration = (1 + Math.random() * 0.8) + 's';
+      
+      sceneArea.appendChild(particle);
+      setTimeout(() => particle.remove(), 2000);
     }
 
     function renderDots() {
       levelDots.innerHTML = '';
-      SCENES.forEach((_, index) => {
+      SCENES.forEach((scene, index) => {
         const dot = document.createElement('div');
         dot.className = 'dot';
         if (found.includes(index)) dot.classList.add('completed');
         if (index === currentLevel && !found.includes(index)) dot.classList.add('active');
+        if (found.includes(index) && index === currentLevel) dot.classList.add('found');
+        dot.title = `${scene.name}${found.includes(index) ? ' ✅ Found!' : ''}`;
         levelDots.appendChild(dot);
       });
     }
@@ -460,31 +1071,71 @@
         return;
       }
       if (bennuFound) {
-        feedback.textContent = '🤷 Bennu is already found! Move to the next level.';
+        feedback.textContent = '🤷 Bennu is already found! Moving to the next level.';
         feedback.style.color = '#5c4530';
         return;
       }
       
       hintsRemaining--;
       hintDisplay.textContent = hintsRemaining;
-      hintArea.textContent = `💡 Bennu whispers: "${SCENES[currentLevel].hint}"`;
+      hintArea.innerHTML = `💡 Bennu whispers: "${SCENES[currentLevel].hint}"`;
       hintArea.classList.add('show');
       feedback.textContent = `💡 Hint used! ${hintsRemaining} remaining.`;
       feedback.style.color = '#c9a84c';
     }
 
+    // ============================================================
     // ===== EVENT LISTENERS =====
-    document.getElementById('hintBtn').addEventListener('click', showHint);
-    document.getElementById('resetBtn').addEventListener('click', initGame);
+    // ============================================================
 
-    // ===== KEYBOARD =====
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'h' || e.key === 'H') showHint();
+    document.getElementById('hintBtn').addEventListener('click', showHint);
+    document.getElementById('resetBtn').addEventListener('click', function() {
+      if (confirm('Start a new game? Your current progress will be lost.')) {
+        initGame();
+        feedback.textContent = '🔄 New game started! Good luck!';
+        feedback.style.color = '#5c4530';
+      }
     });
 
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'h' || e.key === 'H') showHint();
+      if (e.key === 'r' || e.key === 'R') {
+        if (confirm('Start a new game?')) initGame();
+      }
+    });
+
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const mode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        feedback.textContent = `👥 Mode switched to: ${modeNames[mode] || mode}`;
+        feedback.style.color = '#5c4530';
+        setTimeout(() => { 
+          if (!isGameComplete) {
+            feedback.textContent = `🔍 Find Bennu in ${SCENES[currentLevel].name}!`;
+          }
+        }, 1500);
+      });
+    });
+
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
+    totalLevels.textContent = SCENES.length;
+    loadHistory();
     initGame();
-    console.log('🔍 Hoopoe Spot loaded!');
+
+    console.log('🔍 Hoopoe Spot (Chaos Edition) loaded!');
+    console.log(`📋 ${SCENES.length} levels available`);
+    console.log(`📜 ${gameHistory.length} games in history`);
   </script>
 </body>
 </html>

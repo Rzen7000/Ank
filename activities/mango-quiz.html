@@ -59,12 +59,162 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 36px;
+      height: 36px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 4px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
+    }
+
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
+      color: #b45f2a;
+      border-left: 5px solid #c9a84c;
+      padding-left: 18px;
+      margin: 0;
+      font-family: 'Georgia', serif;
+      line-height: 1.2;
+    }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #5c4530;
+      margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .quiz-container {
@@ -73,6 +223,7 @@
       border-radius: 16px;
       padding: 30px;
       min-height: 450px;
+      transition: 0.3s;
     }
 
     .quiz-header {
@@ -101,17 +252,17 @@
       margin-bottom: 16px;
     }
     .progress-track {
-      height: 4px;
+      height: 6px;
       background: #d4c5a0;
-      border-radius: 2px;
+      border-radius: 3px;
       margin-bottom: 24px;
       overflow: hidden;
     }
     .progress-track .fill {
       height: 100%;
-      background: #b45f2a;
-      border-radius: 2px;
-      transition: width 0.5s ease;
+      background: linear-gradient(90deg, #c9a84c, #b45f2a);
+      border-radius: 3px;
+      transition: width 0.6s ease;
     }
 
     .question {
@@ -120,6 +271,7 @@
       margin-bottom: 20px;
       text-align: center;
       font-weight: 500;
+      line-height: 1.6;
     }
 
     .options {
@@ -143,7 +295,7 @@
       align-items: center;
       gap: 12px;
     }
-    .option-btn:hover {
+    .option-btn:hover:not(:disabled) {
       border-color: #b45f2a;
       background: #fdf6e3;
       transform: translateX(4px);
@@ -156,6 +308,13 @@
     .option-btn.selected {
       border-color: #b45f2a;
       background: #f5ede3;
+    }
+    .option-btn:disabled {
+      cursor: default;
+      opacity: 0.6;
+    }
+    .option-btn:disabled.selected {
+      opacity: 1;
     }
 
     /* ===== RESULTS ===== */
@@ -200,6 +359,11 @@
     .result .recommendation strong {
       color: #b45f2a;
     }
+    .result .bennu-approval {
+      font-size: 0.9rem;
+      color: #5c4530;
+      margin-top: 12px;
+    }
     .restart-btn {
       background: #b45f2a;
       color: #fdf6e3;
@@ -217,6 +381,53 @@
       transform: scale(1.02);
     }
 
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -228,17 +439,25 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .quiz-container { padding: 20px; }
       .quiz-header h1 { font-size: 1.6rem; }
       .question { font-size: 1.05rem; }
       .result h2 { font-size: 1.6rem; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .quiz-container { padding: 16px; }
       .quiz-header .icon { font-size: 3rem; }
       .quiz-header h1 { font-size: 1.3rem; }
@@ -247,10 +466,21 @@
       .result .big-icon { font-size: 3.5rem; }
       .result h2 { font-size: 1.3rem; }
       .result .role { font-size: 1rem; }
+      .icon-bennu { width: 18px; height: 18px; }
+      .icon-bennu-large { width: 28px; height: 28px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 10–15 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Self-Reflection</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -266,11 +496,54 @@
   </header>
 
   <main>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🥭 The Mango Committee</h1>
+      <div class="meta">
+        <span class="tag">🎯 Self-Reflection</span>
+        <span class="tag">🧠 Personality</span>
+        <span class="tag">⭐ Level 1</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Discover your Imaginarium personality! The Mango Committee will judge you. <strong>(In a nice way.)</strong></p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Encourage self-reflection and discussion about personal traits, preferences, and how we relate to characters and stories.</span>
+      <span class="time-estimate">⏱️ 10–15 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
+
     <div class="quiz-container" id="quizContainer">
       <div id="quizContent">
         <!-- Rendered by JavaScript -->
       </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Icebreaker:</strong> Use as a fun way to start discussions about personality.</li>
+        <li><strong>Character Connection:</strong> Discuss how each personality type relates to the story characters.</li>
+        <li><strong>Writing Prompt:</strong> Students write about a time they embodied their personality type.</li>
+        <li><strong>Class Discussion:</strong> Share results and discuss similarities and differences.</li>
+        <li><strong>Reflection:</strong> Ask: "Do you agree with your result? Why or why not?"</li>
+        <li><strong>Creative Extension:</strong> Students create their own quiz questions for the Mango Committee.</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>argue for a different personality type</strong> than their result, practicing perspective-taking.
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -284,7 +557,10 @@
   </footer>
 
   <script>
-    // ===== QUIZ DATA =====
+    // ============================================================
+    // ===== QUIZ DATA - EXPANDED TO 8 QUESTIONS =====
+    // ============================================================
+
     const quizData = [
       {
         question: "What's your ideal snack while reading?",
@@ -299,7 +575,7 @@
         question: "How do you handle a difficult problem?",
         options: [
           { text: "Think deeply, analyse, then act", emoji: "🤔", value: "A" },
-          { text: "Try random things until something works", emoji: "🎲", value: "J" },
+          { text: "Try random things until something works", emoji: "🎲", value: "M" },
           { text: "Ask for help from friends and experts", emoji: "🫂", value: "B" },
           { text: "Argue with Bennu about it", emoji: "🐦", value: "S" }
         ]
@@ -307,7 +583,7 @@
       {
         question: "What's your favorite type of story?",
         options: [
-          { text: "A wild adventure with twists and turns", emoji: "🏔️", value: "J" },
+          { text: "A wild adventure with twists and turns", emoji: "🏔️", value: "M" },
           { text: "A philosophical journey that makes you think", emoji: "🧠", value: "A" },
           { text: "A comedy filled with sarcasm and jokes", emoji: "😂", value: "B" },
           { text: "A mystery where you solve the puzzle", emoji: "🔍", value: "S" }
@@ -317,7 +593,7 @@
         question: "What's your role in a group project?",
         options: [
           { text: "Leader who keeps everyone on track", emoji: "👑", value: "B" },
-          { text: "The creative one with wild ideas", emoji: "🎨", value: "J" },
+          { text: "The creative one with wild ideas", emoji: "🎨", value: "M" },
           { text: "The supporter who helps everyone", emoji: "🫂", value: "A" },
           { text: "The quiet observer who notices everything", emoji: "👀", value: "S" }
         ]
@@ -326,51 +602,92 @@
         question: "What's your motto in life?",
         options: [
           { text: "Think big, laugh harder", emoji: "🌟", value: "B" },
-          { text: "Snacks solve everything", emoji: "🍫", value: "J" },
+          { text: "Snacks solve everything", emoji: "🍫", value: "M" },
           { text: "Question everything, including this quiz", emoji: "❓", value: "A" },
           { text: "If in doubt, tap it out", emoji: "🐦", value: "S" }
+        ]
+      },
+      {
+        question: "How do you prefer to spend your free time?",
+        options: [
+          { text: "Reading and learning new things", emoji: "📚", value: "A" },
+          { text: "Exploring new places and trying new foods", emoji: "🌍", value: "M" },
+          { text: "Hanging out with friends and making them laugh", emoji: "😂", value: "B" },
+          { text: "Writing stories or journaling", emoji: "✍️", value: "S" }
+        ]
+      },
+      {
+        question: "What's your approach to making decisions?",
+        options: [
+          { text: "Carefully weigh all options and consequences", emoji: "⚖️", value: "A" },
+          { text: "Go with your gut and see what happens", emoji: "🔮", value: "M" },
+          { text: "Consult with friends and get their opinions", emoji: "🗣️", value: "B" },
+          { text: "Flip a coin and trust the universe", emoji: "🪙", value: "S" }
+        ]
+      },
+      {
+        question: "What kind of friend are you?",
+        options: [
+          { text: "The wise advisor who gives great advice", emoji: "🦉", value: "A" },
+          { text: "The fun one who's always up for adventure", emoji: "🎪", value: "M" },
+          { text: "The loyal one who's always there for you", emoji: "🤝", value: "B" },
+          { text: "The mysterious one with hidden depths", emoji: "🌙", value: "S" }
         ]
       }
     ];
 
-    // ===== PERSONALITY TYPES =====
+    // ============================================================
+    // ===== PERSONALITY TYPES - WITH BENNU ICON =====
+    // ============================================================
+
     const personalityTypes = {
       'B': {
         name: "Bennu",
         role: "The Wise Guardian",
-        icon: "🐦",
+        icon: '🐦',
         description: "You're wise, sarcastic, and secretly kind. Like Bennu, you see the bigger picture and aren't afraid to tap some sense into people. You value learning, laughter, and the occasional snack. People come to you for advice, even if you give it in cryptic beak taps.",
-        recommendation: "You should read <strong>'Bennu's Riddle'</strong> – a philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers. Perfect for a thinker like you!"
+        recommendation: "You should read <strong>'Bennu's Riddle'</strong> – a philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers. Perfect for a thinker like you!",
+        approval: "Bennu taps once in approval."
       },
-      'J': {
+      'M': {
         name: "Jimba",
         role: "The Snack Enthusiast",
         icon: "🍫",
         description: "You're adventurous, snack-obsessed, and loyal to the core. Like Jimba, you'd follow your heart (and your stomach) anywhere. You believe that snacks make everything better, and you're not wrong. Your backpack is full of surprises, and you're always ready for the next adventure.",
-        recommendation: "You should read <strong>'The Floating Classroom'</strong> – when Jimba's snack goes missing, the class discovers a time-traveling portal inside the supply closet. It's got snacks AND adventure!"
+        recommendation: "You should read <strong>'The Floating Classroom'</strong> – when Jimba's snack goes missing, the class discovers a time-traveling portal inside the supply closet. It's got snacks AND adventure!",
+        approval: "Jimba offers you a snack. Bennu taps twice in approval."
       },
       'A': {
         name: "Ali",
         role: "The Quiet Thinker",
         icon: "📚",
         description: "You're thoughtful, observant, and always asking 'why'. Like Ali, you take notes when others are arguing and see the world in a unique way. You believe that deep questions deserve deep answers (even if they're wrapped in funny stories). You're a truth-seeker with a gentle soul.",
-        recommendation: "You should read <strong>'The Accidental Messenger'</strong> – Ali stumbles upon a secret that could change everything. Delivering the message might be harder than receiving it. Perfect for a thinker like you!"
+        recommendation: "You should read <strong>'The Accidental Messenger'</strong> – Ali stumbles upon a secret that could change everything. Delivering the message might be harder than receiving it. Perfect for a thinker like you!",
+        approval: "Ali nods thoughtfully. Bennu taps thrice in approval."
       },
       'S': {
         name: "The Storykeeper",
         role: "The Guardian of Stories",
         icon: "📖",
         description: "You're a dreamer, a storyteller, and a keeper of secrets. Like the Storykeeper, you believe that stories have the power to change the world. You love dark chocolate, exotic fruits, and arguing with fictional hoopoe. You're the one who writes things down so others don't have to.",
-        recommendation: "You should read <strong>'The Month That Changed Everything'</strong> – Jimba learns about food, just not the 'eating' part. It's a story about discovery, growth, and the power of trying new things."
+        recommendation: "You should read <strong>'The Month That Changed Everything'</strong> – Jimba learns about food, just not the 'eating' part. It's a story about discovery, growth, and the power of trying new things.",
+        approval: "The Storykeeper records your result. Bennu taps four times in approval."
       }
     };
 
+    // ============================================================
     // ===== GAME STATE =====
-    let currentQuestion = 0;
-    let answers = { B: 0, J: 0, A: 0, S: 0 };
-    let totalQuestions = quizData.length;
+    // ============================================================
 
+    let currentQuestion = 0;
+    let answers = { B: 0, M: 0, A: 0, S: 0 };
+    let totalQuestions = quizData.length;
+    let currentMode = 'solo';
+
+    // ============================================================
     // ===== RENDER FUNCTIONS =====
+    // ============================================================
+
     function renderStart() {
       const container = document.getElementById('quizContent');
       container.innerHTML = `
@@ -383,7 +700,11 @@
           <button class="restart-btn" onclick="startQuiz()">🍫 Start the Quiz</button>
         </div>
         <p style="text-align:center; color:#5c4530; font-size:0.85rem; margin-top:16px;">
-          🐦 5 questions • 3 minutes • Bennu may or may not be watching
+          <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+          ${totalQuestions} questions • 3 minutes • Bennu may or may not be watching
+        </p>
+        <p style="text-align:center; color:#5c4530; font-size:0.8rem; margin-top:8px; font-style:italic;">
+          💡 Tip: Be honest! There are no wrong answers.
         </p>
       `;
     }
@@ -395,9 +716,14 @@
 
       let optionsHTML = '';
       q.options.forEach(opt => {
+        // If the option emoji is "🐦", replace with Bennu icon
+        let emojiDisplay = opt.emoji;
+        if (opt.emoji === '🐦') {
+          emojiDisplay = `<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">`;
+        }
         optionsHTML += `
           <button class="option-btn" onclick="selectOption('${opt.value}', this)">
-            <span class="emoji">${opt.emoji}</span>
+            <span class="emoji">${emojiDisplay}</span>
             <span>${opt.text}</span>
           </button>
         `;
@@ -422,7 +748,10 @@
     function selectOption(value, button) {
       // Disable all buttons
       const allBtns = document.querySelectorAll('.option-btn');
-      allBtns.forEach(btn => btn.style.opacity = '0.6');
+      allBtns.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+      });
       button.style.opacity = '1';
       button.classList.add('selected');
 
@@ -437,7 +766,7 @@
         } else {
           showResults();
         }
-      }, 500);
+      }, 600);
     }
 
     function showResults() {
@@ -453,6 +782,18 @@
       }
 
       const result = personalityTypes[dominantType];
+      
+      // Generate a summary of scores
+      const scoreSummary = Object.entries(answers)
+        .map(([key, val]) => {
+          const names = { B: 'Bennu', M: 'Jimba', A: 'Ali', S: 'Storykeeper' };
+          return `${names[key]}: ${val}`;
+        })
+        .join(' • ');
+
+      // Bennu approval message with icon
+      const approvalIcon = `<img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">`;
+
       container.innerHTML = `
         <div class="result">
           <span class="big-icon">${result.icon}</span>
@@ -461,8 +802,11 @@
           <div class="description">${result.description}</div>
           <div class="recommendation">${result.recommendation}</div>
           <button class="restart-btn" onclick="restartQuiz()">🔄 Retake the Quiz</button>
-          <p style="font-size:0.8rem; color:#5c4530; margin-top:12px;">
-            🐦 Bennu taps ${dominantType === 'B' ? 'once' : dominantType === 'J' ? 'twice' : dominantType === 'A' ? 'thrice' : 'four times'} in approval.
+          <div class="bennu-approval">
+            ${approvalIcon} ${result.approval}
+          </div>
+          <p style="font-size:0.8rem; color:#5c4530; margin-top:8px; border-top:1px solid #d4c5a0; padding-top:8px;">
+            📊 Your scores: ${scoreSummary}
           </p>
         </div>
       `;
@@ -470,7 +814,7 @@
 
     function startQuiz() {
       currentQuestion = 0;
-      answers = { B: 0, J: 0, A: 0, S: 0 };
+      answers = { B: 0, M: 0, A: 0, S: 0 };
       renderQuestion(0);
     }
 
@@ -478,9 +822,49 @@
       startQuiz();
     }
 
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        const feedback = document.getElementById('quizContent');
+        // Show a subtle feedback message
+        const msg = document.createElement('div');
+        msg.style.cssText = 'text-align:center; color:#5c4530; font-style:italic; padding:8px;';
+        msg.textContent = `👥 Mode switched to: ${modeNames[currentMode] || currentMode}`;
+        feedback.prepend(msg);
+        setTimeout(() => msg.remove(), 2000);
+      });
+    });
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        if (confirm('Restart the quiz?')) restartQuiz();
+      }
+      // Number keys 1-4 for quick selection
+      if (e.key >= '1' && e.key <= '4') {
+        const btns = document.querySelectorAll('.option-btn:not([disabled])');
+        const idx = parseInt(e.key) - 1;
+        if (btns[idx]) btns[idx].click();
+      }
+    });
+
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
     renderStart();
-    console.log('🥭 The Mango Committee Quiz loaded!');
+    console.log('🥭 The Mango Committee Quiz (Classroom Edition) loaded!');
+    console.log(`📋 ${totalQuestions} questions available`);
   </script>
 </body>
 </html>

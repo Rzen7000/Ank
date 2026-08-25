@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bennu's Riddle Challenge - Bennu's Universe</title>
+  <title>Bennu's Riddle Challenge – Classroom Edition</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -58,26 +58,162 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+    .icon-bennu-large {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 3px;
+      display: inline-block;
+    }
+
+    /* ===== CLASSROOM BANNER ===== */
+    .classroom-banner {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      border-bottom: 3px solid #c9a84c;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .classroom-banner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .classroom-banner .badge {
+      background: #c9a84c;
+      color: #2c1810;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
     main {
       flex: 1;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== ACTIVITY HEADER ===== */
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #d4c5a0;
+      padding-bottom: 16px;
+    }
+    .activity-header h1 {
+      font-size: 2.2rem;
       color: #b45f2a;
       border-left: 5px solid #c9a84c;
       padding-left: 18px;
-      margin-bottom: 4px;
+      margin: 0;
       font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
+    .activity-header .meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #5c4530;
+      align-items: center;
+    }
+    .activity-header .meta .tag {
+      background: #f5ede3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #d4c5a0;
+    }
+
     .subtitle {
       font-size: 1.05rem;
       color: #5c4530;
       margin-bottom: 20px;
+    }
+
+    /* ===== LEARNING OBJECTIVE CARD ===== */
+    .objective-card {
+      background: #f5ede3;
+      border: 2px solid #c9a84c;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .objective-card .label {
+      font-weight: bold;
+      color: #b45f2a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .objective-card .content {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    .objective-card .time-estimate {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* ===== MODE SELECTOR ===== */
+    .mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mode-selector button {
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-family: 'Georgia', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #3e2e1f;
+    }
+    .mode-selector button:hover {
+      background: #e8ddd0;
+    }
+    .mode-selector button.active {
+      background: #b45f2a;
+      color: #fdf6e3;
+      border-color: #b45f2a;
     }
 
     .riddle-container {
@@ -88,15 +224,17 @@
       text-align: center;
     }
 
+    /* ===== PROGRESS BAR ===== */
     .progress-bar {
       display: flex;
       gap: 8px;
       justify-content: center;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
     .progress-dot {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: #d4c5a0;
       border: 2px solid #d4c5a0;
@@ -106,6 +244,7 @@
       font-size: 0.8rem;
       font-weight: bold;
       transition: 0.3s;
+      color: #5c4530;
     }
     .progress-dot.completed {
       background: #4caf50;
@@ -116,7 +255,13 @@
       background: #b45f2a;
       border-color: #b45f2a;
       color: white;
-      transform: scale(1.1);
+      transform: scale(1.15);
+      box-shadow: 0 0 16px rgba(180, 95, 42, 0.3);
+    }
+    .progress-dot.skipped {
+      background: #ff9800;
+      border-color: #ff9800;
+      color: white;
     }
     .progress-dot .check {
       display: none;
@@ -146,8 +291,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0 10px;
     }
 
+    /* ===== HINT AREA ===== */
     .hint-area {
       background: #fdf6e3;
       border-left: 4px solid #c9a84c;
@@ -163,6 +310,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: 0.3s;
     }
     .hint-area .hint-text {
       display: none;
@@ -174,6 +322,7 @@
       color: #d4c5a0;
     }
 
+    /* ===== ANSWER INPUT ===== */
     .answer-input {
       display: flex;
       gap: 10px;
@@ -200,6 +349,10 @@
       border-color: #b45f2a;
       box-shadow: 0 0 0 3px rgba(180, 95, 42, 0.15);
     }
+    .answer-input input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     .answer-input button {
       background: #b45f2a;
       color: #fdf6e3;
@@ -212,15 +365,20 @@
       font-family: 'Georgia', serif;
       transition: 0.3s;
     }
-    .answer-input button:hover {
+    .answer-input button:hover:not(:disabled) {
       background: #8f4a1f;
       transform: scale(1.02);
+    }
+    .answer-input button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
     .answer-input button.secondary {
       background: #d4c5a0;
       color: #3e2e1f;
     }
-    .answer-input button.secondary:hover {
+    .answer-input button.secondary:hover:not(:disabled) {
       background: #c9b89a;
     }
 
@@ -230,6 +388,7 @@
       color: #5c4530;
       min-height: 40px;
       margin: 8px 0;
+      transition: 0.3s;
     }
     .feedback.correct {
       color: #2e7d32;
@@ -237,23 +396,49 @@
     .feedback.wrong {
       color: #c62828;
     }
+    .feedback.info {
+      color: #c9a84c;
+    }
 
+    /* ===== SECRET MESSAGE ===== */
     .secret-message {
-      background: #fdf6e3;
-      border: 2px solid #c9a84c;
-      border-radius: 12px;
-      padding: 20px 24px;
+      background: linear-gradient(135deg, #fdf6e3, #f5ede3);
+      border: 3px solid #c9a84c;
+      border-radius: 16px;
+      padding: 24px 28px;
       margin: 16px auto;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #3e2e1f;
-      max-width: 500px;
+      max-width: 550px;
       display: none;
+      box-shadow: 0 4px 20px rgba(201, 168, 76, 0.15);
+      animation: secretReveal 0.8s ease;
     }
     .secret-message.show {
       display: block;
     }
+
+    @keyframes secretReveal {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .secret-message .secret-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 8px;
+    }
     .secret-message strong {
       color: #b45f2a;
+    }
+    .secret-message .secret-phrase {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #b45f2a;
+      letter-spacing: 2px;
+      display: block;
+      margin-top: 8px;
     }
 
     .riddle-btn {
@@ -267,7 +452,7 @@
       cursor: pointer;
       font-family: 'Georgia', serif;
       transition: 0.3s;
-      margin: 8px;
+      margin: 6px;
     }
     .riddle-btn:hover {
       background: #8f4a1f;
@@ -281,6 +466,94 @@
       background: #c9b89a;
     }
 
+    /* ===== HISTORY ===== */
+    .history-area {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid #d4c5a0;
+    }
+    .history-area .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .history-area h3 {
+      color: #b45f2a;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .history-entry {
+      background: #fdf6e3;
+      border: 1px solid #d4c5a0;
+      border-radius: 8px;
+      padding: 5px 12px;
+      margin: 3px 0;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .history-entry .score {
+      color: #b45f2a;
+      font-weight: 500;
+    }
+    .history-entry .date {
+      color: #5c4530;
+      font-size: 0.7rem;
+    }
+
+    /* ===== TEACHER TIPS ===== */
+    .teacher-tips {
+      margin-top: 32px;
+      background: #f5ede3;
+      border: 2px solid #d4c5a0;
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .teacher-tips h3 {
+      color: #b45f2a;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-tips ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .teacher-tips ul li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #3e2e1f;
+    }
+    .teacher-tips ul li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+    .teacher-tips .challenge-card {
+      background: #2c1810;
+      color: #fdf6e3;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .teacher-tips .challenge-card strong {
+      color: #c9a84c;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -292,28 +565,48 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
+      .activity-header h1 { font-size: 1.6rem; }
+      .activity-header .meta { font-size: 0.8rem; }
       .riddle-container { padding: 20px; }
       .riddle-text { font-size: 1.2rem; }
       .answer-input input { width: 180px; }
+      .teacher-tips ul { grid-template-columns: 1fr; }
+      .objective-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .classroom-banner { font-size: 0.75rem; padding: 8px 16px; gap: 8px; }
+      .classroom-banner span { white-space: nowrap; }
+      .progress-dot { width: 28px; height: 28px; font-size: 0.7rem; }
     }
     @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; }
+      main { padding: 16px 12px 32px; }
+      .activity-header h1 { font-size: 1.3rem; padding-left: 12px; }
       .riddle-container { padding: 16px; }
       .riddle-text { font-size: 1rem; min-height: 60px; }
       .answer-input input { width: 140px; font-size: 0.9rem; padding: 8px 12px; }
-      .answer-input button { font-size: 0.9rem; padding: 8px 16px; }
-      .progress-dot { width: 24px; height: 24px; font-size: 0.7rem; }
-      .secret-message { font-size: 1rem; padding: 14px 16px; }
+      .answer-input button { font-size: 0.85rem; padding: 8px 14px; }
+      .progress-dot { width: 24px; height: 24px; font-size: 0.6rem; }
+      .secret-message { font-size: 1rem; padding: 16px; }
+      .secret-message .secret-phrase { font-size: 1.2rem; }
+      .icon-bennu { width: 18px; height: 18px; }
+      .icon-bennu-large { width: 24px; height: 24px; }
+      .history-entry { flex-direction: column; align-items: stretch; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== CLASSROOM BANNER ===== -->
+  <div class="classroom-banner">
+    <span>🏫 <strong>Classroom Ready</strong></span>
+    <span>⏱️ <strong>Activity Time:</strong> 15–25 min</span>
+    <span>👥 <strong>Modes:</strong> Solo · Partner · Group</span>
+    <span class="badge">🎯 Critical Thinking</span>
+  </div>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -329,13 +622,36 @@
   </header>
 
   <main>
-    <h1>🧩 Bennu's Riddle Challenge</h1>
-    <p class="subtitle">Solve 7 riddles to reveal a secret message. Hints available if you're stuck!</p>
+    <!-- ===== ACTIVITY HEADER ===== -->
+    <div class="activity-header">
+      <h1>🧩 Bennu's Riddle Challenge</h1>
+      <div class="meta">
+        <span class="tag">🎯 Critical Thinking</span>
+        <span class="tag">🧠 Logic</span>
+        <span class="tag">⭐ Level 2</span>
+      </div>
+    </div>
+
+    <p class="subtitle">Solve <strong>10 riddles</strong> to reveal a secret message. Hints available if you're stuck!</p>
+
+    <!-- ===== LEARNING OBJECTIVE CARD ===== -->
+    <div class="objective-card">
+      <span class="label">📖 Learning Objective</span>
+      <span class="content">Develop critical thinking, lateral thinking, and problem-solving skills through engaging riddles and wordplay.</span>
+      <span class="time-estimate">⏱️ 15–25 min</span>
+    </div>
+
+    <!-- ===== MODE SELECTOR ===== -->
+    <div class="mode-selector">
+      <button class="active" data-mode="solo">🧑 Solo</button>
+      <button data-mode="partner">👫 Partner</button>
+      <button data-mode="group">👥 Group</button>
+    </div>
 
     <div class="riddle-container">
       <div class="progress-bar" id="progressBar"></div>
 
-      <div class="riddle-number" id="riddleNumber">Riddle 1 of 7</div>
+      <div class="riddle-number" id="riddleNumber">Riddle 1 of 10</div>
       <div class="riddle-text" id="riddleText"></div>
 
       <div class="hint-area" id="hintArea">
@@ -344,23 +660,54 @@
       </div>
 
       <div class="answer-input">
-        <input type="text" id="answerInput" placeholder="Type your answer..." maxlength="20" autocomplete="off">
-        <button id="submitBtn">Submit</button>
-        <button class="secondary" id="hintBtn">💡 Show Hint</button>
+        <input type="text" id="answerInput" placeholder="Type your answer..." maxlength="30" autocomplete="off">
+        <button id="submitBtn">✅ Submit</button>
+        <button class="secondary" id="hintBtn">💡 Hint</button>
         <button class="secondary" id="skipBtn">⏭️ Skip</button>
       </div>
 
       <div class="feedback" id="feedback"></div>
 
       <div class="secret-message" id="secretMessage">
-        <strong>🎉 Secret Message Unlocked!</strong><br>
-        <span id="secretText"></span>
+        <span class="secret-icon">🔓</span>
+        <strong>Secret Message Unlocked!</strong><br>
+        <span class="secret-phrase" id="secretText"></span>
+        <p style="font-size:0.9rem; font-style:italic; margin-top:8px; color:#5c4530;">
+          🐦 Bennu taps three times in approval!
+        </p>
       </div>
 
       <div>
         <button class="riddle-btn secondary" id="resetBtn">🔄 Start Over</button>
+        <button class="riddle-btn secondary" id="exportBtn">📤 Export Results</button>
+      </div>
+
+      <!-- ===== HISTORY ===== -->
+      <div class="history-area" id="historyArea">
+        <div class="history-header">
+          <h3>📜 Game History</h3>
+          <span style="font-size:0.75rem; color:#5c4530;" id="historyCount">0 entries</span>
+        </div>
+        <div id="historyList"></div>
       </div>
     </div>
+
+    <!-- ===== TEACHER TIPS ===== -->
+    <div class="teacher-tips">
+      <h3>🧑‍🏫 Teacher Tips & Extensions</h3>
+      <ul>
+        <li><strong>Warm-Up:</strong> Use as a 5-minute brain teaser activity.</li>
+        <li><strong>Critical Thinking:</strong> Discuss strategies for solving riddles.</li>
+        <li><strong>Vocabulary Building:</strong> Introduce words like "metaphor," "analogy," and "wordplay."</li>
+        <li><strong>Creative Extension:</strong> Students write their own riddles for classmates to solve.</li>
+        <li><strong>Partner Work:</strong> Students discuss riddles in pairs before answering.</li>
+        <li><strong>Reflection:</strong> Ask: "What strategy helped you solve the riddles?"</li>
+      </ul>
+      <div class="challenge-card">
+        <strong>🔥 Challenge Mode:</strong> Students must <strong>write their own riddle</strong> and trade with a partner to solve each other's!
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -374,7 +721,10 @@
   </footer>
 
   <script>
-    // ===== RIDDLES =====
+    // ============================================================
+    // ===== RIDDLES - EXPANDED TO 10 =====
+    // ============================================================
+
     const RIDDLES = [
       {
         question: "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
@@ -410,10 +760,28 @@
         question: "I am always hungry, I must always be fed. The finger I touch, will soon turn red. What am I?",
         answer: "FIRE",
         hint: "🔥 I give warmth but can also burn."
+      },
+      {
+        question: "I can be cracked, made, told, and played. What am I?",
+        answer: "JOKE",
+        hint: "😂 I make people laugh."
+      },
+      {
+        question: "I have a spine but no bones. I have pages but no words. What am I?",
+        answer: "BOOK",
+        hint: "📚 You read me, but I don't speak."
+      },
+      {
+        question: "I have a tail and a head, but no legs. I can be used to write, but I'm not a pen. What am I?",
+        answer: "COIN",
+        hint: "🪙 I have two sides and can be flipped."
       }
     ];
 
+    // ============================================================
     // ===== SECRET PHRASES (with morals and values) =====
+    // ============================================================
+
     const SECRET_PHRASES = [
       "WISDOM BEGINS WITH WONDER",
       "CURIOSITY IS THE KEY TO KNOWLEDGE",
@@ -424,16 +792,34 @@
       "COURAGE COMES FROM CURIOSITY",
       "HONESTY OPENS ALL DOORS",
       "FRIENDSHIP IS THE REAL TREASURE",
-      "PATIENCE REWARDS THE PATIENT"
+      "PATIENCE REWARDS THE PATIENT",
+      "THINK BEFORE YOU SPEAK",
+      "KNOWLEDGE IS POWER",
+      "QUESTIONS LEAD TO ANSWERS",
+      "WISDOM GROWS WITH AGE",
+      "CURIOSITY FUELS THE MIND"
     ];
 
-    // ===== GAME STATE =====
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const HISTORY_STORAGE_KEY = 'bennu_riddle_history';
+
+    // ============================================================
+    // ===== DOM ELEMENTS =====
+    // ============================================================
+
     let currentRiddle = 0;
     let completed = [];
+    let skipped = [];
     let hintsUsed = [];
     let secretPhrase = '';
+    let attempts = 0;
+    let correctAnswers = 0;
+    let currentMode = 'solo';
+    let gameHistory = [];
 
-    // ===== DOM ELEMENTS =====
     const progressBar = document.getElementById('progressBar');
     const riddleNumber = document.getElementById('riddleNumber');
     const riddleText = document.getElementById('riddleText');
@@ -444,11 +830,58 @@
     const secretMessage = document.getElementById('secretMessage');
     const secretText = document.getElementById('secretText');
 
-    // ===== INIT =====
+    // ============================================================
+    // ===== HISTORY FUNCTIONS =====
+    // ============================================================
+
+    function loadHistory() {
+      const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+      gameHistory = stored ? JSON.parse(stored) : [];
+      renderHistory();
+    }
+
+    function saveHistory(entry) {
+      gameHistory.unshift(entry);
+      if (gameHistory.length > 20) gameHistory.pop();
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(gameHistory));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('historyList');
+      const count = document.getElementById('historyCount');
+      count.textContent = `${gameHistory.length} entries`;
+
+      if (gameHistory.length === 0) {
+        container.innerHTML = '<div style="color:#5c4530; font-style:italic; padding:8px;">No games played yet. Solve some riddles!</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      gameHistory.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        div.innerHTML = `
+          <span class="score">🧩 ${entry.solved}/${entry.total} riddles</span>
+          <span>🎯 ${entry.accuracy}% accuracy</span>
+          <span>${entry.completed ? '✅ Completed' : '❌ Not completed'}</span>
+          <span class="date">📅 ${entry.date}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================================
+    // ===== GAME FUNCTIONS =====
+    // ============================================================
+
     function initRiddles() {
       currentRiddle = 0;
       completed = [];
+      skipped = [];
       hintsUsed = [];
+      attempts = 0;
+      correctAnswers = 0;
       secretPhrase = SECRET_PHRASES[Math.floor(Math.random() * SECRET_PHRASES.length)];
       
       secretMessage.classList.remove('show');
@@ -469,17 +902,42 @@
         if (completed.includes(index)) {
           dot.classList.add('completed');
           dot.innerHTML = '<span class="check">✓</span>';
+        } else if (skipped.includes(index)) {
+          dot.classList.add('skipped');
+          dot.innerHTML = '<span class="num">⏭</span>';
         } else if (index === currentRiddle) {
           dot.classList.add('active');
           dot.innerHTML = `<span class="num">${index + 1}</span>`;
         } else {
           dot.innerHTML = `<span class="num">${index + 1}</span>`;
         }
+        dot.title = `Riddle ${index + 1}${completed.includes(index) ? ' ✅ Solved' : skipped.includes(index) ? ' ⏭ Skipped' : ''}`;
         progressBar.appendChild(dot);
       });
     }
 
     function renderRiddle() {
+      // Find the next unsolved riddle
+      let next = currentRiddle;
+      while (next < RIDDLES.length && (completed.includes(next) || skipped.includes(next))) {
+        next++;
+      }
+      
+      if (next >= RIDDLES.length) {
+        // All riddles are solved or skipped
+        if (completed.length === RIDDLES.length) {
+          showSecretMessage();
+        } else {
+          // Some skipped, some completed - all done
+          feedback.textContent = `📊 You've completed ${completed.length} of ${RIDDLES.length} riddles. Start over to try again!`;
+          feedback.className = 'feedback info';
+          answerInput.disabled = true;
+          document.getElementById('submitBtn').disabled = true;
+        }
+        return;
+      }
+      
+      currentRiddle = next;
       const riddle = RIDDLES[currentRiddle];
       riddleNumber.textContent = `Riddle ${currentRiddle + 1} of ${RIDDLES.length}`;
       riddleText.textContent = riddle.question;
@@ -491,10 +949,12 @@
       
       answerInput.value = '';
       answerInput.disabled = false;
+      document.getElementById('submitBtn').disabled = false;
       answerInput.focus();
       
       feedback.textContent = '';
       feedback.className = 'feedback';
+      renderProgress();
     }
 
     function submitAnswer() {
@@ -507,12 +967,15 @@
 
       const riddle = RIDDLES[currentRiddle];
       const isCorrect = answer === riddle.answer.toUpperCase();
+      attempts++;
 
       if (isCorrect) {
+        correctAnswers++;
         completed.push(currentRiddle);
-        feedback.textContent = `✅ Correct! "The answer is ${riddle.answer}". Bennu taps once!`;
+        feedback.textContent = `✅ Correct! The answer is "${riddle.answer}". Bennu taps once!`;
         feedback.className = 'feedback correct';
         answerInput.disabled = true;
+        document.getElementById('submitBtn').disabled = true;
 
         if (completed.length === RIDDLES.length) {
           // All riddles solved!
@@ -522,28 +985,8 @@
         } else {
           // Move to next riddle
           setTimeout(() => {
-            // Find the next unsolved riddle
-            let next = currentRiddle + 1;
-            while (next < RIDDLES.length && completed.includes(next)) {
-              next++;
-            }
-            if (next < RIDDLES.length) {
-              currentRiddle = next;
-              renderProgress();
-              renderRiddle();
-            } else {
-              // All riddles are solved, but for some reason not all completed
-              // Find first uncompleted
-              for (let i = 0; i < RIDDLES.length; i++) {
-                if (!completed.includes(i)) {
-                  currentRiddle = i;
-                  break;
-                }
-              }
-              renderProgress();
-              renderRiddle();
-            }
-          }, 1500);
+            renderRiddle();
+          }, 1200);
         }
       } else {
         feedback.textContent = `❌ Not quite. Try again! (Hint: Think differently)`;
@@ -558,17 +1001,21 @@
       hintText.textContent = riddle.hint;
       hintText.classList.add('show');
       hintArea.querySelector('.hint-placeholder').style.display = 'none';
+      if (!hintsUsed.includes(currentRiddle)) {
+        hintsUsed.push(currentRiddle);
+      }
       feedback.textContent = '💡 Bennu whispers a clue...';
-      feedback.className = 'feedback';
+      feedback.className = 'feedback info';
     }
 
     function skipRiddle() {
       const riddle = RIDDLES[currentRiddle];
       feedback.textContent = `⏭️ Skipped! The answer was "${riddle.answer}".`;
-      feedback.className = 'feedback';
+      feedback.className = 'feedback info';
       
-      completed.push(currentRiddle);
+      skipped.push(currentRiddle);
       answerInput.disabled = true;
+      document.getElementById('submitBtn').disabled = true;
 
       if (completed.length === RIDDLES.length) {
         setTimeout(() => {
@@ -576,25 +1023,8 @@
         }, 800);
       } else {
         setTimeout(() => {
-          let next = currentRiddle + 1;
-          while (next < RIDDLES.length && completed.includes(next)) {
-            next++;
-          }
-          if (next < RIDDLES.length) {
-            currentRiddle = next;
-            renderProgress();
-            renderRiddle();
-          } else {
-            for (let i = 0; i < RIDDLES.length; i++) {
-              if (!completed.includes(i)) {
-                currentRiddle = i;
-                break;
-              }
-            }
-            renderProgress();
-            renderRiddle();
-          }
-        }, 1500);
+          renderRiddle();
+        }, 1000);
       }
     }
 
@@ -603,23 +1033,132 @@
       secretMessage.classList.add('show');
       feedback.textContent = '🎉 TAP TAP TAP! You\'ve unlocked the secret message!';
       feedback.className = 'feedback correct';
+      
+      // Save to history
+      const accuracy = attempts > 0 ? Math.round((correctAnswers / attempts) * 100) : 0;
+      saveHistory({
+        solved: completed.length,
+        total: RIDDLES.length,
+        accuracy: accuracy,
+        completed: completed.length === RIDDLES.length,
+        date: new Date().toLocaleString()
+      });
     }
 
+    // ============================================================
+    // ===== EXPORT =====
+    // ============================================================
+
+    document.getElementById('exportBtn').addEventListener('click', function() {
+      if (gameHistory.length === 0) {
+        feedback.textContent = '📭 No games to export. Solve some riddles first!';
+        feedback.className = 'feedback info';
+        return;
+      }
+
+      let text = '🧩 BENNU\'S RIDDLE CHALLENGE – GAME HISTORY\n';
+      text += '===========================================\n';
+      text += `Exported: ${new Date().toLocaleString()}\n`;
+      text += `Total Games: ${gameHistory.length}\n`;
+      text += '===========================================\n\n';
+
+      gameHistory.forEach((entry, i) => {
+        text += `${i+1}. ${entry.date}\n`;
+        text += `   Solved: ${entry.solved}/${entry.total} riddles\n`;
+        text += `   Accuracy: ${entry.accuracy}%\n`;
+        text += `   Status: ${entry.completed ? '✅ Completed' : '❌ Not completed'}\n\n`;
+      });
+
+      text += '===========================================\n';
+      text += '🐦 "Bennu\'s Riddle Challenge thanks you for your wit!"\n';
+
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `bennu-riddle-history-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      feedback.textContent = '📤 History exported successfully!';
+      feedback.className = 'feedback info';
+    });
+
+    // ============================================================
     // ===== EVENT LISTENERS =====
+    // ============================================================
+
     document.getElementById('submitBtn').addEventListener('click', submitAnswer);
     document.getElementById('hintBtn').addEventListener('click', showHint);
     document.getElementById('skipBtn').addEventListener('click', skipRiddle);
-    document.getElementById('resetBtn').addEventListener('click', initRiddles);
-
-    answerInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        submitAnswer();
+    document.getElementById('resetBtn').addEventListener('click', function() {
+      if (confirm('Start over? Your current progress will be lost.')) {
+        initRiddles();
+        feedback.textContent = '🔄 Starting fresh! Good luck!';
+        feedback.className = 'feedback info';
+        setTimeout(() => {
+          feedback.textContent = '';
+        }, 2000);
       }
     });
 
+    answerInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        if (!this.disabled) {
+          submitAnswer();
+        }
+      }
+    });
+
+    // ============================================================
+    // ===== MODE SELECTOR =====
+    // ============================================================
+
+    document.querySelectorAll('.mode-selector button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-selector button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+        const modeNames = { solo: 'Solo', partner: 'Partner', group: 'Group' };
+        feedback.textContent = `👥 Mode switched to: ${modeNames[currentMode] || currentMode}`;
+        feedback.className = 'feedback info';
+        setTimeout(() => {
+          feedback.textContent = '';
+          feedback.className = 'feedback';
+        }, 1500);
+      });
+    });
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'r' || e.key === 'R') {
+        if (confirm('Start over?')) initRiddles();
+      }
+      if (e.key === 'h' || e.key === 'H') {
+        showHint();
+      }
+      if (e.key === 's' || e.key === 'S') {
+        if (!answerInput.disabled) {
+          skipRiddle();
+        }
+      }
+    });
+
+    // ============================================================
     // ===== INIT =====
+    // ============================================================
+
+    loadHistory();
     initRiddles();
-    console.log('🧩 Bennu\'s Riddle Challenge loaded!');
+
+    console.log('🧩 Bennu\'s Riddle Challenge (Classroom Edition) loaded!');
+    console.log(`📋 ${RIDDLES.length} riddles available`);
+    console.log(`📜 ${gameHistory.length} games in history`);
   </script>
 </body>
 </html>

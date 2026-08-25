@@ -59,53 +59,118 @@
       color: #b45f2a;
     }
 
+    /* ===== BENNU ICON STYLES ===== */
+    .icon-bennu {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      border-radius: 50%;
+      object-fit: contain;
+      background: rgba(253, 246, 227, 0.8);
+      padding: 2px;
+      display: inline-block;
+    }
+
     main {
       flex: 1;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 24px 40px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.4rem;
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+      background: linear-gradient(135deg, #f5ede3 0%, #fdf6e3 100%);
+      border: 2px solid #d4c5a0;
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: '✦';
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      font-size: 1.2rem;
+      color: #c9a84c;
+      opacity: 0.4;
+    }
+    .hero-section::after {
+      content: '✦';
+      position: absolute;
+      bottom: 12px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: #c9a84c;
+      opacity: 0.4;
+    }
+    .hero-section h1 {
+      font-size: 2.6rem;
       color: #b45f2a;
-      border-left: 5px solid #c9a84c;
-      padding-left: 18px;
+      border: none;
+      padding: 0;
       margin-bottom: 4px;
       font-family: 'Georgia', serif;
     }
-    .subtitle {
-      font-size: 1.05rem;
+    .hero-section .hero-sub {
+      font-size: 1.1rem;
       color: #5c4530;
-      margin-bottom: 24px;
+      margin-bottom: 4px;
+    }
+    .hero-section .hero-bennu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      background: #fdf6e3;
+      padding: 8px 20px;
+      border-radius: 30px;
+      border: 1px solid #d4c5a0;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+      color: #5c4530;
+    }
+    .hero-section .hero-bennu img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
     }
 
-    .hub-intro {
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
       background: #f5ede3;
       border: 2px solid #d4c5a0;
       border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-      text-align: center;
+      padding: 14px 24px;
     }
-    .hub-intro p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #3e2e1f;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .hub-intro .bennu-greeting {
-      font-style: italic;
+    .stats-bar .stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
       color: #5c4530;
-      margin-top: 8px;
-      background: #fdf6e3;
-      padding: 8px 16px;
-      border-radius: 8px;
-      display: inline-block;
+    }
+    .stats-bar .stat strong {
+      color: #b45f2a;
+      font-size: 1.2rem;
+    }
+    .stats-bar .stat .emoji {
+      font-size: 1.2rem;
     }
 
+    /* ===== FILTER BAR ===== */
     .filter-bar {
       display: flex;
       gap: 10px;
@@ -122,45 +187,84 @@
       font-family: 'Georgia', serif;
       font-size: 0.85rem;
       transition: 0.3s;
+      color: #3e2e1f;
     }
     .filter-btn:hover {
       border-color: #b45f2a;
+      background: #fdf6e3;
     }
     .filter-btn.active {
       background: #b45f2a;
       color: #fdf6e3;
       border-color: #b45f2a;
     }
+    .filter-btn .badge {
+      background: rgba(255,255,255,0.2);
+      padding: 0 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      margin-left: 4px;
+    }
+    .filter-btn.active .badge {
+      background: rgba(255,255,255,0.2);
+    }
 
+    /* ===== ACTIVITIES GRID ===== */
     .activities-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px;
     }
 
     .activity-card {
       background: #f5ede3;
       border: 2px solid #d4c5a0;
       border-radius: 16px;
-      padding: 20px 22px;
+      padding: 22px 24px 20px;
       transition: 0.3s;
       text-decoration: none;
       color: #3e2e1f;
       display: flex;
       flex-direction: column;
       position: relative;
+      cursor: pointer;
     }
     .activity-card:hover {
       border-color: #b45f2a;
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(180, 95, 42, 0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(180, 95, 42, 0.12);
+    }
+    .activity-card:active {
+      transform: scale(0.98);
+    }
+
+    .activity-card .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
     }
     .activity-card .card-icon {
       font-size: 2.8rem;
-      margin-bottom: 10px;
+      line-height: 1;
     }
+    .activity-card .card-status {
+      font-size: 1rem;
+      background: #fdf6e3;
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid #d4c5a0;
+      font-size: 0.7rem;
+      color: #5c4530;
+    }
+    .activity-card .card-status.completed {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+
     .activity-card .card-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #b45f2a;
       font-weight: 600;
       margin-bottom: 4px;
@@ -170,22 +274,30 @@
       color: #5c4530;
       line-height: 1.6;
       flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .activity-card .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      border-top: 1px solid rgba(212, 197, 160, 0.3);
+      padding-top: 12px;
     }
     .activity-card .card-tag {
       display: inline-block;
       background: #fdf6e3;
-      padding: 2px 12px;
+      padding: 2px 14px;
       border-radius: 20px;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       color: #5c4530;
       border: 1px solid #d4c5a0;
-      margin-top: 10px;
-      align-self: flex-start;
+      text-transform: capitalize;
     }
     .activity-card .card-arrow {
-      position: absolute;
-      bottom: 16px;
-      right: 18px;
       font-size: 1.2rem;
       color: #d4c5a0;
       transition: 0.3s;
@@ -195,22 +307,44 @@
       transform: translateX(4px);
     }
 
-    .activity-card.completed {
-      border-color: #4caf50;
+    .activity-card .card-difficulty {
+      display: flex;
+      gap: 2px;
+      font-size: 0.65rem;
+      color: #d4c5a0;
     }
-    .activity-card.completed .card-tag {
-      background: #e8f5e9;
-      border-color: #4caf50;
-      color: #2e7d32;
-    }
-
-    .activity-card .card-status {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      font-size: 1.2rem;
+    .activity-card .card-difficulty .filled {
+      color: #b45f2a;
     }
 
+    .activity-card.hidden {
+      display: none;
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #5c4530;
+      background: #f5ede3;
+      border-radius: 16px;
+      border: 2px dashed #d4c5a0;
+    }
+    .empty-state .empty-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .empty-state h3 {
+      color: #b45f2a;
+      margin-bottom: 6px;
+    }
+    .empty-state p {
+      font-size: 0.95rem;
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 20px;
@@ -222,25 +356,35 @@
     }
     footer img { height: 1.2em; vertical-align: middle; margin: 0 4px; opacity: 0.6; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       header { flex-direction: column; align-items: flex-start; padding: 12px 16px; }
       header nav { gap: 10px; }
       header nav a { font-size: 0.8rem; }
-      h1 { font-size: 1.8rem; }
-      .activities-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-    }
-    @media (max-width: 480px) {
-      main { padding: 24px 16px; }
-      h1 { font-size: 1.4rem; }
-      .activities-grid { grid-template-columns: 1fr; }
-      .activity-card { padding: 16px; }
-      .activity-card .card-icon { font-size: 2.2rem; }
+      .hero-section h1 { font-size: 2rem; }
+      .hero-section { padding: 24px 20px; }
+      .stats-bar { gap: 16px; padding: 12px 16px; }
+      .stats-bar .stat { font-size: 0.85rem; }
+      .activities-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
       .filter-bar { gap: 6px; }
       .filter-btn { font-size: 0.75rem; padding: 6px 14px; }
+    }
+    @media (max-width: 480px) {
+      main { padding: 16px 12px 32px; }
+      .hero-section h1 { font-size: 1.6rem; }
+      .hero-section .hero-sub { font-size: 0.95rem; }
+      .hero-section .hero-bennu { font-size: 0.85rem; padding: 6px 14px; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .activity-card { padding: 16px 18px; }
+      .activity-card .card-icon { font-size: 2.2rem; }
+      .stats-bar { flex-direction: column; align-items: center; gap: 8px; }
+      .filter-bar { gap: 4px; }
+      .filter-btn { font-size: 0.7rem; padding: 4px 10px; }
     }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">
       <img src="../images/ANKAA LOGO.jpg" alt="Logo" class="logo-img">
@@ -256,24 +400,43 @@
   </header>
 
   <main>
-    <h1>🎮 Activities Hub</h1>
-    <p class="subtitle">Explore Bennu's Universe through games, puzzles, and creative challenges!</p>
-
-    <div class="hub-intro">
-      <p> Welcome to the Activities Hub! Choose from 12 adventures, puzzles, and creative challenges. 
-      Each activity is designed to spark curiosity, creativity, and a little bit of laughter.</p>
-      <div class="bennu-greeting">💡 "Bennu says: 'Try them all. Or don't. I'm a bird.'"</div>
+    <!-- ===== HERO SECTION ===== -->
+    <div class="hero-section">
+      <h1>🎮 Activities Hub</h1>
+      <p class="hero-sub">Explore Bennu's Universe through games, puzzles, and creative challenges!</p>
+      <div class="hero-bennu">
+        <img src="../images/bennu-icon.ico" alt="Bennu" class="icon-bennu" onerror="this.onerror=null; this.src='../images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
+        <span>"Try them all. Or don't. I'm a bird." — Bennu</span>
+      </div>
     </div>
 
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="puzzle">🧩 Puzzles</button>
-      <button class="filter-btn" data-filter="game">🎮 Games</button>
-      <button class="filter-btn" data-filter="creative">✍️ Creative</button>
-      <button class="filter-btn" data-filter="quiz">📝 Quizzes</button>
-      <button class="filter-btn" data-filter="adventure">🏔️ Adventures</button>
+    <!-- ===== STATS BAR ===== -->
+    <div class="stats-bar">
+      <span class="stat">
+        <span class="emoji">🎯</span>
+        <strong id="totalActivities">0</strong> Total Activities
+      </span>
+      <span class="stat">
+        <span class="emoji">✅</span>
+        <strong id="completedActivities">0</strong> Completed
+      </span>
+      <span class="stat">
+        <span class="emoji">⭐</span>
+        <strong id="progressPercent">0%</strong> Progress
+      </span>
+      <span class="stat">
+        <span class="emoji">📚</span>
+        <span id="categoryCount">0</span> Categories
+      </span>
     </div>
 
+    <!-- ===== FILTER BAR ===== -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">🌟 All <span class="badge" id="allCount">0</span></button>
+      <!-- Categories will be dynamically generated -->
+    </div>
+
+    <!-- ===== ACTIVITIES GRID ===== -->
     <div class="activities-grid" id="activitiesGrid"></div>
   </main>
 
@@ -288,106 +451,120 @@
   </footer>
 
   <script>
+    // ============================================================
     // ===== ACTIVITIES DATA =====
+    // ============================================================
+
     const ACTIVITIES = [
       {
         id: 'tap-code',
         icon: '🕊️',
-        title: 'Bennu\'s Tap Code',
+        title: "Bennu's Tap Code",
         desc: 'Learn Morse code with Egypt\'s most sarcastic hoopoe. Tap. Tap. TAP.',
         category: 'puzzle',
         page: 'tap-code.html',
-        completed: false
+        difficulty: 2,
+        time: '15-25 min'
       },
       {
         id: 'snack-portal',
         icon: '🎒',
-        title: 'Snack Portal Adventure',
+        title: "Jimba's Snack Portal",
         desc: 'Enter Jimba\'s magical backpack and explore a world of snacks and surprises.',
         category: 'adventure',
         page: 'snack-portal.html',
-        completed: false
+        difficulty: 2,
+        time: '15-25 min'
       },
       {
         id: 'mango-quiz',
         icon: '🥭',
         title: 'Mango Committee Quiz',
-        desc: 'Discover your Bennu\'s Universe personality! 5 questions, 5 personalities, 1 mango.',
+        desc: 'Discover your Bennu\'s Universe personality! 8 questions, 4 personalities, 1 mango.',
         category: 'quiz',
         page: 'mango-quiz.html',
-        completed: false
+        difficulty: 1,
+        time: '10-15 min'
       },
       {
         id: 'memory-game',
         icon: '🧠',
-        title: 'Bennu\'s Memory Game',
-        desc: 'Match the pairs with Bennu. 3 difficulty levels. 60 seconds. No pressure.',
+        title: "Bennu's Memory Game",
+        desc: 'Match the pairs with Bennu. 3 difficulty levels. Timed challenge. No pressure.',
         category: 'game',
         page: 'memory-game.html',
-        completed: false
+        difficulty: 2,
+        time: '10-20 min'
       },
       {
         id: 'scavenger-hunt',
         icon: '🔍',
-        title: 'Scavenger Hunt',
-        desc: 'Find all 7 locations with clues. Bennu is your guide. (He\'s not very helpful.)',
+        title: 'Bennu\'s Scavenger Hunt',
+        desc: 'Find all 8 locations with clues. Earn a certificate when you finish!',
         category: 'adventure',
         page: 'scavenger-hunt.html',
-        completed: false
+        difficulty: 2,
+        time: '20-35 min'
       },
       {
         id: 'word-puzzle',
         icon: '🧩',
-        title: 'Bennu\'s Word Puzzle',
-        desc: 'Word Search + Crossword with 15 words from Bennu\'s Universe. Two puzzles in one!',
+        title: "Bennu's Word Puzzle",
+        desc: 'Word Search + Crossword with 20 words from Bennu\'s Universe. Two puzzles in one!',
         category: 'puzzle',
         page: 'word-puzzle.html',
-        completed: false
+        difficulty: 2,
+        time: '15-30 min'
       },
       {
         id: 'mango-match',
         icon: '🍍',
         title: 'Mango Match',
-        desc: 'Drag and drop fruits to match their descriptions. 7 fruits, 1 timer.',
+        desc: 'Drag and drop 14 fruits to match their descriptions. Learn about Egyptian fruits!',
         category: 'game',
         page: 'mango-match.html',
-        completed: false
+        difficulty: 1,
+        time: '10-20 min'
       },
       {
         id: 'great-debate',
         icon: '⚖️',
         title: 'The Great Debate',
-        desc: 'Vote on 5 important questions. Bennu will judge you. (In a nice way.)',
+        desc: 'Vote on important questions, justify your position, and create your own debates!',
         category: 'quiz',
         page: 'great-debate.html',
-        completed: false
+        difficulty: 2,
+        time: '15-30 min'
       },
       {
         id: 'riddle-challenge',
         icon: '🤔',
-        title: 'Bennu\'s Riddle Challenge',
-        desc: 'Solve 7 riddles with hints to reveal a secret message of wisdom.',
+        title: "Bennu's Riddle Challenge",
+        desc: 'Solve 10 riddles with hints to reveal a secret message of wisdom.',
         category: 'puzzle',
         page: 'riddle-challenge.html',
-        completed: false
+        difficulty: 2,
+        time: '15-25 min'
       },
       {
         id: 'story-builder',
         icon: '✍️',
-        title: 'Bennu\'s Universe Story Builder',
-        desc: 'Generate story ideas, write your own tales, and save your favourites.',
+        title: 'Story Builder',
+        desc: 'Generate story ideas, write your own tales, save them, and export!',
         category: 'creative',
         page: 'story-builder.html',
-        completed: false
+        difficulty: 2,
+        time: '20-35 min'
       },
       {
         id: 'hoopoe-spot',
         icon: '👀',
         title: 'Hoopoe Spot',
-        desc: 'Find Bennu hidden in 5 scenes. He gets harder to spot each level!',
+        desc: 'Find Bennu hidden in 6 chaotic scenes. He gets harder to spot each level!',
         category: 'game',
         page: 'hoopoe-spot.html',
-        completed: false
+        difficulty: 2,
+        time: '10-20 min'
       },
       {
         id: 'decision-maker',
@@ -396,83 +573,218 @@
         desc: 'Ask a yes/no question. The Mango Committee decides. Bennu might interrupt.',
         category: 'creative',
         page: 'decision-maker.html',
-        completed: false
+        difficulty: 1,
+        time: '15-25 min'
       }
     ];
 
-    // ===== CHECK COMPLETION STATUS =====
-    function checkCompletion() {
-      // Check localStorage for completed activities
-      const completed = JSON.parse(localStorage.getItem('imaginarium_activities_completed') || '[]');
-      ACTIVITIES.forEach(act => {
-        act.completed = completed.includes(act.id);
-      });
+    // ============================================================
+    // ===== CATEGORY DATA =====
+    // ============================================================
+
+    const CATEGORY_MAP = {
+      'puzzle': { icon: '🧩', label: 'Puzzles' },
+      'game': { icon: '🎮', label: 'Games' },
+      'creative': { icon: '✍️', label: 'Creative' },
+      'quiz': { icon: '📝', label: 'Quizzes' },
+      'adventure': { icon: '🏔️', label: 'Adventures' }
+    };
+
+    // ============================================================
+    // ===== STORAGE =====
+    // ============================================================
+
+    const STORAGE_KEY = 'imaginarium_activities_completed';
+
+    function getCompleted() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
     }
 
     function markCompleted(activityId) {
-      const completed = JSON.parse(localStorage.getItem('imaginarium_activities_completed') || '[]');
+      const completed = getCompleted();
       if (!completed.includes(activityId)) {
         completed.push(activityId);
-        localStorage.setItem('imaginarium_activities_completed', JSON.stringify(completed));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(completed));
       }
     }
 
-    // ===== RENDER ACTIVITIES =====
-    function renderActivities(filter = 'all') {
+    function isCompleted(activityId) {
+      return getCompleted().includes(activityId);
+    }
+
+    function resetProgress() {
+      if (confirm('Reset all progress? This will mark all activities as incomplete.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderActivities(currentFilter);
+        updateStats();
+        updateFilterCounts();
+      }
+    }
+
+    // ============================================================
+    // ===== STATE =====
+    // ============================================================
+
+    let currentFilter = 'all';
+
+    // ============================================================
+    // ===== RENDER FUNCTIONS =====
+    // ============================================================
+
+    function renderFilterBar() {
+      const bar = document.getElementById('filterBar');
+      // Keep the "All" button
+      const allBtn = bar.querySelector('[data-filter="all"]');
+      bar.innerHTML = '';
+      bar.appendChild(allBtn);
+
+      // Add category buttons
+      const categories = [...new Set(ACTIVITIES.map(a => a.category))];
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = cat;
+        const catInfo = CATEGORY_MAP[cat] || { icon: '📌', label: cat };
+        btn.innerHTML = `${catInfo.icon} ${catInfo.label} <span class="badge" id="count-${cat}">0</span>`;
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          renderActivities(currentFilter);
+        });
+        bar.appendChild(btn);
+      });
+    }
+
+    function renderActivities(filter) {
       const grid = document.getElementById('activitiesGrid');
       grid.innerHTML = '';
 
-      const filtered = filter === 'all' 
+      let filtered = filter === 'all' 
         ? ACTIVITIES 
         : ACTIVITIES.filter(act => act.category === filter);
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#5c4530;">
-          No activities in this category yet. Try another filter!
-        </div>`;
+        grid.innerHTML = `
+          <div class="empty-state">
+            <span class="empty-icon">🔍</span>
+            <h3>No activities found</h3>
+            <p>Try a different filter to see more activities!</p>
+          </div>
+        `;
         return;
       }
 
+      // Sort: completed first, then by title
+      filtered.sort((a, b) => {
+        const aDone = isCompleted(a.id);
+        const bDone = isCompleted(b.id);
+        if (aDone && !bDone) return -1;
+        if (!aDone && bDone) return 1;
+        return a.title.localeCompare(b.title);
+      });
+
       filtered.forEach(act => {
         const card = document.createElement('a');
-        card.className = `activity-card${act.completed ? ' completed' : ''}`;
+        card.className = 'activity-card';
         card.href = act.page;
         card.target = '_blank';
+        card.dataset.id = act.id;
+
+        const completed = isCompleted(act.id);
+        const difficultyStars = '⭐'.repeat(act.difficulty) + '☆'.repeat(Math.max(0, 3 - act.difficulty));
+        const catInfo = CATEGORY_MAP[act.category] || { icon: '📌', label: act.category };
+
         card.innerHTML = `
-          <span class="card-status">${act.completed ? '✅' : '⬜'}</span>
-          <span class="card-icon">${act.icon}</span>
+          <div class="card-top">
+            <span class="card-icon">${act.icon}</span>
+            <span class="card-status ${completed ? 'completed' : ''}">${completed ? '✅ Done' : '⬜ New'}</span>
+          </div>
           <div class="card-title">${act.title}</div>
           <div class="card-desc">${act.desc}</div>
-          <span class="card-tag">${act.category}</span>
-          <span class="card-arrow">→</span>
+          <div class="card-bottom">
+            <span class="card-tag">${catInfo.icon} ${catInfo.label}</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-size:0.7rem; color:#5c4530;">⏱️ ${act.time}</span>
+              <span class="card-difficulty">${difficultyStars}</span>
+              <span class="card-arrow">→</span>
+            </div>
+          </div>
         `;
-        // Mark as completed when clicked
+
         card.addEventListener('click', function(e) {
-          // Don't prevent default, just mark as completed
+          e.preventDefault();
+          // Mark as completed
           markCompleted(act.id);
-          // Update local state
-          act.completed = true;
-          // Re-render to update status
-          renderActivities(filter);
+          // Update stats and re-render
+          renderActivities(currentFilter);
+          updateStats();
+          updateFilterCounts();
+          // Open in new tab
+          window.open(act.page, '_blank');
         });
+
         grid.appendChild(card);
       });
     }
 
-    // ===== FILTER BUTTONS =====
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        renderActivities(this.dataset.filter);
+    // ============================================================
+    // ===== STATS =====
+    // ============================================================
+
+    function updateStats() {
+      const total = ACTIVITIES.length;
+      const completed = getCompleted().filter(id => ACTIVITIES.some(a => a.id === id)).length;
+      const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+      const categories = new Set(ACTIVITIES.map(a => a.category)).size;
+
+      document.getElementById('totalActivities').textContent = total;
+      document.getElementById('completedActivities').textContent = completed;
+      document.getElementById('progressPercent').textContent = progress + '%';
+      document.getElementById('categoryCount').textContent = categories;
+    }
+
+    function updateFilterCounts() {
+      // Update all count badges
+      document.getElementById('allCount').textContent = ACTIVITIES.length;
+      const categories = [...new Set(ACTIVITIES.map(a => a.category))];
+      categories.forEach(cat => {
+        const count = ACTIVITIES.filter(a => a.category === cat).length;
+        const badge = document.getElementById(`count-${cat}`);
+        if (badge) badge.textContent = count;
       });
+    }
+
+    // ============================================================
+    // ===== KEYBOARD SHORTCUTS =====
+    // ============================================================
+
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+        e.preventDefault();
+        resetProgress();
+      }
     });
 
+    // ============================================================
     // ===== INIT =====
-    checkCompletion();
+    // ============================================================
+
+    // Build filter bar
+    renderFilterBar();
+
+    // Render activities
     renderActivities('all');
+
+    // Update stats
+    updateStats();
+    updateFilterCounts();
+
     console.log('🎮 Activities Hub loaded!');
     console.log(`📚 ${ACTIVITIES.length} activities available`);
+    console.log(`✅ ${getCompleted().length} completed`);
+    console.log('💡 Tip: Press Ctrl+R to reset progress');
   </script>
 </body>
 </html>
