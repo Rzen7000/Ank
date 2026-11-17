@@ -212,6 +212,10 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+    .book-card .badge.coming-soon-badge {
+      background: #d4c5a0;
+      color: #5c4530;
+    }
     .book-card .book-cover {
       width: 100%;
       max-height: 140px;
@@ -273,6 +277,16 @@
     .latest-list p em {
       color: #5c4530;
       font-weight: 500;
+    }
+    .latest-list a {
+      color: #b45f2a;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dotted #c9a84c;
+    }
+    .latest-list a:hover {
+      color: #8f4a1f;
+      border-bottom-color: #b45f2a;
     }
 
     /* --- SCROLL REVEAL --- */
@@ -395,7 +409,6 @@
       <a href="map.html">Explore the Map</a>
       <a href="books.html" class="active">Quest Packs & Adventures</a>
       <a href="about.html">About Sha</a>
-      <a href="latest.html">Bennu's Bulletin</a>
       <a href="merchandise.html">Gift Closet</a>
       <a href="connect.html">Caw, Caw</a>
       <a href="activities/index.html">🎮 Activities</a>
@@ -406,7 +419,7 @@
     <div class="welcome-section">
       <h1 class="reveal">
         <img src="images/bennu-icon.ico" alt="Bennu" class="icon-bennu" style="width:28px; height:28px; margin-right:10px;" onerror="this.onerror=null; this.src='images/bennu-icon.png'; this.onerror=function(){this.style.display='none';}">
-        📚 Quest Packs & Adventures
+        Quest Packs & Adventures
       </h1>
       
       <p class="reveal">
@@ -441,7 +454,7 @@
     </div>
 
     <!-- === PHASE 2: Dynamic Book Grid with Filters === -->
-    <h2 class="reveal">📚 Full Quest Packs (available in the Gift Closet)</h2>
+    <h2 class="reveal">Full Quest Packs</h2>
     
     <!-- Filter Bar -->
     <div class="filter-bar reveal" id="filter-bar">
@@ -458,29 +471,29 @@
     <!-- Free Short Stories section (unchanged) -->
     <h2 class="reveal">📖 Free Short Stories (download)</h2>
     <div class="latest-list reveal">
-      <p><em>"Climate Change Denial"</em> – a short story. <a href="pdfs/climate_denial.pdf" download>Download available soon</a></p>
-      <p><em>"It's just weather," Uncle Tarek said, waving at the flooded schoolyard. "The climate has always changed." Amina wanted to argue. She had the graphs, the articles, the police records. But her uncle had never been wrong in front of her. She bit her lip. "Let's walk," she said. Maybe the drowned tomato plants could speak louder than she could.</em></p>
+      <p><em>"Climate Change Denial"</em> – a short story. <a href="pdfs/climate_denial.pdf" download>Download now</a></p>
+      <p><em>"It's just weather," Uncle Tarek said, waving at the flooded schoolyard. "The climate has always changed." Shariffa wanted to argue. She had the graphs, the articles, the police records. But her uncle had never been wrong in front of her. She bit her lip. "Let's walk," she said. Maybe the drowned tomato plants could speak louder than she could.</em></p>
 
-      <p><em>"Wealth inequality & Zakat"</em> – a short story. <a href="pdfs/wealth_zakat.pdf" download>Download available soon</a></p>
-      <p><em>Layla watched Aya take a second bread roll and slip it into her pocket. She knew the food bank was for families who needed help. But Aya never said anything. Never asked. Now Layla's father was bragging about their new car. She wondered: was giving zakat only about money? Or about seeing what you didn't want to see?</em></p>
+      <p><em>"Wealth inequality & Zakat"</em> – a short story. <a href="pdfs/wealth_zakat.pdf" download>Download now</a></p>
+      <p><em>Heba watched Aya take a second bread roll and slip it into her pocket. She knew the food bank was for families who needed help. But Aya never said anything. Never asked. Now Heba's father was bragging about their new car. She wondered: was giving zakat only about money? Or about seeing what you didn't want to see?</em></p>
 
-      <p><em>"Stereotypes"</em> – a short story. <a href="pdfs/stereotypes.pdf" download>Download available soon</a></p>
-      <p><em>Tariq could jump higher than anyone. But the volleyball team was "for girls." The boys laughed when he asked to try out. "You'll get hurt," they said. "It's not football." He didn't answer. He just walked to the court, picked up the ball, and served. The net shook. The gym went quiet. He still didn't know if he would make the team, but he knew he had to try.</em></p>
+      <p><em>"Stereotypes"</em> – a short story. <a href="pdfs/stereotypes.pdf" download>Download now</a></p>
+      <p><em>Ahmed could jump higher than anyone. But the volleyball team was "for girls." The boys laughed when he asked to try out. "You'll get hurt," they said. "It's not football." He didn't answer. He just walked to the court, picked up the ball, and served. The net shook. The gym went quiet. He still didn't know if he would make the team, but he knew he had to try.</em></p>
 
-      <p><em>"AI & Honesty"</em> – a short story. <a href="pdfs/ai_honesty.pdf" download>Download available soon</a></p>
-      <p><em>The essay won first place. Everyone clapped. But Nour felt the letters burning in his pocket, the ones he typed, not the ones he wrote. The AI had done the work. He had only pressed "generate." Now Mr. Zakaria wanted him to read it aloud at assembly. Nour looked at the podium. He had a choice: speak another's words, or speak his own silence.</em></p>
+      <p><em>"AI & Honesty"</em> – a short story. <a href="pdfs/ai_honesty.pdf" download>Download now</a></p>
+      <p><em>The essay won first place. Everyone clapped. But Ramez felt the letters burning in his pocket, the ones he typed, not the ones he wrote. The AI had done the work. He had only pressed "generate." Now Mr. Zakaria wanted him to read it aloud at assembly. Nour looked at the podium. He had a choice: speak another's words, or speak his own silence.</em></p>
 
-      <p><em>"Animal Testing"</em> – a short story. <a href="pdfs/animal_testing.pdf" download>Download available soon</a></p>
-      <p><em>Aisha hid the rabbit in the art supply closet before class. She knew she couldn't keep it secret forever. Ms. Magda wanted data, skin reaction, redness, swelling. "It's one small animal," the teacher said. "For science. For human good." But Aisha looked at the rabbit's nose, soft and twitching. She thought of her grandmother's words: No creature is small enough to be forgotten.</em></p>
+      <p><em>"Animal Testing"</em> – a short story. <a href="pdfs/animal_testing.pdf" download>Download now</a></p>
+      <p><em>Menna hid the rabbit in the art supply closet before class. She knew she couldn't keep it secret forever. Ms. Magda wanted data, skin reaction, redness, swelling. "It's one small animal," the teacher said. "For science. For human good." But Menna looked at the rabbit's nose, soft and twitching. She thought of her grandmother's words: No creature is small enough to be forgotten.</em></p>
 
-      <p><em>"Cultural Appropriation"</em> – a short story. <a href="pdfs/cultural_appropriation.pdf" download>Download available soon</a></p>
+      <p><em>"Cultural Appropriation"</em> – a short story. <a href="pdfs/cultural_appropriation.pdf" download>Download now</a></p>
       <p><em>Leila watched Fatima put on the dirac – the Somali dress her own grandmother had sewn. Fatima called it "exotic." She would wear it for a fashion show, then return to her own clothes. Leila's grandmother stood at the back, silent. Afterward, Leila took Fatima aside. "Would you wear my skin, too?" she asked. Fatima blinked. The question hung like a dress on a hook.</em></p>
 
-      <p><em>"Freedom of Speech VS Respect for Beliefs"</em> – a short story. <a href="pdfs/freedom_speech.pdf" download>Download available soon</a></p>
-      <p><em>"It's just a joke," Sami said, holding up the drawing. A few classmates laughed. More didn't. Bilal stood up. "Would you draw my mother like that?" he asked. Sami's smile faded. He hadn't thought of it that way. He had only thought about his freedom. Now Mr. Ameen was writing on the board: Your freedom ends where someone else's dignity begins. Sami erased the drawing.</em></p>
+      <p><em>"Freedom of Speech VS Respect for Beliefs"</em> – a short story. <a href="pdfs/freedom_speech.pdf" download>Download now</a></p>
+      <p><em>"It's just a joke," Ali said, holding up the drawing. A few classmates laughed. More didn't. Motaz stood up. "Would you draw my mother like that?" he asked. Ali's smile faded. He hadn't thought of it that way. He had only thought about his freedom. Now Mr. Ameen was writing on the board: Your freedom ends where someone else's dignity begins. Ali erased the drawing.</em></p>
 
-      <p><em>"Water Wars (Geopolitics)"</em> – a short story. <a href="pdfs/water_wars.pdf" download>Download available soon</a></p>
-      <p><em>"Your dam is stealing our water," Youssef said. "Your farms use too much," Alem replied. They stood on opposite sides of the model river they were supposed to build together. Ms. Molly didn't intervene. She just placed two empty cups on the table. "Share," she said. "One cup. Two sides. Figure it out." Youssef looked at the cup. Alem looked at Youssef.</em></p>
+      <p><em>"Water Wars (Geopolitics)"</em> – a short story. <a href="pdfs/water_wars.pdf" download>Download now</a></p>
+      <p><em>"Your dam is stealing our water," Hani said. "Your farms use too much," Adam replied. They stood on opposite sides of the model river they were supposed to build together. Ms. Molly didn't intervene. She just placed two empty cups on the table. "Share," she said. "One cup. Two sides. Figure it out." Hani looked at the cup. Adam looked at Hani.</em></p>
     </div>
   </main>
 
@@ -498,38 +511,40 @@
   <script>
     (function() {
       // --- 1. Book Data (JSON-like array) ---
+      // To make a book downloadable: just add a `pdf` property with the path to the file.
+      // If `pdf` is missing or null, the card shows "Coming soon" automatically.
       const books = [
         {
           id: 1,
-          title: "The Floating Classroom",
-          category: "quest",
-          description: "When Jimba's snack goes missing, the class discovers a time‑traveling portal inside the supply closet.",
-          image: "images/floatclassrm.png",
-          status: "coming-soon"
+          title: "Wings of Imagination",
+          category: "adventure",
+          description: "Bennu, a Hoopoe with a Phoenix-sized imagination, narrates his life at Ubuntu Community School",
+          image: "images/BT WoI - FRONT small.jpg",
+          pdf: "pdfs/WoI-AP.pdf"   // ← DOWNLOAD ACTIVE
         },
         {
           id: 2,
-          title: "Bennu's Riddle",
+          title: "Epic Egypt Adventure",
           category: "adventure",
-          description: "A philosophical adventure about truth, lies, and a talking hoopoe who never gives straight answers.",
+          description: "A curious hoopoe named Bennu and a lively class of Year 6 students discover an ancient, hidden network of energy called the Songlines.",
           image: "images/sketch.png",
-          status: "coming-soon"
+          pdf: null                                // ← still coming soon
         },
         {
           id: 3,
           title: "The Accidental Messenger",
-          category: "adventure",
+          category: "quest",
           description: "Ali stumbles upon a secret that could change everything. But delivering the message might be harder than receiving it.",
           image: "images/floatclassrm.png",
-          status: "coming-soon"
+          pdf: null                                // ← still coming soon
         },
         {
           id: 4,
-          title: "Silence of the Hive",
+          title: "The Colors that faded",
           category: "quest",
-          description: "A colony of bees, a farmer with a dilemma, and a classroom that must decide who is right.",
+          description: "Sayf is a talented artist who believes that if a drawing isn’t perfect, it isn’t worth showing. Then the school announces an art fair..",
           image: "images/sketch.png",
-          status: "coming-soon"
+          pdf: null                                // ← still coming soon
         }
       ];
 
@@ -550,11 +565,17 @@
 
         let cardsHTML = '';
         filteredBooks.forEach(book => {
-          const isComingSoon = book.status === 'coming-soon';
-          const badgeHTML = isComingSoon ? `<span class="badge">Coming Soon</span>` : '';
-          const buttonHTML = isComingSoon 
-            ? `<button class="download-btn coming-soon" disabled>Coming Soon</button>` 
-            : `<a href="#" class="download-btn">Download</a>`;
+          const isDownloadable = Boolean(book.pdf);
+
+          // Badge: gold "New" style for downloadable, muted grey for coming soon
+          const badgeHTML = isDownloadable
+            ? `<span class="badge">Download</span>`
+            : `<span class="badge coming-soon-badge">Coming Soon</span>`;
+
+          // Button: real link if downloadable, disabled button otherwise
+          const buttonHTML = isDownloadable
+            ? `<a href="${book.pdf}" class="download-btn" download target="_blank" rel="noopener">Download now</a>`
+            : `<button class="download-btn coming-soon" disabled>Coming soon</button>`;
 
           cardsHTML += `
             <div class="book-card reveal">
